@@ -32,6 +32,52 @@ class AuditoresController extends Controller
     }
     public function guardarAuditores(){
         $datos = \request('datos');
+        //$comisionista = (new Comisionista())->where('id',$comi_id)->first();
+
+        //$result = $comisionista;
+        //var_dump($datos);
+        $insert = [];
+        for ($i = 0; $i < count($datos);$i++){
+            if($datos[$i]['name'] == "password"){
+                if($datos[$i]['value'] != ""){
+                    $insert[$datos[$i]['name']] = bcrypt($datos[$i]['value']);
+
+                }else{
+                    $insert[$datos[$i]['name']] = bcrypt("1234");
+                }
+            }else{
+                $insert[$datos[$i]['name']] = $datos[$i]['value'];
+
+            }
+
+
+
+        }
+        //var_dump($insert);
+        (new Auditore())->insert($insert);
+        return md5(1);
+
+    }
+
+    public function eliminarAuditores(){
+        $comi_id = \request('comi_id');
+        (new Auditore())->where('id',$comi_id)->delete();
+        return md5(1);
+    }
+    public function mostrarAuditores(){
+        $comi_id = \request('comi_id');
+
+
+        $comisionista = (new Auditore())->where('id',$comi_id)->first();
+
+        $result = $comisionista;
+
+        return json_encode($result);
+
+    }
+    public function editarAuditores(){
+        $comi_id = \request('comi_id');
+        $datos = \request('datos');
 
         //$comisionista = (new Comisionista())->where('id',$comi_id)->first();
 
@@ -39,11 +85,21 @@ class AuditoresController extends Controller
         //var_dump($datos);
         $insert = [];
         for ($i = 0; $i < count($datos);$i++){
-            $insert[$datos[$i]['name']] = $datos[$i]['value'];
+            if($datos[$i]['name'] == "password"){
+                if($datos[$i]['value'] != ""){
+                    $insert[$datos[$i]['name']] = bcrypt($datos[$i]['value']);
+
+                }
+            }else{
+                $insert[$datos[$i]['name']] = $datos[$i]['value'];
+
+            }
+
+
 
         }
         //var_dump($insert);
-        (new Auditore())->insert($insert);
+        (new Auditore())->where('id',$comi_id)->update($insert);
         return md5(1);
 
     }

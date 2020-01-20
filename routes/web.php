@@ -36,10 +36,15 @@ Route::middleware(['auth'])->group(function () {
     //----PDS
     Route::get('pds', 'PDS\PDSController@index')->name('pds');
     Route::post('pds/listas/ajax/cargarpds', 'PDS\PDSController@cargarpds')->name('cargarpds');
+    //edit cris
     //----Auditores
     Route::get('auditores', 'Auditores\AuditoresController@index')->name('auditores');
     Route::post('auditores/listas/ajax/cargarauditores', 'Auditores\AuditoresController@cargarauditores')->name('cargarauditores');
-
+    Route::post('auditor/listas/ajax/guardarAuditor', 'Auditores\AuditoresController@guardarAuditores')->name('auditor/listas/ajax/guardarAuditor');
+    Route::post('auditor/listas/ajax/eliminarAuditor', 'Auditores\AuditoresController@eliminarAuditores')->name('auditor/listas/ajax/eliminarAuditor');
+    Route::post('auditor/listas/ajax/mostrarAuditor', 'Auditores\AuditoresController@mostrarAuditores')->name('auditor/listas/ajax/mostrarAuditor');
+    Route::post('auditor/listas/ajax/editarAuditor', 'Auditores\AuditoresController@editarAuditores')->name('auditor/listas/ajax/editarAuditor');
+//editcrisfin
     //----Indicadores
     Route::any('indicadores', 'Admin\IndicadoresController@index')->name('indicadores');
     //--Rutas Ajax
