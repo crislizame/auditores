@@ -43,24 +43,29 @@ class InformesApiController extends Controller
                 $pds_id = $request->post("pds_id");
                 $agenda_id = $request->post("agenda_id");
                 $informe_id = $request->post("informe_id");
-                $informes_count = (new Informes_reporte())->where(['auditor_id'=>$auditor_id,'pds_id'=>$pds_id,'agenda_id'=>$agenda_id,'informe_id'=>$informe_id])->count();
+                $informes_count = (new Informes_reporte())->where(['auditor_id'=>$auditor_id,'pds_id'=>$pds_id,'agenda_id'=>$agenda_id,'informes_id'=>$informe_id])->count();
                 if($informes_count == 0){
                    $informes = new Informes_reporte();
                    $informes->informes_id = $informe_id;
                    $informes->agenda_id = $agenda_id;
                    $informes->auditor_id = $auditor_id;
                    $informes->pds_id = $pds_id;
+                   $informes->value = $request->post('value');
+                   $informes->observa = $request->post('observa');
                    $informes->save();
                 }else{
-                    $informes_id = (new Informes_reporte())->where(['auditor_id'=>$auditor_id,'pds_id'=>$pds_id,'agenda_id'=>$agenda_id,'informe_id'=>$informe_id])->value("idinformes_reportes");
+                    $informes_idx = (new Informes_reporte())->where(['auditor_id'=>$auditor_id,'pds_id'=>$pds_id,'agenda_id'=>$agenda_id,'informes_id'=>$informe_id])->value("idinformes_reportes");
 
                     $informes = new Informes_reporte();
                     $informes->exists = true;
-                    $informes->idinformes_reportes = $informes_id;
+                    $informes->idinformes_reportes = $informes_idx;
                     $informes->informes_id = $informe_id;
                     $informes->agenda_id = $agenda_id;
                     $informes->auditor_id = $auditor_id;
                     $informes->pds_id = $pds_id;
+                    $informes->value = $request->post('value');
+                    $informes->observa = $request->post('observa');
+
                     $informes->save();
                 }
                 break;

@@ -7,6 +7,7 @@ use App\Auditoria_reporte;
 use App\Encaudit;
 use App\Encauditdata;
 use App\Encauditvalue;
+use App\Informes_reporte;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -65,10 +66,15 @@ class EncuestasAuditoriasVController extends Controller
                 $res = array();
                 foreach ($datosverticales as $datosverticale) {
                     $thc = (new Encauditvalue())->where('encaudit_id',$datosverticale->idencaudit)->get();
+                    if($datosverticale->nombre_estado != "Informes"){
                     $res[] = array('nombre' => $datosverticale->nombre_estado,
                         'categoria' => $datosverticale->categoria,
                         'id'=>$datosverticale->idencaudit,'carita'=>0,'observa'=>'','idencauditdata'=>"");
+
+
+
                     foreach ($thc as $th) {
+
                         $carita = (new Encauditdata())->where(['agenda_id'=>$agenda_id,'encauditvalues_id'=>$th->idencauditvalues,'pds_id'=>$idpds,'auditor_id'=>$auditor_id])->value('carita');
                        // $image = (new Encauditdata())->where(['agenda_id'=>$agenda_id,'encauditvalues_id'=>$th->idencauditvalues,'pds_id'=>$idpds])->value('image');
                         $observa = (new Encauditdata())->where(['agenda_id'=>$agenda_id,'encauditvalues_id'=>$th->idencauditvalues,'pds_id'=>$idpds,'auditor_id'=>$auditor_id])->value('observa');
@@ -79,27 +85,28 @@ class EncuestasAuditoriasVController extends Controller
                     }
 
                 }
+                }
                 return response()->json($res,200,[], JSON_UNESCAPED_UNICODE);
+
                 break;
             case "i":
                 $id = $request->post('id');
                 $agenda_id = $request->post('agenda_id');
                 $idpds = $request->post('idpds');
-                $datosverticales = (new Encaudit())->where('nombre_estado',$id)->get();
+                $datosverticales = (new Encaudit())->where('nombre_estado',"Informes")->get();
                 $res = array();
                 foreach ($datosverticales as $datosverticale) {
                     $thc = (new Encauditvalue())->where('encaudit_id',$datosverticale->idencaudit)->get();
                     $res[] = array('nombre' => $datosverticale->nombre_estado,
                         'categoria' => $datosverticale->categoria,
-                        'id'=>$datosverticale->idencaudit,'carita'=>0,'observa'=>'','idencauditdata'=>"");
+                        'id'=>$datosverticale->idencaudit,'value'=>0,'observa'=>'');
                     foreach ($thc as $th) {
-                        $carita = (new Encauditdata())->where(['agenda_id'=>$agenda_id,'encauditvalues_id'=>$th->idencauditvalues,'pds_id'=>$idpds,'auditor_id'=>$auditor_id])->value('carita');
+                        $value = (new Informes_reporte())->where(['agenda_id'=>$agenda_id,'informes_id'=>$th->idencauditvalues,'pds_id'=>$idpds,'auditor_id'=>$auditor_id])->value('value');
+                        $observa = (new Informes_reporte())->where(['agenda_id'=>$agenda_id,'informes_id'=>$th->idencauditvalues,'pds_id'=>$idpds,'auditor_id'=>$auditor_id])->value('observa');
                        // $image = (new Encauditdata())->where(['agenda_id'=>$agenda_id,'encauditvalues_id'=>$th->idencauditvalues,'pds_id'=>$idpds])->value('image');
-                        $observa = (new Encauditdata())->where(['agenda_id'=>$agenda_id,'encauditvalues_id'=>$th->idencauditvalues,'pds_id'=>$idpds,'auditor_id'=>$auditor_id])->value('observa');
-                        $idencauditdatas = (new Encauditdata())->where(['agenda_id'=>$agenda_id,'encauditvalues_id'=>$th->idencauditvalues,'pds_id'=>$idpds,'auditor_id'=>$auditor_id])->value('idencauditdatas');
                         $res[] = array('nombre' => $th->nombre_val,
                             'id' => $th->idencauditvalues,
-                            'categoria'=>'0s','carita'=>$carita==null?0:$carita,'observa'=>$observa==null?"":$observa,'idencauditdata'=>$idencauditdatas);
+                            'categoria'=>'0s','value'=>$value==null?0:$value,'observa'=>$observa==null?"":$observa);
                     }
 
                 }
