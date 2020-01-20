@@ -81,6 +81,30 @@ class EncuestasAuditoriasVController extends Controller
                 }
                 return response()->json($res,200,[], JSON_UNESCAPED_UNICODE);
                 break;
+            case "i":
+                $id = $request->post('id');
+                $agenda_id = $request->post('agenda_id');
+                $idpds = $request->post('idpds');
+                $datosverticales = (new Encaudit())->where('nombre_estado',$id)->get();
+                $res = array();
+                foreach ($datosverticales as $datosverticale) {
+                    $thc = (new Encauditvalue())->where('encaudit_id',$datosverticale->idencaudit)->get();
+                    $res[] = array('nombre' => $datosverticale->nombre_estado,
+                        'categoria' => $datosverticale->categoria,
+                        'id'=>$datosverticale->idencaudit,'carita'=>0,'observa'=>'','idencauditdata'=>"");
+                    foreach ($thc as $th) {
+                        $carita = (new Encauditdata())->where(['agenda_id'=>$agenda_id,'encauditvalues_id'=>$th->idencauditvalues,'pds_id'=>$idpds,'auditor_id'=>$auditor_id])->value('carita');
+                       // $image = (new Encauditdata())->where(['agenda_id'=>$agenda_id,'encauditvalues_id'=>$th->idencauditvalues,'pds_id'=>$idpds])->value('image');
+                        $observa = (new Encauditdata())->where(['agenda_id'=>$agenda_id,'encauditvalues_id'=>$th->idencauditvalues,'pds_id'=>$idpds,'auditor_id'=>$auditor_id])->value('observa');
+                        $idencauditdatas = (new Encauditdata())->where(['agenda_id'=>$agenda_id,'encauditvalues_id'=>$th->idencauditvalues,'pds_id'=>$idpds,'auditor_id'=>$auditor_id])->value('idencauditdatas');
+                        $res[] = array('nombre' => $th->nombre_val,
+                            'id' => $th->idencauditvalues,
+                            'categoria'=>'0s','carita'=>$carita==null?0:$carita,'observa'=>$observa==null?"":$observa,'idencauditdata'=>$idencauditdatas);
+                    }
+
+                }
+                return response()->json($res,200,[], JSON_UNESCAPED_UNICODE);
+                break;
             case "s":
                 $countreporte = (new Auditoria_reporte())->where(['agenda_id'=>$request->post('agenda_id'),
                     'pds_id'=>$request->post('idpds')])->count();
