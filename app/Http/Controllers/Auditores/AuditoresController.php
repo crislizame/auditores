@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auditores;
 
 use App\Auditore;
+use App\Comisionista;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -28,5 +29,22 @@ class AuditoresController extends Controller
                     </tr>";
         }
         return $td;
+    }
+    public function guardarAuditores(){
+        $datos = \request('datos');
+
+        //$comisionista = (new Comisionista())->where('id',$comi_id)->first();
+
+        //$result = $comisionista;
+        //var_dump($datos);
+        $insert = [];
+        for ($i = 0; $i < count($datos);$i++){
+            $insert[$datos[$i]['name']] = $datos[$i]['value'];
+
+        }
+        //var_dump($insert);
+        (new Auditore())->insert($insert);
+        return md5(1);
+
     }
 }

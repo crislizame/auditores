@@ -23,6 +23,7 @@ Route::resource('v1/perfilauditor', 'API\PerfilAuditorController');
 Route::resource('v1/user', 'API\UserLoginController');
 Route::resource('v1/informe', 'API\InformesApiController');
 Route::resource('v1/pdsperfil', 'API\PdsApiController');
+Route::resource('v1/contador', 'API\ContadorApiController');
 Route::resource('v1/imagen', 'API\ImagenController');
 Route::resource('v1/reportes', 'API\ReportesController');
 Route::resource('v1/getAgendas', 'API\MonthController');
