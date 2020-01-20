@@ -1,0 +1,24 @@
+[08-Oct-2019 11:51:38 America/Guayaquil] PHP Fatal error:  Uncaught InvalidArgumentException: Route [login] not defined. in /home/grupolizame/public_html/temporal92/vendor/laravel/framework/src/Illuminate/Routing/UrlGenerator.php:388
+Stack trace:
+#0 /home/grupolizame/public_html/temporal92/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(782): Illuminate\Routing\UrlGenerator->route('login', Array, true)
+#1 /home/grupolizame/public_html/temporal92/storage/framework/views/3ddeaba60431db963d6027aca000ffeaf4cc71eb.php(11): route('login')
+#2 /home/grupolizame/public_html/temporal92/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(43): include('/home/grupoliza...')
+#3 /home/grupolizame/public_html/temporal92/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(59): Illuminate\View\Engines\PhpEngine->evaluatePath('/home/grupoliza...', Array)
+#4 /home/grupolizame/public_html/temporal92/vendor/laravel/framework/src/Illuminate/View/View.php(142): Illuminate\View\Engines\CompilerEngine->get('/home/grupoliza...', Array)
+#5 /home in /home/grupolizame/public_html/temporal92/vendor/laravel/framework/src/Illuminate/Routing/UrlGenerator.php on line 388
+[08-Oct-2019 11:51:38 America/Guayaquil] PHP Fatal error:  Uncaught InvalidArgumentException: Route [login] not defined. in /home/grupolizame/public_html/temporal92/vendor/laravel/framework/src/Illuminate/Routing/UrlGenerator.php:388
+Stack trace:
+#0 /home/grupolizame/public_html/temporal92/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(782): Illuminate\Routing\UrlGenerator->route('login', Array, true)
+#1 /home/grupolizame/public_html/temporal92/storage/framework/views/3ddeaba60431db963d6027aca000ffeaf4cc71eb.php(11): route('login')
+#2 /home/grupolizame/public_html/temporal92/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(43): include('/home/grupoliza...')
+#3 /home/grupolizame/public_html/temporal92/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(59): Illuminate\View\Engines\PhpEngine->evaluatePath('/home/grupoliza...', Array)
+#4 /home/grupolizame/public_html/temporal92/vendor/laravel/framework/src/Illuminate/View/View.php(142): Illuminate\View\Engines\CompilerEngine->get('/home/grupoliza...', Array)
+#5 /home in /home/grupolizame/public_html/temporal92/vendor/laravel/framework/src/Illuminate/Routing/UrlGenerator.php on line 388
+[04-Nov-2019 23:59:38 America/Guayaquil] PHP Fatal error:  Uncaught InvalidArgumentException: Route [login] not defined. in /home/grupolizame/public_html/temporal92/vendor/laravel/framework/src/Illuminate/Routing/UrlGenerator.php:388
+Stack trace:
+#0 /home/grupolizame/public_html/temporal92/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(782): Illuminate\Routing\UrlGenerator->route('login', Array, true)
+#1 /home/grupolizame/public_html/temporal92/storage/framework/views/3ddeaba60431db963d6027aca000ffeaf4cc71eb.php(11): route('login')
+#2 /home/grupolizame/public_html/temporal92/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(43): include('/home/grupoliza...')
+#3 /home/grupolizame/public_html/temporal92/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(59): Illuminate\View\Engines\PhpEngine->evaluatePath('/home/grupoliza...', Array)
+#4 /home/grupolizame/public_html/temporal92/vendor/laravel/framework/src/Illuminate/View/View.php(142): Illuminate\View\Engines\CompilerEngine->get('/home/grupoliza...', Array)
+#5 /home in /home/grupolizame/public_html/temporal92/vendor/laravel/framework/src/Illuminate/Routing/UrlGenerator.php on line 388
