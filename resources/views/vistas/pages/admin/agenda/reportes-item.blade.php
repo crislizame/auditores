@@ -136,7 +136,7 @@ $pdsdata = (new \App\Pdsperfile())->where('id',$datos->pds_id)->first();
                 $datosverticales = (new \App\Encaudit())->where('categoria','=','estado')->get();
                 @endphp
                 @forelse($datosverticales as $dv)
-                <h5 class="titulos p-2">{{ucfirst($dv->nombre_estado)}}</h5>
+                <h5 class="titulos p-2 ml-5">{{ucfirst($dv->nombre_estado)}}</h5>
                 <table class="table ">
                     <tbody>
                         @php
@@ -148,10 +148,9 @@ $pdsdata = (new \App\Pdsperfile())->where('id',$datos->pds_id)->first();
                         $id = (new \App\Encauditdata())->where(['encauditvalues_id'=>$th->idencauditvalues,'agenda_id'=>$datos->agenda_id,'pds_id'=>$pdsdata->id])->value('idencauditdatas');
                         @endphp
                         <tr>
-                            <td width="50%"><b>{{ucfirst($th->nombre_val)}}</b></td>
-
-                            <td><img src="{{asset('img/cara'.(new \App\Encauditdata())->where(['encauditvalues_id'=>$th->idencauditvalues,'agenda_id'=>$datos->agenda_id,'pds_id'=>$pdsdata->id])->value('carita').'.jpg')}}" width="50px" alt="carita"></td>
-                            <td width="25%"><b>{{ucfirst((new \App\Encauditdata())->where(['encauditvalues_id'=>$th->idencauditvalues,'agenda_id'=>$datos->agenda_id,'pds_id'=>$pdsdata->id])->value('observa'))}}</b></td>
+                            <td width="30%"><b>{{ucfirst($th->nombre_val)}}</b></td>
+                            <td width=75><img src="{{asset('img/cara'.(new \App\Encauditdata())->where(['encauditvalues_id'=>$th->idencauditvalues,'agenda_id'=>$datos->agenda_id,'pds_id'=>$pdsdata->id])->value('carita').'.jpg')}}" width="50px" alt="carita"></td>
+                            <td width="55%"><b class="border border-dark">{{ucfirst((new \App\Encauditdata())->where(['encauditvalues_id'=>$th->idencauditvalues,'agenda_id'=>$datos->agenda_id,'pds_id'=>$pdsdata->id])->value('observa'))}}</b></td>
                             <td><button data-id="{{$id}}" class="btn btn-sm btn-primary btn-verfotos">Ver Fotos</button></td>
                         </tr>
                         @empty
