@@ -150,7 +150,7 @@ $pdsdata = (new \App\Pdsperfile())->where('id',$datos->pds_id)->first();
                         <tr>
                             <td width="30%"><b>{{ucfirst($th->nombre_val)}}</b></td>
                             <td width=75><img src="{{asset('img/cara'.(new \App\Encauditdata())->where(['encauditvalues_id'=>$th->idencauditvalues,'agenda_id'=>$datos->agenda_id,'pds_id'=>$pdsdata->id])->value('carita').'.jpg')}}" width="50px" alt="carita"></td>
-                            <td width="55%" class="border border-dark"><b>{{ucfirst((new \App\Encauditdata())->where(['encauditvalues_id'=>$th->idencauditvalues,'agenda_id'=>$datos->agenda_id,'pds_id'=>$pdsdata->id])->value('observa'))}}</b></td>
+                            <td width="55%" class="border border-dark" style="border-radius: 1rem!important;"><b>{{ucfirst((new \App\Encauditdata())->where(['encauditvalues_id'=>$th->idencauditvalues,'agenda_id'=>$datos->agenda_id,'pds_id'=>$pdsdata->id])->value('observa'))}}</b></td>
                             <td><button data-id="{{$id}}" class="btn btn-sm btn-primary btn-verfotos">Ver Fotos</button></td>
                         </tr>
                         @empty
