@@ -149,6 +149,7 @@
                             $encuesta = (new \App\Encauditdata())->where(['encauditvalues_id'=>$th->idencauditvalues,'agenda_id'=>$datos->agenda_id,'pds_id'=>$pdsdata->id, 'auditor_id'=>$datos->auditor_id]);
                             $id = $encuesta->value('idencauditdatas');
                             $valor = 0;
+                            if($encuesta->value('carita')>0){}
                             @endphp
                             <tr>
                                 <td width="30%"><b>{{ucfirst($th->nombre_val)}}</b></td>
