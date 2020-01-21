@@ -141,6 +141,7 @@
                         <tbody>
                             @php
                             $thc = (new \App\Encauditvalue())->where('encaudit_id',$dv->idencaudit)->get();
+                            $promcaritas = (new \App\Encauditvalue())->where('encaudit_id',$dv->idencaudit)->count();
                             @endphp
                             @forelse($thc as $th)
 
@@ -149,7 +150,7 @@
                             $id = $encuesta->value('idencauditdatas');
                             $valor = 0;
                             if(isset($encuesta->value('carita'))){
-                            switch($encuesta->value('carita')){
+                            /*switch($encuesta->value('carita')){
                             csse 1:
                             $valor = 0;
                             break;
@@ -165,7 +166,7 @@
                             csse 5:
                             $valor = 100;
                             break;
-                            }
+                            }*/
                             }
                             @endphp
                             <tr>
