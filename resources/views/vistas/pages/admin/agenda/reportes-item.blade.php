@@ -147,11 +147,32 @@
                             @php
                             $encuesta = (new \App\Encauditdata())->where(['encauditvalues_id'=>$th->idencauditvalues,'agenda_id'=>$datos->agenda_id,'pds_id'=>$pdsdata->id, 'auditor_id'=>$datos->auditor_id]);
                             $id = $encuesta->value('idencauditdatas');
+                            $valor = 0;
+                            switch($encuesta->value('carita')){
+                            csse 1:
+                            $valor = 0;
+                            break;
+                            csse 2:
+                            $valor = 25;
+                            break;
+                            csse 3:
+                            $valor = 50;
+                            break;
+                            csse 4:
+                            $valor = 75;
+                            break;
+                            csse 5:
+                            $valor = 100;
+                            break;
+                            }
                             @endphp
                             <tr>
                                 <td width="30%"><b>{{ucfirst($th->nombre_val)}}</b></td>
+                                <td width=75>
+                                    <h2 class="titulos-categoria p-2 text-right">{{$valor}}%</h2>
+                                </td>
                                 <td width=75><img src="{{asset('img/cara'.$encuesta->value('carita').'.jpg')}}" width="50px" alt="carita"></td>
-                                <td width="55%">
+                                <td width="50%">
                                     <div class="rounded border border-dark">
                                         <b>{{ucfirst($encuesta->value('observa'))}}</b>
                                     </div>
