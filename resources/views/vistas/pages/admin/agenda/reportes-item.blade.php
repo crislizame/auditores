@@ -253,14 +253,15 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                                 <td width="25%"><b>Propiedad</b></td>
                                 <td>{{$valores_muebles->value('propiedad') == 0 ? "Propio" : "Alquilado"}}</td>
                             </tr>
+                        </tbody>
+                        <tfoot>
                             <tr>
                                 <td><b>Observación</b></td>
                             </tr>
                             <tr>
                                 <td>{{$valores_muebles->value('observa')}}</td>
                             </tr>
-                        </tbody>
-
+                        </tfoot>
                     </table>
                     </div>
                     @empty
