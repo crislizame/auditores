@@ -152,14 +152,19 @@
                             if($encuesta->value('carita')>0){
                             switch ((int)$encuesta->value('carita')) {
                             case 1:
+                            $valor = 0;
                             break;
                             case 2:
+                            $valor = 25;
                             break;
                             case 3:
+                            $valor = 50;
                             break;
                             case 4:
+                            $valor = 75;
                             break;
                             case 5:
+                            $valor = 100;
                             break;
                             }
                             }
