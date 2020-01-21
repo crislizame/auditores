@@ -204,7 +204,7 @@
                                 sumaestados += $(this).attr('data-val');
                             });
                             var aux = sumaestados/{{$promcaritas}};
-                            $('#promestado').html('Estado <span class="border border-info rounded px-1">'+aux.toFixed(2)+'%</span>');
+                            $('#promestado').html('Estado <span class="border border-white rounded px-1">'+aux.toFixed(2)+'%</span>');
                         });
                     </script>
                     <h3 class="titulos-grandes p-2 text-center">Activo</h3>
