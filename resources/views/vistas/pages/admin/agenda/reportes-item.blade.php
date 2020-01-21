@@ -82,7 +82,8 @@
                         <div class="col-lg-6 offset-lg-3">
                             <div class="row">
                                 <div class="col titulos-visuales rounded p-2">
-                                    <h2 class="titulos-categoria p-0 promestado">Estado</h2>
+                                    <h2 class="titulos-categoria p-0 pt-1">Estado</h2>
+                                    <h2 class="titulos-categoria p-0 pt-1" id="promestado"></h2>
                                 </div>
                                 <div class="col titulos-visuales rounded p-2">
                                     <h2 class="titulos-categoria p-0">Activos</h2>
@@ -204,6 +205,7 @@
                                 sumaestados += $(this).attr('data-val');
                             });
                             var aux = sumaestados/{{$promcaritas}};
+                            $('#promestado').html('<span class="border border-white rounded px-1">'+aux.toFixed(2)+'%</span>');
                             $('.promestado').html('Estado <span class="border border-white rounded px-1">'+aux.toFixed(2)+'%</span>');
                         });
                     </script>

@@ -20,7 +20,8 @@ $pdsdata = (new \App\Pdsperfile())->where('id',$datos->pds_id)->first();
                         <div class="col-lg-6 offset-lg-3">
                             <div class="row">
                                 <div class="col titulos-visuales rounded p-2">
-                                    <h2 class="titulos-categoria p-0 promestado">Estado</h2>
+                                    <h2 class="titulos-categoria p-0 pt-1">Estado</h2>
+                                    <h2 class="titulos-categoria p-0 pt-1" id="promestado"></h2>
                                 </div>
                                 <div class="col titulos-visuales rounded p-2">
                                     <h2 class="titulos-categoria p-0">Activos</h2>
@@ -121,7 +122,6 @@ $pdsdata = (new \App\Pdsperfile())->where('id',$datos->pds_id)->first();
                                         <b>{{ucfirst($encuesta->value('observa'))}}</b>
                                     </div>
                                 </td>
-                                <td><button data-id="{{$id}}" class="btn btn-sm btn-primary btn-verfotos">Ver Fotos</button></td>
                             </tr>
                             @empty
                             @endforelse
@@ -144,7 +144,8 @@ $pdsdata = (new \App\Pdsperfile())->where('id',$datos->pds_id)->first();
                                 sumaestados += $(this).attr('data-val');
                             });
                             var aux = sumaestados/{{$promcaritas}};
-                            jQuery('.promestado').html('Estado <span class="border border-white rounded px-1">'+aux.toFixed(2)+'%</span>');
+                            $('#promestado').html('<span class="border border-white rounded px-1">'+aux.toFixed(2)+'%</span>');
+                            $('.promestado').html('Estado <span class="border border-white rounded px-1">'+aux.toFixed(2)+'%</span>');
                         });
                     </script>
                     <h3 class="titulos-grandes p-2 text-center">Activo</h3>
