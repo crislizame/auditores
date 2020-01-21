@@ -202,11 +202,12 @@
                     @endphp
                     <div class="col-12">
                     @forelse($datosverticales as $dv)
-                    <div class="col-4 p-3">
                     <h5 class="titulos p-2">{{ucfirst($dv->nombre_estado)}}</h5>
                     @php
                     $thc = (new \App\Encauditvalue())->where('encaudit_id',$dv->idencaudit)->get();
                     @endphp
+                    
+                    <div class="col-4 p-3">
                     @forelse($thc as $th)
                     <h6 class="titulos p-2"><b>{{ucfirst($th->nombre_val)}}</b></h6>
                     <table class="table ">
@@ -249,6 +250,7 @@
                     @empty
                     @endforelse
                     </div>
+
                     @empty
                     @endforelse
                     </div>
