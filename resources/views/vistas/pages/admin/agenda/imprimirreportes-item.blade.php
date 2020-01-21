@@ -128,9 +128,9 @@ $pdsdata = (new \App\Pdsperfile())->where('id',$datos->pds_id)->first();
                         </tbody>
                         <script type='text/javascript'>
                             var tituloaux{{$dv->idencaudit}} = '{{ucfirst($dv->nombre_estado)}} <span class="border border-info rounded px-1">{{number_format($valores/$promcaritas, 2, '.', '')}}%</span>';
-                            $(document).ready(function(){
-                                $('#tituloaux{{$dv->idencaudit}}').html(tituloaux{{$dv->idencaudit}});
-                                $('#tituloaux{{$dv->idencaudit}}').attr('data-val',{{number_format($valores/$promcaritas, 2, '.', '')}});
+                            jQuery(document).ready(function(){
+                                jQuery('#tituloaux{{$dv->idencaudit}}').html(tituloaux{{$dv->idencaudit}});
+                                jQuery('#tituloaux{{$dv->idencaudit}}').attr('data-val',{{number_format($valores/$promcaritas, 2, '.', '')}});
                             });
                         </script>
                     </table>
@@ -138,13 +138,13 @@ $pdsdata = (new \App\Pdsperfile())->where('id',$datos->pds_id)->first();
                     @endforelse
 
                     <script type='text/javascript'>
-                        $(document).ready(function(){
+                        jQuery(document).ready(function(){
                             var sumaestados=0;
-                            $('[data-val]').each(function(index,element){
+                            jQuery('[data-val]').each(function(index,element){
                                 sumaestados += $(this).attr('data-val');
                             });
                             var aux = sumaestados/{{$promcaritas}};
-                            $('#promestado').html('Estado <span class="border border-white rounded px-1">'+aux.toFixed(2)+'%</span>');
+                            jQuery('#promestado').html('Estado <span class="border border-white rounded px-1">'+aux.toFixed(2)+'%</span>');
                         });
                     </script>
                     <h3 class="titulos-grandes p-2 text-center">Activo</h3>
