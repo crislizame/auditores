@@ -1,5 +1,5 @@
 @extends('vistas.layout.print')
-
+@section('content')
 @php
 $datos = (new \App\Auditoria_reporte())->where('idauditoria_reportes',request('id'))->first();
 $pdsdata = (new \App\Pdsperfile())->where('id',$datos->pds_id)->first();
@@ -417,3 +417,4 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
 
 <!--End Dashboard Content-->
 </div><!-- End Row principal -->
+@endsection
