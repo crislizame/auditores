@@ -191,7 +191,7 @@
                             var tituloaux{{$dv->idencaudit}} = '{{ucfirst($dv->nombre_estado)}} <span class="border border-info rounded px-1">{{number_format($valores/$promcaritas, 2, '.', '')}}%</span>';
                             $(document).ready(function(){
                                 $('#tituloaux{{$dv->idencaudit}}').html(tituloaux{{$dv->idencaudit}});
-                                $('#tituloaux{{$dv->idencaudit}}', {'data-val' : {{number_format($valores/$promcaritas, 2, '.', '')}},});
+                                $('#tituloaux{{$dv->idencaudit}}').attr('data-val',{{number_format($valores/$promcaritas, 2, '.', '')}});
                             });
                         </script>
                     </table>
