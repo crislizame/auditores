@@ -187,9 +187,9 @@
                             @empty
                             @endforelse
                         </tbody>
-                        <script>/*var citems = {{$promcaritas}}; var cvalor = {{$valores}};*/ var tituloaux = '{{ucfirst($dv->nombre_estado)}} <span class="border border-black rounded">{{$valores/$promcaritas}}%</span>';
+                        <script>/*var citems = {{$promcaritas}}; var cvalor = {{$valores}};*/ var tituloaux{{$dv->idencaudit}} = '{{ucfirst($dv->nombre_estado)}} <span class="border border-black rounded">{{$valores/$promcaritas}}%</span>';
                             $(document).ready(function(){
-                                $('#tituloaux{{$dv->idencaudit}}').html(tituloaux);
+                                $('#tituloaux{{$dv->idencaudit}}').html(tituloaux{{$dv->idencaudit}});
                             });
                         </script>
                     </table>
