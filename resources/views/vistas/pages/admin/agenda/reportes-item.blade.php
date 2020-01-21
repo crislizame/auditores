@@ -172,7 +172,7 @@
                             <tr>
                                 <td width="30%"><b>{{ucfirst($th->nombre_val)}}</b></td>
                                 <td width=75>
-                                    <h2 class="titulos-categoria p-2 text-right">{{$valor}}%</h2>
+                                    <h2 class="p-2 text-right">{{$valor}}%</h2>
                                 </td>
                                 <td width=75><img src="{{asset('img/cara'.$encuesta->value('carita').'.jpg')}}" width="50px" alt="carita"></td>
                                 <td width="50%">
