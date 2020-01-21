@@ -187,7 +187,8 @@
                             @empty
                             @endforelse
                         </tbody>
-                        <script>/*var citems = {{$promcaritas}}; var cvalor = {{$valores}};*/ var tituloaux{{$dv->idencaudit}} = '{{ucfirst($dv->nombre_estado)}} <span class="border border-black rounded">{{$valores/$promcaritas}}%</span>';
+                        <script>
+                            var tituloaux{{$dv->idencaudit}} = '{{ucfirst($dv->nombre_estado)}} <span class="border border-black rounded">{{number_format($valores/$promcaritas, 2, '.', '')}}%</span>';
                             $(document).ready(function(){
                                 $('#tituloaux{{$dv->idencaudit}}').html(tituloaux{{$dv->idencaudit}});
                             });
