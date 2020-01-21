@@ -202,47 +202,49 @@
                     @endphp
                     <div class="row p-2">
                     @forelse($datosverticales as $dv)
-                    <h5 class="col-lg-12 titulos p-2 mx-3">{{ucfirst($dv->nombre_estado)}}</h5>
+                    <h5 class="col-lg-12 titulos p-2 text-center">{{ucfirst($dv->nombre_estado)}}</h5>
                     @php
                     $thc = (new \App\Encauditvalue())->where('encaudit_id',$dv->idencaudit)->get();
                     @endphp
                     
                     
                     @forelse($thc as $th)
-                    <div class="col-lg-4 p-3">
+                    <div class="col-lg-4 py-2 px-5">
                     <h6 class="titulos p-2"><b>{{ucfirst($th->nombre_val)}}</b></h6>
                     <table class="table ">
 
 
                         <tbody>
-
+@php
+$valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=>$th->idencauditvalues, 'agenda_id'=>$datos->agenda_id, 'pds_id'=>$pdsdata->id, 'auditor_id'=>$datos->auditor_id]);
+@endphp
                             <tr>
                                 <td width="25%"><b>Código</b></td>
-                                <td><b>{{(new \App\Encauditdataactivo())->where(['encauditvalues_id'=>$th->idencauditvalues,'agenda_id'=>$datos->agenda_id,'pds_id'=>$pdsdata->id])->value('codigo')}}</b></td>
+                                <td><b>{{$valores_muebles->value('codigo')}}</b></td>
                             </tr>
                             <tr>
                                 <td width="25%"><b>Cantidad</b></td>
-                                <td>{{(new \App\Encauditdataactivo())->where(['encauditvalues_id'=>$th->idencauditvalues,'agenda_id'=>$datos->agenda_id,'pds_id'=>$pdsdata->id])->value('cantidad')}}</td>
+                                <td>{{$valores_muebles->value('cantidad')}}</td>
                             </tr>
                             <tr>
                                 <td width="25%"><b>Marca</b></td>
-                                <td>{{(new \App\Encauditdataactivo())->where(['encauditvalues_id'=>$th->idencauditvalues,'agenda_id'=>$datos->agenda_id,'pds_id'=>$pdsdata->id])->value('marca')}}</td>
+                                <td>{{$valores_muebles->value('marca')}}</td>
                             </tr>
                             <tr>
                                 <td width="25%"><b>Modelo</b></td>
-                                <td>{{(new \App\Encauditdataactivo())->where(['encauditvalues_id'=>$th->idencauditvalues,'agenda_id'=>$datos->agenda_id,'pds_id'=>$pdsdata->id])->value('Modelo')}}</td>
+                                <td>{{$valores_muebles->value('Modelo')}}</td>
                             </tr>
                             <tr>
                                 <td width="25%"><b>Color</b></td>
-                                <td>{{(new \App\Encauditdataactivo())->where(['encauditvalues_id'=>$th->idencauditvalues,'agenda_id'=>$datos->agenda_id,'pds_id'=>$pdsdata->id])->value('color')}}</td>
+                                <td>{{$valores_muebles->value('color')}}</td>
                             </tr>
                             <tr>
                                 <td width="25%"><b>Propiedad</b></td>
-                                <td>{{(new \App\Encauditdataactivo())->where(['encauditvalues_id'=>$th->idencauditvalues,'agenda_id'=>$datos->agenda_id,'pds_id'=>$pdsdata->id])->value('propiedad') == 0 ? "Propio" : "Alquilado"}}</td>
+                                <td>{{$valores_muebles->value('propiedad') == 0 ? "Propio" : "Alquilado"}}</td>
                             </tr>
                             <tr>
                                 <td width="30%"><b>Observación</b></td>
-                                <td>{{(new \App\Encauditdataactivo())->where(['encauditvalues_id'=>$th->idencauditvalues,'agenda_id'=>$datos->agenda_id,'pds_id'=>$pdsdata->id])->value('observa')}}</td>
+                                <td>{{$valores_muebles->value('observa')}}</td>
                             </tr>
 
                         </tbody>
