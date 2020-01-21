@@ -131,7 +131,7 @@
                             @endforelse
                         </tbody>
                     </table>
-                    <h3 class="titulos-grandes p-2 text-center">Estado</h3>
+                    <h3 class="titulos-grandes p-2 text-center" id="promestado">Estado</h3>
                     @php
                     $datosverticales = (new \App\Encaudit())->where('categoria','=','estado')->get();
                     @endphp
@@ -199,7 +199,11 @@
                     @endforelse
                     <script>
                         $(document).ready(function(){
-                            console.log($('[data-val]'));
+                            var sumaestados=0;
+                            $('[data-val]').each(function(index,element){
+                                sumaestados += $(this).attr('data-val');
+                            });
+                            $('#promestado').html('<span class="border border-info rounded px-1">'+sumaestados/{{$promcaritas}}+'%</span>');
                         });
                     </script>
                     <h3 class="titulos-grandes p-2 text-center">Activo</h3>
