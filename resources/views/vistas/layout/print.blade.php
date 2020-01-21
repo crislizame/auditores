@@ -36,8 +36,8 @@
 
     <script src="{{asset("assets/js/jquery.autocomplete.js")}}"></script>
     <script type='text/javascript'>
-        $(document).ready(function {
-            window.onload = detectarCarga;
+        $(document).ready(function(){
+            detectarCarga();
         });
 
         function detectarCarga() {
