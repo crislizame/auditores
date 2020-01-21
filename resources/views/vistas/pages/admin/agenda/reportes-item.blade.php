@@ -191,11 +191,17 @@
                             var tituloaux{{$dv->idencaudit}} = '{{ucfirst($dv->nombre_estado)}} <span class="border border-info rounded px-1">{{number_format($valores/$promcaritas, 2, '.', '')}}%</span>';
                             $(document).ready(function(){
                                 $('#tituloaux{{$dv->idencaudit}}').html(tituloaux{{$dv->idencaudit}});
+                                $('#tituloaux{{$dv->idencaudit}}', {'data-val' : {{number_format($valores/$promcaritas, 2, '.', '')}},});
                             });
                         </script>
                     </table>
                     @empty
                     @endforelse
+                    <script>
+                        $(document).ready(function(){
+                            console.log($('[data-val]'));
+                        });
+                    </script>
                     <h3 class="titulos-grandes p-2 text-center">Activo</h3>
                     @php
                     $datosverticales = (new \App\Encaudit())->where('categoria','=','activos')->get();
