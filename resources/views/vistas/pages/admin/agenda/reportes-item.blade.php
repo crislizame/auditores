@@ -136,7 +136,7 @@
                     $datosverticales = (new \App\Encaudit())->where('categoria','=','estado')->get();
                     @endphp
                     @forelse($datosverticales as $dv)
-                    <h5 class="titulos p-2 ml-5" id="tituloaux{{$dv->idencaudit}}">{{ucfirst($dv->nombre_estado)}}</h5>
+                    <h5 class="titulos p-2 text-centar" id="tituloaux{{$dv->idencaudit}}">{{ucfirst($dv->nombre_estado)}}</h5>
                     <table class="table">
                         <tbody>
                             @php
