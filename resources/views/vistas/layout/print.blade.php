@@ -34,11 +34,7 @@
 
     <!-- Start wrapper-->
     <div id="wrapper">
-        {{--<div class="wrapper sidebar_minimize">--}}
-        @include('vistas.include.menu')
-        <div class="content-wrapper pl-0">
             @yield('content')
-        </div>
     </div>
     
     <link href="{{asset("assets/css/app-style.css")}}" rel="stylesheet" />
