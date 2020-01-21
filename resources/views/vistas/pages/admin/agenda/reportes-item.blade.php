@@ -188,7 +188,7 @@
                             @endforelse
                         </tbody>
                         <script>
-                            var tituloaux{{$dv->idencaudit}} = '{{ucfirst($dv->nombre_estado)}} <span class="border border-info rounded">{{number_format($valores/$promcaritas, 2, '.', '')}}%</span>';
+                            var tituloaux{{$dv->idencaudit}} = '{{ucfirst($dv->nombre_estado)}} <span class="border border-info rounded px-1">{{number_format($valores/$promcaritas, 2, '.', '')}}%</span>';
                             $(document).ready(function(){
                                 $('#tituloaux{{$dv->idencaudit}}').html(tituloaux{{$dv->idencaudit}});
                             });
