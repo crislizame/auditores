@@ -20,7 +20,7 @@ $pdsdata = (new \App\Pdsperfile())->where('id',$datos->pds_id)->first();
                         <div class="col-lg-6 offset-lg-3">
                             <div class="row">
                                 <div class="col titulos-visuales rounded p-2">
-                                    <h2 class="titulos-categoria p-0" id="promestado">Estado</h2>
+                                    <h2 class="titulos-categoria p-0 promestado">Estado</h2>
                                 </div>
                                 <div class="col titulos-visuales rounded p-2">
                                     <h2 class="titulos-categoria p-0">Activos</h2>
@@ -70,7 +70,7 @@ $pdsdata = (new \App\Pdsperfile())->where('id',$datos->pds_id)->first();
                         </tbody>
                     </table>
 
-                    <h3 class="titulos-grandes p-2 text-center" id="promestado">Estado</h3>
+                    <h3 class="titulos-grandes p-2 text-center promestado">Estado</h3>
                     @php
                     $datosverticales = (new \App\Encaudit())->where('categoria','=','estado')->get();
                     @endphp
@@ -144,7 +144,7 @@ $pdsdata = (new \App\Pdsperfile())->where('id',$datos->pds_id)->first();
                                 sumaestados += $(this).attr('data-val');
                             });
                             var aux = sumaestados/{{$promcaritas}};
-                            jQuery('#promestado').html('Estado <span class="border border-white rounded px-1">'+aux.toFixed(2)+'%</span>');
+                            jQuery('.promestado').html('Estado <span class="border border-white rounded px-1">'+aux.toFixed(2)+'%</span>');
                         });
                     </script>
                     <h3 class="titulos-grandes p-2 text-center">Activo</h3>
