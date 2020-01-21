@@ -202,7 +202,7 @@
                     @endphp
                     <div class="col-12">
                     @forelse($datosverticales as $dv)
-                    <h5 class="titulos p-2">{{ucfirst($dv->nombre_estado)}}</h5>
+                    <h5 class="col-12 titulos p-2">{{ucfirst($dv->nombre_estado)}}</h5>
                     @php
                     $thc = (new \App\Encauditvalue())->where('encaudit_id',$dv->idencaudit)->get();
                     @endphp
