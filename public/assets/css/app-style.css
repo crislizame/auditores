@@ -4576,6 +4576,10 @@ form.striped-rows .form-group {
     background: linear-gradient(45deg, #215f00, #e4e4d9) !important;
 }
 
+.border {
+    border: 2px solid #dee2e6 !important;
+}
+
 .border-left-sm {
     border-left: 2px solid !important;
 }
