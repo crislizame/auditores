@@ -178,7 +178,7 @@
                                 </td>
                                 <td width=75><img src="{{asset('img/cara'.$encuesta->value('carita').'.jpg')}}" width="50px" alt="carita"></td>
                                 <td width="50%">
-                                    <div class="rounded border border-dark">
+                                    <div class="rounded border border-dark px-1">
                                         <b>{{ucfirst($encuesta->value('observa'))}}</b>
                                     </div>
                                 </td>
