@@ -69,7 +69,7 @@
                             $auditreport = (new \App\Auditoria_reporte())->orderBy('idauditoria_reportes','desc')->get();
                             break;
                             case "estados":
-                            $auditreport = (new \App\Auditoria_reporte())->where('tipo','G')->orderBy('idauditoria_reportes','desc')->get();
+                            $auditreport = (new \App\Auditoria_reporte())->where('tipo','N')->orderBy('idauditoria_reportes','desc')->get();
                             break;
                             case "procesos":
                             $auditreport = (new \App\Auditoria_reporte())->where('tipo','P')->orderBy('idauditoria_reportes','desc')->get();

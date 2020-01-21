@@ -148,6 +148,7 @@
                             $encuesta = (new \App\Encauditdata())->where(['encauditvalues_id'=>$th->idencauditvalues,'agenda_id'=>$datos->agenda_id,'pds_id'=>$pdsdata->id, 'auditor_id'=>$datos->auditor_id]);
                             $id = $encuesta->value('idencauditdatas');
                             $valor = 0;
+                            if(isset($encuesta->value('carita'))){
                             switch($encuesta->value('carita')){
                             csse 1:
                             $valor = 0;
@@ -164,6 +165,7 @@
                             csse 5:
                             $valor = 100;
                             break;
+                            }
                             }
                             @endphp
                             <tr>
