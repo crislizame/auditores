@@ -126,7 +126,7 @@ $pdsdata = (new \App\Pdsperfile())->where('id',$datos->pds_id)->first();
                             @empty
                             @endforelse
                         </tbody>
-                        <script>
+                        <script type='text/javascript'>
                             var tituloaux{{$dv->idencaudit}} = '{{ucfirst($dv->nombre_estado)}} <span class="border border-info rounded px-1">{{number_format($valores/$promcaritas, 2, '.', '')}}%</span>';
                             $(document).ready(function(){
                                 $('#tituloaux{{$dv->idencaudit}}').html(tituloaux{{$dv->idencaudit}});
@@ -137,7 +137,7 @@ $pdsdata = (new \App\Pdsperfile())->where('id',$datos->pds_id)->first();
                     @empty
                     @endforelse
 
-                    <script>
+                    <script type='text/javascript'>
                         $(document).ready(function(){
                             var sumaestados=0;
                             $('[data-val]').each(function(index,element){
