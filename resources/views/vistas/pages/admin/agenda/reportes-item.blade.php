@@ -137,11 +137,12 @@
                     @endphp
                     @forelse($datosverticales as $dv)
                     <h5 class="titulos p-2 ml-5">{{ucfirst($dv->nombre_estado)}}</h5>
-                    <table class="table ">
+                    <table class="table">
                         <tbody>
                             @php
                             $thc = (new \App\Encauditvalue())->where('encaudit_id',$dv->idencaudit)->get();
                             $promcaritas = (new \App\Encauditvalue())->where('encaudit_id',$dv->idencaudit)->count();
+                            $valores = 0;
                             @endphp
                             @forelse($thc as $th)
 
@@ -167,6 +168,7 @@
                             $valor = 100;
                             break;
                             }
+                            $valores .= $valor;
                             }
                             @endphp
                             <tr>
@@ -185,6 +187,7 @@
                             @empty
                             @endforelse
                         </tbody>
+                        <script>var citems = {{$promcaritas}}; var cvalor = {{$valores}};</script>
                     </table>
                     @empty
                     @endforelse
