@@ -207,8 +207,9 @@
                     $thc = (new \App\Encauditvalue())->where('encaudit_id',$dv->idencaudit)->get();
                     @endphp
                     
-                    <div class="col-4 p-3">
+                    
                     @forelse($thc as $th)
+                    <div class="col-4 p-3">
                     <h6 class="titulos p-2"><b>{{ucfirst($th->nombre_val)}}</b></h6>
                     <table class="table ">
 
@@ -247,9 +248,9 @@
                         </tbody>
 
                     </table>
+                    </div>
                     @empty
                     @endforelse
-                    </div>
 
                     @empty
                     @endforelse
