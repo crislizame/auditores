@@ -696,9 +696,10 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
 
 
 <script type='text/javascript'>
-    window.onload = detectarCarga;
-
-    function detectarCarga() {
-        window.print();
-    }
+    $(document).ready(function{
+        window.onload = detectarCarga;
+        function detectarCarga() {
+            window.print();
+        }
+    });
 </script>
