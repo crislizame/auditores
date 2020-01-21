@@ -82,7 +82,7 @@
                         <div class="col-lg-6 offset-lg-3">
                             <div class="row">
                                 <div class="col titulos-visuales rounded p-2">
-                                    <h2 class="titulos-categoria p-0">Estado</h2>
+                                    <h2 class="titulos-categoria p-0" id="promestado">Estado</h2>
                                 </div>
                                 <div class="col titulos-visuales rounded p-2">
                                     <h2 class="titulos-categoria p-0">Activos</h2>
