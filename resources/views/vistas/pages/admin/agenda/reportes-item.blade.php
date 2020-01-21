@@ -200,9 +200,9 @@
                     @php
                     $datosverticales = (new \App\Encaudit())->where('categoria','=','activos')->get();
                     @endphp
-                    <div class="row">
+                    <div class="row p-2">
                     @forelse($datosverticales as $dv)
-                    <h5 class="col-lg-12 titulos p-2">{{ucfirst($dv->nombre_estado)}}</h5>
+                    <h5 class="col-lg-12 titulos p-2 mx-3">{{ucfirst($dv->nombre_estado)}}</h5>
                     @php
                     $thc = (new \App\Encauditvalue())->where('encaudit_id',$dv->idencaudit)->get();
                     @endphp
