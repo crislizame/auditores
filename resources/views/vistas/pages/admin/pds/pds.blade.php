@@ -36,12 +36,11 @@
     </div>
 </div>
 
-
 <div class="modal fade addComisionistaModal" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header bg-primary ">
-                <h5 class="modal-title text-white" id="exampleModalLongTitle">Agregar Comisionistas</h5>
+                <h5 class="modal-title text-white" id="exampleModalLongTitle">Agregar PDS</h5>
                 <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -60,11 +59,11 @@
                             <select class="form-control pds_name" id="pds_name" name="pds_id">
                                 <option value="0">Seleccione un PDS</option>
                                 @php
-                                $pdss = (new \App\Pdsperfile())->orderBy('id','desc')->get()
+                                    $pdss = (new \App\Pdsperfile())->orderBy('id','desc')->get()
 
                                 @endphp
                                 @forelse($pdss as $pds)
-                                <option value="{{$pds->id}}">{{$pds->pds_name}}</option>
+                                    <option value="{{$pds->id}}">{{$pds->pds_name}}</option>
                                 @empty
                                 @endforelse
                             </select>
@@ -74,16 +73,16 @@
                             <select disabled class="form-control pds_ciudad" id="pds_ciudad" name="pds_ciudad">
                                 <option value="0">Ciudad</option>
                                 @php
-                                $provinciasx = public_path('provincias.json');
-                                $abierto = file_get_contents($provinciasx);
-                                $provincias = json_decode($abierto);
+                                    $provinciasx = public_path('provincias.json');
+                                    $abierto = file_get_contents($provinciasx);
+                                    $provincias = json_decode($abierto);
 
                                 @endphp
                                 @forelse($provincias as $provincia)
-                                @forelse($provincia->cantones as $canton)
-                                <option value="{{$canton->canton}}">{{$canton->canton}}</option>
-                                @empty
-                                @endforelse
+                                    @forelse($provincia->cantones as $canton)
+                                        <option value="{{$canton->canton}}">{{$canton->canton}}</option>
+                                    @empty
+                                    @endforelse
                                 @empty
                                 @endforelse
                             </select>
@@ -203,6 +202,7 @@
         </div>
     </div>
 </div>
+
 <div class="modal fade editComisionistaModal" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">

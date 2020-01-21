@@ -58,7 +58,23 @@ class AuditoresController extends Controller
         return md5(1);
 
     }
+    public function guardarPDS(){
+        $datos = \request('datos');
 
+        //$comisionista = (new Comisionista())->where('id',$comi_id)->first();
+
+        //$result = $comisionista;
+        //var_dump($datos);
+        $insert = [];
+        for ($i = 0; $i < count($datos);$i++){
+            $insert[$datos[$i]['name']] = $datos[$i]['value'];
+
+        }
+        //var_dump($insert);
+        (new Comisionista())->insert($insert);
+        return md5(1);
+
+    }
     public function eliminarAuditores(){
         $comi_id = \request('comi_id');
         (new Auditore())->where('id',$comi_id)->delete();

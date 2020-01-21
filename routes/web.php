@@ -32,11 +32,16 @@ Route::middleware(['auth'])->group(function () {
     Route::get('comisionista', 'Admin\ComisionistasController@obtenertodos')->name('comisionista');
     //----EncuestasAuditorias
     Route::get('encaudit', 'Admin\EcnAuditoriasController@index')->name('encaudit');
+    //edit cris
 
     //----PDS
     Route::get('pds', 'PDS\PDSController@index')->name('pds');
+    Route::post('pds/listas/ajax/mostrarpds', 'PDS\PDSController@mostrarpds')->name('pds/listas/ajax/mostrarpds');
     Route::post('pds/listas/ajax/cargarpds', 'PDS\PDSController@cargarpds')->name('cargarpds');
-    //edit cris
+    Route::post('pds/listas/ajax/guardarPDS', 'PDS\PDSController@guardarPDS')->name('pds/listas/ajax/guardarPDS');
+    Route::post('pds/listas/ajax/editarPDS', 'PDS\PDSController@editarPDS')->name('pds/listas/ajax/editarPDS');
+    Route::post('pds/listas/ajax/eliminarPDS', 'PDS\PDSController@eliminarPDS')->name('pds/listas/ajax/eliminarPDS');
+
     //----Auditores
     Route::get('auditores', 'Auditores\AuditoresController@index')->name('auditores');
     Route::post('auditores/listas/ajax/cargarauditores', 'Auditores\AuditoresController@cargarauditores')->name('cargarauditores');
@@ -72,4 +77,5 @@ Route::middleware(['auth'])->group(function () {
     Route::post('comisionista/listas/ajax/editarComisionistas', 'Admin\ComisionistasController@editarComisionistas')->name('comisionista/listas/ajax/editarComisionistas');
     Route::post('comisionista/listas/ajax/guardarComisionistas', 'Admin\ComisionistasController@guardarComisionistas')->name('comisionista/listas/ajax/guardarComisionistas');
     Route::post('comisionista/listas/ajax/eliminarComisionistas', 'Admin\ComisionistasController@eliminarComisionistas')->name('comisionista/listas/ajax/eliminarComisionistas');
+    Route::post('pds/listas/ajax/guardarPDS', 'Admin\ComisionistasController@guardarPDS')->name('pds/listas/ajax/guardarPDS');
 });

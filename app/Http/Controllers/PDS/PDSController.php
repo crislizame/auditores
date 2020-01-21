@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\PDS;
 
+use App\Comisionista;
 use App\Pdsperfile;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -28,5 +29,56 @@ class PDSController extends Controller
                     </tr>";
         }
         return $td;
+    }
+    public function mostrarpds(){
+        $comi_id = \request('comi_id');
+
+
+        $comisionista = (new Comisionista())->where('id',$comi_id)->first();
+
+        $result = $comisionista;
+
+        return json_encode($result);
+
+    }
+    public function editarPDS(){
+        $comi_id = \request('comi_id');
+        $datos = \request('datos');
+
+        //$comisionista = (new Comisionista())->where('id',$comi_id)->first();
+
+        //$result = $comisionista;
+        //var_dump($datos);
+        $insert = [];
+        for ($i = 0; $i < count($datos);$i++){
+            $insert[$datos[$i]['name']] = $datos[$i]['value'];
+
+        }
+        //var_dump($insert);
+        (new Comisionista())->where('id',$comi_id)->update($insert);
+        return md5(1);
+
+    }
+    public function guardarPDS(){
+        $datos = \request('datos');
+
+        //$comisionista = (new Comisionista())->where('id',$comi_id)->first();
+
+        //$result = $comisionista;
+        //var_dump($datos);
+        $insert = [];
+        for ($i = 0; $i < count($datos);$i++){
+            $insert[$datos[$i]['name']] = $datos[$i]['value'];
+
+        }
+        //var_dump($insert);
+        (new Comisionista())->insert($insert);
+        return md5(1);
+
+    }
+    public function eliminarPDS(){
+        $comi_id = \request('comi_id');
+        (new Comisionista())->where('id',$comi_id)->delete();
+        return md5(1);
     }
 }
