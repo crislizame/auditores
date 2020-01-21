@@ -200,16 +200,16 @@
                     @php
                     $datosverticales = (new \App\Encaudit())->where('categoria','=','activos')->get();
                     @endphp
-                    <div class="col-12">
+                    <div class="row">
                     @forelse($datosverticales as $dv)
-                    <h5 class="col-12 titulos p-2">{{ucfirst($dv->nombre_estado)}}</h5>
+                    <h5 class="col-lg-12 titulos p-2">{{ucfirst($dv->nombre_estado)}}</h5>
                     @php
                     $thc = (new \App\Encauditvalue())->where('encaudit_id',$dv->idencaudit)->get();
                     @endphp
                     
                     
                     @forelse($thc as $th)
-                    <div class="col-4 p-3">
+                    <div class="col-lg-4 p-3">
                     <h6 class="titulos p-2"><b>{{ucfirst($th->nombre_val)}}</b></h6>
                     <table class="table ">
 
