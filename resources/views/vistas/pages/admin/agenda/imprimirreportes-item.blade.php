@@ -127,11 +127,11 @@ $pdsdata = (new \App\Pdsperfile())->where('id',$datos->pds_id)->first();
 
                             <tr class="row">
                             @php
-                            $images = Illuminate\Support\Facades\DB::select("SELECT id FROM attachments INNER JOIN encauditdata_attachments ON attachments.idattachments = encauditdata_attachments.attachments_id WHERE encauditdata_attachments.encauditdatas_id = $id LIMIT 4");
+                            $images = Illuminate\Support\Facades\DB::select("SELECT id FROM attachments INNER JOIN encauditdata_attachments ON attachments.idattachments = encauditdata_attachments.attachments_id WHERE encauditdata_attachments.encauditdatas_id = ".$id." LIMIT 4");
                             @endphp
                             
 
-                            
+
                             </tr>
 
                             @empty
