@@ -126,12 +126,7 @@ $pdsdata = (new \App\Pdsperfile())->where('id',$datos->pds_id)->first();
                             </tr>
 
                             <tr class="row">
-                            @php
-                            $images = \App\Encauditdata()::all();
-
-                            var_dump($images);
-
-                            @endphp
+                            
 
 
                             </tr>
