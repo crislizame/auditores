@@ -132,9 +132,9 @@ $pdsdata = (new \App\Pdsperfile())->where('id',$datos->pds_id)->first();
                             @endphp
 
                             @forelse($images as $image)
-                            <div class="col-lg-3">
+                            <td class="col-lg-3">
                                 <img class="img-responsive" style="height:25vh;" src="{{url('/')}}/imagen/{{$image->idattachments}}.jpg">
-                            </div>
+                            </td>
                             @empty
                             @endforelse
 
