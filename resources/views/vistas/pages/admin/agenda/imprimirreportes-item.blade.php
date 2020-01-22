@@ -128,8 +128,15 @@ $pdsdata = (new \App\Pdsperfile())->where('id',$datos->pds_id)->first();
                             <tr class="row">
                             
                             @php
-                            $thc = (new \App\Attachment())->select('idattachments')->join('encauditdata_attachments','attachments.idattachments','encauditdata_attachments.attachments_id')->where('encauditdata_attachments.encauditdatas_id',$id)->limit(4)->get();
+                            $images = (new \App\Attachment())->select('idattachments')->join('encauditdata_attachments','attachments.idattachments','encauditdata_attachments.attachments_id')->where('encauditdata_attachments.encauditdatas_id',$id)->limit(4)->get();
                             @endphp
+
+                            @for($images as $image)
+                            <td class="col">
+                                <img class="img-responsive" src="{{asset('imagen/$image.jpg')}}">
+                            </td>
+                            @empty
+                            @endforelse
 
                             </tr>
 
