@@ -357,22 +357,31 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                     @endphp
                     @forelse($datosverticales as $dv)
                     <h5 class="titulos p-2">{{ucfirst($dv->nombre_estado)}}</h5>
-                    <table class="table ">
-                        <tbody>
+                    
+                    <div class="row">
                             @php
                             $thc = (new \App\Encauditvalue())->where('encaudit_id',$dv->idencaudit)->get();
                             @endphp
-                            @forelse($thc as $th)
-                            <tr>
-                                <td width="50%"><b>{{ucfirst($th->nombre_val)}}</b></td>
-                                <td><img src="{{asset('img/cara'.(new \App\Encauditdata())->where(['encauditvalues_id'=>$th->idencauditvalues,'agenda_id'=>$datos->agenda_id,'pds_id'=>$pdsdata->id])->value('carita').'.jpg')}}" width="50px" alt="carita"></td>
-                                <td width="25%"><b>{{ucfirst((new \App\Encauditdata())->where(['encauditvalues_id'=>$th->idencauditvalues,'agenda_id'=>$datos->agenda_id,'pds_id'=>$pdsdata->id])->value('observa'))}}</b></td>
 
-                            </tr>
+                            @forelse($thc as $th)
+                                <div class="col-lg-6">
+                                    <div class="row">
+                                    <div class="col-lg-10">
+                                        <b>{{ucfirst($th->nombre_val)}}</b>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <img src="{{asset('img/cara'.(new \App\Encauditdata())->where(['encauditvalues_id'=>$th->idencauditvalues,'agenda_id'=>$datos->agenda_id,'pds_id'=>$pdsdata->id])->value('carita').'.jpg')}}" width="50px" alt="carita">
+                                    </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <b>{{ucfirst((new \App\Encauditdata())->where(['encauditvalues_id'=>$th->idencauditvalues,'agenda_id'=>$datos->agenda_id,'pds_id'=>$pdsdata->id])->value('observa'))}}</b>
+                                        </div>
+                                    </div>
+                                </div>
                             @empty
                             @endforelse
-                        </tbody>
-                    </table>
+                    </div>
                     @empty
                     @endforelse
                     
