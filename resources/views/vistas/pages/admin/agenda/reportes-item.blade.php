@@ -364,8 +364,8 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                             @endphp
 
                             @forelse($thc as $th)
-                                <div class="col-lg-6">
-                                    <div class="row">
+                                <div class="col-lg-6 mb-3">
+                                    <div class="row mb-2">
                                     <div class="col-lg-10">
                                         <b>{{ucfirst($th->nombre_val)}}</b>
                                     </div>
@@ -375,7 +375,7 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <b>{{ucfirst((new \App\Encauditdata())->where(['encauditvalues_id'=>$th->idencauditvalues,'agenda_id'=>$datos->agenda_id,'pds_id'=>$pdsdata->id])->value('observa'))}}</b>
+                                            <span class="border border-info rounded px-1"><b>{{ucfirst((new \App\Encauditdata())->where(['encauditvalues_id'=>$th->idencauditvalues,'agenda_id'=>$datos->agenda_id,'pds_id'=>$pdsdata->id])->value('observa'))}}</b></span>
                                         </div>
                                     </div>
                                 </div>
