@@ -78,7 +78,7 @@
                             @endphp
                             @forelse($auditreport as $aure)
                             <tr>
-                                <td><a href="{{route("agenda/reportes-item")}}?cat=auditoria&id={{$aure->idauditoria_reportes}}">#{{$aure->tipo.'-'.str_pad($aure->idauditoria_reportes, 7, "0", STR_PAD_LEFT)}}</a></td>
+                                <td><a href="{{route("agenda/reportes-item")}}?cat={{$aure->tipo}}&id={{$aure->idauditoria_reportes}}">#{{$aure->tipo.'-'.str_pad($aure->idauditoria_reportes, 7, "0", STR_PAD_LEFT)}}</a></td>
                                 <td>{{(new \App\Agenda())->where(['id'=>$aure->agenda_id])->value("agenda_date")}}</td>
                                 {{-- <td>--}}
                                 {{-- @php--}}

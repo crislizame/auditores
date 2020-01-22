@@ -62,7 +62,7 @@
     $datos = (new \App\Auditoria_reporte())->where('idauditoria_reportes',request('id'))->first();
     $pdsdata = (new \App\Pdsperfile())->where('id',$datos->pds_id)->first();
     @endphp
-    @if(request('cat') == "auditoria")
+    @if(request('cat') == "N")
     <div class="row h-100">
         <!-- Start Row principal -->
 
@@ -280,7 +280,7 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
     <!-- End Submenu -->
     <!--Start Dashboard Content-->
     @endif
-    @if(request('cat') == "procesos")
+    @if(request('cat') == "P")
     <div class="row h-100">
         <!-- Start Row principal -->
 
