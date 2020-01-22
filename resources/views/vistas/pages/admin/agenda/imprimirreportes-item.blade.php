@@ -84,6 +84,7 @@ $pdsdata = (new \App\Pdsperfile())->where('id',$datos->pds_id)->first();
                             $promcaritas = (new \App\Encauditvalue())->where('encaudit_id',$dv->idencaudit)->count();
                             $valores = 0;
                             @endphp
+                            
                             @forelse($thc as $th)
 
                             @php
@@ -123,8 +124,45 @@ $pdsdata = (new \App\Pdsperfile())->where('id',$datos->pds_id)->first();
                                     </div>
                                 </td>
                             </tr>
+
+                            <tr class="row">
+                            @php
+                            $images = DB::select("SELECT id FROM attachments INNER JOIN encauditdata_attachments ON attachments.idattachments = encauditdata_attachments.attachments_id WHERE encauditdata_attachments.encauditdatas_id = $id LIMIT 4");
+                            @endphp
+
+                            @for($images as $image)
+                            <td class="col">
+                                <img class="img-responsive" src="{{asset('imagen/$image.jpg')}}">
+                            </td>
                             @empty
                             @endforelse
+                                
+                            </tr>
+
+                            @empty
+                            @endforelse
+                            
+
+
+
+
+                            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                         </tbody>
                         <script type='text/javascript'>
                             var tituloaux{{$dv->idencaudit}} = '{{ucfirst($dv->nombre_estado)}} <span class="border border-info rounded px-1">{{number_format($valores/$promcaritas, 2, '.', '')}}%</span>';

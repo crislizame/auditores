@@ -17,6 +17,9 @@ Route::group(['prefix' => 'constructor'], function () {
 Auth::routes();
 Route::any('logout', 'Auth\LoginController@logout')->name('logout');
 
+Route::get('imprimir/reportes-item', 'Agenda\AgendaController@imprimirreportesitem')->name('imprimir/reportes-item');
+Route::any('agenda/getimages', 'Agenda\AgendaController@getimages')->name('agenda/getimages');
+
 Route::middleware(['auth'])->group(function () {
     //--Rutas Menu
     //----Agenda
@@ -24,8 +27,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('agenda/ver-agenda', 'Agenda\AgendaController@veragenda')->name('agenda/ver-agenda');
     Route::get('agenda/reportes', 'Agenda\AgendaController@reportes')->name('agenda/reportes');
     Route::get('agenda/reportes-item', 'Agenda\AgendaController@reportesitem')->name('agenda/reportes-item');
-    Route::get('imprimir/reportes-item', 'Agenda\AgendaController@imprimirreportesitem')->name('imprimir/reportes-item');
-    Route::any('agenda/getimages', 'Agenda\AgendaController@getimages')->name('agenda/getimages');
     Route::get('imagen/{id}', 'Agenda\AgendaController@imagen');
     //----Comisionista
     Route::get('comisionista/listas', 'Admin\ComisionistasController@listas')->name('comisionista/listas');
@@ -33,12 +34,22 @@ Route::middleware(['auth'])->group(function () {
     //----EncuestasAuditorias
     Route::get('encaudit', 'Admin\EcnAuditoriasController@index')->name('encaudit');
 
+    //edit cris
     //----PDS
     Route::get('pds', 'PDS\PDSController@index')->name('pds');
+    Route::post('pds/listas/ajax/mostrarpds', 'PDS\PDSController@mostrarpds')->name('pds/listas/ajax/mostrarpds');
     Route::post('pds/listas/ajax/cargarpds', 'PDS\PDSController@cargarpds')->name('cargarpds');
+    Route::post('pds/listas/ajax/guardarPDS', 'PDS\PDSController@guardarPDS')->name('pds/listas/ajax/guardarPDS');
+    Route::post('pds/listas/ajax/editarPDS', 'PDS\PDSController@editarPDS')->name('pds/listas/ajax/editarPDS');
+    Route::post('pds/listas/ajax/eliminarPDS', 'PDS\PDSController@eliminarPDS')->name('pds/listas/ajax/eliminarPDS');
     //----Auditores
     Route::get('auditores', 'Auditores\AuditoresController@index')->name('auditores');
     Route::post('auditores/listas/ajax/cargarauditores', 'Auditores\AuditoresController@cargarauditores')->name('cargarauditores');
+    Route::post('auditor/listas/ajax/guardarAuditor', 'Auditores\AuditoresController@guardarAuditores')->name('auditor/listas/ajax/guardarAuditor');
+    Route::post('auditor/listas/ajax/eliminarAuditor', 'Auditores\AuditoresController@eliminarAuditores')->name('auditor/listas/ajax/eliminarAuditor');
+    Route::post('auditor/listas/ajax/mostrarAuditor', 'Auditores\AuditoresController@mostrarAuditores')->name('auditor/listas/ajax/mostrarAuditor');
+    Route::post('auditor/listas/ajax/editarAuditor', 'Auditores\AuditoresController@editarAuditores')->name('auditor/listas/ajax/editarAuditor');
+    //editcrisfin
 
     //----Indicadores
     Route::any('indicadores', 'Admin\IndicadoresController@index')->name('indicadores');
