@@ -125,7 +125,7 @@ $pdsdata = (new \App\Pdsperfile())->where('id',$datos->pds_id)->first();
                                 </td>
                             </tr>
 
-                            <div class="row">
+                            <tr class="row">
                             
                             @php
                             $images = (new \App\Attachment())->select('idattachments')->join('encauditdata_attachments','attachments.idattachments','encauditdata_attachments.attachments_id')->where('encauditdata_attachments.encauditdatas_id',$id)->limit(4)->get();
@@ -138,7 +138,7 @@ $pdsdata = (new \App\Pdsperfile())->where('id',$datos->pds_id)->first();
                             @empty
                             @endforelse
 
-                            </div>
+                            </tr>
 
                             @empty
                             @endforelse
