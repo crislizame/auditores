@@ -132,7 +132,7 @@ $pdsdata = (new \App\Pdsperfile())->where('id',$datos->pds_id)->first();
 
                             @for($images as $image)
                             <td class="col">
-                                <img class="img-responsive" src="{{asset('imagen/$image.jpg')}}">
+                                
                             </td>
                             @empty
                             @endforelse
