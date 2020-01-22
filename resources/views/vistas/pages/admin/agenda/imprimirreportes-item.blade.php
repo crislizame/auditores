@@ -127,7 +127,9 @@ $pdsdata = (new \App\Pdsperfile())->where('id',$datos->pds_id)->first();
 
                             <tr class="row">
                             
-
+                            @php
+                            $thc = (new \App\Attachment())->all();
+                            @endphp
 
                             </tr>
 
