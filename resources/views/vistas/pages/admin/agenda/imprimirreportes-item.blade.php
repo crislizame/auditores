@@ -128,7 +128,7 @@ $pdsdata = (new \App\Pdsperfile())->where('id',$datos->pds_id)->first();
                             <tr class="row">
                             
                             @php
-                            $thc = (new \App\Attachment())->all();
+                            $thc = (new \App\Attachment())->select('idattachments')->join('encauditdata_attachments','attachments.idattachments','encauditdata_attachments.attachments_id')->where('encauditdata_attachments.encauditdatas_id',$id)->limit(4)->get();
                             @endphp
 
                             </tr>
