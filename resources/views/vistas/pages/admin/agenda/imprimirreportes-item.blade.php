@@ -131,7 +131,7 @@ $pdsdata = (new \App\Pdsperfile())->where('id',$datos->pds_id)->first();
                             $images = (new \App\Attachment())->select('idattachments')->join('encauditdata_attachments','attachments.idattachments','encauditdata_attachments.attachments_id')->where('encauditdata_attachments.encauditdatas_id',$id)->limit(4)->get();
                             @endphp
 
-                            @for($images as $image)
+                            @forelse($images as $image)
                             <td class="col">
                                 <img class="img-responsive" src="{{url('/')}}imagen/{{$image}}.jpg">
                             </td>
