@@ -125,20 +125,20 @@ $pdsdata = (new \App\Pdsperfile())->where('id',$datos->pds_id)->first();
                                 </td>
                             </tr>
 
-                            <tr class="row">
+                            <div class="row">
                             
                             @php
                             $images = (new \App\Attachment())->select('idattachments')->join('encauditdata_attachments','attachments.idattachments','encauditdata_attachments.attachments_id')->where('encauditdata_attachments.encauditdatas_id',$id)->limit(4)->get();
                             @endphp
 
                             @forelse($images as $image)
-                            <td class="col-lg-3">
+                            <div class="col-lg-3">
                                 <img class="img-responsive" style="height:25vh;" src="{{url('/')}}/imagen/{{$image->idattachments}}.jpg">
-                            </td>
+                            </div>
                             @empty
                             @endforelse
 
-                            </tr>
+                            </div>
 
                             @empty
                             @endforelse
