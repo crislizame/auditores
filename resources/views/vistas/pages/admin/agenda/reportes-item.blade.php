@@ -605,7 +605,7 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                                 <div class="col-lg-4 text-center p-2">$ {{number_format($arqueos->depositosparciales,2)}}</div>
                             </div>
                             <div class="row">
-                                <span class="btn btn-primary" id="depositos"><i class="fa fa-eye"></i> Ver depósitos</span>
+                                <span data-id="{{$arqueos->idarqueocajas}}" class="btn btn-primary" id="depositos"><i class="fa fa-eye"></i> Ver depósitos</span>
                             </div>
                             <div class="row">
                                 <div class="col-lg-12"><h5 class="titulos p-2 text-center">Conciliación del arqueo realizado</h5></div>
@@ -642,26 +642,6 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
 
                     </div>
 
-
-                    <div class="modal modal-verdepositos" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <img id="depositos">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary pull-left">Anterior</button>
-        <button type="button" class="btn btn-primary pull-right">Siguiente</button>
-      </div>
-    </div>
-  </div>
-</div>
 
 
 
@@ -718,6 +698,7 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                 dataType: 'text',
                 data: {
                     'id': id,
+                    'cat': 'N',
                     '_token': "{{csrf_token()}}"
                 },
                 beforeSend: function() {
@@ -732,7 +713,7 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
         @if(request('cat') == "P")
         $('#depositos').click(function() {
             $('.modal-verdepositos').modal('show');
-            /*
+            
             var id = $(this).attr('data-id');
             $.ajax({
                 url: "{{route('agenda/getimages')}}",
@@ -740,6 +721,7 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                 dataType: 'text',
                 data: {
                     'id': id,
+                    'cat': 'P',
                     '_token': "{{csrf_token()}}"
                 },
                 beforeSend: function() {
@@ -749,7 +731,7 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
 
                 $('.imagenes-id').html(data);
             });
-            */
+            
         });
         @endif
     });
