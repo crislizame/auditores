@@ -656,8 +656,8 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
         <img id="depositos">
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Siguiente</button>
-        <button type="button" class="btn btn-primary">Anterior</button>
+        <button type="button" class="btn btn-primary pull-left">Anterior</button>
+        <button type="button" class="btn btn-primary pull-right">Siguiente</button>
       </div>
     </div>
   </div>
