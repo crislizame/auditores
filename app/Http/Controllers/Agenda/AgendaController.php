@@ -345,9 +345,9 @@ class AgendaController extends Controller
     public function getimages()
     {
         $id = \request('id');
+        $res = "";
         if (\request('cat') == 'N') {
             $imgs = (new Encauditdata_attachment())->where('encauditdatas_id', $id)->get();
-            $res = "";
             foreach ($imgs as $img) {
                 $res .= " <div class=\"col-md-6 col-lg-3 col-xl-3\">
                                             <a href=\"" . url('imagen/' . $img->attachments_id) . "\" data-fancybox=\"group2\">
@@ -357,7 +357,6 @@ class AgendaController extends Controller
             }
         } else if (\request('cat') == 'P') {
             $imgs = (new Arqueo_attachment())->where('arqueo_id', $id)->get();
-            $res = "";
             foreach ($imgs as $img) {
                 $res .= " <div class=\"col-md-6 col-lg-3 col-xl-3\">
                                             <a href=\"" . url('imagen/' . $img->attachments_id) . "\" data-fancybox=\"group2\">

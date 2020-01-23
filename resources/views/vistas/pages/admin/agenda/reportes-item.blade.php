@@ -712,7 +712,7 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
         @endif
         @if(request('cat') == "P")
         $('#depositos').click(function() {
-            $('.modal-verdepositos').modal('show');
+            $('.modal-verfotos').modal('show');
             
             var id = $(this).attr('data-id');
             $.ajax({
