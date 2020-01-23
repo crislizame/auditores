@@ -16,6 +16,7 @@ Route::group(['prefix' => 'constructor'], function () {
 });
 Auth::routes();
 Route::any('logout', 'Auth\LoginController@logout')->name('logout');
+Route::get('imagen/{id}', 'Agenda\AgendaController@imagen');
 
 Route::middleware(['auth'])->group(function () {
     //--Rutas Menu
@@ -26,7 +27,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('agenda/reportes-item', 'Agenda\AgendaController@reportesitem')->name('agenda/reportes-item');
     Route::get('imprimir/reportes-item', 'Agenda\AgendaController@imprimirreportesitem')->name('imprimir/reportes-item');
     Route::any('agenda/getimages', 'Agenda\AgendaController@getimages')->name('agenda/getimages');
-    Route::get('imagen/{id}', 'Agenda\AgendaController@imagen');
     //----Comisionista
     Route::get('comisionista/listas', 'Admin\ComisionistasController@listas')->name('comisionista/listas');
     Route::get('comisionista', 'Admin\ComisionistasController@obtenertodos')->name('comisionista');

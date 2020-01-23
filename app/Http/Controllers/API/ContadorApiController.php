@@ -97,6 +97,7 @@ class ContadorApiController extends Controller
                     'agenda_id' => $agenda_id, 'pds_id' => $pds_id, 'auditor_id' => $auditor_id])->count();
 
                 $count_activos_resueltos += $count_datas;
+            echo $count_datas;
 
         }
 

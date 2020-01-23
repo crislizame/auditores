@@ -15,7 +15,7 @@
         <div class="col-lg-12 mt-3">
             <div class="card">
                 <div class="card-body">
-                    {{--<h5 class="card-title"><button data-toggle="modal" data-target=".addComisionistaModal" class="btn btn-primary"><i class="fa fa-plus"></i> Agregar Comisionistas</button></h5>--}}
+                    <h5 class="card-title"><button data-toggle="modal" data-target=".addComisionistaModal" class="btn btn-primary"><i class="fa fa-plus"></i> Agregar PDS</button></h5>
                     <table class="table" id="list_pds">
                         <thead>
                             <tr class="bg-primary text-white">
@@ -56,17 +56,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="pds_name">PDS</label>
-                            <select class="form-control pds_name" id="pds_name" name="pds_id">
-                                <option value="0">Seleccione un PDS</option>
-                                @php
-                                    $pdss = (new \App\Pdsperfile())->orderBy('id','desc')->get()
-
-                                @endphp
-                                @forelse($pdss as $pds)
-                                    <option value="{{$pds->id}}">{{$pds->pds_name}}</option>
-                                @empty
-                                @endforelse
-                            </select>
+                            <input class="form-control" id="pds_name" name="pds_name" type="text">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="pds_ciudad">Ciudad</label>
