@@ -430,7 +430,7 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                     <h3 class="titulos-grandes p-2 text-center">Informes</h3>
                     <div class="row px-2">
 
-                        <div class="col-lg-4">
+                        <div class="col-lg-4 my-3">
 
                             <div class="col-lg-3 offset-lg-5 titulos-negro p-2">
                                     <h2 class="p-0 pt-1">Si <i class="fa fa-check bg-success rounded-circle text-white p-1"></i></h2>
