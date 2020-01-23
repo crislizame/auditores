@@ -205,10 +205,6 @@
                     @endforelse
                     <script>
                         $(document).ready(function(){
-                            /*var sumaestados=0;
-                            $('[data-val]').each(function(index,element){
-                                sumaestados += parseInt($(this).attr('data-val'));
-                            });*/
                             var aux = {{$promcompleto/$cantidadestados}};
                             $('#promestado').html('<span class="border border-white rounded px-1">'+aux.toFixed(2)+'%</span>');
                             $('.promestado').html('Estado <span class="border border-white rounded px-1">'+aux.toFixed(2)+'%</span>');
@@ -444,8 +440,8 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                             @endphp
                             @forelse($informes as $informe)
                                 <div class="col-lg-12">
-                                    <h4 class="titulos-negro p-2">{{$informe->nombre_val}}</h4>
-                                    <div class="border border-info rounded px-1"><b>{{$informe->observa}}</b></div>
+                                    <h4 class="titulos-negro p-2" style="height: 20vh;">{{$informe->nombre_val}}</h4>
+                                    <div class="border border-info rounded px-1" style="min-height: 25vh;"><b>{{$informe->observa}}</b></div>
                                 </div>
                             @empty
                             @endforelse
@@ -455,7 +451,7 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                         <div class="col-lg-4">
 
                             <div class="col-lg-3 offset-lg-5 titulos-negro p-2">
-                                    <h2 class="p-0 pt-1">No <i class="fa fa-times bg-danger rounded-circle text-white"></i></h2>
+                                    <h2 class="p-0 pt-1">No <i class="fa fa-times-circle-o bg-danger rounded-circle text-white"></i></h2>
                             </div>
                             @php
                                 $informes = (new \App\Informes_reporte())->join('encauditvalues','informes_reportes.informes_id','encauditvalues.idencauditvalues')->where([ 'agenda_id'=>$datos->agenda_id,  'pds_id'=>$pdsdata->id, 'auditor_id'=>$datos->auditor_id, 'value'=>'NO' ])->get();
@@ -473,7 +469,7 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                         <div class="col-lg-4">
 
                             <div class="col-lg-3 offset-lg-5 titulos-negro p-2">
-                                    <h2 class="p-0 pt-1">N/A</h2>
+                                    <h2 class="p-0 pt-1">N/A <i class="fa fa-asterisk bg-warning rounded-circle text-white"></i></h2>
                             </div>
                             @php
                                 $informes = (new \App\Informes_reporte())->join('encauditvalues','informes_reportes.informes_id','encauditvalues.idencauditvalues')->where([ 'agenda_id'=>$datos->agenda_id,  'pds_id'=>$pdsdata->id, 'auditor_id'=>$datos->auditor_id, 'value'=>'N/A' ])->get();
