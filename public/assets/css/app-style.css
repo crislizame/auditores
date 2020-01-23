@@ -5980,6 +5980,15 @@ input[type="color"] {
     color: white;
 }
 
+.titulos-informe {
+    color: #000 !important;
+    min-height: 15vh;
+}
+
+.observaciones-informes{
+    min-height: 20vh;
+}
+
 .mini-btn {
     padding: 3px;
 }

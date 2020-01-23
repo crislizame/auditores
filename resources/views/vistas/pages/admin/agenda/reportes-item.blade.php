@@ -440,8 +440,8 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                             @endphp
                             @forelse($informes as $informe)
                                 <div class="col-lg-12">
-                                    <h4 class="titulos-negro p-2" style="height: 20vh;">{{$informe->nombre_val}}</h4>
-                                    <div class="border border-info rounded px-1" style="min-height: 25vh;"><b>{{$informe->observa}}</b></div>
+                                    <h4 class="titulos-negro p-2 titulos-informes">{{$informe->nombre_val}}</h4>
+                                    <div class="border border-info rounded px-1 observaciones-informes"><b>{{$informe->observa}}</b></div>
                                 </div>
                             @empty
                             @endforelse
@@ -458,8 +458,8 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                             @endphp
                             @forelse($informes as $informe)
                                 <div class="col-lg-12">
-                                    <h4 class="titulos-negro p-2">{{$informe->nombre_val}}</h4>
-                                    <div class="border border-info rounded px-1"><b>{{$informe->observa}}</b></div>
+                                    <h4 class="titulos-negro p-2 titulos-informes">{{$informe->nombre_val}}</h4>
+                                    <div class="border border-info rounded px-1 observaciones-informes"><b>{{$informe->observa}}</b></div>
                                 </div>
                             @empty
                             @endforelse
@@ -468,7 +468,7 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                         
                         <div class="col-lg-4">
 
-                            <div class="col-lg-3 offset-lg-5 titulos-negro p-2">
+                            <div class="col-lg-4 offset-lg-4 titulos-negro p-2">
                                     <h2 class="p-0 pt-1">N/A <i class="fa fa-asterisk bg-warning rounded-circle text-white"></i></h2>
                             </div>
                             @php
@@ -476,8 +476,8 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                             @endphp
                             @forelse($informes as $informe)
                                 <div class="col-lg-12">
-                                    <h4 class="titulos-negro p-2">{{$informe->nombre_val}}</h4>
-                                    <div class="border border-info rounded px-1"><b>{{$informe->observa}}</b></div>
+                                    <h4 class="titulos-negro p-2 titulos-informes">{{$informe->nombre_val}}</h4>
+                                    <div class="border border-info rounded px-1 observaciones-informes"><b>{{$informe->observa}}</b></div>
                                 </div>
                             @empty
                             @endforelse
