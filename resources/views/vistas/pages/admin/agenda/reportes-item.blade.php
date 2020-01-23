@@ -404,7 +404,7 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                             'agenda_id'=>$datos->agenda_id, 
                         'pds_id'=>$pdsdata->id, 
                         'auditor_id'=>$datos->auditor_id
-                        ])->toSQL());@endphp
+                        ])->toSql());@endphp
                             @forelse($informes as $informe)
                                 <div class="col-lg-12">
                                     <h3 class="titulos-negro p-2">{{$informe->nombre_val}}</h3>
