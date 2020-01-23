@@ -5982,11 +5982,11 @@ input[type="color"] {
 
 .titulos-informes {
     color: #000 !important;
-    min-height: 15vh;
+    min-height: 10vh;
 }
 
 .observaciones-informes{
-    min-height: 20vh;
+    min-height: 15vh;
 }
 
 .mini-btn {
