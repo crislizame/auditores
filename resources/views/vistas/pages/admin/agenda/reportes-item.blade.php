@@ -549,7 +549,38 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
 
                         </div>
 
-                        <div class="col-lg-4"></div>
+                        <div class="col-lg-4">
+                        <h5 class="titulos p-2">Conciliación del arqueo realizado</h5>
+                    <table class="table ">
+
+                        <tbody>
+                            <tr>
+                                <td style="text-align: center">Arqueo Físico</td>
+                                <td style="text-align: center">{{$sumacant}}</td>
+                                <td style="text-align: center">$ {{number_format($sumatotal,2)}}</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center">Arqueo de POS</td>
+                                <td style="text-align: center">-</td>
+                                <td style="text-align: center">$ {{number_format(($arqueos->sumapos),2)}}</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center">Diferencia</td>
+                                <td style="text-align: center">-</td>
+                                <td style="text-align: center">$ {{number_format(($diferencia),2)}}</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"></td>
+                                <td style="text-align: center"></td>
+                                <td style="text-align: center"></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center">Observación</td>
+                                <td style="text-align: center" colspan="2">{{$arqueos->observacion}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                        </div>
 
                     </div>
 
