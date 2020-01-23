@@ -713,7 +713,6 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
         @if(request('cat') == "P")
         $('#depositos').click(function() {
             $('.modal-verfotos').modal('show');
-            
             var id = $(this).attr('data-id');
             $.ajax({
                 url: "{{route('agenda/getimages')}}",
