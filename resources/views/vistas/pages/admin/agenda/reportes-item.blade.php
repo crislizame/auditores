@@ -457,8 +457,8 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                                 <thead>
                                     <tr>
                                         <th style="text-align: center"><h5 class="titulos p-2">Monedas</h5></th>
-                                        <th style="text-align: center">Cantidad</th>
-                                        <th style="text-align: center">Suma</th>
+                                        <th style="text-align: center"><h5 class="titulos p-2">Cantidad</h5></th>
+                                        <th style="text-align: center"><h5 class="titulos p-2">Total</h5></th>
                                     </tr>
                                 </thead>
                                 @php
@@ -503,7 +503,51 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
 
                         </div>
 
-                        <div class="col-lg-4"></div>
+                        <div class="col-lg-4">
+
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: center"><h5 class="titulos p-2">Billetes</h5></th>
+                                        <th style="text-align: center"><h5 class="titulos p-2">Cantidad</h5></th>
+                                        <th style="text-align: center"><h5 class="titulos p-2">Total</h5></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                            <tr>
+                                <td style="text-align: center">$ 1.00</td>
+                                <td style="text-align: center">{{$arqueos->b100}}</td>
+                                <td style="text-align: center">$ {{number_format(($arqueos->b100*1.00),2)}}</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center">$ 5.00</td>
+                                <td style="text-align: center">{{$arqueos->b500}}</td>
+                                <td style="text-align: center">$ {{number_format(($arqueos->b500*5.00),2)}}</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center">$ 10.00</td>
+                                <td style="text-align: center">{{$arqueos->b1000}}</td>
+                                <td style="text-align: center">$ {{number_format(($arqueos->b1000*10.00),2)}}</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center">$ 20.00</td>
+                                <td style="text-align: center">{{$arqueos->b2000}}</td>
+                                <td style="text-align: center">$ {{number_format(($arqueos->b2000*20.00),2)}}</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center">$ 50.00</td>
+                                <td style="text-align: center">{{$arqueos->b5000}}</td>
+                                <td style="text-align: center">$ {{number_format(($arqueos->b5000*50.00),2)}}</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center">$ 100.00</td>
+                                <td style="text-align: center">{{$arqueos->b10000}}</td>
+                                <td style="text-align: center">$ {{number_format(($arqueos->b10000*100.00),2)}}</td>
+                            </tr>
+                        </tbody>
+                            </table>
+
+                        </div>
 
                         <div class="col-lg-4"></div>
 
