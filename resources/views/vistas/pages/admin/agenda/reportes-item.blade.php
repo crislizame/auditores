@@ -202,7 +202,7 @@
                         $(document).ready(function(){
                             var sumaestados=0;
                             $('[data-val]').each(function(index,element){
-                                sumaestados += $(this).attr('data-val');
+                                sumaestados += parseInt($(this).attr('data-val'));
                             });
                             var aux = sumaestados/{{$promcaritas}};
                             $('#promestado').html('<span class="border border-white rounded px-1">'+aux.toFixed(2)+'%</span>');
@@ -416,11 +416,11 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                     @endforelse
                     <script>
                         $(document).ready(function(){
-                            var sumaestados=0;
+                            var sumaprocesos=0;
                             $('[data-val]').each(function(index,element){
-                                sumaestados += $(this).attr('data-val');
+                                sumaprocesos += parseInt($(this).attr('data-val'));
                             });
-                            var aux = sumaestados/{{$promcaritas}};
+                            var aux = sumaprocesos/{{$promcaritas}};
                             $('#promprocesos').html('<span class="border border-white rounded px-1">'+aux.toFixed(2)+'%</span>');
                             $('.promprocesos').html('Procesos <span class="border border-white rounded px-1">'+aux.toFixed(2)+'%</span>');
                         });
