@@ -643,7 +643,7 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                     </div>
 
 
-                    <div class="modal" tabindex="-1" role="dialog">
+                    <div class="modal modal-verdepositos" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -704,7 +704,7 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
 <script src="{{asset('assets/plugins/Chart.js/Chart.min.js')}}"></script>
 <script>
     $(document).ready(function() {
-        @if(request('cat') == "auditoria")
+        @if(request('cat') == "N")
         $('.btn-verfotos').click(function() {
             $('.modal-verfotos').modal('show');
             var id = $(this).attr('data-id');
@@ -723,6 +723,29 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
 
                 $('.imagenes-id').html(data);
             });
+        });
+        @endif
+        @if(request('cat') == "P")
+        $('#depositos').click(function() {
+            $('.modal-verdepositos').modal('show');
+            /*
+            var id = $(this).attr('data-id');
+            $.ajax({
+                url: "{{route('agenda/getimages')}}",
+                method: "post",
+                dataType: 'text',
+                data: {
+                    'id': id,
+                    '_token': "{{csrf_token()}}"
+                },
+                beforeSend: function() {
+                    $('.imagenes-id').html("");
+                }
+            }).done(function(data) {
+
+                $('.imagenes-id').html(data);
+            });
+            */
         });
         @endif
     });
