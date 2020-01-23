@@ -351,10 +351,11 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
     </tbody>
 </table>
 
-<h3 class="titulos-grandes p-2 promprocesos">Procesos</h3>
+<h3 class="titulos-grandes p-2 promprocesos text-center">Procesos</h3>
                     @php
                     $datosverticales = (new \App\Encaudit())->where('categoria','=','procesos')->get();
                     $valores = 0;
+                    $promcaritas = 0;
                     @endphp
                     @forelse($datosverticales as $dv)
                     <h5 class="titulos p-2 text-center">{{ucfirst($dv->nombre_estado)}}</h5>
@@ -362,7 +363,7 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                     <div class="row px-2">
                             @php
                             $thc = (new \App\Encauditvalue())->where('encaudit_id',$dv->idencaudit)->get();
-                            $promcaritas = (new \App\Encauditvalue())->where('encaudit_id',$dv->idencaudit)->count();
+                            $promcaritas += (new \App\Encauditvalue())->where('encaudit_id',$dv->idencaudit)->count();
                             @endphp
 
                             @forelse($thc as $th)
