@@ -563,7 +563,17 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                                 <td style="text-align: center">$ {{number_format($sumatotal,2)}}</td>
                             </tr>
                             <tr>
+                                <td style="text-align: center"><h5 class="titulos p-2">Depósitos parciales</h5></td>
+                                <td style="text-align: center">$ {{number_format($arqueos->depositosparciales,2)}}</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><h5 class="titulos p-2">Total de arqueo</h5></td>
+                                <td style="text-align: center">$ {{number_format($sumatotal,2)}}</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center">Arqueo Físico</td>
                                 <td style="text-align: center">{{$sumacant}}</td>
+                                <td style="text-align: center">$ {{number_format($sumatotal,2)}}</td>
                             </tr>
                             <tr>
                                 <td style="text-align: center">Arqueo de POS</td>
