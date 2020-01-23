@@ -364,18 +364,45 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                             @endphp
 
                             @forelse($thc as $th)
+                            @php
+                            $proceso = (new \App\Encauditdata())->where(['encauditvalues_id'=>$th->idencauditvalues,'agenda_id'=>$datos->agenda_id,'pds_id'=>$pdsdata->id]);
+                            $valor = 0;
+                            if($proceso->value('carita')>0){
+                            switch ((int)$proceso->value('carita')) {
+                            case 1:
+                            $valor = 0;
+                            break;
+                            case 2:
+                            $valor = 25;
+                            break;
+                            case 3:
+                            $valor = 50;
+                            break;
+                            case 4:
+                            $valor = 75;
+                            break;
+                            case 5:
+                            $valor = 100;
+                            break;
+                            }
+                            //$valores += $valor;
+                            }
+                            @endphp
                                 <div class="col-lg-6 mb-3">
                                     <div class="row mb-2">
-                                    <div class="col-lg-10">
-                                        <b>{{ucfirst($th->nombre_val)}}</b>
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <img src="{{asset('img/cara'.(new \App\Encauditdata())->where(['encauditvalues_id'=>$th->idencauditvalues,'agenda_id'=>$datos->agenda_id,'pds_id'=>$pdsdata->id])->value('carita').'.jpg')}}" width="50px" alt="carita">
-                                    </div>
+                                       <div class="col-lg-8">
+                                            <b>{{ucfirst($th->nombre_val)}}</b>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <h2 class="p-2 text-right">{{$valor}}%</h2>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <img src="{{asset('img/cara'.->value('carita').'.jpg')}}" width="50px" alt="carita">
+                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <span class="border border-info rounded px-1"><b>{{ucfirst((new \App\Encauditdata())->where(['encauditvalues_id'=>$th->idencauditvalues,'agenda_id'=>$datos->agenda_id,'pds_id'=>$pdsdata->id])->value('observa'))}}</b></span>
+                                            <span class="border border-info rounded px-1"><b>{{ucfirst($proceso->value('observa'))}}</b></span>
                                         </div>
                                     </div>
                                 </div>
