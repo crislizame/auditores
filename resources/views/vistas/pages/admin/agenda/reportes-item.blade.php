@@ -388,18 +388,32 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                     <h3 class="titulos-grandes p-2">Informes</h3>
                     <div class="row px-2">
 
+                        @php
+                        $informes = (new \App\Informes_reporte())->join('encauditvalues','informes_reportes.informes_id','encauditvalues.encaudit_id')->where([ 'agenda_id'=>$datos->agenda_id, 'pds_id'=>$pdsdata->id, 'auditor_id'=>$datos->auditor_id, 'value'=>'SI'])->get();
+                        @endphp
                         <div class="col-lg-6">
 
                             <div class="col-lg-2 offset-lg-5 titulos-negro p-2">
-                                    <h2 class="titulos-categoria p-0 pt-1">Si <i class="fa fa-check bg-success rounded-circle"></i></h2>
+                                    <h2 class="p-0 pt-1">Si <i class="fa fa-check bg-success rounded-circle text-white"></i></h2>
                             </div>
+
+                            @forelse($informes as $informe)
+                                <div class="col-lg-12">
+                                    <h3 class="titulos-negro p-2">{{$informe->nombre_val}}</h3>
+                                    <div class="border border-info rounded px-1"><b>{{$informe->observa}}</b></div>
+                                </div>
+                            @empty
+                            @endforelse
 
                         </div>
                         
                         <div class="col-lg-6">
 
                             <div class="col-lg-2 offset-lg-5 titulos-negro p-2">
-                                    <h2 class="titulos-categoria p-0 pt-1">Si <i class="fa fa-times bg-danger rounded-circle"></i></h2>
+                                    <h2 class="p-0 pt-1">Si <i class="fa fa-times bg-danger rounded-circle text-white"></i></h2>
+                            </div>
+                            <div class="col-lg-12">
+
                             </div>
 
                         </div>
