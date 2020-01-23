@@ -135,6 +135,7 @@
                     <h3 class="titulos-grandes p-2 text-center promestado">Estado</h3>
                     @php
                     $datosverticales = (new \App\Encaudit())->where('categoria','=','estado')->get();
+                    $promcompleto = 0
                     @endphp
                     @forelse($datosverticales as $dv)
                     <h5 class="titulos p-2 text-center" id="tituloaux{{$dv->idencaudit}}">{{ucfirst($dv->nombre_estado)}}</h5>
@@ -143,6 +144,7 @@
                             @php
                             $thc = (new \App\Encauditvalue())->where('encaudit_id',$dv->idencaudit)->get();
                             $promcaritas = (new \App\Encauditvalue())->where('encaudit_id',$dv->idencaudit)->count();
+                            $promcompleto += $promcaritas;
                             $valores = 0;
                             @endphp
                             @forelse($thc as $th)
@@ -204,7 +206,7 @@
                             $('[data-val]').each(function(index,element){
                                 sumaestados += parseInt($(this).attr('data-val'));
                             });
-                            var aux = sumaestados/{{$promcaritas}};
+                            var aux = sumaestados/{{$promcompleto}};
                             $('#promestado').html('<span class="border border-white rounded px-1">'+aux.toFixed(2)+'%</span>');
                             $('.promestado').html('Estado <span class="border border-white rounded px-1">'+aux.toFixed(2)+'%</span>');
                         });
