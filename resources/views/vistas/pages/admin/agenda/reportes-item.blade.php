@@ -446,17 +446,22 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                     </div>
 
                     <h3 class="titulos-grandes p-2 text-center">Arqueo de Caja</h3>
-                    <h5 class="titulos p-2 text-center">Monedas</h5>
-                    <table class="table ">
-                        <thead>
-                            <tr>
-                                <th style="text-align: center">Denominación</th>
-                                <th style="text-align: center">Cantidad</th>
-                                <th style="text-align: center">Suma</th>
-                            </tr>
-                        </thead>
-                        @php
+                    
 
+    
+                    <div class="row px-2">
+
+                        <div class="col-lg-4">
+
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: center"><h5 class="titulos p-2">Monedas</h5></th>
+                                        <th style="text-align: center">Cantidad</th>
+                                        <th style="text-align: center">Suma</th>
+                                    </tr>
+                                </thead>
+                                @php
                         $arqueos = (new \App\Arqueocaja())->where(['pds_id'=>$datos->pds_id,'agenda_id'=>$datos->agenda_id])->first();
                         $sumacant = $arqueos->m001+$arqueos->m005+$arqueos->m010+$arqueos->m025+$arqueos->m050+$arqueos->m100+$arqueos->b100+$arqueos->b500+$arqueos->b1000+$arqueos->b2000+$arqueos->b5000+$arqueos->b10000;
                         $sumatotal = ($arqueos->m001*0.01)+($arqueos->m005*0.05)+($arqueos->m010*0.10)+($arqueos->m025*0.25)+($arqueos->m050*0.50)+($arqueos->m100*1.00)+($arqueos->b100*1.00)+($arqueos->b500*5.00)+($arqueos->b1000*10.00)+($arqueos->b2000*20.00)+($arqueos->b5000*50.00)+($arqueos->b10000*100.00);
@@ -494,7 +499,16 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                                 <td style="text-align: center">$ {{number_format(($arqueos->m100*1.00),2)}}</td>
                             </tr>
                         </tbody>
-                    </table>
+                            </table>
+
+                        </div>
+
+                        <div class="col-lg-4"></div>
+
+                        <div class="col-lg-4"></div>
+
+                    </div>
+
 
 
 
