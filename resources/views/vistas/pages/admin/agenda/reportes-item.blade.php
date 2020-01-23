@@ -397,7 +397,7 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                                             <h2 class="p-2 text-right">{{$valor}}%</h2>
                                         </div>
                                         <div class="col-lg-2">
-                                            <img src="{{asset('img/cara'.->value('carita').'.jpg')}}" width="50px" alt="carita">
+                                            <img src="{{asset('img/cara'.$proceso->value('carita').'.jpg')}}" width="50px" alt="carita">
                                         </div>
                                     </div>
                                     <div class="row">
