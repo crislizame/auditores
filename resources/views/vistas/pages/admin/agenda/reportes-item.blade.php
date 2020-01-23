@@ -145,7 +145,7 @@
                             @php
                             $thc = (new \App\Encauditvalue())->where('encaudit_id',$dv->idencaudit)->get();
                             $promcaritas = (new \App\Encauditvalue())->where('encaudit_id',$dv->idencaudit)->count();
-                            $promcompleto += $promcaritas;
+                            
                             $valores = 0;
                             @endphp
                             @forelse($thc as $th)
@@ -197,6 +197,9 @@
                                 $('#tituloaux{{$dv->idencaudit}}').html(tituloaux{{$dv->idencaudit}});
                                 $('#tituloaux{{$dv->idencaudit}}').attr('data-val',{{number_format($valores/$promcaritas, 2, '.', '')}});
                             });
+                            @php
+                            $promcompleto += $valores/$promcaritas;
+                            @endphp
                         </script>
                     </table>
                     @empty
