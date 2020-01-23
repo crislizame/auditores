@@ -135,6 +135,7 @@
                     <h3 class="titulos-grandes p-2 text-center promestado">Estado</h3>
                     @php
                     $datosverticales = (new \App\Encaudit())->where('categoria','=','estado')->get();
+                    $cantidadestados =(new \App\Encaudit())->where('categoria','=','estado')->count();
                     $promcompleto = 0
                     @endphp
                     @forelse($datosverticales as $dv)
@@ -202,11 +203,11 @@
                     @endforelse
                     <script>
                         $(document).ready(function(){
-                            var sumaestados=0;
+                            /*var sumaestados=0;
                             $('[data-val]').each(function(index,element){
                                 sumaestados += parseInt($(this).attr('data-val'));
-                            });
-                            var aux = sumaestados/{{$promcompleto}};
+                            });*/
+                            var aux = $promcompleto/{{$cantidadestados}};
                             $('#promestado').html('<span class="border border-white rounded px-1">'+aux.toFixed(2)+'%</span>');
                             $('.promestado').html('Estado <span class="border border-white rounded px-1">'+aux.toFixed(2)+'%</span>');
                         });
