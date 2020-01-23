@@ -400,7 +400,11 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                             <div class="col-lg-2 offset-lg-5 titulos-negro p-2">
                                     <h2 class="p-0 pt-1">Si <i class="fa fa-check bg-success rounded-circle text-white"></i></h2>
                             </div>
-@php echo var_dump($informes);@endphp
+@php echo var_dump((new \App\Informes_reporte())->join('encauditvalues','informes_reportes.informes_id','encauditvalues.encaudit_id')->where([ 
+                            'agenda_id'=>$datos->agenda_id, 
+                        'pds_id'=>$pdsdata->id, 
+                        'auditor_id'=>$datos->auditor_id
+                        ])->toSQL());@endphp
                             @forelse($informes as $informe)
                                 <div class="col-lg-12">
                                     <h3 class="titulos-negro p-2">{{$informe->nombre_val}}</h3>
