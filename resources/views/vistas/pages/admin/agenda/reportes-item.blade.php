@@ -559,7 +559,7 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                                 </thead>
                         <tbody>
                             <tr>
-                            <td style="text-align: center"><h5 class="titulos p-2">Monedas y billetes</h5></td>
+                                <td style="text-align: center"><h5 class="titulos p-2">Monedas y billetes</h5></td>
                                 <td style="text-align: center">$ {{number_format($sumatotal,2)}}</td>
                             </tr>
                             <tr>
