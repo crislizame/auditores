@@ -356,9 +356,9 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                     $datosverticales = (new \App\Encaudit())->where('categoria','=','procesos')->get();
                     @endphp
                     @forelse($datosverticales as $dv)
-                    <h5 class="titulos p-2">{{ucfirst($dv->nombre_estado)}}</h5>
+                    <h5 class="titulos p-2 text-center">{{ucfirst($dv->nombre_estado)}}</h5>
                     
-                    <div class="row">
+                    <div class="row px-2">
                             @php
                             $thc = (new \App\Encauditvalue())->where('encaudit_id',$dv->idencaudit)->get();
                             @endphp
@@ -385,6 +385,27 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                     @empty
                     @endforelse
                     
+                    <h3 class="titulos-grandes p-2">Informes</h3>
+                    <div class="row px-2">
+
+                        <div class="col-lg-6">
+
+                            <div class="col-lg-2 offset-lg-5 titulos-negro p-2">
+                                    <h2 class="titulos-categoria p-0 pt-1">Si <i class="fa fa-check bg-success rounded-circle"></i></h2>
+                            </div>
+
+                        </div>
+                        
+                        <div class="col-lg-6">
+
+                            <div class="col-lg-2 offset-lg-5 titulos-negro p-2">
+                                    <h2 class="titulos-categoria p-0 pt-1">Si <i class="fa fa-times bg-danger rounded-circle"></i></h2>
+                            </div>
+
+                        </div>
+
+
+                    </div>
 
                 </div>
             </div>
