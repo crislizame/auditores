@@ -391,7 +391,7 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                         @php
                         $informes = (new \App\Informes_reporte())->join('encauditvalues','informes_reportes.informes_id','encauditvalues.encaudit_id')->where([ 
                             //'agenda_id'=>$datos->agenda_id, 
-                        'pds_id'=>$pdsdata->id//, 
+                        //'pds_id'=>$pdsdata->id//, 
                         //'auditor_id'=>$datos->auditor_id
                         ])->get();
                         @endphp
