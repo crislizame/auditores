@@ -207,7 +207,7 @@
                             $('[data-val]').each(function(index,element){
                                 sumaestados += parseInt($(this).attr('data-val'));
                             });*/
-                            var aux = $promcompleto/{{$cantidadestados}};
+                            var aux = {{$promcompleto/$cantidadestados}};
                             $('#promestado').html('<span class="border border-white rounded px-1">'+aux.toFixed(2)+'%</span>');
                             $('.promestado').html('Estado <span class="border border-white rounded px-1">'+aux.toFixed(2)+'%</span>');
                         });
