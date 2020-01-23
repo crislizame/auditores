@@ -9,6 +9,7 @@ use App\Attachment;
 use App\Auditore;
 use App\Encauditdata_attachment;
 use App\Pdsperfile;
+use App\Arqueo_attachment;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
