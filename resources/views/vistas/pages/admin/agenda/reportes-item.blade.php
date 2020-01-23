@@ -448,7 +448,7 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
 
                         </div>
                         
-                        <div class="col-lg-4">
+                        <div class="col-lg-4 my-3">
 
                             <div class="col-lg-3 offset-lg-5 titulos-negro p-2">
                                     <h2 class="p-0 pt-1">No <i class="fa fa-times-circle-o bg-danger rounded-circle text-white p-1"></i></h2>
@@ -466,7 +466,7 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
 
                         </div>
                         
-                        <div class="col-lg-4">
+                        <div class="col-lg-4 my-3">
 
                             <div class="col-lg-4 offset-lg-4 titulos-negro p-2">
                                     <h2 class="p-0 pt-1">N/A <i class="fa fa-asterisk bg-warning rounded-circle text-white p-1"></i></h2>
