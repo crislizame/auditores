@@ -605,6 +605,9 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                                 <div class="col-lg-4 text-center p-2">$ {{number_format($arqueos->depositosparciales,2)}}</div>
                             </div>
                             <div class="row">
+                                <span class="btn btn-primary"><i class="fa fa-eye"></i> Ver depósitos</span>
+                            </div>
+                            <div class="row">
                                 <div class="col-lg-12"><h5 class="titulos p-2 text-center">Conciliación del arqueo realizado</h5></div>
                             </div>
                     <table class="table ">
@@ -640,7 +643,21 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                     </div>
 
 
-
+                    <div class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img id="depositos">
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
