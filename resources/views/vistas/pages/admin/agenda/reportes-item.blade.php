@@ -433,7 +433,7 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                         <div class="col-lg-4">
 
                             <div class="col-lg-3 offset-lg-5 titulos-negro p-2">
-                                    <h2 class="p-0 pt-1">Si <i class="fa fa-check bg-success rounded-circle text-white"></i></h2>
+                                    <h2 class="p-0 pt-1">Si <i class="fa fa-check bg-success rounded-circle text-white p-1"></i></h2>
                             </div>
                             @php
                                 $informes = (new \App\Informes_reporte())->join('encauditvalues','informes_reportes.informes_id','encauditvalues.idencauditvalues')->where([ 'agenda_id'=>$datos->agenda_id,  'pds_id'=>$pdsdata->id, 'auditor_id'=>$datos->auditor_id, 'value'=>'SI' ])->get();
@@ -451,7 +451,7 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                         <div class="col-lg-4">
 
                             <div class="col-lg-3 offset-lg-5 titulos-negro p-2">
-                                    <h2 class="p-0 pt-1">No <i class="fa fa-times-circle-o bg-danger rounded-circle text-white"></i></h2>
+                                    <h2 class="p-0 pt-1">No <i class="fa fa-times-circle-o bg-danger rounded-circle text-white p-1"></i></h2>
                             </div>
                             @php
                                 $informes = (new \App\Informes_reporte())->join('encauditvalues','informes_reportes.informes_id','encauditvalues.idencauditvalues')->where([ 'agenda_id'=>$datos->agenda_id,  'pds_id'=>$pdsdata->id, 'auditor_id'=>$datos->auditor_id, 'value'=>'NO' ])->get();
@@ -469,7 +469,7 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                         <div class="col-lg-4">
 
                             <div class="col-lg-4 offset-lg-4 titulos-negro p-2">
-                                    <h2 class="p-0 pt-1">N/A <i class="fa fa-asterisk bg-warning rounded-circle text-white"></i></h2>
+                                    <h2 class="p-0 pt-1">N/A <i class="fa fa-asterisk bg-warning rounded-circle text-white p-1"></i></h2>
                             </div>
                             @php
                                 $informes = (new \App\Informes_reporte())->join('encauditvalues','informes_reportes.informes_id','encauditvalues.idencauditvalues')->where([ 'agenda_id'=>$datos->agenda_id,  'pds_id'=>$pdsdata->id, 'auditor_id'=>$datos->auditor_id, 'value'=>'N/A' ])->get();
