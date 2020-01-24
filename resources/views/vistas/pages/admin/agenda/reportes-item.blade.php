@@ -432,7 +432,7 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
 
                         <div class="col-lg-4 my-3">
 
-                            <div class="col-lg-3 offset-lg-5 titulos-negro p-2">
+                            <div class="col-md-4 offset-md-4 col-lg-3 offset-lg-5 titulos-negro p-2">
                                     <h2 class="p-0 pt-1">Si <i class="fa fa-check bg-success rounded-circle text-white p-1"></i></h2>
                             </div>
                             @php
@@ -450,7 +450,7 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                         
                         <div class="col-lg-4 my-3">
 
-                            <div class="col-lg-3 offset-lg-5 titulos-negro p-2">
+                            <div class="col-md-4 offset-md-4 col-lg-3 offset-lg-5 titulos-negro p-2">
                                     <h2 class="p-0 pt-1">No <i class="fa fa-times-circle-o bg-danger rounded-circle text-white p-1"></i></h2>
                             </div>
                             @php
@@ -468,7 +468,7 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                         
                         <div class="col-lg-4 my-3">
 
-                            <div class="col-lg-4 offset-lg-4 titulos-negro p-2">
+                            <div class="col-md-4 offset-md-4 col-lg-4 offset-lg-4 titulos-negro p-2">
                                     <h2 class="p-0 pt-1">N/A <i class="fa fa-asterisk bg-warning rounded-circle text-white p-1"></i></h2>
                             </div>
                             @php
