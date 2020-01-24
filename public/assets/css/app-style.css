@@ -6005,6 +6005,10 @@ input[type="color"] {
         min-height: 8vh;
         padding: .5rem !important;
     }
+
+    .lightbox-thumb {
+        width: 50%;
+    }
 }
 
 .mini-btn {
@@ -6246,6 +6250,10 @@ ul .datosvertical {
 }
 
 @media (min-width: 1536px) {
+    .container{
+        min-width: 1792px;
+    }
+    
     .pdsmenuflow {
         max-height: 79vh;
     }

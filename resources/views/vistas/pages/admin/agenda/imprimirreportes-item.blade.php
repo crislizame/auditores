@@ -221,9 +221,6 @@ $pdsdata = (new \App\Pdsperfile())->where('id',$datos->pds_id)->first();
         <div class="card m-0">
             <div class="card-body pl-0 pr-0 pb-0 pt-0">
                 <h2 class="titulos-categoria p-2 text-center">AUDITORIA DE PROCESO</h2>
-                <a target="_blank" href="{{route('imprimir/reportes-item')}}?cat=auditoria&id={{request('id')}}">
-                    <h3 class="titulos-grandes p-2 text-center"><i class="fa fa-print text-white"></i> Ver en Formato de Impresión</h3>
-                </a>
                 <h2 class="titulos p-2 text-center">{{strtoupper($pdsdata->pds_name)}}</h2>
                 <h3 class="titulos p-2 text-center">Número de reporte: {{$datos->tipo.'-'.str_pad($datos->idauditoria_reportes, 7, "0", STR_PAD_LEFT)}}</h3>
                 <h3 class="titulos-negro p-2 text-center">{{\Carbon\Carbon::now()->format('d/m/Y')}}</h3>
@@ -554,7 +551,8 @@ $pdsdata = (new \App\Pdsperfile())->where('id',$datos->pds_id)->first();
                         </table>
                     </div>
                 </div>
-                <div class="row px-2 imagenes-imp">
+                <div class="container">
+                    <div class="row px-2 imagenes-imp"></div>
                 </div>
                 <script>
                     $(document).ready(function(){
