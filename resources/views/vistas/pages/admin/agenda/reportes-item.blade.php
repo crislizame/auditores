@@ -439,7 +439,7 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                                 $informes = (new \App\Informes_reporte())->join('encauditvalues','informes_reportes.informes_id','encauditvalues.idencauditvalues')->where([ 'agenda_id'=>$datos->agenda_id,  'pds_id'=>$pdsdata->id, 'auditor_id'=>$datos->auditor_id, 'value'=>'SI' ])->get();
                             @endphp
                             @forelse($informes as $informe)
-                                <div class="col-lg-12">
+                                <div class="col-lg-12 mb-3">
                                     <h4 class="titulos-negro p-2 titulos-informes">{{$informe->nombre_val}}</h4>
                                     <div class="border border-info rounded px-1 observaciones-informes"><b>{{$informe->observa}}</b></div>
                                 </div>
@@ -457,7 +457,7 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                                 $informes = (new \App\Informes_reporte())->join('encauditvalues','informes_reportes.informes_id','encauditvalues.idencauditvalues')->where([ 'agenda_id'=>$datos->agenda_id,  'pds_id'=>$pdsdata->id, 'auditor_id'=>$datos->auditor_id, 'value'=>'NO' ])->get();
                             @endphp
                             @forelse($informes as $informe)
-                                <div class="col-lg-12">
+                                <div class="col-lg-12 mb-3">
                                     <h4 class="titulos-negro p-2 titulos-informes">{{$informe->nombre_val}}</h4>
                                     <div class="border border-info rounded px-1 observaciones-informes"><b>{{$informe->observa}}</b></div>
                                 </div>
@@ -475,7 +475,7 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                                 $informes = (new \App\Informes_reporte())->join('encauditvalues','informes_reportes.informes_id','encauditvalues.idencauditvalues')->where([ 'agenda_id'=>$datos->agenda_id,  'pds_id'=>$pdsdata->id, 'auditor_id'=>$datos->auditor_id, 'value'=>'N/A' ])->get();
                             @endphp
                             @forelse($informes as $informe)
-                                <div class="col-lg-12">
+                                <div class="col-lg-12 mb-3">
                                     <h4 class="titulos-negro p-2 titulos-informes">{{$informe->nombre_val}}</h4>
                                     <div class="border border-info rounded px-1 observaciones-informes"><b>{{$informe->observa}}</b></div>
                                 </div>

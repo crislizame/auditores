@@ -5987,6 +5987,7 @@ input[type="color"] {
 
 .observaciones-informes{
     min-height: 15vh;
+    padding: .5rem!important;
 }
 
 .mini-btn {
