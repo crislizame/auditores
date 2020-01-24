@@ -175,24 +175,26 @@
                             }
                             @endphp
                             <div class="col-12">
-                                <div class="col-4">
-                                    <b>{{ucfirst($th->nombre_val)}}</b>
-                                </div>
-                                <div class="col-2">
-                                    <div class="col">
-                                        <h2 class="p-2 text-right">{{$valor}}%</h2>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <b>{{ucfirst($th->nombre_val)}}</b>
                                     </div>
-                                    <div class="col">
-                                    <img src="{{asset('img/cara'.$encuesta->value('carita').'.jpg')}}" width="50px" alt="carita">
+                                    <div class="col-2">
+                                        <div class="col">
+                                            <h2 class="p-2 text-right">{{$valor}}%</h2>
+                                        </div>
+                                        <div class="col">
+                                            <img src="{{asset('img/cara'.$encuesta->value('carita').'.jpg')}}" width="50px" alt="carita">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-4">
-                                    <div class="rounded border border-dark px-1">
-                                        <b>{{ucfirst($encuesta->value('observa'))}}</b>
+                                    <div class="col-4">
+                                        <div class="rounded border border-dark px-1">
+                                            <b>{{ucfirst($encuesta->value('observa'))}}</b>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-2">
-                                    <button data-id="{{$id}}" class="btn btn-sm btn-primary btn-verfotos">Ver Fotos</button>
+                                    <div class="col-2">
+                                        <button data-id="{{$id}}" class="btn btn-sm btn-primary btn-verfotos">Ver Fotos</button>
+                                    </div>
                                 </div>
                             </div>
                             @empty
