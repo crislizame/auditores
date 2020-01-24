@@ -16,6 +16,9 @@ Route::group(['prefix' => 'constructor'], function () {
 });
 Auth::routes();
 Route::any('logout', 'Auth\LoginController@logout')->name('logout');
+
+Route::get('imprimir/reportes-item', 'Agenda\AgendaController@imprimirreportesitem')->name('imprimir/reportes-item');
+Route::any('agenda/getimages', 'Agenda\AgendaController@getimages')->name('agenda/getimages');
 Route::get('imagen/{id}', 'Agenda\AgendaController@imagen');
 
 Route::middleware(['auth'])->group(function () {
@@ -25,15 +28,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('agenda/ver-agenda', 'Agenda\AgendaController@veragenda')->name('agenda/ver-agenda');
     Route::get('agenda/reportes', 'Agenda\AgendaController@reportes')->name('agenda/reportes');
     Route::get('agenda/reportes-item', 'Agenda\AgendaController@reportesitem')->name('agenda/reportes-item');
-    Route::get('imprimir/reportes-item', 'Agenda\AgendaController@imprimirreportesitem')->name('imprimir/reportes-item');
-    Route::any('agenda/getimages', 'Agenda\AgendaController@getimages')->name('agenda/getimages');
     //----Comisionista
     Route::get('comisionista/listas', 'Admin\ComisionistasController@listas')->name('comisionista/listas');
     Route::get('comisionista', 'Admin\ComisionistasController@obtenertodos')->name('comisionista');
     //----EncuestasAuditorias
     Route::get('encaudit', 'Admin\EcnAuditoriasController@index')->name('encaudit');
-    //edit cris
 
+    //edit cris
     //----PDS
     Route::get('pds', 'PDS\PDSController@index')->name('pds');
     Route::post('pds/listas/ajax/mostrarpds', 'PDS\PDSController@mostrarpds')->name('pds/listas/ajax/mostrarpds');
@@ -41,7 +42,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('pds/listas/ajax/guardarPDS', 'PDS\PDSController@guardarPDS')->name('pds/listas/ajax/guardarPDS');
     Route::post('pds/listas/ajax/editarPDS', 'PDS\PDSController@editarPDS')->name('pds/listas/ajax/editarPDS');
     Route::post('pds/listas/ajax/eliminarPDS', 'PDS\PDSController@eliminarPDS')->name('pds/listas/ajax/eliminarPDS');
-
     //----Auditores
     Route::get('auditores', 'Auditores\AuditoresController@index')->name('auditores');
     Route::post('auditores/listas/ajax/cargarauditores', 'Auditores\AuditoresController@cargarauditores')->name('cargarauditores');
@@ -49,7 +49,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('auditor/listas/ajax/eliminarAuditor', 'Auditores\AuditoresController@eliminarAuditores')->name('auditor/listas/ajax/eliminarAuditor');
     Route::post('auditor/listas/ajax/mostrarAuditor', 'Auditores\AuditoresController@mostrarAuditores')->name('auditor/listas/ajax/mostrarAuditor');
     Route::post('auditor/listas/ajax/editarAuditor', 'Auditores\AuditoresController@editarAuditores')->name('auditor/listas/ajax/editarAuditor');
-//editcrisfin
+    //editcrisfin
+
     //----Indicadores
     Route::any('indicadores', 'Admin\IndicadoresController@index')->name('indicadores');
     //--Rutas Ajax
@@ -77,5 +78,4 @@ Route::middleware(['auth'])->group(function () {
     Route::post('comisionista/listas/ajax/editarComisionistas', 'Admin\ComisionistasController@editarComisionistas')->name('comisionista/listas/ajax/editarComisionistas');
     Route::post('comisionista/listas/ajax/guardarComisionistas', 'Admin\ComisionistasController@guardarComisionistas')->name('comisionista/listas/ajax/guardarComisionistas');
     Route::post('comisionista/listas/ajax/eliminarComisionistas', 'Admin\ComisionistasController@eliminarComisionistas')->name('comisionista/listas/ajax/eliminarComisionistas');
-    Route::post('pds/listas/ajax/guardarPDS', 'Admin\ComisionistasController@guardarPDS')->name('pds/listas/ajax/guardarPDS');
 });

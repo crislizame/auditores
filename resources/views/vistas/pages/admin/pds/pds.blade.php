@@ -60,7 +60,7 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="pds_ciudad">Ciudad</label>
-                            <select disabled class="form-control pds_ciudad" id="pds_ciudad" name="pds_ciudad">
+                            <select  class="form-control pds_ciudad" id="pds_ciudad" name="pds_ciudad">
                                 <option value="0">Ciudad</option>
                                 @php
                                     $provinciasx = public_path('provincias.json');
