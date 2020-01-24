@@ -440,7 +440,7 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                             @endphp
                             @forelse($informes as $informe)
                                 <div class="col-lg-12 mb-3">
-                                    <h4 class="titulos-negro p-2 titulos-informes">{{$informe->nombre_val}}</h4>
+                                    <h4 class="p-2 titulos-informes">{{$informe->nombre_val}}</h4>
                                     <div class="border border-info rounded px-1 observaciones-informes"><b>{{$informe->observa}}</b></div>
                                 </div>
                             @empty
@@ -458,7 +458,7 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                             @endphp
                             @forelse($informes as $informe)
                                 <div class="col-lg-12 mb-3">
-                                    <h4 class="titulos-negro p-2 titulos-informes">{{$informe->nombre_val}}</h4>
+                                    <h4 class="p-2 titulos-informes">{{$informe->nombre_val}}</h4>
                                     <div class="border border-info rounded px-1 observaciones-informes"><b>{{$informe->observa}}</b></div>
                                 </div>
                             @empty
@@ -476,7 +476,7 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                             @endphp
                             @forelse($informes as $informe)
                                 <div class="col-lg-12 mb-3">
-                                    <h4 class="titulos-negro p-2 titulos-informes">{{$informe->nombre_val}}</h4>
+                                    <h4 class="p-2 titulos-informes">{{$informe->nombre_val}}</h4>
                                     <div class="border border-info rounded px-1 observaciones-informes"><b>{{$informe->observa}}</b></div>
                                 </div>
                             @empty
