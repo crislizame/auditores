@@ -368,20 +368,20 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                             $valores += $valor;
                             }
                             @endphp
-                                <div class="col-lg-6 mb-3">
+                                <div class="col-6 mb-3">
                                     <div class="row mb-2">
-                                       <div class="col-lg-7">
+                                       <div class="col-7">
                                             <b>{{ucfirst($th->nombre_val)}}</b>
                                         </div>
-                                        <div class="col-lg-3">
+                                        <div class="col-3">
                                             <h2 class="p-2 text-right" data-val="{{$valor}}">{{$valor}}%</h2>
                                         </div>
-                                        <div class="col-lg-2">
+                                        <div class="col-2">
                                             <img src="{{asset('img/cara'.$proceso->value('carita').'.jpg')}}" width="50px" alt="carita">
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-lg-12">
+                                        <div class="col-12">
                                             <span class="border border-info rounded px-1"><b>{{ucfirst($proceso->value('observa'))}}</b></span>
                                         </div>
                                     </div>
