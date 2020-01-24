@@ -187,8 +187,8 @@
                                             <b>{{ucfirst($encuesta->value('observa'))}}</b>
                                         </div>
                                     </div>
-                                    <div class="col-2">
-                                        <button data-id="{{$id}}" class="btn btn-sm btn-primary btn-verfotos text-center">Ver Fotos</button>
+                                    <div class="col-2 text-center">
+                                        <button data-id="{{$id}}" class="btn btn-sm btn-primary btn-verfotos">Ver Fotos</button>
                                     </div>
                                 </div>
                             </div>
