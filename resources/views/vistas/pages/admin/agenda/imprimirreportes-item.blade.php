@@ -214,6 +214,15 @@ $pdsdata = (new \App\Pdsperfile())->where('id',$datos->pds_id)->first();
         </div>
     </div>
 </div>
+<script type='text/javascript'>
+        $(document).ready(function(){
+            detectarCarga();
+        });
+
+        function detectarCarga() {
+            window.print();
+        }
+    </script>
 @endif
 @if(request('cat') == "P")
 <div class="row h-100">
@@ -570,6 +579,8 @@ $pdsdata = (new \App\Pdsperfile())->where('id',$datos->pds_id)->first();
                             }
                         }).done(function(data) {
                             $('.imagenes-imp').html(data);
+                            setTimeout(10000);
+                            window.print();
                         });
                     });
                 </script>

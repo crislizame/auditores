@@ -35,15 +35,7 @@
     <script src="{{asset("assets/js/bootstrap.min.js")}}"></script>
 
     <script src="{{asset("assets/js/jquery.autocomplete.js")}}"></script>
-    <script type='text/javascript'>
-        $(document).ready(function(){
-            detectarCarga();
-        });
-
-        function detectarCarga() {
-            window.print();
-        }
-    </script>
+    
 </body>
 
 </html>
