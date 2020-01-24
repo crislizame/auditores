@@ -577,9 +577,6 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                                 <div class="col-lg-4 text-center p-2">$ {{number_format($arqueos->depositosparciales,2)}}</div>
                             </div>
                             <div class="row">
-                                <span data-id="{{$arqueos->idarqueocajas}}" class="btn btn-primary" id="depositos"><i class="fa fa-eye"></i> Ver depósitos</span>
-                            </div>
-                            <div class="row">
                                 <div class="col-lg-12"><h5 class="titulos p-2 text-center">Conciliación del arqueo realizado</h5></div>
                             </div>
                     <table class="table ">
