@@ -184,7 +184,7 @@
                                         <img src="{{asset('img/cara'.$encuesta->value('carita').'.jpg')}}" width="50px" alt="carita" class="pull-right">
                                     </div>
                                     <div class="col-4">
-                                        <div class="rounded border border-dark px-1">
+                                        <div class="rounded border border-dark px-1" style="min-height: 7vh;">
                                             <b>{{ucfirst($encuesta->value('observa'))}}</b>
                                         </div>
                                     </div>
