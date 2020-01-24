@@ -133,6 +133,7 @@
                         </tbody>
                     </table>
                     <h3 class="titulos-grandes p-2 text-center promestado">Estado</h3>
+                    <div class="row px-2">
                     @php
                     $datosverticales = (new \App\Encaudit())->where('categoria','=','estado')->get();
                     $cantidadestados =(new \App\Encaudit())->where('categoria','=','estado')->count();
@@ -140,8 +141,6 @@
                     @endphp
                     @forelse($datosverticales as $dv)
                     <h5 class="col titulos p-2 text-center" id="tituloaux{{$dv->idencaudit}}">{{ucfirst($dv->nombre_estado)}}</h5>
-
-                    <div class="row px-2">
                     @php
                             $thc = (new \App\Encauditvalue())->where('encaudit_id',$dv->idencaudit)->get();
                             $promcaritas = (new \App\Encauditvalue())->where('encaudit_id',$dv->idencaudit)->count();
