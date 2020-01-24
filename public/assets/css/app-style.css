@@ -5990,6 +5990,18 @@ input[type="color"] {
     padding: .5rem!important;
 }
 
+@media print {
+    .titulos-informes {
+        color: #52699B !important;
+        min-height: 5vh;
+    }
+    
+    .observaciones-informes{
+        min-height: 8vh;
+        padding: .5rem!important;
+    }
+}
+
 .mini-btn {
     padding: 3px;
 }
