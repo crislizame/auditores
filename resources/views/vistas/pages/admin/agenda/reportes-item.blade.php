@@ -275,10 +275,10 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td><b>Observación</b></td>
+                                <td colspan="2"><b>Observación</b></td>
                             </tr>
                             <tr style="background: lightgray;">
-                                <td>{{$valores_muebles->value('observa')}}</td>
+                                <td colspan="2">{{$valores_muebles->value('observa')}}</td>
                             </tr>
                         </tfoot>
                     </table>
