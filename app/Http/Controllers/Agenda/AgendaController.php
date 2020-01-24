@@ -364,6 +364,15 @@ class AgendaController extends Controller
                                             </a>
                                         </div>";
             }
+        } else if (\request('cat') == 'Print') {
+            $imgs = (new Arqueo_attachment())->where('arqueo_id', $id)->get();
+            foreach ($imgs as $img) {
+                $res .= " <div class=\"col-2\">
+                                            <a href=\"" . url('imagen/' . $img->attachments_id) . "\" data-fancybox=\"group2\">
+                                                <img src=\"" . url('imagen/' . $img->attachments_id) . "\" alt=\"lightbox\" class=\"lightbox-thumb img-thumbnail\">
+                                            </a>
+                                        </div>";
+            }
         }
         return $res;
     }

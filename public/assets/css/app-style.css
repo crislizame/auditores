@@ -6005,10 +6005,6 @@ input[type="color"] {
         min-height: 8vh;
         padding: .5rem !important;
     }
-
-    .lightbox-thumb {
-        width: 50%;
-    }
 }
 
 .mini-btn {

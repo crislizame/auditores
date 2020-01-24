@@ -562,7 +562,7 @@ $pdsdata = (new \App\Pdsperfile())->where('id',$datos->pds_id)->first();
                             dataType: 'text',
                             data: {
                                 'id': {{$arqueos->idarqueocajas}},
-                                'cat': 'P',
+                                'cat': 'Print',
                                 '_token': "{{csrf_token()}}"
                             },
                             beforeSend: function() {
