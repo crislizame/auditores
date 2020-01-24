@@ -19,6 +19,7 @@ Route::any('logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::get('imprimir/reportes-item', 'Agenda\AgendaController@imprimirreportesitem')->name('imprimir/reportes-item');
 Route::any('agenda/getimages', 'Agenda\AgendaController@getimages')->name('agenda/getimages');
+Route::get('imagen/{id}', 'Agenda\AgendaController@imagen');
 
 Route::middleware(['auth'])->group(function () {
     //--Rutas Menu
@@ -27,7 +28,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('agenda/ver-agenda', 'Agenda\AgendaController@veragenda')->name('agenda/ver-agenda');
     Route::get('agenda/reportes', 'Agenda\AgendaController@reportes')->name('agenda/reportes');
     Route::get('agenda/reportes-item', 'Agenda\AgendaController@reportesitem')->name('agenda/reportes-item');
-    Route::get('imagen/{id}', 'Agenda\AgendaController@imagen');
     //----Comisionista
     Route::get('comisionista/listas', 'Admin\ComisionistasController@listas')->name('comisionista/listas');
     Route::get('comisionista', 'Admin\ComisionistasController@obtenertodos')->name('comisionista');
