@@ -6330,4 +6330,9 @@ ul .datosvertical {
         min-height: 12.5vh;
     }
 
+    .titulos-procentaje{
+        font-size: 30px;
+        line-height: 34px;
+    }
+
 }
