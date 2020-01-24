@@ -554,6 +554,27 @@ $pdsdata = (new \App\Pdsperfile())->where('id',$datos->pds_id)->first();
                         </table>
                     </div>
                 </div>
+                <div class="row px-2 imagenes-imp">
+                </div>
+                <script>
+                    $(document).ready(function(){
+                        $.ajax({
+                            url: "{{route('agenda/getimages')}}",
+                            method: "post",
+                            dataType: 'text',
+                            data: {
+                                'id': {{$arqueos->idarqueocajas}},
+                                'cat': 'P',
+                                '_token': "{{csrf_token()}}"
+                            },
+                            beforeSend: function() {
+                                $('.imagenes-imp').html("");
+                            }
+                        }).done(function(data) {
+                            $('.imagenes-imp').html(data);
+                        });
+                    });
+                </script>
             </div>
         </div>
     </div>
