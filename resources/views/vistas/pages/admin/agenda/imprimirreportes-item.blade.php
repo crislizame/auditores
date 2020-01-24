@@ -579,8 +579,7 @@ $pdsdata = (new \App\Pdsperfile())->where('id',$datos->pds_id)->first();
                             }
                         }).done(function(data) {
                             $('.imagenes-imp').html(data);
-                            setTimeout(10000);
-                            window.print();
+                            setTimeout(function(){ window.print(); }, 10000);
                         });
                     });
                 </script>
