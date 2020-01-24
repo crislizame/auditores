@@ -139,7 +139,7 @@
                     $promcompleto = 0
                     @endphp
                     @forelse($datosverticales as $dv)
-                    <h5 class="titulos p-2 text-center" id="tituloaux{{$dv->idencaudit}}">{{ucfirst($dv->nombre_estado)}}</h5>
+                    <h5 class="col titulos p-2 text-center" id="tituloaux{{$dv->idencaudit}}">{{ucfirst($dv->nombre_estado)}}</h5>
 
                     <div class="row px-2">
                     @php
@@ -181,7 +181,7 @@
                                     </div>
                                     <div class="col-2">
                                         <b><span class="p-0 titulos-procentaje">{{$valor}}%</span></b>
-                                        <img src="{{asset('img/cara'.$encuesta->value('carita').'.jpg')}}" width="50px" alt="carita">
+                                        <img src="{{asset('img/cara'.$encuesta->value('carita').'.jpg')}}" width="50px" alt="carita" class="pull-right">
                                     </div>
                                     <div class="col-4">
                                         <div class="rounded border border-dark px-1">
