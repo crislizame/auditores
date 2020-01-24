@@ -302,15 +302,15 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
         <div class="row">
             <div class="col titulos-visuales rounded p-2">
                 <h2 class="titulos-categoria p-0 pt-1">Procesos</h2>
-                <h2 class="titulos-categoria p-0 pt-1" id="promprocesos"></h2>
+                <h2 class="text-white p-0 pt-1" id="promprocesos"></h2>
             </div>
             <div class="col titulos-visuales rounded p-2">
                 <h2 class="titulos-categoria p-0">Activos</h2>
-                <h1 class="titulos-categoria p-0"><i class="fa fa-check bg-success rounded-circle"></i></h1>
+                <h1 class="text-white p-0"><i class="fa fa-check bg-success rounded-circle"></i></h1>
             </div>
             <div class="col titulos-visuales rounded p-2">
                 <h2 class="titulos-categoria p-0">Perfil</h2>
-                <h1 class="titulos-categoria p-0"><i class="fa fa-check bg-success rounded-circle"></i></h1>
+                <h1 class="text-white p-0"><i class="fa fa-check bg-success rounded-circle"></i></h1>
             </div>
         </div>
     </div>
