@@ -6251,6 +6251,11 @@ ul .datosvertical {
         min-height: 41.6vh;
         max-height: 41.6vh;
     }
+    
+    .titulos-procentaje{
+        font-size: 30px;
+        line-height: 34px;
+    }
 }
 
 .lmhreporte li a:hover {
