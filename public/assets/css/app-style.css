@@ -5985,20 +5985,25 @@ input[type="color"] {
     min-height: 10vh;
 }
 
-.observaciones-informes{
+.observaciones-informes {
     min-height: 15vh;
-    padding: .5rem!important;
+    padding: .5rem !important;
 }
 
 @media print {
+    h2 {
+        font-size: 30px;
+        line-height: 34px;
+    }
+
     .titulos-informes {
         color: #52699B !important;
         min-height: 5vh;
     }
-    
-    .observaciones-informes{
+
+    .observaciones-informes {
         min-height: 8vh;
-        padding: .5rem!important;
+        padding: .5rem !important;
     }
 }
 
