@@ -5582,12 +5582,27 @@ input[type="color"] {
 /* Responsive */
 @media only screen and (max-width: 1366px) {
 
+    h2{
+        font-size: 30px;
+        line-height: 34px;
+    }
+    
     .error-pages {
         margin-top: 110px;
     }
 
     .coming-soon {
         margin-top: 110px;
+    }
+
+    .titulos-informes{
+        font-size: 18px;
+        line-height: 22px;
+        min-height: 15vh;
+    }
+
+    .observaciones-informes{
+        min-height: 12.5vh;
     }
 
 }
