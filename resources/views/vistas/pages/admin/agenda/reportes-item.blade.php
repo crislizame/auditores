@@ -71,7 +71,7 @@
                 <div class="card-body pl-0 pr-0 pb-0 pt-0">
                     <h2 class="titulos-categoria p-2 text-center">AUDITORIA GENERAL</h2>
 
-                    <a target="_blank" href="{{route('imprimir/reportes-item')}}?cat=auditoria&id={{request('id')}}">
+                    <a target="_blank" href="{{route('imprimir/reportes-item')}}?cat=N&id={{request('id')}}">
                         <h3 class="titulos-grandes p-2 text-center"><i class="fa fa-print text-white"></i> Ver en Formato de Impresión</h3>
                     </a>
                     <h2 class="titulos p-2 text-center">{{strtoupper($pdsdata->pds_name)}}</h2>
@@ -290,7 +290,7 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                 <div class="card-body pl-0 pr-0 pb-0 pt-0">
                 <h2 class="titulos-categoria p-2 text-center">AUDITORIA DE PROCESO</h2>
 
-<a target="_blank" href="{{route('imprimir/reportes-item')}}?cat=auditoria&id={{request('id')}}">
+<a target="_blank" href="{{route('imprimir/reportes-item')}}?cat=P&id={{request('id')}}">
     <h3 class="titulos-grandes p-2 text-center"><i class="fa fa-print text-white"></i> Ver en Formato de Impresión</h3>
 </a>
 <h2 class="titulos p-2 text-center">{{strtoupper($pdsdata->pds_name)}}</h2>
