@@ -180,7 +180,7 @@
                                         <b>{{ucfirst($th->nombre_val)}}</b>
                                     </div>
                                     <div class="col-2">
-                                        <b><span class="p-0 titulos-procentaje">{{$valor}}50%</span></b>
+                                        <b><span class="p-0 titulos-procentaje">{{$valor}}%</span></b>
                                         <img src="{{asset('img/cara'.$encuesta->value('carita').'.jpg')}}" width="50px" alt="carita">
                                     </div>
                                     <div class="col-4">
