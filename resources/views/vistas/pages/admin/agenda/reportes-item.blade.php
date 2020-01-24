@@ -140,9 +140,9 @@
                     @endphp
                     @forelse($datosverticales as $dv)
                     <h5 class="titulos p-2 text-center" id="tituloaux{{$dv->idencaudit}}">{{ucfirst($dv->nombre_estado)}}</h5>
-                    <table class="table">
-                        <tbody>
-                            @php
+
+                    <div class="row px-2">
+                    @php
                             $thc = (new \App\Encauditvalue())->where('encaudit_id',$dv->idencaudit)->get();
                             $promcaritas = (new \App\Encauditvalue())->where('encaudit_id',$dv->idencaudit)->count();
                             
@@ -174,22 +174,29 @@
                             $valores += $valor;
                             }
                             @endphp
-                            <tr>
-                                <td width="30%"><b>{{ucfirst($th->nombre_val)}}</b></td>
-                                <td width=150>
-                                    <h2 class="p-2 text-right">{{$valor}}%</h2>
-                                </td>
-                                <td width=75><img src="{{asset('img/cara'.$encuesta->value('carita').'.jpg')}}" width="50px" alt="carita"></td>
-                                <td width="50%">
+                            <div class="col-12">
+                                <div class="col-4">
+                                    <b>{{ucfirst($th->nombre_val)}}</b>
+                                </div>
+                                <div class="col-2">
+                                    <div class="col">
+                                        <h2 class="p-2 text-right">{{$valor}}%</h2>
+                                    </div>
+                                    <div class="col">
+                                    <img src="{{asset('img/cara'.$encuesta->value('carita').'.jpg')}}" width="50px" alt="carita">
+                                    </div>
+                                </div>
+                                <div class="col-4">
                                     <div class="rounded border border-dark px-1">
                                         <b>{{ucfirst($encuesta->value('observa'))}}</b>
                                     </div>
-                                </td>
-                                <td><button data-id="{{$id}}" class="btn btn-sm btn-primary btn-verfotos">Ver Fotos</button></td>
-                            </tr>
+                                </div>
+                                <div class="col-2">
+                                    <button data-id="{{$id}}" class="btn btn-sm btn-primary btn-verfotos">Ver Fotos</button>
+                                </div>
+                            </div>
                             @empty
                             @endforelse
-                        </tbody>
                         <script>
                             var tituloaux{{$dv->idencaudit}} = '{{ucfirst($dv->nombre_estado)}} <span class="border border-info rounded px-1">{{number_format($valores/$promcaritas, 2, '.', '')}}%</span>';
                             $(document).ready(function(){
@@ -200,7 +207,6 @@
                             $promcompleto += $valores/$promcaritas;
                             @endphp
                         </script>
-                    </table>
                     @empty
                     @endforelse
                     <script>
@@ -210,6 +216,19 @@
                             $('.promestado').html('Estado <span class="border border-white rounded px-1">'+aux.toFixed(2)+'%</span>');
                         });
                     </script>
+                    </div>
+
+
+
+                            
+
+
+
+
+
+
+
+
                     <h3 class="titulos-grandes p-2 text-center">Activo</h3>
                     @php
                     $datosverticales = (new \App\Encaudit())->where('categoria','=','activos')->get();
