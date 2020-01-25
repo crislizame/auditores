@@ -485,7 +485,7 @@
                                 <div class="col-lg-4 my-3">
 
                                     <div class="col text-center titulos-negro p-2">
-                                        <h2 class="p-0 pt-1">N/A <i class="fa fa-asterisk bg-warning rounded-circle text-white p-1"></i></h2>
+                                        <h2 class="p-0 pt-1">N/A <i class="fa fa-minus bg-warning rounded-circle text-white p-1"></i></h2>
                                     </div>
                                     @php
                                         $informes = (new \App\Informes_reporte())->join('encauditvalues','informes_reportes.informes_id','encauditvalues.idencauditvalues')->where([ 'agenda_id'=>$datos->agenda_id,  'pds_id'=>$pdsdata->id, 'auditor_id'=>$datos->auditor_id, 'value'=>'N/A' ])->get();

@@ -55,28 +55,14 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="pds_name">PDS</label>
+                            <label for="pds_name">Nombre del PDS</label>
                             <input class="form-control" id="pds_name" name="pds_name" type="text">
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="pds_ciudad">Ciudad</label>
-                            <select  class="form-control pds_ciudad" id="pds_ciudad" name="pds_ciudad">
-                                <option value="0">Ciudad</option>
-                                @php
-                                    $provinciasx = public_path('provincias.json');
-                                    $abierto = file_get_contents($provinciasx);
-                                    $provincias = json_decode($abierto);
-
-                                @endphp
-                                @forelse($provincias as $provincia)
-                                    @forelse($provincia->cantones as $canton)
-                                        <option value="{{$canton->canton}}">{{$canton->canton}}</option>
-                                    @empty
-                                    @endforelse
-                                @empty
-                                @endforelse
-                            </select>
+                            <label for="pds_cod">Código de establecimiento ID</label>
+                            <input class="form-control" id="pds_cod" name="pds_cod" type="text">
                         </div>
+
                     </div>
                     <div class="row">
                         <div class="col-12">
@@ -86,73 +72,97 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="nombres">Nombres</label>
-                            <input class="form-control" id="nombres" name="nombres" type="text">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="apellidos">Apellidos</label>
-                            <input class="form-control" id="apellidos" name="apellidos" type="text">
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="estudios">Estudios</label>
-                            <input class="form-control" id="estudios" name="estudios" type="text">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="direccion">Direccion</label>
-                            <input class="form-control" id="direccion" name="direccion" type="text">
-
-                        </div>
-
-
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group col-md-3">
-                            <label for="tipo_comisionista">Tipo</label>
-                            {{-- <input class="form-control" id="tipo_comisionista" name="tipo_comisionista" type="text" >--}}
-
-                            <select class="form-control" id="tipo_comisionista" name="tipo_comisionista">
-                                <option value="AG. MULTIPLE">AG. MULTIPLE</option>
-                                <option value="AGENCIERO 1PTO">AGENCIERO 1PTO</option>
-                                <option value="COMISIONISTA">COMISIONISTA</option>
+                            <label for="pds_provincia">Provincia</label>
+                            <select  class="form-control pds_ciudad" id="pds_provincia" name="pds_provincia">
+                                <option value="0">Provincia</option>
+                                @php
+                                    $provinciasx = public_path('provincias.json');
+                                    $abierto = file_get_contents($provinciasx);
+                                    $provincias = json_decode($abierto);
+                                @endphp
+{{--                                asds--}}
+                                @forelse($provincias as $provincia)
+                                        <option value="{{$provincia->provincia}}">{{$provincia->provincia}}</option>
+                                @empty
+                                @endforelse
                             </select>
                         </div>
-                        <div class="form-group col-md-3">
-                            <label for="fecha_ingreso">Fecha Ingreso</label>
-                            <input class="form-control" value="<?php echo date('Y-m-d'); ?>" id="created_at" name="created_at" type="date">
+                        <div class="form-group col-md-6">
+                            <label for="pds_ciudad">Ciudad</label>
+                            <select  class="form-control pds_ciudad" id="pds_ciudad" name="pds_ciudad">
+                                <option value="0">Ciudad</option>
 
+                                @forelse($provincias as $provincia)
+                                    @forelse($provincia->cantones as $canton)
+                                        <option value="{{$canton->canton}}">{{$canton->canton}}</option>
+                                    @empty
+                                    @endforelse
+                                @empty
+                                @endforelse
+                            </select>
                         </div>
-                        <div class="form-group col-md-3">
-                            <label for="telef_celular">Telef. Celular</label>
-                            <input class="form-control" id="celular" name="celular" type="text">
 
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label for="telef_fijo">Telefono Fijo</label>
-                            <input class="form-control" id="telef_domicilio" name="telef_domicilio" type="text">
-
-                        </div>
                     </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="pds_sventas">Supervisor de ventas</label>
+                            <input class="form-control" id="pds_sventas" name="pds_sventas" type="text">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="pds_recaudo">Recaudador</label>
+                            <input class="form-control" id="pds_recaudo" name="pds_recaudo" type="text">
+
+                        </div>
+
+
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="pds_logistic">Logistico</label>
+                            <input class="form-control" id="pds_logistic" name="pds_logistic" type="text">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="pds_direccion">Direccion</label>
+                            <input class="form-control" id="pds_direccion" name="pds_direccion" type="text">
+
+                        </div>
+
+
+                    </div>
+
+
                     <div class="row">
                         <div class="col-12">
-                            <div class="text-center">Recursos de Supervisión</div>
+                            <div class="text-center">Contrato de arriendo</div>
                             <hr class="pt-0 mt-0 text-black" style="color: black!important">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="rs_ventas">Ventas</label>
-                            <input class="form-control" id="rs_ventas" name="rs_ventas" type="text">
-
+                            <label for="pds_arrinicio">Inicio</label>
+                            <input class="form-control" id="pds_arrinicio" name="pds_arrinicio" type="date">
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="rs_cartera">Cartera</label>
-                            <input class="form-control" id="rs_cartera" name="rs_cartera" type="text">
+                            <label for="pds_arrfin">Fin</label>
+                            <input class="form-control" id="pds_arrfin" name="pds_arrfin" type="date">
 
                         </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="pds_fapertura">Fecha de apertura</label>
+                            <input class="form-control" id="pds_fapertura" name="pds_fapertura" type="date">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="pds_telef">Teléfonos</label>
+                            <input class="form-control" id="pds_telef" name="pds_telef" type="text">
 
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="pds_mt2">Mt2 del local</label>
+                            <input class="form-control" id="pds_mt2" name="pds_mt2" type="text">
+
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-12">
@@ -162,24 +172,101 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-3">
-                            <label for="tipo_comisionista">Hora de Entrada L-V</label>
-                            <input class="form-control" id="h_ingreso" name="h_ingreso" type="time">
+                            <label for="pds_lvapertura">Hora de Entrada L-V</label>
+                            <input class="form-control" id="pds_lvapertura" name="pds_lvapertura" type="time">
 
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="direccion">Hora de Salida L-V</label>
-                            <input class="form-control" id="h_salida" name="h_salida" type="time">
+                            <label for="pds_lvcierre">Hora de Salida L-V</label>
+                            <input class="form-control" id="pds_lvcierre" name="pds_lvcierre" type="time">
 
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="telef_celular">Hora de Entrada S-D</label>
-                            <input class="form-control" id="hfds_ingreso" name="hfds_ingreso" type="time">
+                            <label for="pds_sapertura">Hora de Entrada S</label>
+                            <input class="form-control" id="pds_sapertura" name="pds_sapertura" type="time">
 
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="telef_fijo">Hora de Salida S-D</label>
-                            <input class="form-control" id="hfds_salida" name="hfds_salida" type="time">
+                            <label for="pds_scierre">Hora de Salida S</label>
+                            <input class="form-control" id="pds_scierre" name="pds_scierre" type="time">
 
+                        </div>
+                    </div>
+                    <div class="form-row">
+
+                        <div class="form-group col-md-6">
+                            <label for="pds_dapertura">Hora de Entrada Domingos</label>
+                            <input class="form-control" id="pds_dapertura" name="pds_dapertura" type="time">
+
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="pds_dcierre">Hora de Salida Domingos</label>
+                            <input class="form-control" id="pds_dcierre" name="pds_dcierre" type="time">
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="text-center">Permisos</div>
+                            <hr class="pt-0 mt-0 text-black" style="color: black!important">
+                        </div>
+                    </div>
+                    <div class="form-row">
+
+                        <div class="form-group col-md-4">
+                            <div class="">Bomberos</div>
+                            <br>
+                            <div class="icheck-primary">
+                                <input type="checkbox"  id="bsenal" name="bsenal">
+                                <label for="bsenal">Señaléticas</label>
+                            </div>
+                            <br>
+                            <div class="icheck-primary">
+                                <input type="checkbox"  id="bextintores" name="bextintores">
+                                <label for="bextintores">Extintores</label>
+                            </div>
+
+                        </div>
+                        <div class="form-group col-md-4">
+                            <div class="">Municipales</div>
+                            <br>
+                            <div class="icheck-primary">
+                                <input type="checkbox"  id="msuelo" name="msuelo">
+                                <label for="msuelo">Uso de suelo</label>
+                            </div>
+                            <br>
+                            <div class="icheck-primary">
+                                <input type="checkbox"  id="msalud" name="msalud">
+                                <label for="msalud">Permiso del Ministerio de Salud</label>
+                            </div>
+                            <br>
+                            <div class="icheck-primary">
+                                <input type="checkbox"  id="mpatente" name="mpatente">
+                                <label for="mpatente">Patente</label>
+                            </div>
+                            <br>
+                            <div class="icheck-primary">
+                                <input type="checkbox"  id="mtasa" name="mtasa">
+                                <label for="mtasa">Tasa de habilitación</label>
+                            </div>
+                            <br>
+                            <div class="icheck-primary">
+                                <input type="checkbox" id="mpermisoanterior" name="mpermisoanterior">
+                                <label for="mpermisoanterior">Permiso del año anterior</label>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <div class="">Letreros</div>
+                            <br>
+                            <div class="icheck-primary">
+                                <input type="checkbox"  id="lpermiso" name="lpermiso">
+                                <label for="lpermiso">Permiso</label>
+                            </div>
+                            <br>
+                            <div class="icheck-primary">
+                                <input type="checkbox"  id="lotros" name="lotros">
+                                <label for="lotros">Otros</label>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -192,12 +279,11 @@
         </div>
     </div>
 </div>
-
 <div class="modal fade editComisionistaModal" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header bg-primary ">
-                <h5 class="modal-title text-white" id="exampleModalLongTitle">Editar Comisionistas</h5>
+                <h5 class="modal-title text-white" id="exampleModalLongTitle">Editar PDS</h5>
                 <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -212,38 +298,14 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="pds_name">Nombre de PDS</label>
-                            <select class="form-control pds_name" id="pds_name2" name="pds_id">
-                                <option value="0">Seleccione un PDS</option>
-                                @php
-                                $pdss = (new \App\Pdsperfile())->orderBy('id','desc')->get()
-
-                                @endphp
-                                @forelse($pdss as $pds)
-                                <option value="{{$pds->id}}">{{$pds->pds_name}}</option>
-                                @empty
-                                @endforelse
-                            </select>
+                            <label for="pds_name">Nombre del PDS</label>
+                            <input class="form-control" id="pds_name2" name="pds_name" type="text">
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="pds_ciudad2">Ciudad</label>
-                            <select disabled class="form-control pds_ciudad" id="pds_ciudad2" name="pds_ciudad">
-                                <option value="0">Ciudad</option>
-                                @php
-                                $provinciasx = public_path('provincias.json');
-                                $abierto = file_get_contents($provinciasx);
-                                $provincias = json_decode($abierto);
-
-                                @endphp
-                                @forelse($provincias as $provincia)
-                                @forelse($provincia->cantones as $canton)
-                                <option value="{{$canton->canton}}">{{$canton->canton}}</option>
-                                @empty
-                                @endforelse
-                                @empty
-                                @endforelse
-                            </select>
+                            <label for="pds_cod">Código de establecimiento ID</label>
+                            <input class="form-control" id="pds_cod2" name="pds_cod" type="text">
                         </div>
+
                     </div>
                     <div class="row">
                         <div class="col-12">
@@ -253,73 +315,97 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="nombres">Nombres</label>
-                            <input class="form-control" id="nombres2" name="nombres" type="text">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="apellidos">Apellidos</label>
-                            <input class="form-control" id="apellidos2" name="apellidos" type="text">
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="estudios">Estudios</label>
-                            <input class="form-control" id="estudios2" name="estudios" type="text">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="direccion">Dirección</label>
-                            <input class="form-control" id="direccion2" name="direccion" type="text">
-
-                        </div>
-
-
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group col-md-3">
-                            <label for="tipo_comisionista">Tipo</label>
-                            {{-- <input class="form-control" id="tipo_comisionista2" name="tipo_comisionista" type="text" >--}}
-
-                            <select class="form-control" id="tipo_comisionista2" name="tipo_comisionista">
-                                <option value="AG. MULTIPLE">AG. MULTIPLE</option>
-                                <option value="AGENCIERO 1PTO">AGENCIERO 1PTO</option>
-                                <option value="COMISIONISTA">COMISIONISTA</option>
+                            <label for="pds_provincia">Provincia</label>
+                            <select  class="form-control pds_ciudad" id="pds_provincia2" name="pds_provincia">
+                                <option value="0">Provincia</option>
+                                @php
+                                    $provinciasx = public_path('provincias.json');
+                                    $abierto = file_get_contents($provinciasx);
+                                    $provincias = json_decode($abierto);
+                                @endphp
+{{--                                asds--}}
+                                @forelse($provincias as $provincia)
+                                        <option value="{{$provincia->provincia}}">{{$provincia->provincia}}</option>
+                                @empty
+                                @endforelse
                             </select>
                         </div>
-                        <div class="form-group col-md-3">
-                            <label for="fecha_ingreso">Fecha Ingreso</label>
-                            <input class="form-control" id="created_at2" value="<?php echo date('Y-m-d'); ?>" name="created_at" type="date">
+                        <div class="form-group col-md-6">
+                            <label for="pds_ciudad">Ciudad</label>
+                            <select  class="form-control pds_ciudad" id="pds_ciudad2" name="pds_ciudad">
+                                <option value="0">Ciudad</option>
 
+                                @forelse($provincias as $provincia)
+                                    @forelse($provincia->cantones as $canton)
+                                        <option value="{{$canton->canton}}">{{$canton->canton}}</option>
+                                    @empty
+                                    @endforelse
+                                @empty
+                                @endforelse
+                            </select>
                         </div>
-                        <div class="form-group col-md-3">
-                            <label for="telef_celular">Número Celular</label>
-                            <input class="form-control" id="celular2" value="0" name="celular" type="text">
 
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label for="telef_fijo">Teléfono Fijo</label>
-                            <input class="form-control" id="telef_domicilio2" name="telef_domicilio" type="text">
-
-                        </div>
                     </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="pds_sventas">Supervisor de ventas</label>
+                            <input class="form-control" id="pds_sventas2" name="pds_sventas" type="text">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="pds_recaudo">Recaudador</label>
+                            <input class="form-control" id="pds_recaudo2" name="pds_recaudo" type="text">
+
+                        </div>
+
+
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="pds_logistic">Logistico</label>
+                            <input class="form-control" id="pds_logistic2" name="pds_logistic" type="text">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="pds_direccion">Direccion</label>
+                            <input class="form-control" id="pds_direccion2" name="pds_direccion" type="text">
+
+                        </div>
+
+
+                    </div>
+
+
                     <div class="row">
                         <div class="col-12">
-                            <div class="text-center">Recursos de Supervisión</div>
+                            <div class="text-center">Contrato de arriendo</div>
                             <hr class="pt-0 mt-0 text-black" style="color: black!important">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="rs_ventas">Ventas</label>
-                            <input class="form-control" id="rs_ventas2" name="rs_ventas" type="text">
-
+                            <label for="pds_arrinicio">Inicio</label>
+                            <input class="form-control" id="pds_arrinicio2" name="pds_arrinicio" type="date">
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="rs_cartera">Cartera</label>
-                            <input class="form-control" id="rs_cartera2" name="rs_cartera" type="text">
+                            <label for="pds_arrfin">Fin</label>
+                            <input class="form-control" id="pds_arrfin2" name="pds_arrfin" type="date">
 
                         </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="pds_fapertura">Fecha de apertura</label>
+                            <input class="form-control" id="pds_fapertura2" name="pds_fapertura" type="date">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="pds_telef">Teléfonos</label>
+                            <input class="form-control" id="pds_telef2" name="pds_telef" type="text">
 
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="pds_mt2">Mt2 del local</label>
+                            <input class="form-control" id="pds_mt22" name="pds_mt2" type="text">
+
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-12">
@@ -329,29 +415,106 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-3">
-                            <label for="tipo_comisionista">Hora de Entrada L-V (22:10)</label>
-                            <input class="form-control" id="h_ingreso2" name="h_ingreso">
+                            <label for="pds_lvapertura">Hora de Entrada L-V</label>
+                            <input class="form-control" id="pds_lvapertura2" name="pds_lvapertura" type="time">
 
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="direccion">Hora de Salida L-V (22:10)</label>
-                            <input class="form-control" id="h_salida2" name="h_salida">
+                            <label for="pds_lvcierre">Hora de Salida L-V</label>
+                            <input class="form-control" id="pds_lvcierre2" name="pds_lvcierre" type="time">
 
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="telef_celular">Hora de Entrada S-D (22:10)</label>
-                            <input class="form-control" id="hfds_ingreso2" name="hfds_ingreso">
+                            <label for="pds_sapertura">Hora de Entrada S</label>
+                            <input class="form-control" id="pds_sapertura2" name="pds_sapertura" type="time">
 
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="telef_fijo">Hora de Salida S-D (22:10)</label>
-                            <input class="form-control" id="hfds_salida2" name="hfds_salida">
+                            <label for="pds_scierre">Hora de Salida S</label>
+                            <input class="form-control" id="pds_scierre2" name="pds_scierre" type="time">
 
+                        </div>
+                    </div>
+                    <div class="form-row">
+
+                        <div class="form-group col-md-6">
+                            <label for="pds_dapertura">Hora de Entrada Domingos</label>
+                            <input class="form-control" id="pds_dapertura2" name="pds_dapertura" type="time">
+
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="pds_dcierre">Hora de Salida Domingos</label>
+                            <input class="form-control" id="pds_dcierre2" name="pds_dcierre" type="time">
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="text-center">Permisos</div>
+                            <hr class="pt-0 mt-0 text-black" style="color: black!important">
+                        </div>
+                    </div>
+                    <div class="form-row">
+
+                        <div class="form-group col-md-4">
+                            <div class="">Bomberos</div>
+                            <br>
+                            <div class="icheck-primary">
+                                <input type="checkbox"  id="bsenal2" name="bsenal">
+                                <label for="bsenal2">Señaléticas</label>
+                            </div>
+                            <br>
+                            <div class="icheck-primary">
+                                <input type="checkbox"  id="bextintores2" name="bextintores">
+                                <label for="bextintores2">Extintores</label>
+                            </div>
+
+                        </div>
+                        <div class="form-group col-md-4">
+                            <div class="">Municipales</div>
+                            <br>
+                            <div class="icheck-primary">
+                                <input type="checkbox"  id="msuelo2" name="msuelo">
+                                <label for="msuelo2">Uso de suelo</label>
+                            </div>
+                            <br>
+                            <div class="icheck-primary">
+                                <input type="checkbox"  id="msalud2" name="msalud">
+                                <label for="msalud2">Permiso del Ministerio de Salud</label>
+                            </div>
+                            <br>
+                            <div class="icheck-primary">
+                                <input type="checkbox"  id="mpatente2" name="mpatente">
+                                <label for="mpatente2">Patente</label>
+                            </div>
+                            <br>
+                            <div class="icheck-primary">
+                                <input type="checkbox"  id="mtasa2" name="mtasa">
+                                <label for="mtasa2">Tasa de habilitación</label>
+                            </div>
+                            <br>
+                            <div class="icheck-primary">
+                                <input type="checkbox" id="mpermisoanterior2" name="mpermisoanterior">
+                                <label for="mpermisoanterior2">Permiso del año anterior</label>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <div class="">Letreros</div>
+                            <br>
+                            <div class="icheck-primary">
+                                <input type="checkbox"  id="lpermiso2" name="lpermiso">
+                                <label for="lpermiso2">Permiso</label>
+                            </div>
+                            <br>
+                            <div class="icheck-primary">
+                                <input type="checkbox"  id="lotros2" name="lotros">
+                                <label for="lotros2">Otros</label>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                        <button type="submit" disabled class="btn btn-primary btnComisionistasEditar">Guardar</button>
+                        <button type="submit" class="btn btn-primary btnComisionistasEditar">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -359,6 +522,8 @@
         </div>
     </div>
 </div>
+
+
 
 @endsection
 @section('script')
@@ -375,60 +540,7 @@
         $('form').on('submit', function() {
             return false;
         });
-        $('#pds_name').select2();
-        $('#pds_ciudad').select2();
-        $('#pds_name').on('select2:select', function(e) {
-            var data = e.params.data;
-            $.ajax({
-                url: "{{route('comisionista/listas/ajax/ciudadpds')}}",
-                method: "post",
-                dataType: 'text',
-                data: {
-                    'pds_id': data.id,
-                    '_token': "{{csrf_token()}}"
-                },
-                beforeSend: function() {
-                    // noti =  Lobibox.notify('info', {
-                    //     pauseDelayOnHover: true,
-                    //     title: "¡Eliminando!",
-                    //     continueDelayOnInactiveTab: false,
-                    //     position: 'top right',
-                    //     icon: 'fa fa-check-circle',
-                    //     msg: 'Por Favor Espere'
-                    // });
-                }
-            }).done(function(done) {
-                console.log(done);
-                $('#pds_ciudad').val(done).trigger('change');
-            });
-        });
-        $('#pds_ciudad2').select2();
-        $('#pds_name2').select2();
-        $('#pds_name2').on('select2:select', function(e) {
-            var data = e.params.data;
-            $.ajax({
-                url: "{{route('comisionista/listas/ajax/ciudadpds')}}",
-                method: "post",
-                dataType: 'text',
-                data: {
-                    'pds_id': data.id,
-                    '_token': "{{csrf_token()}}"
-                },
-                beforeSend: function() {
-                    // noti =  Lobibox.notify('info', {
-                    //     pauseDelayOnHover: true,
-                    //     title: "¡Eliminando!",
-                    //     continueDelayOnInactiveTab: false,
-                    //     position: 'top right',
-                    //     icon: 'fa fa-check-circle',
-                    //     msg: 'Por Favor Espere'
-                    // });
-                }
-            }).done(function(done) {
-                console.log(done);
-                $('#pds_ciudad2').val(done).trigger('change');
-            });
-        });
+        $('.pds_ciudad').select2();
 
         //comisionista/listas/ajax/cargarPDS
         cargarPDS();
@@ -478,7 +590,7 @@
                 var id = $(this).attr('data-id');
                 $('.editComisionistaModal').modal('show');
                 $.ajax({
-                    url: "{{route('comisionista/listas/ajax/mostrarComisionistas')}}",
+                    url: "{{route('pds/listas/ajax/mostrarpds')}}",
                     method: "post",
                     dataType: 'json',
                     data: {
@@ -486,57 +598,120 @@
                         '_token': "{{csrf_token()}}"
                     },
                     beforeSend: function() {
-                        $('#pds_name2').val(0)
-                            .trigger('change');
+                        $('#pds_name2').val('');
                         $('#pds_ciudad2').val(0)
                             .trigger('change');
-                        $('#nombres2').val('');
-                        $('#apellidos2').val('');
-                        $('#estudios2').val('');
-                        $('#direccion2').val('');
-                        $('#h_ingreso2').val('');
-                        $('#h_salida2').val('');
-                        $('#hfds_ingreso2').val('');
-                        $('#hfds_salida2').val('');
-                        $('#celular2').val('');
-                        $('#telef_domicilio2').val('');
-                        $('#rs_cartera2').val('');
-                        $('#created_at2').val('');
-                        $('#tipo_comisionista2').val('');
+                        $('#pds_provincia2').val(0)
+                            .trigger('change');
+                        $('#pds_cod2').val('');
+                        $('#pds_sventas2').val('');
+                        $('#pds_fapertura2').val('');
+
+                        $('#pds_direccion2').val('');
+                        $('#pds_arrinicio2').val('');
+                        $('#pds_arrfin2').val('');
+                        $('#pds_mt22').val('');
+                        $('#pds_lvapertura2').val('');
+                        $('#pds_lvcierre2').val('');
+                        $('#pds_sapertura2').val('');
+                        $('#pds_scierre2').val('');
+                        $('#pds_dapertura2').val('');
+                        $('#pds_dcierre2').val('');
+                        $('#pds_logistic2').val('');
+                        $('#pds_recaudo2').val('');
+                        $('#pds_telef').val('');
+                        $('#bsenal2').removeAttr('checked');
+                        $('#bextintores2').removeAttr('checked');
+                        $('#msuelo2').removeAttr('checked');
+                        $('#msalud2').removeAttr('checked');
+                        $('#mpatente2').removeAttr('checked');
+                        $('#mtasa2').removeAttr('checked');
+                        $('#mpermisoanterior2').removeAttr('checked');
+                        $('#lpermiso2').removeAttr('checked');
+                        $('#lotros2').removeAttr('checked');
+
                     }
                 }).done(function(data) {
                     //asdasdasd
                     $('#formeditComisionistas').attr('data-id', id);
-                    $('#pds_name2').val(data.pds_id)
-                        .trigger('change');
-                    var date = $('#pds_name2').select2('data');
-                    $('#pds_name2').trigger({
+                    $('#pds_ciudad2').val(data[0].pds_ciudad).trigger('change');
+                    $('#pds_provincia2').val(data[0].pds_provincia).trigger('change');
+                    var date1 = $('#pds_ciudad2').select2('data');
+                    $('#pds_ciudad2').trigger({
+                        type: 'select2:select',
+                        params: {
+                            data: date1[0]
+
+                        }
+                    });
+                    var date = $('#pds_provincia2').select2('data');
+                    $('#pds_provincia2').trigger({
                         type: 'select2:select',
                         params: {
                             data: date[0]
 
                         }
                     });
-                    $('#nombres2').val(data.nombres);
-                    $('#apellidos2').val(data.apellidos);
-                    $('#estudios2').val(data.estudios);
-                    $('#direccion2').val(data.direccion);
-                    $('#h_ingreso2').val(data.h_ingreso);
-                    $('#h_salida2').val(data.h_salida);
-                    $('#hfds_ingreso2').val(data.hfds_ingreso);
-                    $('#hfds_salida2').val(data.hfds_salida);
-                    $('#tipo_comisionista2').val(data.tipo_comisionista);
-                    $('#celular2').val(data.celular);
-                    $('#telef_domicilio2').val(data.telef_domicilio);
-                    $('#rs_cartera2').val(data.rs_cartera);
-                    $('#created_at2').val(data.created_at);
+                    $('#pds_name2').val(data[0].pds_name);
+                    $('#pds_cod2').val(data[0].pds_cod);
+                    $('#pds_sventas2').val(data[0].pds_sventas);
+                    $('#pds_fapertura2').val(data[0].pds_fapertura);
+
+                    $('#pds_direccion2').val(data[0].pds_direccion);
+                    $('#pds_arrinicio2').val(data[0].pds_arrinicio);
+                    $('#pds_arrfin2').val(data[0].pds_arrfin);
+                    $('#pds_mt22').val(data[0].pds_mt2);
+                    $('#pds_lvapertura2').val(data[0].pds_lvapertura);
+                    $('#pds_lvcierre2').val(data[0].pds_lvcierre);
+                    $('#pds_sapertura2').val(data[0].pds_sapertura);
+                    $('#pds_scierre2').val(data[0].pds_scierre);
+                    $('#pds_dapertura2').val(data[0].pds_dapertura);
+                    $('#pds_dcierre2').val(data[0].pds_dcierre);
+                    $('#pds_logistic2').val(data[0].pds_logistic);
+                    $('#pds_recaudo2').val(data[0].pds_recaudo);
+                    $('#pds_telef2').val(data[0].pds_telef);
+                    if(data[1].bsenal === "true"){
+                        $('label[for="bsenal2"]').click();
+
+                    }
+                    if(data[1].bextintores === "true"){
+                        $('label[for="bextintores2"]').click();
+
+                    }
+                    if(data[1].msuelo === "true"){
+                        $('label[for="msuelo2"]').click();
+
+                    }
+                    if(data[1].msalud === "true"){
+                        $('label[for="msalud2"]').click();
+
+                    }
+                    if(data[1].mpatente === "true"){
+                        $('label[for="mpatente2"]').click();
+
+                    }
+                    if(data[1].mtasa === "true"){
+                        $('label[for="mtasa2"]').click();
+
+                    }
+                    if(data[1].mpermisoanterior === "true"){
+                        $('label[for="mpermisoanterior2"]').click();
+
+                    }
+                    if(data[1].lpermiso === "true"){
+                        $('label[for="lpermiso2"]').click();
+
+                    }
+                    if(data[1].lotros === "true"){
+                        $('label[for="lotros2"]').click();
+                    }
 
                 });
             });
             $('.btnEliminarComisionista').click(function() {
                 var id = $(this).attr('data-id');
                 swal({
-                    title: "¿Estas seguro de ELIMINAR el Comisionista?",
+                    title: "¿Estas seguro de ELIMINAR el PDS?",
                     icon: "warning",
                     buttons: {
                         cancel: {
@@ -553,7 +728,7 @@
                 }).then((willsuccess) => {
                     if (willsuccess) {
                         $.ajax({
-                            url: "{{route('comisionista/listas/ajax/eliminarComisionistas')}}",
+                            url: "{{route('pds/listas/ajax/eliminarPDS')}}",
                             method: "post",
                             dataType: 'text',
                             data: {
@@ -565,7 +740,7 @@
                             }
                         }).done(function(data) {
                             swal({
-                                title: "Comisionista Eliminado con éxito",
+                                title: "Pds Eliminado con éxito",
                                 icon: "success",
                                 buttons: false,
                                 timer: 1000,
@@ -573,7 +748,7 @@
                                 closeOnEsc: false
                             });
 
-                            cargarComisionistas();
+                            cargarPDS();
                         });
                     }
                 });
@@ -585,7 +760,7 @@
             var btncomi = $(this);
             var id = $(this).attr('data-id');
             $.ajax({
-                url: "{{route('comisionista/listas/ajax/editarComisionistas')}}",
+                url: "{{route('pds/listas/ajax/editarPDS')}}",
                 method: "post",
                 dataType: 'text',
                 data: {
@@ -613,7 +788,7 @@
             var formdata = $(this).serializeArray();
             var btncomi = $(this);
             $.ajax({
-                url: "{{route('comisionista/listas/ajax/guardarComisionistas')}}",
+                url: "{{route('pds/listas/ajax/guardarPDS')}}",
                 method: "post",
                 dataType: 'text',
                 data: {
@@ -633,7 +808,7 @@
                     icon: 'fa fa-check-circle',
                     msg: 'Edición Guardado'
                 });
-                cargarComisionistas();
+                cargarPDS();
             });
 
         });

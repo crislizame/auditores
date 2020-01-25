@@ -56,8 +56,10 @@ class ContadorApiController extends Controller
         $count_estados_resueltos = 0;
         foreach ($estados as $estado) {
             $count_estado = (new Encauditvalue())->where('encaudit_id',$estado->idencaudit)->count();
+            $count_activo_f = (new Encauditvalue())->where('encaudit_id', $estado->idencaudit)->first();
+
             $count_estados += $count_estado;
-            $count_datas = (new Encauditdata())->where(['encauditvalues_id'=>$estado->idencauditvalues,
+            $count_datas = (new Encauditdata())->where(['encauditvalues_id'=>$count_activo_f->idencauditvalues,
                 'agenda_id'=>$agenda_id,'pds_id'=>$pds_id,'auditor_id'=>$auditor_id])->count();
 
             $count_estados_resueltos += $count_datas;
@@ -68,8 +70,9 @@ class ContadorApiController extends Controller
         foreach ($procesos as $activo) {
             if ($activo->nombre_estado != "Informes") {
                 $count_activo = (new Encauditvalue())->where('encaudit_id', $activo->idencaudit)->count();
+                $count_activo_f = (new Encauditvalue())->where('encaudit_id', $activo->idencaudit)->first();
                 $count_procesos += $count_activo;
-                $count_datas = (new Encauditdata())->where(['encauditvalues_id' => $activo->idencauditvalues,
+                $count_datas = (new Encauditdata())->where(['encauditvalues_id' => $count_activo_f->idencauditvalues,
                     'agenda_id' => $agenda_id, 'pds_id' => $pds_id, 'auditor_id' => $auditor_id])->count();
 
                 $count_procesos_resueltos += $count_datas;
@@ -80,8 +83,10 @@ class ContadorApiController extends Controller
         $count_informes_resueltos = 0;
         foreach ($procesos as $activo) {
                 $count_activo = (new Encauditvalue())->where('encaudit_id', $activo->idencaudit)->count();
+            $count_activo_f = (new Encauditvalue())->where('encaudit_id', $activo->idencaudit)->first();
+
             $count_informes += $count_activo;
-                $count_datas = (new Informes_reporte())->where(['informes_id' => $activo->idencauditvalues,
+                $count_datas = (new Informes_reporte())->where(['informes_id' => $count_activo_f->idencauditvalues,
                     'agenda_id' => $agenda_id, 'pds_id' => $pds_id, 'auditor_id' => $auditor_id])->count();
 
             $count_informes_resueltos += $count_datas;
@@ -92,19 +97,19 @@ class ContadorApiController extends Controller
         $count_activos_resueltos = 0;
         foreach ($activos as $activo) {
                 $count_activo = (new Encauditvalue())->where('encaudit_id', $activo->idencaudit)->count();
+                $count_activo_f = (new Encauditvalue())->where('encaudit_id', $activo->idencaudit)->first();
                 $count_activos += $count_activo;
-                $count_datas = (new Encauditdataactivo())->where(['encauditvalues_id' => $activo->idencauditvalues,
+                $count_datas = (new Encauditdataactivo())->where(['encauditvalues_id' => $count_activo_f->idencauditvalues,
                     'agenda_id' => $agenda_id, 'pds_id' => $pds_id, 'auditor_id' => $auditor_id])->count();
 
                 $count_activos_resueltos += $count_datas;
-            echo $count_datas;
 
         }
 
-        $dif_estado = $count_estados - $count_estados_resueltos;
-        $dif_proceso = $count_procesos - $count_procesos_resueltos;
-        $dif_activo = $count_activos - $count_activos_resueltos;
-        $dif_informe = $count_informes - $count_informes_resueltos;
+        $dif_estado = (int)$count_estados - (int)$count_estados_resueltos;
+        $dif_proceso = (int)$count_procesos - (int)$count_procesos_resueltos;
+        $dif_activo = (int)$count_activos - (int)$count_activos_resueltos;
+        $dif_informe = (int)$count_informes - (int)$count_informes_resueltos;
         if($tipo == "N"){
             $sumatotal = $dif_estado+$dif_activo;
 
