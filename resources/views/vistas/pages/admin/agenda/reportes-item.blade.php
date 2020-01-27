@@ -375,6 +375,7 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                     $promcaritas = 0;
                     @endphp
                     @forelse($datosverticales as $dv)
+                                @if(ucfirst($th->nombre_val)!='Informes')
                     <h5 class="titulos p-2 text-center">{{ucfirst($dv->nombre_estado)}}</h5>
                     
                     <div class="row px-2">
@@ -408,7 +409,6 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                             $valores += $valor;
                             }
                             @endphp
-                                @if($th->nombre_val!='Informes')
                                 <div class="col-lg-6 mb-3">
                                     <div class="row mb-2">
                                        <div class="col-lg-7">
@@ -427,10 +427,10 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                                         </div>
                                     </div>
                                 </div>
-                                @endif
                             @empty
                             @endforelse
                     </div>
+                                @endif
                     @empty
                     @endforelse
                     <script>
