@@ -116,21 +116,22 @@ $pdsdata = (new \App\Pdsperfile())->where('id',$datos->pds_id)->first();
                                     <b>{{ucfirst($encuesta->value('observa'))}}</b>
                                 </div>
                             </td>
-                        </tr>
-                        <tr class="row">
+                    </tbody>
+                </table>
+
+                        <div class="row">
                             @php
                             $images = (new \App\Attachment())->select('idattachments')->join('encauditdata_attachments','attachments.idattachments','encauditdata_attachments.attachments_id')->where('encauditdata_attachments.encauditdatas_id',$id)->limit(4)->get();
                             @endphp
                             @forelse($images as $image)
-                            <td class="col-lg-3">
+                            <div class="col-lg-3 mx-2">
                                 <img class="img-responsive" style="height:25vh;" src="{{url('/')}}/imagen/{{$image->idattachments}}.jpg">
-                            </td>
+                            </div>
                             @empty
                             @endforelse
-                        </tr>
+                        </div>
                         @empty
                         @endforelse
-                    </tbody>
                     <script type='text/javascript'>
                         var tituloaux {{$dv->idencaudit}} = '{{ucfirst($dv->nombre_estado)}} <span class="border border-info rounded px-1">{{number_format($valores/$promcaritas, 2, '.', '')}}%</span>';
                         jQuery(document).ready(function() {
@@ -138,7 +139,6 @@ $pdsdata = (new \App\Pdsperfile())->where('id',$datos->pds_id)->first();
                             jQuery('#tituloaux{{$dv->idencaudit}}').attr('data-val', {{number_format($valores / $promcaritas, 2, '.', '')}});
                         });
                     </script>
-                </table>
                 @empty
                 @endforelse
                 <script type='text/javascript'>
