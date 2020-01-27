@@ -6235,36 +6235,6 @@ ul .datosvertical {
 
 }
 
-@media (min-width: 1536px) {
-    .container{
-        min-width: 1792px;
-    }
-    
-    .pdsmenuflow {
-        max-height: 79vh;
-    }
-
-    .pdsgenciudades {
-        height: 88vh;
-        min-height: 88vh;
-        max-height: 88vh;
-    }
-
-    .pdsgencards {
-        height: 41.6vh;
-        min-height: 41.6vh;
-        max-height: 41.6vh;
-    }
-    
-    .titulos-procentaje{
-        font-size: 30px;
-        line-height: 34px;
-    }
-    
-    .img-responsive{
-        max-height:24vh;
-    }
-}
 
 .lmhreporte li a:hover {
     color: white;
@@ -6348,4 +6318,35 @@ ul .datosvertical {
         line-height: 34px;
     }
 
+}
+
+@media (min-width: 1536px) {
+    .container{
+        min-width: 1792px;
+    }
+    
+    .pdsmenuflow {
+        max-height: 79vh;
+    }
+
+    .pdsgenciudades {
+        height: 88vh;
+        min-height: 88vh;
+        max-height: 88vh;
+    }
+
+    .pdsgencards {
+        height: 41.6vh;
+        min-height: 41.6vh;
+        max-height: 41.6vh;
+    }
+    
+    .titulos-procentaje{
+        font-size: 30px;
+        line-height: 34px;
+    }
+    
+    .img-responsive{
+        max-height:24vh;
+    }
 }
