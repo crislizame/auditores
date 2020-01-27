@@ -5968,7 +5968,7 @@ input[type="color"] {
 
 .titulos-informes {
     color: #52699B !important;
-    min-height: 10vh;
+    /*min-height: 10vh;*/
 }
 
 .observaciones-informes {
@@ -5984,7 +5984,7 @@ input[type="color"] {
 
     .titulos-informes {
         color: #52699B !important;
-        min-height: 5vh;
+        /*min-height: 5vh;*/
     }
 
     .observaciones-informes {
@@ -6306,7 +6306,7 @@ ul .datosvertical {
     .titulos-informes{
         font-size: 18px;
         line-height: 22px;
-        min-height: 15vh;
+        /*min-height: 15vh;*/
     }
 
     .observaciones-informes{
