@@ -20,7 +20,7 @@
                         <thead>
                             <tr class="bg-primary text-white">
                                 <th scope="col">ID</th>
-                                <th>PDS</th>
+                                <th>Punto de la Suerte</th>
                                 <th>Provincia</th>
                                 <th>Ciudad</th>
                                 <th>Supervisor</th>

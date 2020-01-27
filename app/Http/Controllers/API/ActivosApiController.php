@@ -44,6 +44,14 @@ class ActivosApiController extends Controller
         $tipo = $request->post('tipo');
         $auditor_id = $request->post('auditor_id');
         switch ($tipo){
+            case "c1":
+                $id = $request->post('id');
+                $agenda_id = $request->post('agenda_id');
+                $idpds = $request->post('idpds');
+                $codigo = (new Encauditdataactivo())->where(['agenda_id'=>$agenda_id,'encauditvalues_id'=>$id,'pds_id'=>$idpds,'auditor_id'=>$auditor_id])->first();
+                return response()->json([$codigo],200,[], JSON_UNESCAPED_UNICODE);
+
+                break;
             case "c":
                 $id = $request->post('id');
                 $agenda_id = $request->post('agenda_id');
@@ -88,7 +96,7 @@ class ActivosApiController extends Controller
                     'encauditvalues_id'=> $request->post('id'),
                     'pds_id'=>$request->post('idpds'),'auditor_id'=>$auditor_id])->count();
                 $countreporte = (new Auditoria_reporte())->where(['agenda_id'=>$request->post('agenda_id'),
-                    'pds_id'=>$request->post('idpds')])->count();
+                    'pds_id'=>$request->post('idpds'),'auditor_id'=>$auditor_id])->count();
                 if($countreporte == 0 ){
                     $reporte = (new Auditoria_reporte());
                     $reporte->pds_id = $request->post('idpds');

@@ -58,8 +58,8 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="aud_apellidos">Nombres</label>
-                            <input class="form-control" id="aud_apellidos" name="aud_nombre" type="text">
+                            <label for="aud_nombre">Nombres</label>
+                            <input class="form-control" id="aud_nombre" name="aud_nombre" type="text">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="aud_apellidos">Apellidos</label>
@@ -165,7 +165,7 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="aud_apellidos">Nombres</label>
+                            <label for="aud_nombre">Nombres</label>
                             <input class="form-control" id="aud_nombre2" name="aud_nombre" type="text">
                         </div>
                         <div class="form-group col-md-6">
@@ -509,6 +509,16 @@
                     icon: 'fa fa-check-circle',
                     msg: 'Edición Guardado'
                 });
+                $('#aud_nombre').val('');
+                $('#aud_apellidos').val('');
+                $('#aud_cedula').val('');
+                $('#password').val('1234');
+                $('#aud_correo').val('');
+                $('#aud_direccion').val('');
+                $('#aud_cuentanumero').val('');
+                $('#aud_cuentatipo').val('');
+                $('#aud_cuentabanco').val('ahorro');
+                $('#auditor_tipo').val('N');
                 cargarAuditores();
             });
 

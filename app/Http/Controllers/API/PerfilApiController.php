@@ -129,6 +129,9 @@ class PerfilApiController extends Controller
                 $pds_scierre = $request->post('pds_scierre');
                 $pds_dapertura = $request->post('pds_dapertura');
                 $pds_dcierre = $request->post('pds_dcierre');
+                $pds_telef = $request->post('pds_telef');
+
+
 
                 $pdsperfiles = new Pdsperfile();
                 $pdsperfiles->exists = true;
@@ -147,6 +150,7 @@ class PerfilApiController extends Controller
                 $pdsperfiles->pds_sapertura = $pds_sapertura;
                 $pdsperfiles->pds_scierre = $pds_scierre;
                 $pdsperfiles->pds_dapertura = $pds_dapertura;
+                $pdsperfiles->pds_telef = $pds_telef;
                 $pdsperfiles->pds_dcierre = $pds_dcierre;
                 $pdsperfiles->save();
 

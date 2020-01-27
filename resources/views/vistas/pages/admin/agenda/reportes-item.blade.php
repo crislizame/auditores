@@ -75,7 +75,7 @@
                                 <h3 class="titulos-grandes p-2 text-center"><i class="fa fa-print text-white"></i> Ver en Formato de Impresión</h3>
                             </a>
                             <h2 class="titulos p-2 text-center">{{strtoupper($pdsdata->pds_name)}}</h2>
-                            <h3 class="titulos p-2 text-center">Número de reporte: {{$datos->tipo.'-'.str_pad($datos->idauditoria_reportes, 7, "0", STR_PAD_LEFT)}}</h3>
+                            <h3 class="titulos p-2 text-center">Número de reporte: {{($datos->tipo == "N" ? "N" : "N").'-'.str_pad($datos->idauditoria_reportes, 7, "0", STR_PAD_LEFT)}}</h3>
                             <h3 class="titulos-negro p-2 text-center">{{\Carbon\Carbon::now()->format('d/m/Y')}}</h3>
 
                             <div class="col-lg-12 mb-2">
@@ -375,60 +375,62 @@
                                 $promcaritas = 0;
                             @endphp
                             @forelse($datosverticales as $dv)
-                                <h5 class="titulos p-2 text-center">{{ucfirst($dv->nombre_estado)}}</h5>
+                                @if(ucfirst($dv->nombre_estado)!='Informes')
+                                    <h5 class="titulos p-2 text-center">{{ucfirst($dv->nombre_estado)}}</h5>
 
-                                <div class="row px-2">
-                                    @php
-                                        $thc = (new \App\Encauditvalue())->where('encaudit_id',$dv->idencaudit)->get();
-                                        $promcaritas += (new \App\Encauditvalue())->where('encaudit_id',$dv->idencaudit)->count();
-                                    @endphp
-
-                                    @forelse($thc as $th)
+                                    <div class="row px-2">
                                         @php
-                                            $proceso = (new \App\Encauditdata())->where(['encauditvalues_id'=>$th->idencauditvalues,'agenda_id'=>$datos->agenda_id,'pds_id'=>$pdsdata->id]);
-                                            $valor = 0;
-                                            if($proceso->value('carita')>0){
-                                            switch ((int)$proceso->value('carita')) {
-                                            case 1:
-                                            $valor = 0;
-                                            break;
-                                            case 2:
-                                            $valor = 25;
-                                            break;
-                                            case 3:
-                                            $valor = 50;
-                                            break;
-                                            case 4:
-                                            $valor = 75;
-                                            break;
-                                            case 5:
-                                            $valor = 100;
-                                            break;
-                                            }
-                                            $valores += $valor;
-                                            }
+                                            $thc = (new \App\Encauditvalue())->where('encaudit_id',$dv->idencaudit)->get();
+                                            $promcaritas += (new \App\Encauditvalue())->where('encaudit_id',$dv->idencaudit)->count();
                                         @endphp
-                                        <div class="col-lg-6 mb-3">
-                                            <div class="row mb-2">
-                                                <div class="col-lg-7">
-                                                    <b>{{ucfirst($th->nombre_val)}}</b>
+
+                                        @forelse($thc as $th)
+                                            @php
+                                                $proceso = (new \App\Encauditdata())->where(['encauditvalues_id'=>$th->idencauditvalues,'agenda_id'=>$datos->agenda_id,'pds_id'=>$pdsdata->id]);
+                                                $valor = 0;
+                                                if($proceso->value('carita')>0){
+                                                switch ((int)$proceso->value('carita')) {
+                                                case 1:
+                                                $valor = 0;
+                                                break;
+                                                case 2:
+                                                $valor = 25;
+                                                break;
+                                                case 3:
+                                                $valor = 50;
+                                                break;
+                                                case 4:
+                                                $valor = 75;
+                                                break;
+                                                case 5:
+                                                $valor = 100;
+                                                break;
+                                                }
+                                                $valores += $valor;
+                                                }
+                                            @endphp
+                                            <div class="col-lg-6 mb-3">
+                                                <div class="row mb-2">
+                                                    <div class="col-lg-7">
+                                                        <b>{{ucfirst($th->nombre_val)}}</b>
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        <h2 class="p-2 text-right" data-val="{{$valor}}">{{$valor}}%</h2>
+                                                    </div>
+                                                    <div class="col-lg-2">
+                                                        <img src="{{asset('img/cara'.$proceso->value('carita').'.jpg')}}" width="50px" alt="carita">
+                                                    </div>
                                                 </div>
-                                                <div class="col-lg-3">
-                                                    <h2 class="p-2 text-right" data-val="{{$valor}}">{{$valor}}%</h2>
-                                                </div>
-                                                <div class="col-lg-2">
-                                                    <img src="{{asset('img/cara'.$proceso->value('carita').'.jpg')}}" width="50px" alt="carita">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <span class="border border-info rounded px-1"><b>{{ucfirst($proceso->value('observa'))}}</b></span>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-lg-12">
-                                                    <span class="border border-info rounded px-1"><b>{{ucfirst($proceso->value('observa'))}}</b></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @empty
-                                    @endforelse
-                                </div>
+                                        @empty
+                                        @endforelse
+                                    </div>
+                                @endif
                             @empty
                             @endforelse
                             <script>
@@ -485,7 +487,7 @@
                                 <div class="col-lg-4 my-3">
 
                                     <div class="col text-center titulos-negro p-2">
-                                        <h2 class="p-0 pt-1">N/A <i class="fa fa-minus bg-warning rounded-circle text-white p-1"></i></h2>
+                                        <h2 class="p-0 pt-1">N/A <i class="fa fa-asterisk bg-warning rounded-circle text-white p-1"></i></h2>
                                     </div>
                                     @php
                                         $informes = (new \App\Informes_reporte())->join('encauditvalues','informes_reportes.informes_id','encauditvalues.idencauditvalues')->where([ 'agenda_id'=>$datos->agenda_id,  'pds_id'=>$pdsdata->id, 'auditor_id'=>$datos->auditor_id, 'value'=>'N/A' ])->get();

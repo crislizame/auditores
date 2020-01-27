@@ -114,7 +114,7 @@ class EncuestasAuditoriasVController extends Controller
                 break;
             case "s":
                 $countreporte = (new Auditoria_reporte())->where(['agenda_id'=>$request->post('agenda_id'),
-                    'pds_id'=>$request->post('idpds')])->count();
+                    'pds_id'=>$request->post('idpds'),'auditor_id'=>$auditor_id])->count();
                 if($countreporte == 0 ){
                     $reporte = (new Auditoria_reporte());
                     $reporte->pds_id = $request->post('idpds');

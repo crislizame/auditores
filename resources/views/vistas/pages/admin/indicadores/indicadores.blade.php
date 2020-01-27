@@ -332,23 +332,7 @@
                                                     labels: ['{{$mes3letra}}', '{{$mes2letra}}', '{{$mes1letra}}', '{{$mes0letra}}'],
                                                     datasets: [{
                                                         label: '',
-                                                        data: [{
-                                                            {
-                                                                $carita3res
-                                                            }
-                                                        }, {
-                                                            {
-                                                                $carita2res
-                                                            }
-                                                        }, {
-                                                            {
-                                                                $carita1res
-                                                            }
-                                                        }, {
-                                                            {
-                                                                $carita0res
-                                                            }
-                                                        }],
+                                                        data: [{{$carita3res}}, {{$carita2res}}, {{$carita1res}}, {{$carita0res}}],
                                                         backgroundColor: "transparent",
                                                         borderColor: "#004e92",
                                                         borderWidth: 2
@@ -529,23 +513,7 @@
                                                     labels: ['{{$mes3letra}}', '{{$mes2letra}}', '{{$mes1letra}}', '{{$mes0letra}}'],
                                                     datasets: [{
                                                         label: '',
-                                                        data: [{
-                                                            {
-                                                                $carita3res
-                                                            }
-                                                        }, {
-                                                            {
-                                                                $carita2res
-                                                            }
-                                                        }, {
-                                                            {
-                                                                $carita1res
-                                                            }
-                                                        }, {
-                                                            {
-                                                                $carita0res
-                                                            }
-                                                        }],
+                                                        data: [{{$carita3res}}, {{$carita2res}}, {{$carita1res}}, {{$carita0res}}],
                                                         backgroundColor: "transparent",
                                                         borderColor: "#004e92",
                                                         borderWidth: 2

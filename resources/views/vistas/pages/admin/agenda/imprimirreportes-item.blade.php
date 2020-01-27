@@ -11,7 +11,7 @@
                     <div class="card-body pl-0 pr-0 pb-0 pt-0">
                         <h2 class="titulos-categoria p-2 text-center">AUDITORIA GENERAL</h2>
                         <h2 class="titulos p-2 text-center">{{strtoupper($pdsdata->pds_name)}}</h2>
-                        <h3 class="titulos p-2 text-center">Número de reporte: {{$datos->tipo.'-'.str_pad($datos->idauditoria_reportes, 7, "0", STR_PAD_LEFT)}}</h3>
+                        <h3 class="titulos p-2 text-center">Número de reporte: {{($datos->tipo == "N" ? "N" : "P") .'-'.str_pad($datos->idauditoria_reportes, 7, "0", STR_PAD_LEFT)}}</h3>
                         <h3 class="titulos-negro p-2 text-center">{{\Carbon\Carbon::now()->format('d/m/Y')}}</h3>
                         <div class="col-lg-12 mb-2">
                             <div class="col-lg-6 offset-lg-3">
@@ -69,85 +69,86 @@
                         <h3 class="titulos-grandes p-2 text-center promestado">Estado</h3>
                         @php
                             $datosverticales = (new \App\Encaudit())->where('categoria','=','estado')->get();
+                            $cantidadestados =(new \App\Encaudit())->where('categoria','=','estado')->count();
+                            $promcompleto = 0
                         @endphp
                         @forelse($datosverticales as $dv)
                             <h5 class="titulos p-2 text-center" id="tituloaux{{$dv->idencaudit}}">{{ucfirst($dv->nombre_estado)}}</h5>
-                            <table class="table">
-                                <tbody>
+                            @php
+                                $thc = (new \App\Encauditvalue())->where('encaudit_id',$dv->idencaudit)->get();
+                                $promcaritas = (new \App\Encauditvalue())->where('encaudit_id',$dv->idencaudit)->count();
+                                $valores = 0;
+                            @endphp
+                            @forelse($thc as $th)
                                 @php
-                                    $thc = (new \App\Encauditvalue())->where('encaudit_id',$dv->idencaudit)->get();
-                                    $promcaritas = (new \App\Encauditvalue())->where('encaudit_id',$dv->idencaudit)->count();
-                                    $valores = 0;
+                                    $encuesta = (new \App\Encauditdata())->where(['encauditvalues_id'=>$th->idencauditvalues,'agenda_id'=>$datos->agenda_id,'pds_id'=>$pdsdata->id, 'auditor_id'=>$datos->auditor_id]);
+                                    $id = $encuesta->value('idencauditdatas');
+                                    $valor = 0;
+                                    if($encuesta->value('carita')>0){
+                                    switch ((int)$encuesta->value('carita')) {
+                                    case 1:
+                                    $valor = 0;
+                                    break;
+                                    case 2:
+                                    $valor = 25;
+                                    break;
+                                    case 3:
+                                    $valor = 50;
+                                    break;
+                                    case 4:
+                                    $valor = 75;
+                                    break;
+                                    case 5:
+                                    $valor = 100;
+                                    break;
+                                    }
+                                    $valores += $valor;
+                                    }
                                 @endphp
-                                @forelse($thc as $th)
-                                    @php
-                                        $encuesta = (new \App\Encauditdata())->where(['encauditvalues_id'=>$th->idencauditvalues,'agenda_id'=>$datos->agenda_id,'pds_id'=>$pdsdata->id, 'auditor_id'=>$datos->auditor_id]);
-                                        $id = $encuesta->value('idencauditdatas');
-                                        $valor = 0;
-                                        if($encuesta->value('carita')>0){
-                                        switch ((int)$encuesta->value('carita')) {
-                                        case 1:
-                                        $valor = 0;
-                                        break;
-                                        case 2:
-                                        $valor = 25;
-                                        break;
-                                        case 3:
-                                        $valor = 50;
-                                        break;
-                                        case 4:
-                                        $valor = 75;
-                                        break;
-                                        case 5:
-                                        $valor = 100;
-                                        break;
-                                        }
-                                        $valores += $valor;
-                                        }
-                                    @endphp
-                                    <tr>
-                                        <td width="30%"><b>{{ucfirst($th->nombre_val)}}</b></td>
-                                        <td width=150>
-                                            <h2 class="p-2 text-right">{{$valor}}%</h2>
-                                        </td>
-                                        <td width=75><img src="{{asset('img/cara'.$encuesta->value('carita').'.jpg')}}" width="50px" alt="carita"></td>
-                                        <td width="50%">
-                                            <div class="rounded border border-dark px-1">
+                                <div class="col-12 mb-2">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <b class="ml-4">{{ucfirst($th->nombre_val)}}</b>
+                                        </div>
+                                        <div class="col-2">
+                                            <b><span class="p-0 titulos-procentaje">{{$valor}}%</span></b>
+                                            <img src="{{asset('img/cara'.$encuesta->value('carita').'.jpg')}}" width="50px" alt="carita" class="pull-right">
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="rounded border border-dark px-1" style="min-height: 3vh;">
                                                 <b>{{ucfirst($encuesta->value('observa'))}}</b>
                                             </div>
-                                        </td>
-                                    </tr>
-                                    <tr class="row">
-                                        @php
-                                            $images = (new \App\Attachment())->select('idattachments')->join('encauditdata_attachments','attachments.idattachments','encauditdata_attachments.attachments_id')->where('encauditdata_attachments.encauditdatas_id',$id)->limit(4)->get();
-                                        @endphp
-                                        @forelse($images as $image)
-                                            <td class="col-lg-3">
-                                                <img class="img-responsive" style="height:25vh;" src="{{url('/')}}/imagen/{{$image->idattachments}}.jpg">
-                                            </td>
-                                        @empty
-                                        @endforelse
-                                    </tr>
-                                @empty
-                                @endforelse
-                                </tbody>
-                                <script type='text/javascript'>
-                                    var tituloaux {{$dv->idencaudit}} = '{{ucfirst($dv->nombre_estado)}} <span class="border border-info rounded px-1">{{number_format($valores/$promcaritas, 2, '.', '')}}%</span>';
-                                    jQuery(document).ready(function() {
-                                        jQuery('#tituloaux{{$dv->idencaudit}}').html(tituloaux {{$dv->idencaudit}});
-                                        jQuery('#tituloaux{{$dv->idencaudit}}').attr('data-val', {{number_format($valores / $promcaritas, 2, '.', '')}});
-                                    });
-                                </script>
-                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    @php
+                                        $images = (new \App\Attachment())->select('idattachments')->join('encauditdata_attachments','attachments.idattachments','encauditdata_attachments.attachments_id')->where('encauditdata_attachments.encauditdatas_id',$id)->limit(6)->get();
+                                    @endphp
+                                    @forelse($images as $image)
+                                        <div class="col-2 mx-1 mb-4 ml-1">
+                                            <img class="card-img w-100 "  src="{{url('/')}}/imagen/{{$image->idattachments}}.jpg">
+                                        </div>
+                                    @empty
+                                    @endforelse
+                                </div>
+                            @empty
+                            @endforelse
+                            <script type='text/javascript'>
+                                var tituloaux{{$dv->idencaudit}} = '{{ucfirst($dv->nombre_estado)}} <span class="border border-info rounded px-1">{{number_format($valores/$promcaritas, 2, '.', '')}}%</span>';
+                                jQuery(document).ready(function() {
+                                    jQuery('#tituloaux{{$dv->idencaudit}}').html(tituloaux{{$dv->idencaudit}});
+                                    jQuery('#tituloaux{{$dv->idencaudit}}').attr('data-val', {{number_format($valores/$promcaritas, 2, '.', '')}});
+                                });
+                                @php
+                                    $promcompleto += $valores/$promcaritas;
+                                @endphp
+                            </script>
                         @empty
                         @endforelse
                         <script type='text/javascript'>
                             jQuery(document).ready(function() {
-                                var sumaestados = 0;
-                                jQuery('[data-val]').each(function(index, element) {
-                                    sumaestados += $(this).attr('data-val');
-                                });
-                                var aux = sumaestados / {{$promcaritas}};
+                                var aux = {{$promcompleto/$cantidadestados}};
                                 $('#promestado').html('<span class="border border-white rounded px-1">' + aux.toFixed(2) + '%</span>');
                                 $('.promestado').html('Estado <span class="border border-white rounded px-1">' + aux.toFixed(2) + '%</span>');
                             });
@@ -293,58 +294,60 @@
                             $promcaritas = 0;
                         @endphp
                         @forelse($datosverticales as $dv)
-                            <h5 class="titulos p-2 text-center">{{ucfirst($dv->nombre_estado)}}</h5>
-                            <div class="row px-2">
-                                @php
-                                    $thc = (new \App\Encauditvalue())->where('encaudit_id',$dv->idencaudit)->get();
-                                    $promcaritas += (new \App\Encauditvalue())->where('encaudit_id',$dv->idencaudit)->count();
-                                @endphp
-                                @forelse($thc as $th)
+                            @if(ucfirst($dv->nombre_estado)!='Informes')
+                                <h5 class="titulos p-2 text-center">{{ucfirst($dv->nombre_estado)}}</h5>
+                                <div class="row px-2">
                                     @php
-                                        $proceso = (new \App\Encauditdata())->where(['encauditvalues_id'=>$th->idencauditvalues,'agenda_id'=>$datos->agenda_id,'pds_id'=>$pdsdata->id]);
-                                        $valor = 0;
-                                        if($proceso->value('carita')>0){
-                                        switch ((int)$proceso->value('carita')) {
-                                        case 1:
-                                        $valor = 0;
-                                        break;
-                                        case 2:
-                                        $valor = 25;
-                                        break;
-                                        case 3:
-                                        $valor = 50;
-                                        break;
-                                        case 4:
-                                        $valor = 75;
-                                        break;
-                                        case 5:
-                                        $valor = 100;
-                                        break;
-                                        }
-                                        $valores += $valor;
-                                        }
+                                        $thc = (new \App\Encauditvalue())->where('encaudit_id',$dv->idencaudit)->get();
+                                        $promcaritas += (new \App\Encauditvalue())->where('encaudit_id',$dv->idencaudit)->count();
                                     @endphp
-                                    <div class="col-6 mb-3">
-                                        <div class="row mb-2">
-                                            <div class="col-7">
-                                                <b>{{ucfirst($th->nombre_val)}}</b>
+                                    @forelse($thc as $th)
+                                        @php
+                                            $proceso = (new \App\Encauditdata())->where(['encauditvalues_id'=>$th->idencauditvalues,'agenda_id'=>$datos->agenda_id,'pds_id'=>$pdsdata->id]);
+                                            $valor = 0;
+                                            if($proceso->value('carita')>0){
+                                            switch ((int)$proceso->value('carita')) {
+                                            case 1:
+                                            $valor = 0;
+                                            break;
+                                            case 2:
+                                            $valor = 25;
+                                            break;
+                                            case 3:
+                                            $valor = 50;
+                                            break;
+                                            case 4:
+                                            $valor = 75;
+                                            break;
+                                            case 5:
+                                            $valor = 100;
+                                            break;
+                                            }
+                                            $valores += $valor;
+                                            }
+                                        @endphp
+                                        <div class="col-6 mb-3">
+                                            <div class="row mb-2">
+                                                <div class="col-7">
+                                                    <b>{{ucfirst($th->nombre_val)}}</b>
+                                                </div>
+                                                <div class="col-3">
+                                                    <h2 class="p-2 text-right" data-val="{{$valor}}">{{$valor}}%</h2>
+                                                </div>
+                                                <div class="col-2">
+                                                    <img src="{{asset('img/cara'.$proceso->value('carita').'.jpg')}}" width="50px" alt="carita">
+                                                </div>
                                             </div>
-                                            <div class="col-3">
-                                                <h2 class="p-2 text-right" data-val="{{$valor}}">{{$valor}}%</h2>
-                                            </div>
-                                            <div class="col-2">
-                                                <img src="{{asset('img/cara'.$proceso->value('carita').'.jpg')}}" width="50px" alt="carita">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <span class="border border-info rounded px-1"><b>{{ucfirst($proceso->value('observa'))}}</b></span>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <span class="border border-info rounded px-1"><b>{{ucfirst($proceso->value('observa'))}}</b></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @empty
-                                @endforelse
-                            </div>
+                                    @empty
+                                    @endforelse
+                                </div>
+                            @endif
                         @empty
                         @endforelse
                         <script>
@@ -361,14 +364,14 @@
                         <h3 class="titulos-grandes p-2 text-center">Informes</h3>
                         <div class="row px-2">
                             <div class="col-4 my-3">
-                                <div class="col-3 offset-5 titulos-negro p-2">
+                                <div class="col-6 offset-5 titulos-negro p-2">
                                     <h2 class="p-0 pt-1">Si <i class="fa fa-check bg-success rounded-circle text-white p-1"></i></h2>
                                 </div>
                                 @php
                                     $informes = (new \App\Informes_reporte())->join('encauditvalues','informes_reportes.informes_id','encauditvalues.idencauditvalues')->where([ 'agenda_id'=>$datos->agenda_id, 'pds_id'=>$pdsdata->id, 'auditor_id'=>$datos->auditor_id, 'value'=>'SI' ])->get();
                                 @endphp
                                 @forelse($informes as $informe)
-                                    <div class="col-12 mb-3">
+                                    <div class="col-12  mb-3">
                                         <h4 class="titulos-negro p-2 titulos-informes">{{$informe->nombre_val}}</h4>
                                         <div class="border border-info rounded px-1 observaciones-informes"><b>{{$informe->observa}}</b></div>
                                     </div>
@@ -376,7 +379,7 @@
                                 @endforelse
                             </div>
                             <div class="col-4 my-3">
-                                <div class="col-3 offset-5 titulos-negro p-2">
+                                <div class="col-6 offset-5 titulos-negro p-2">
                                     <h2 class="p-0 pt-1">No <i class="fa fa-times-circle-o bg-danger rounded-circle text-white p-1"></i></h2>
                                 </div>
                                 @php
@@ -391,8 +394,8 @@
                                 @endforelse
                             </div>
                             <div class="col-4 my-3">
-                                <div class="col-4 offset-4 titulos-negro p-2">
-                                    <h2 class="p-0 pt-1">N/A <i class="fa fa-minus bg-warning rounded-circle text-white p-1"></i></h2>
+                                <div class="col-6 offset-4 titulos-negro p-2">
+                                    <h2 class="p-0 pt-1">N/A <i class="fa fa-asterisk bg-warning rounded-circle text-white p-1"></i></h2>
                                 </div>
                                 @php
                                     $informes = (new \App\Informes_reporte())->join('encauditvalues','informes_reportes.informes_id','encauditvalues.idencauditvalues')->where([ 'agenda_id'=>$datos->agenda_id, 'pds_id'=>$pdsdata->id, 'auditor_id'=>$datos->auditor_id, 'value'=>'N/A' ])->get();
