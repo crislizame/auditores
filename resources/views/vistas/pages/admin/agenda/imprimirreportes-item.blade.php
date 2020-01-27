@@ -294,6 +294,7 @@ $pdsdata = (new \App\Pdsperfile())->where('id',$datos->pds_id)->first();
                 $promcaritas = 0;
                 @endphp
                 @forelse($datosverticales as $dv)
+                @if(ucfirst($dv->nombre_estado)!='Informes')
                 <h5 class="titulos p-2 text-center">{{ucfirst($dv->nombre_estado)}}</h5>
                 <div class="row px-2">
                     @php
@@ -346,6 +347,7 @@ $pdsdata = (new \App\Pdsperfile())->where('id',$datos->pds_id)->first();
                     @empty
                     @endforelse
                 </div>
+                @endif
                 @empty
                 @endforelse
                 <script>
