@@ -62,7 +62,7 @@
     $datos = (new \App\Auditoria_reporte())->where('idauditoria_reportes',request('id'))->first();
     $pdsdata = (new \App\Pdsperfile())->where('id',$datos->pds_id)->first();
     @endphp
-    @if(request('cat') == "N")
+    @if(request('cat') == "A")
     <div class="row h-100">
         <!-- Start Row principal -->
 
