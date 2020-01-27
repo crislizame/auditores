@@ -5992,7 +5992,7 @@ input[type="color"] {
         padding: .5rem !important;
     }
 
-    .img-responsive{
+    .col-3 > .img-responsive{
         max-height:9vh;
     }
 }
@@ -6346,7 +6346,7 @@ ul .datosvertical {
         line-height: 34px;
     }
     
-    .img-responsive{
+    .col-3 > .img-responsive{
         max-height:24vh;
     }
 }

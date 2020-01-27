@@ -69,6 +69,8 @@ $pdsdata = (new \App\Pdsperfile())->where('id',$datos->pds_id)->first();
                 <h3 class="titulos-grandes p-2 text-center promestado">Estado</h3>
                 @php
                 $datosverticales = (new \App\Encaudit())->where('categoria','=','estado')->get();
+                $cantidadestados =(new \App\Encaudit())->where('categoria','=','estado')->count();
+                $promcompleto = 0
                 @endphp
                 @forelse($datosverticales as $dv)
                 <h5 class="titulos p-2 text-center" id="tituloaux{{$dv->idencaudit}}">{{ucfirst($dv->nombre_estado)}}</h5>
@@ -135,19 +137,18 @@ $pdsdata = (new \App\Pdsperfile())->where('id',$datos->pds_id)->first();
                     <script type='text/javascript'>
                         var tituloaux{{$dv->idencaudit}} = '{{ucfirst($dv->nombre_estado)}} <span class="border border-info rounded px-1">{{number_format($valores/$promcaritas, 2, '.', '')}}%</span>';
                         jQuery(document).ready(function() {
-                            jQuery('#tituloaux{{$dv->idencaudit}}').html(tituloaux {{$dv->idencaudit}});
-                            jQuery('#tituloaux{{$dv->idencaudit}}').attr('data-val', {{number_format($valores / $promcaritas, 2, '.', '')}});
+                            jQuery('#tituloaux{{$dv->idencaudit}}').html(tituloaux{{$dv->idencaudit}});
+                            jQuery('#tituloaux{{$dv->idencaudit}}').attr('data-val', {{number_format($valores/$promcaritas, 2, '.', '')}});
                         });
+                        @php
+                            $promcompleto += $valores/$promcaritas;
+                        @endphp
                     </script>
                 @empty
                 @endforelse
                 <script type='text/javascript'>
                     jQuery(document).ready(function() {
-                        var sumaestados = 0;
-                        jQuery('[data-val]').each(function(index, element) {
-                            sumaestados += $(this).attr('data-val');
-                        });
-                        var aux = sumaestados / {{$promcaritas}};
+                        var aux = {{$promcompleto/$cantidadestados}};
                         $('#promestado').html('<span class="border border-white rounded px-1">' + aux.toFixed(2) + '%</span>');
                         $('.promestado').html('Estado <span class="border border-white rounded px-1">' + aux.toFixed(2) + '%</span>');
                     });
