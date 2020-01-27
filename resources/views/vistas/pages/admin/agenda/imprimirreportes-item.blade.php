@@ -4,7 +4,7 @@
 $datos = (new \App\Auditoria_reporte())->where('idauditoria_reportes',request('id'))->first();
 $pdsdata = (new \App\Pdsperfile())->where('id',$datos->pds_id)->first();
 @endphp
-@if(request('cat') == "A")
+@if(request('cat') == "N")
 <div class="row h-100">
     <div class="col-lg-12 mt-3">
         <div class="card m-0">

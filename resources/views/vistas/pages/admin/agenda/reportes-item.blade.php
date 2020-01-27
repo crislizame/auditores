@@ -62,7 +62,7 @@
     $datos = (new \App\Auditoria_reporte())->where('idauditoria_reportes',request('id'))->first();
     $pdsdata = (new \App\Pdsperfile())->where('id',$datos->pds_id)->first();
     @endphp
-    @if(request('cat') == "A")
+    @if(request('cat') == "N")
     <div class="row h-100">
         <!-- Start Row principal -->
 
@@ -704,7 +704,7 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
 <script src="{{asset('assets/plugins/Chart.js/Chart.min.js')}}"></script>
 <script>
     $(document).ready(function() {
-        @if(request('cat') == "A")
+        @if(request('cat') == "N")
         $('.btn-verfotos').click(function() {
             $('.modal-verfotos').modal('show');
             var id = $(this).attr('data-id');
@@ -714,7 +714,7 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                 dataType: 'text',
                 data: {
                     'id': id,
-                    'cat': 'A',
+                    'cat': 'N',
                     '_token': "{{csrf_token()}}"
                 },
                 beforeSend: function() {
