@@ -408,6 +408,7 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                             $valores += $valor;
                             }
                             @endphp
+                                @if($th->nombre_val!='Informes')
                                 <div class="col-lg-6 mb-3">
                                     <div class="row mb-2">
                                        <div class="col-lg-7">
@@ -426,6 +427,7 @@ $valores_muebles = (new \App\Encauditdataactivo())->where([ 'encauditvalues_id'=
                                         </div>
                                     </div>
                                 </div>
+                                @endif
                             @empty
                             @endforelse
                     </div>
