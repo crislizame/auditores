@@ -103,10 +103,10 @@ $pdsdata = (new \App\Pdsperfile())->where('id',$datos->pds_id)->first();
                         $valores += $valor;
                         }
                         @endphp
-                <div class="col-12 mb-2 ml-4">
+                <div class="col-12 mb-2">
                                 <div class="row">
                                     <div class="col-4">
-                                        <b>{{ucfirst($th->nombre_val)}}</b>
+                                        <b class="ml-4">{{ucfirst($th->nombre_val)}}</b>
                                     </div>
                                     <div class="col-2">
                                         <b><span class="p-0 titulos-procentaje">{{$valor}}%</span></b>
@@ -119,13 +119,13 @@ $pdsdata = (new \App\Pdsperfile())->where('id',$datos->pds_id)->first();
                                     </div>
                                 </div>
                             </div>
-                        <div class="row">
+                        <div class="row mb-3">
                             @php
                             $images = (new \App\Attachment())->select('idattachments')->join('encauditdata_attachments','attachments.idattachments','encauditdata_attachments.attachments_id')->where('encauditdata_attachments.encauditdatas_id',$id)->limit(4)->get();
                             @endphp
                             @forelse($images as $image)
                             <div class="col-lg-3 mx-1">
-                                <img class="img-responsive" style="height:25vh;" src="{{url('/')}}/imagen/{{$image->idattachments}}.jpg">
+                                <img class="img-responsive" style="max-height:20vh;"src="{{url('/')}}/imagen/{{$image->idattachments}}.jpg">
                             </div>
                             @empty
                             @endforelse
