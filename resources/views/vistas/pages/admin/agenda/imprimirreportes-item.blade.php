@@ -124,7 +124,7 @@ $pdsdata = (new \App\Pdsperfile())->where('id',$datos->pds_id)->first();
                             $images = (new \App\Attachment())->select('idattachments')->join('encauditdata_attachments','attachments.idattachments','encauditdata_attachments.attachments_id')->where('encauditdata_attachments.encauditdatas_id',$id)->limit(4)->get();
                             @endphp
                             @forelse($images as $image)
-                            <div class="col-lg-3 mx-1">
+                            <div class="col-3 mx-1">
                                 <img class="img-responsive" style="max-height:20vh;"src="{{url('/')}}/imagen/{{$image->idattachments}}.jpg">
                             </div>
                             @empty

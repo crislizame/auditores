@@ -6256,6 +6256,10 @@ ul .datosvertical {
         font-size: 30px;
         line-height: 34px;
     }
+    
+    .img-responsive{
+        max-height:32vh;
+    }
 }
 
 .lmhreporte li a:hover {
