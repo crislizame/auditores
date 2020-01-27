@@ -72,8 +72,6 @@ $pdsdata = (new \App\Pdsperfile())->where('id',$datos->pds_id)->first();
                 @endphp
                 @forelse($datosverticales as $dv)
                 <h5 class="titulos p-2 text-center" id="tituloaux{{$dv->idencaudit}}">{{ucfirst($dv->nombre_estado)}}</h5>
-                <table class="table">
-                    <tbody>
                         @php
                         $thc = (new \App\Encauditvalue())->where('encaudit_id',$dv->idencaudit)->get();
                         $promcaritas = (new \App\Encauditvalue())->where('encaudit_id',$dv->idencaudit)->count();
@@ -105,20 +103,22 @@ $pdsdata = (new \App\Pdsperfile())->where('id',$datos->pds_id)->first();
                         $valores += $valor;
                         }
                         @endphp
-                        <tr>
-                            <td width="30%"><b>{{ucfirst($th->nombre_val)}}</b></td>
-                            <td width=150>
-                                <h2 class="p-2 text-right">{{$valor}}%</h2>
-                            </td>
-                            <td width=75><img src="{{asset('img/cara'.$encuesta->value('carita').'.jpg')}}" width="50px" alt="carita"></td>
-                            <td width="50%">
-                                <div class="rounded border border-dark px-1">
-                                    <b>{{ucfirst($encuesta->value('observa'))}}</b>
+                <div class="col-12 mb-2 ml-4">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <b>{{ucfirst($th->nombre_val)}}</b>
+                                    </div>
+                                    <div class="col-2">
+                                        <b><span class="p-0 titulos-procentaje">{{$valor}}%</span></b>
+                                        <img src="{{asset('img/cara'.$encuesta->value('carita').'.jpg')}}" width="50px" alt="carita" class="pull-right">
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="rounded border border-dark px-1" style="min-height: 7vh;">
+                                            <b>{{ucfirst($encuesta->value('observa'))}}</b>
+                                        </div>
+                                    </div>
                                 </div>
-                            </td>
-                    </tbody>
-                </table>
-
+                            </div>
                         <div class="row">
                             @php
                             $images = (new \App\Attachment())->select('idattachments')->join('encauditdata_attachments','attachments.idattachments','encauditdata_attachments.attachments_id')->where('encauditdata_attachments.encauditdatas_id',$id)->limit(4)->get();
