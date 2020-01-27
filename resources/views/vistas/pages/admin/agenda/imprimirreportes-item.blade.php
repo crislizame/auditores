@@ -133,7 +133,7 @@ $pdsdata = (new \App\Pdsperfile())->where('id',$datos->pds_id)->first();
                         @empty
                         @endforelse
                     <script type='text/javascript'>
-                        var tituloaux {{$dv->idencaudit}} = '{{ucfirst($dv->nombre_estado)}} <span class="border border-info rounded px-1">{{number_format($valores/$promcaritas, 2, '.', '')}}%</span>';
+                        var tituloaux{{$dv->idencaudit}} = '{{ucfirst($dv->nombre_estado)}} <span class="border border-info rounded px-1">{{number_format($valores/$promcaritas, 2, '.', '')}}%</span>';
                         jQuery(document).ready(function() {
                             jQuery('#tituloaux{{$dv->idencaudit}}').html(tituloaux {{$dv->idencaudit}});
                             jQuery('#tituloaux{{$dv->idencaudit}}').attr('data-val', {{number_format($valores / $promcaritas, 2, '.', '')}});

@@ -5991,6 +5991,10 @@ input[type="color"] {
         min-height: 8vh;
         padding: .5rem !important;
     }
+
+    .img-responsive{
+        max-height:9vh;
+    }
 }
 
 .mini-btn {
@@ -6258,7 +6262,7 @@ ul .datosvertical {
     }
     
     .img-responsive{
-        max-height:32vh;
+        max-height:24vh;
     }
 }
 
