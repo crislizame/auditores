@@ -48,7 +48,13 @@ class ActivosApiController extends Controller
                 $id = $request->post('id');
                 $agenda_id = $request->post('agenda_id');
                 $idpds = $request->post('idpds');
+
+                $codigoc = (new Encauditdataactivo())->where(['agenda_id'=>$agenda_id,'encauditvalues_id'=>$id,'pds_id'=>$idpds,'auditor_id'=>$auditor_id])->count();
+
                 $codigo = (new Encauditdataactivo())->where(['agenda_id'=>$agenda_id,'encauditvalues_id'=>$id,'pds_id'=>$idpds,'auditor_id'=>$auditor_id])->first();
+                if ($codigoc == 0){
+                    return [];
+                }
                 return response()->json([$codigo],200,[], JSON_UNESCAPED_UNICODE);
 
                 break;
@@ -87,6 +93,7 @@ class ActivosApiController extends Controller
                             'marca'=>$marca==null?"":$marca
                         );
                     }
+
 
                 }
                 return response()->json($res,200,[], JSON_UNESCAPED_UNICODE);

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auditores;
 
 use App\Auditore;
+use App\Auditores_attachment;
 use App\Comisionista;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -85,6 +86,8 @@ class AuditoresController extends Controller
 
 
         $comisionista = (new Auditore())->where('id',$comi_id)->first();
+        $attach = (new Auditores_attachment())->where('auditor_id',$comi_id)->value("attachments_id");
+        $comisionista->attach = $attach;
 
         $result = $comisionista;
 

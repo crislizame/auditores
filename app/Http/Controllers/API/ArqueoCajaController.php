@@ -47,7 +47,6 @@ class ArqueoCajaController extends Controller
                 $arqueo_id = $request->post('arqueo_id');
                 $imagen = base64_decode($request->post('image'));
                 $aud_attach_count = (new Arqueo_attachment())->where('arqueo_id',$arqueo_id)->count();
-                if ($aud_attach_count == 0){
                     $attach = new Attachment();
                     $attach->file = $imagen;
                     $attach->user_id = $arqueo_id;
@@ -58,16 +57,7 @@ class ArqueoCajaController extends Controller
                     $aud_attach->attachments_id = $idattach;
                     $aud_attach->save();
                     $aud_attach_id = $idattach;
-                }else{
-                    $aud_attach_id = (new Arqueo_attachment())->where('arqueo_id',$arqueo_id)->value('attachments_id');
 
-                    $attach = new Attachment();
-                    $attach->exists = true;
-                    $attach->idattachments = $aud_attach_id;
-                    $attach->file = $imagen;
-                    $attach->save();
-
-                }
                 break;
             case "s":
                 //variables
@@ -90,7 +80,7 @@ class ArqueoCajaController extends Controller
                 $pds_id = $request->post('pds_id');
                 $auditor_id = $request->post('auditor_id');
                 $countreporte = (new Auditoria_reporte())->where(['agenda_id'=>$request->post('agenda_id'),
-                    'pds_id'=>$request->post('idpds')])->count();
+                    'pds_id'=>$request->post('pds_id'),'auditor_id'=>$auditor_id])->count();
                 if($countreporte == 0 ){
                     $reporte = (new Auditoria_reporte());
                     $reporte->pds_id = $request->post('pds_id');

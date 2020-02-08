@@ -22,7 +22,7 @@
                                 <th scope="col">ID</th>
                                 <th>Tipo</th>
                                 <th>Nombre</th>
-                                <th>Apellidos</th>
+                                <th>Apellido</th>
                                 <th>Cedula</th>
                                 <th>Opciones</th>
                             </tr>
@@ -164,13 +164,18 @@
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="col-6">
+                            <img width="90%" height="200px" style="max-height: 200px" id="img_editar" class="img-fluid p-2">
+                        </div>
+                        <div class="col-6">
+                        <div class="form-group col-md-12">
                             <label for="aud_nombre">Nombres</label>
                             <input class="form-control" id="aud_nombre2" name="aud_nombre" type="text">
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-12">
                             <label for="aud_apellidos">Apellidos</label>
                             <input class="form-control" id="aud_apellidos2" name="aud_apellidos" type="text">
+                        </div>
                         </div>
                     </div>
                     <div class="form-row">
@@ -192,7 +197,7 @@
                             <label for="auditor_tipo">Tipo</label>
                             {{-- <input class="form-control" id="tipo_comisionista" name="tipo_comisionista" type="text" >--}}
 
-                            <select class="form-control" id="auditor_tipo" name="auditor_tipo">
+                            <select class="form-control" id="auditor_tipo2" name="auditor_tipo">
                                 <option value="N"> NORMAL</option>
                                 <option value="P"> PROCESO</option>
                             </select>
@@ -386,6 +391,7 @@
                         $('#password2').val('');
                         $('#aud_correo2').val('');
                         $('#aud_direccion2').val('');
+                        $('#img_editar').attr('src',"");
                         $('#aud_cuentanumero2').val('');
                         $('#aud_cuentatipo2').val('');
                         $('#aud_cuentabanco2').val('ahorro');
@@ -394,7 +400,11 @@
                 }).done(function(data) {
                     //asdasdasd
                     $('#formeditComisionistas').attr('data-id', id);
-
+                    if(data.attach == null || data.attach == "null" ){
+                        $('#img_editar').attr('src',"{{asset('person.jpg')}}");
+                    }else{
+                        $('#img_editar').attr('src',"{{url('imagen')}}/"+data.attach);
+                    }
                     $('#aud_nombre2').val(data.aud_nombre);
                     $('#aud_apellidos2').val(data.aud_apellidos);
                     $('#aud_cedula2').val(data.aud_cedula);

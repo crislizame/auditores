@@ -29,7 +29,7 @@ class PDSController extends Controller
         foreach ($datos_pds as $pds) {
             $td .= "<tr>
                         <th scope=\"row\">" . $pds->id . "</th>
-                        <td width='35%'>" . strtoupper($pds->pds_name) . "</td>
+                        <td width='30%'>" . strtoupper($pds->pds_name) . "</td>
                         <td >" . strtoupper($pds->pds_provincia). "</td>
                         <td>" . strtoupper($pds->pds_ciudad). "</td>
                         <td>" . strtoupper($pds->pds_sventas) . "</td>
@@ -44,6 +44,7 @@ class PDSController extends Controller
 
         $comisionista = (new Pdsperfile())->where('id',$comi_id)->first();
         $permisos_c = (new Pdsperfiles_permiso())->where('pds_id',$comi_id)->count();
+        $attach = (new Pdsperfiles_attachment())->where('pds_id',$comi_id)->value("attachments_id");
         if($permisos_c == 0){
             $p_array = array();
             $array_permisos = ['bsenal','bextintores','msuelo','mpatente','mtasa','mpermisoanterior','lpermiso','lotros'];
@@ -59,6 +60,7 @@ class PDSController extends Controller
 
 
         }
+        $comisionista->attach = $attach;
         $c_array = json_decode(json_encode($comisionista),true);
 
         $result = array($c_array,$p_array);

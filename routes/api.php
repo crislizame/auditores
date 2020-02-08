@@ -18,6 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::resource('v1/arqueocaja', 'API\ArqueoCajaController');
 Route::resource('v1/comisionistas', 'API\ComisionistasApiController');
+Route::resource('v1/comisionistasr', 'API\ComisionistaReporte');
 Route::resource('v1/com_api', 'API\ComisionistasApiController2');
 Route::resource('v1/perfilauditor', 'API\PerfilAuditorController');
 Route::resource('v1/user', 'API\UserLoginController');

@@ -17,7 +17,7 @@
 @endphp
 @include("vistas.submenu.agenda.submenu",$activar)
         <!--Start Dashboard Content-->
-            <div class="row col-lg-10">
+            <div class="row h-100 col-lg-10">
                 <div class="col-lg-12 h-50 m-0 p-3" style="padding-bottom: 0!important"><!-- Start PDS -->
 
                     <div class="card h-100 m-0 p-0">
@@ -35,33 +35,25 @@
 
                 </div><!-- End PDS -->
                 <div class="col-lg-12 h-50 p-3 pt-1 " style="padding-top: 0!important;"><!-- Start PDS -->
+                    <div class="titulos-grandes">
+                        <span class="ml-3 text-white bold ">PDS - Auditores</span>
+                    </div>
+                    <div class="card m-0 h-75 p-0" style="overflow-x: scroll;">
 
-                    <div class="card h-100 m-0 p-0">
                         <div class="card-body p-0">
-                            <div class="col-lg-12 p-0 m-0 h-50  text-center h-50">
-                                <div class="titulos-grandes">
-                                    <span class=" text-white bold ">Auditores</span>
-                                </div>
-                                <div class="auditmenuflow" style="max-height: 120px;">
-                                    <ul class="nav auditmenu auditlistarajax flex-column">
 
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>PDS</th>
+                                    <th>Auditores</th>
+                                    <th>Eliminar</th>
+                                </tr>
+                                </thead>
+                                <tbody class="tablatodos">
 
-
-                                    </ul>
-                                </div>
-
-                            </div>
-                            <div class="col-lg-12  p-0 m-0 h-50 text-center">
-                                <div class="titulos-grandes">
-                                    <span class=" text-white bold ">PDS</span>
-
-                                </div>
-                                <div class="pds-lista-flow  h-75 p-0 m-0 text-center">
-                                    <ul class="nav pds-lista pdslistarajax flex-column">
-
-                                    </ul>
-                                </div>
-                            </div>
+                                </tbody>
+                            </table>
 
                         </div>
                     </div>
@@ -286,156 +278,102 @@ noti.remove();
                 }
             });
             cargarcalendario();
-            function cargarpdsaudit(dataid){
+            function eliminaralll(idagenda){
 
+           $('.btn-eliminarall').click(function() {
+               var idd = $(this).attr('data-id');
                 $.ajax({
-                    url: "{{route('agenda/ver/ajax/cargarpdsxfecha')}}",
-                    method:"post",
-                    dataType:'text',
-                    data: {'id':dataid,'_token':"{{csrf_token()}}"},
-                    beforeSend: function( ) {
-                        $('.pdslistarajax').html(" <li class=\"nav-item active audititem\">\n" +
-                            "                                        <span class=\"nav-link \" href=\"#\">Cargando ... <span class=\"check-or-not\"><i class=\"fa fa-check-circle text-white float-right p-1 \"></i></span></span>\n" +
-                            "                                    </li>");
+                    url: "{{route('agenda/ver/ajax/eliminarpdsdeagenda')}}",
+                    method: "post",
+                    dataType: 'text',
+                    data: {'id': idd, '_token': "{{csrf_token()}}"},
+                    beforeSend: function () {
+                        noti = Lobibox.notify('info', {
+                            pauseDelayOnHover: true,
+                            title: "¡Eliminando!",
+                            continueDelayOnInactiveTab: false,
+                            position: 'top right',
+                            icon: 'fa fa-check-circle',
+                            msg: 'Por Favor Espere'
+                        });
                     }
                 }).done(function (done) {
-                    $('.pdslistarajax').html(done);
-                    $('.btn-editarpds').click(function () {
-                        var idd = $(this).attr('data-id');
-                        var idagenda = $(this).attr('data-agenda');
-                        var nombrespds = $(this).attr('data-nombre');
-                        $('.modal-editpds').modal("show");
-                        $('.pdsedit_actual').html(nombrespds);
-                        $('.btn-editarelpds').attr('data-agenda',idagenda);
-                        $('.btn-editarelpds').attr('data-id',idd);
+                    noti.remove();
+                    Lobibox.notify('success', {
+                        pauseDelayOnHover: true,
+                        title: "¡Eliminado!",
+                        continueDelayOnInactiveTab: false,
+                        position: 'top right',
+                        icon: 'fa fa-check-circle',
+                        msg: ' Eliminado'
                     });
-                    $('.btn-delpds').click(function () {
-                        var idd = $(this).attr('data-id');
-                        var idagenda = $(this).attr('data-agenda');
-                        var noti;
-                        swal({
-                            title: "¿Estas seguro de ELIMINAR el PDS?",
-                            icon: "warning",
-                            buttons: {
-                                cancel: {
-                                    text:"NO",
-                                    className:"btn-danger shadow-danger",
-                                    visible: true,
-                                    closeModal: true,
-                                },
-                                willsuccess: "Eliminar"
-
-
-                            },
-                            dangerMode: false,
-                        }).then((willsuccess) => {
-                            if (willsuccess) {
-                                $.ajax({
-                                    url: "{{route('agenda/ver/ajax/eliminarpdsdeagenda')}}",
-                                    method: "post",
-                                    dataType: 'text',
-                                    data: {'id': idd, idagenda: idagenda, '_token': "{{csrf_token()}}"},
-                                    beforeSend: function () {
-                                       noti = Lobibox.notify('info', {
-                                            pauseDelayOnHover: true,
-                                            title: "¡Eliminando!",
-                                            continueDelayOnInactiveTab: false,
-                                            position: 'top right',
-                                            icon: 'fa fa-check-circle',
-                                            msg: 'Por Favor Espere'
-                                        });
-                                    }
-                                }).done(function (done) {
-noti.remove();
-                                    Lobibox.notify('success', {
-                                        pauseDelayOnHover: true,
-                                        title: "¡Eliminado!",
-                                        continueDelayOnInactiveTab: false,
-                                        position: 'top right',
-                                        icon: 'fa fa-check-circle',
-                                        msg: 'PDS Eliminado'
-                                    });
-                                    cargarpdsaudit(idagenda);
-                                    $('.modal-editpds').modal("hide");
-                                });
-                            }
-                        });
-                    });
+                    cargarpdsaudit(idagenda);
+                    $('.modal-editpds').modal("hide");
                 });
+            });
+            }
+
+            function cargarpdsaudit(dataid){
+
+{{--                $.ajax({--}}
+{{--                    url: "{{route('agenda/ver/ajax/cargarpdsxfecha')}}",--}}
+{{--                    method:"post",--}}
+{{--                    dataType:'text',--}}
+{{--                    data: {'id':dataid,'_token':"{{csrf_token()}}"},--}}
+{{--                    beforeSend: function( ) {--}}
+{{--                        $('.pdslistarajax').html(" <li class=\"nav-item active audititem\">\n" +--}}
+{{--                            "                                        <span class=\"nav-link \" href=\"#\">Cargando ... <span class=\"check-or-not\"><i class=\"fa fa-check-circle text-white float-right p-1 \"></i></span></span>\n" +--}}
+{{--                            "                                    </li>");--}}
+{{--                    }--}}
+{{--                }).done(function (done) {--}}
+{{--                    $('.pdslistarajax').html(done);--}}
+{{--                    $('.btn-editarpds').click(function () {--}}
+{{--                        var idd = $(this).attr('data-id');--}}
+{{--                        var idagenda = $(this).attr('data-agenda');--}}
+{{--                        var nombrespds = $(this).attr('data-nombre');--}}
+{{--                        $('.modal-editpds').modal("show");--}}
+{{--                        $('.pdsedit_actual').html(nombrespds);--}}
+{{--                        $('.btn-editarelpds').attr('data-agenda',idagenda);--}}
+{{--                        $('.btn-editarelpds').attr('data-id',idd);--}}
+{{--                    });--}}
+{{--                    $('.btn-delpds').click(function () {--}}
+{{--                        var idd = $(this).attr('data-id');--}}
+{{--                        var idagenda = $(this).attr('data-agenda');--}}
+{{--                        var noti;--}}
+{{--                        swal({--}}
+{{--                            title: "¿Estas seguro de ELIMINAR el PDS?",--}}
+{{--                            icon: "warning",--}}
+{{--                            buttons: {--}}
+{{--                                cancel: {--}}
+{{--                                    text:"NO",--}}
+{{--                                    className:"btn-danger shadow-danger",--}}
+{{--                                    visible: true,--}}
+{{--                                    closeModal: true,--}}
+{{--                                },--}}
+{{--                                willsuccess: "Eliminar"--}}
+
+
+{{--                            },--}}
+{{--                            dangerMode: false,--}}
+{{--                        }).then((willsuccess) => {--}}
+{{--                            if (willsuccess) {--}}
+
+{{--                            }--}}
+{{--                        });--}}
+{{--                    });--}}
+{{--                });--}}
                 $.ajax({
                     url: "{{route('agenda/ver/ajax/cargarauditxfecha')}}",
                     method:"post",
                     dataType:'text',
                     data: {'id':dataid,'_token':"{{csrf_token()}}"},
                     beforeSend: function( ) {
-                        $('.auditlistarajax').html(" <li class=\"nav-item active audititem\">\n" +
-                            "                                        <span class=\"nav-link \" href=\"#\">Cargando ... <span class=\"check-or-not\"><i class=\"fa fa-check-circle text-white float-right p-1 \"></i></span></span>\n" +
-                            "                                    </li>");
+                        $('.tablatodos').html("");
 
                     }
                 }).done(function (done) {
-                    $('.auditlistarajax').html(done);
-                    $('.btn-editaudit').click(function () {
-                        var idd = $(this).attr('data-id');
-                        var idagenda = $(this).attr('data-agenda');
-                        var nombrespds = $(this).attr('data-nombre');
-                        $('.modal-editaudit').modal("show");
-                        $('.auditedit_actual').html(nombrespds);
-                        $('.btn-editarauditor').attr('data-agenda',idagenda);
-                        $('.btn-editarauditor').attr('data-id',idd);
-                    });
-                    $('.btn-delaudit').click(function () {
-                        var idd = $(this).attr('data-id');
-                        var idagenda = $(this).attr('data-agenda');
-                        var noti;
-                        swal({
-                            title: "¿Estas seguro de ELIMINAR el Auditor?",
-                            icon: "warning",
-                            buttons: {
-                                cancel: {
-                                    text:"NO",
-                                    className:"btn-danger shadow-danger",
-                                    visible: true,
-                                    closeModal: true,
-                                },
-                                willsuccess: "Eliminar"
-
-
-                            },
-                            dangerMode: false,
-                        }).then((willsuccess) => {
-                            if (willsuccess) {
-                                $.ajax({
-                                    url: "{{route('agenda/ver/ajax/eliminarauditordeagenda')}}",
-                                    method: "post",
-                                    dataType: 'text',
-                                    data: {'id': idd, idagenda: idagenda, '_token': "{{csrf_token()}}"},
-                                    beforeSend: function () {
-                                      noti =  Lobibox.notify('info', {
-                                            pauseDelayOnHover: true,
-                                            title: "¡Eliminando!",
-                                            continueDelayOnInactiveTab: false,
-                                            position: 'top right',
-                                            icon: 'fa fa-check-circle',
-                                            msg: 'Por Favor Espere'
-                                        });
-                                    }
-                                }).done(function (done) {
-                                    noti.remove()
-                                    Lobibox.notify('success', {
-                                        pauseDelayOnHover: true,
-                                        title: "¡Eliminado!",
-                                        continueDelayOnInactiveTab: false,
-                                        position: 'top right',
-                                        icon: 'fa fa-check-circle',
-                                        msg: 'Auditor Eliminado'
-                                    });
-                                    cargarpdsaudit(idagenda);
-                                    $('.modal-editpds').modal("hide");
-                                });
-                            }
-                        });
-                    });
+                    $('.tablatodos').html(done);
+    eliminaralll(dataid);
 
                 });
             }

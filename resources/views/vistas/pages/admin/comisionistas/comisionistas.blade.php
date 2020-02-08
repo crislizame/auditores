@@ -24,10 +24,10 @@
                                 <th scope="col">ID</th>
                                 <th>Nombre</th>
                                 <th>Apellido</th>
-                                <th>Cliente</th>
+                                <th width="30%">Punto de Suerte</th>
                                 <th>Ciudad</th>
-                                <th>Calificación</th>
-                                <th>Opciones</th>
+                                <th width="5%">Score</th>
+                                <th width="15%">Opciones</th>
                             </tr>
                         </thead>
                         <tbody class="comisionistaTabla">
@@ -114,9 +114,26 @@
                             <label for="apellidos">Apellidos</label>
                             <input class="form-control" id="apellidos" name="apellidos" type="text">
                         </div>
+
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
+                            <label for="cedula">Cédula</label>
+                            <input class="form-control" id="cedula" name="cedula" type="text">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="email">Email</label>
+                            <input class="form-control" id="email" name="email" type="text">
+
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label for="edad">Edad</label>
+                            <input class="form-control" id="edad" name="edad" type="text">
+                        </div>
+                        <div class="form-group col-md-3">
                             <label for="estudios">Estudios</label>
                             <input class="form-control" id="estudios" name="estudios" type="text">
                         </div>
@@ -141,8 +158,8 @@
                             </select>
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="fecha_ingreso">Fecha Ingreso</label>
-                            <input class="form-control" value="<?php echo date('Y-m-d'); ?>" id="created_at" name="created_at" type="date">
+                            <label for="fecha_apertura">Fecha Ingreso</label>
+                            <input class="form-control" value="<?php echo date('Y-m-d'); ?>" id="fecha_apertura" name="fecha_apertura" type="date">
 
                         </div>
                         <div class="form-group col-md-3">
@@ -151,7 +168,7 @@
 
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="telef_fijo">Telefono Fijo</label>
+                            <label for="telef_domicilio">Telefono Fijo</label>
                             <input class="form-control" id="telef_domicilio" name="telef_domicilio" type="text">
 
                         </div>
@@ -231,7 +248,11 @@
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="col-6">
+                            <img width="90%" height="200px" style="max-height: 200px" id="img_editar" class="img-fluid p-2">
+                        </div>
+                        <div class="col-6">
+                        <div class="form-group col-md-12">
                             <label for="pds_name">Nombre de PDS</label>
                             <select class="form-control pds_name" id="pds_name2" name="pds_id">
                                 <option value="0">Seleccione un PDS</option>
@@ -245,7 +266,7 @@
                                 @endforelse
                             </select>
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-12">
                             <label for="pds_ciudad2">Ciudad</label>
                             <select disabled class="form-control pds_ciudad" id="pds_ciudad2" name="pds_ciudad">
                                 <option value="0">Ciudad</option>
@@ -264,6 +285,7 @@
                                 @endforelse
                             </select>
                         </div>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-12">
@@ -280,9 +302,26 @@
                             <label for="apellidos">Apellidos</label>
                             <input class="form-control" id="apellidos2" name="apellidos" type="text">
                         </div>
+
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
+                            <label for="cedula">Cédula</label>
+                            <input class="form-control" id="cedula2" name="cedula" type="text">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="email">Email</label>
+                            <input class="form-control" id="email2" name="email" type="text">
+
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label for="edad">Edad</label>
+                            <input class="form-control" id="edad2" name="edad" type="text">
+                        </div>
+                        <div class="form-group col-md-3">
                             <label for="estudios">Estudios</label>
                             <input class="form-control" id="estudios2" name="estudios" type="text">
                         </div>
@@ -307,8 +346,8 @@
                             </select>
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="fecha_ingreso">Fecha Ingreso</label>
-                            <input class="form-control" id="created_at2" value="<?php echo date('Y-m-d'); ?>" name="created_at" type="date">
+                            <label for="fecha_apertura">Fecha Ingreso</label>
+                            <input class="form-control" id="fecha_apertura2" value="" name="fecha_apertura" type="text">
 
                         </div>
                         <div class="form-group col-md-3">
@@ -317,7 +356,7 @@
 
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="telef_fijo">Teléfono Fijo</label>
+                            <label for="telef_domicilio">Teléfono Fijo</label>
                             <input class="form-control" id="telef_domicilio2" name="telef_domicilio" type="text">
 
                         </div>
@@ -523,12 +562,18 @@
                         $('#direccion2').val('');
                         $('#h_ingreso2').val('');
                         $('#h_salida2').val('');
+                        $('#email2').val('');
+                        $('#edad2').val('');
+                        $('#img_editar').attr('src',"");
+
                         $('#hfds_ingreso2').val('');
                         $('#hfds_salida2').val('');
                         $('#celular2').val('');
                         $('#telef_domicilio2').val('');
+                        $('#cedula2').val('');
                         $('#rs_cartera2').val('');
-                        $('#created_at2').val('');
+                        $('#rs_ventas2').val('');
+                        $('#fecha_apertura2').val('');
                         $('#tipo_comisionista2').val('');
 
                         // noti =  Lobibox.notify('info', {
@@ -553,19 +598,29 @@
 
                         }
                     });
+                    if(data.attach == null || data.attach == "null" ){
+                        $('#img_editar').attr('src',"{{asset('person.jpg')}}");
+                    }else{
+                        $('#img_editar').attr('src',"{{url('imagen')}}/"+data.attach);
+                    }
                     $('#nombres2').val(data.nombres);
                     $('#apellidos2').val(data.apellidos);
                     $('#estudios2').val(data.estudios);
                     $('#direccion2').val(data.direccion);
                     $('#h_ingreso2').val(data.h_ingreso);
+                    $('#email2').val(data.email);
+
                     $('#h_salida2').val(data.h_salida);
+                    $('#rs_ventas2').val(data.rs_ventas);
                     $('#hfds_ingreso2').val(data.hfds_ingreso);
                     $('#hfds_salida2').val(data.hfds_salida);
                     $('#tipo_comisionista2').val(data.tipo_comisionista);
                     $('#celular2').val(data.celular);
-                    $('#telef_domicilio2').val(data.telef_domicilio);
+                    $('#fecha_apertura2').val(data.fecha_apertura);
                     $('#rs_cartera2').val(data.rs_cartera);
-                    $('#created_at2').val(data.created_at);
+                    $('#telef_domicilio2').val(data.telef_domicilio);
+                    $('#cedula2').val(data.cedula);
+                    $('#edad2').val(data.edad);
 
                 });
             });
@@ -669,6 +724,26 @@
                     icon: 'fa fa-check-circle',
                     msg: 'Edición Guardado'
                 });
+                $('#pds_name').val(0)
+                    .trigger('change');
+                $('#pds_ciudad').val(0)
+                    .trigger('change');
+                $('#nombres').val('');
+                $('#apellidos').val('');
+                $('#estudios').val('');
+                $('#direccion').val('');
+                $('#h_ingreso').val('');
+                $('#h_salida').val('');
+                $('#edad').val('');
+                $('#hfds_ingreso').val('');
+                $('#hfds_salida').val('');
+                $('#celular').val('');
+                $('#telef_domicilio').val('');
+                $('#cedula').val('');
+                $('#rs_cartera').val('');
+                $('#rs_ventas').val('');
+                $('#fecha_apertura').val('');
+                $('#tipo_comisionista').val('');
                 cargarComisionistas();
             });
 

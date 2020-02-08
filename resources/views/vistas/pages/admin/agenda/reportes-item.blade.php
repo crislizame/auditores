@@ -69,7 +69,7 @@
                 <div class="col-lg-12 mt-3">
                     <div class="card m-0">
                         <div class="card-body pl-0 pr-0 pb-0 pt-0">
-                            <h2 class="titulos-categoria p-2 text-center">AUDITORIA GENERAL</h2>
+                            <h2 class="titulos-categoria p-2 text-center">AUDITORIA NORMAL</h2>
 
                             <a target="_blank" href="{{route('imprimir/reportes-item')}}?cat=N&id={{request('id')}}">
                                 <h3 class="titulos-grandes p-2 text-center"><i class="fa fa-print text-white"></i> Ver en Formato de Impresión</h3>
@@ -123,10 +123,25 @@
                                 <tbody>
                                 @php
                                     $comisionistas = (new \App\Comisionista())->where('pds_id',$pdsdata->id)->get();
+
                                 @endphp
                                 @forelse($comisionistas as $com)
+                                    @php
+                                        $pcom_c = (new \App\Comisionistas_reporte())->where(['pds_id'=>$pdsdata->id,
+    'comisionista_id'=>$com->id,'agenda_id'=>$datos->agenda_id,'auditor_id'=>$datos->auditor_id])->count();
+
+
+    $pcom = (new \App\Comisionistas_reporte())->where(['pds_id'=>$pdsdata->id,
+    'comisionista_id'=>$com->id,'agenda_id'=>$datos->agenda_id,'auditor_id'=>$datos->auditor_id])->first();
+
+                                    @endphp
                                     <tr>
-                                        <td>{{strtoupper($com->nombres)}} {{strtoupper($com->apellidos)}}</td>
+                                        <td width="45%">{{strtoupper($com->nombres)}} {{strtoupper($com->apellidos)}}</td>
+                                        @if ($pcom_c > 0)
+                                        <td>{!! $pcom->presente == "s" ? '<i class="fa fa-check bg-success rounded-circle text-white p-1"></i>' : '<i class="fa fa-times-circle-o bg-danger rounded-circle text-white p-1"></i>'!!}</td>
+                                        @else
+                                            <td><i class="fa fa-asterisk bg-warning rounded-circle text-white p-1"></i></td>
+                                        @endif
                                     </tr>
                                 @empty
                                 @endforelse
@@ -358,10 +373,25 @@
                                 <tbody>
                                 @php
                                     $comisionistas = (new \App\Comisionista())->where('pds_id',$pdsdata->id)->get();
+
                                 @endphp
                                 @forelse($comisionistas as $com)
+                                    @php
+                                        $pcom_c = (new \App\Comisionistas_reporte())->where(['pds_id'=>$pdsdata->id,
+    'comisionista_id'=>$com->id,'agenda_id'=>$datos->agenda_id,'auditor_id'=>$datos->auditor_id])->count();
+
+
+    $pcom = (new \App\Comisionistas_reporte())->where(['pds_id'=>$pdsdata->id,
+    'comisionista_id'=>$com->id,'agenda_id'=>$datos->agenda_id,'auditor_id'=>$datos->auditor_id])->first();
+
+                                    @endphp
                                     <tr>
-                                        <td>{{strtoupper($com->nombres)}} {{strtoupper($com->apellidos)}}</td>
+                                        <td width="45%">{{strtoupper($com->nombres)}} {{strtoupper($com->apellidos)}}</td>
+                                        @if ($pcom_c > 0)
+                                            <td>{!! $pcom->presente == "s" ? '<i class="fa fa-check bg-success rounded-circle text-white p-1"></i>' : '<i class="fa fa-times-circle-o bg-danger rounded-circle text-white p-1"></i>'!!}</td>
+                                        @else
+                                            <td><i class="fa fa-asterisk bg-warning rounded-circle text-white p-1"></i></td>
+                                        @endif
                                     </tr>
                                 @empty
                                 @endforelse
@@ -409,24 +439,40 @@
                                                 $valores += $valor;
                                                 }
                                             @endphp
-                                            <div class="col-lg-6 mb-3">
-                                                <div class="row mb-2">
-                                                    <div class="col-lg-7">
+                                            <div class="col-12 mb-2 ml-4">
+                                                <div class="row">
+                                                    <div class="col-4">
                                                         <b>{{ucfirst($th->nombre_val)}}</b>
                                                     </div>
-                                                    <div class="col-lg-3">
-                                                        <h2 class="p-2 text-right" data-val="{{$valor}}">{{$valor}}%</h2>
+                                                    <div class="col-2">
+                                                        <b><span class="p-0 titulos-procentaje" data-val="{{$valor}}">{{$valor}}%</span></b>
+                                                        <img src="{{asset('img/cara'.$proceso->value('carita').'.jpg')}}" width="50px" alt="carita" class="pull-right">
                                                     </div>
-                                                    <div class="col-lg-2">
-                                                        <img src="{{asset('img/cara'.$proceso->value('carita').'.jpg')}}" width="50px" alt="carita">
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-12">
-                                                        <span class="border border-info rounded px-1"><b>{{ucfirst($proceso->value('observa'))}}</b></span>
+                                                    <div class="col-6">
+                                                        <div class="rounded border border-dark px-1" style="min-height: 7vh;">
+                                                            <b>{{ucfirst($proceso->value('observa'))}}</b>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
+{{--                                            <div class="col-lg-12 mb-3">--}}
+{{--                                                <div class="row mb-2">--}}
+{{--                                                    <div class="col-lg-7">--}}
+{{--                                                        <b>{{ucfirst($th->nombre_val)}}</b>--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="col-lg-3">--}}
+{{--                                                        <h2 class="p-2 text-right" data-val="{{$valor}}">{{$valor}}%</h2>--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="col-lg-2">--}}
+{{--                                                        <img src="{{asset('img/cara'.$proceso->value('carita').'.jpg')}}" width="50px" alt="carita">--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                                <div class="row">--}}
+{{--                                                    <div class="col-lg-12">--}}
+{{--                                                        <span class="border border-info rounded px-1"><b>{{ucfirst($proceso->value('observa'))}}</b></span>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
                                         @empty
                                         @endforelse
                                     </div>
@@ -522,10 +568,23 @@
                                         </tr>
                                         </thead>
                                         @php
-                                            $arqueos = (new \App\Arqueocaja())->where(['pds_id'=>$datos->pds_id,'agenda_id'=>$datos->agenda_id])->first();
-                                            $sumacant = $arqueos->m001+$arqueos->m005+$arqueos->m010+$arqueos->m025+$arqueos->m050+$arqueos->m100+$arqueos->b100+$arqueos->b500+$arqueos->b1000+$arqueos->b2000+$arqueos->b5000+$arqueos->b10000;
-                                            $sumatotal = ($arqueos->m001*0.01)+($arqueos->m005*0.05)+($arqueos->m010*0.10)+($arqueos->m025*0.25)+($arqueos->m050*0.50)+($arqueos->m100*1.00)+($arqueos->b100*1.00)+($arqueos->b500*5.00)+($arqueos->b1000*10.00)+($arqueos->b2000*20.00)+($arqueos->b5000*50.00)+($arqueos->b10000*100.00);
-                                            $diferencia = ($sumatotal) - $arqueos->sumapos;
+
+                                            $arqueos_c = (new \App\Arqueocaja())->where(['pds_id'=>$datos->pds_id,'agenda_id'=>$datos->agenda_id])->count();
+                                            if($arqueos_c > 0){
+                                                $arqueos = (new \App\Arqueocaja())->where(['pds_id'=>$datos->pds_id,'agenda_id'=>$datos->agenda_id])->first();
+                                                $sumacant = $arqueos->m001+$arqueos->m005+$arqueos->m010+$arqueos->m025+$arqueos->m050+$arqueos->m100+$arqueos->b100+$arqueos->b500+$arqueos->b1000+$arqueos->b2000+$arqueos->b5000+$arqueos->b10000;
+                                                $sumatotal_m =($arqueos->m001*0.01)+($arqueos->m005*0.05)+($arqueos->m010*0.10)+($arqueos->m025*0.25)+($arqueos->m050*0.50)+($arqueos->m100*1.00)+($arqueos->b100*1.00)+($arqueos->b500*5.00)+($arqueos->b1000*10.00)+($arqueos->b2000*20.00)+($arqueos->b5000*50.00)+($arqueos->b10000*100.00);
+                                                $sumatotal = $arqueos->depositosparciales+($arqueos->m001*0.01)+($arqueos->m005*0.05)+($arqueos->m010*0.10)+($arqueos->m025*0.25)+($arqueos->m050*0.50)+($arqueos->m100*1.00)+($arqueos->b100*1.00)+($arqueos->b500*5.00)+($arqueos->b1000*10.00)+($arqueos->b2000*20.00)+($arqueos->b5000*50.00)+($arqueos->b10000*100.00);
+                                                $diferencia = ($sumatotal) - $arqueos->sumapos;
+
+                                            }else{
+                                                $arqueos = (new \App\Arqueocaja())->where(['idarqueocajas'=>1])->first();
+                                                $sumacant = 0;
+                                                $sumatotal_m =0;
+                                                $sumatotal = 0;
+                                                $diferencia = 0;
+
+                                            }
                                         @endphp
                                         <tbody>
                                         <tr>
@@ -612,7 +671,7 @@
                                 <div class="col-lg-4 mt-2">
                                     <div class="row">
                                         <div class="col-lg-8"><h5 class="titulos p-2 text-center">Monedas y billetes</h5></div>
-                                        <div class="col-lg-4 text-center p-2">$ {{number_format($sumatotal,2)}}</div>
+                                        <div class="col-lg-4 text-center p-2">$ {{number_format($sumatotal_m,2)}}</div>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-8"><h5 class="titulos p-2 text-center">Depósitos parciales</h5></div>
@@ -629,28 +688,24 @@
                                     <table class="table ">
                                         <tbody>
                                         <tr>
-                                            <td style="text-align: center">Arqueo Físico</td>
-                                            <td style="text-align: center">{{$sumacant}}</td>
+                                            <td style="text-align: center" colspan="2">Arqueo Físico</td>
                                             <td style="text-align: center">$ {{number_format($sumatotal,2)}}</td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align: center">Arqueo de POS</td>
-                                            <td style="text-align: center">-</td>
+                                            <td style="text-align: center" colspan="2">Arqueo de POS</td>
                                             <td style="text-align: center">$ {{number_format(($arqueos->sumapos),2)}}</td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align: center">Diferencia</td>
-                                            <td style="text-align: center">-</td>
+                                            <td style="text-align: center" colspan="2">Diferencia</td>
                                             <td style="text-align: center">$ {{number_format(($diferencia),2)}}</td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align: center"></td>
-                                            <td style="text-align: center"></td>
+                                            <td style="text-align: center" colspan="2"></td>
                                             <td style="text-align: center"></td>
                                         </tr>
                                         <tr>
                                             <td style="text-align: center">Observación</td>
-                                            <td style="text-align: center" colspan="2">{{$arqueos->observacion}}</td>
+                                            <td style="text-align: center" colspan="2">{{$arqueos_c == 0 ? "" : $arqueos->observacion}}</td>
                                         </tr>
                                         </tbody>
                                     </table>

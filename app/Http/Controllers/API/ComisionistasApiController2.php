@@ -57,8 +57,11 @@ class ComisionistasApiController2 extends Controller
                 $hfds_salida = $request->post('hfds_salida');
                 $rs_ventas = $request->post('rs_ventas');
                 $rs_cartera = $request->post('rs_cartera');
+                $email = $request->post('email');
                 $estudios = $request->post('estudios');
                 $fecha_apertura = $request->post('fecha_apertura');
+                $cedula = $request->post('cedula');
+                $edad = $request->post('edad');
                 $tipo_comisionista = $request->post('tipo_comisionista');
                 $comisionista = new Comisionista();
                 $comisionista->exists = true;
@@ -74,6 +77,9 @@ class ComisionistasApiController2 extends Controller
                 $comisionista->hfds_salida = $hfds_salida;
                 $comisionista->rs_ventas = $rs_ventas;
                 $comisionista->rs_cartera = $rs_cartera;
+                $comisionista->cedula = $cedula;
+                $comisionista->email = $email;
+                $comisionista->edad = $edad;
                 $comisionista->estudios = $estudios;
                 $comisionista->fecha_apertura = $fecha_apertura;
                 $comisionista->tipo_comisionista = $tipo_comisionista;

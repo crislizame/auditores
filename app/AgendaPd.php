@@ -13,16 +13,22 @@ class AgendaPd extends Model
 //            //copmpletar dspuwes
 //        }
     }
-    public function save_pds_agend($agenda_id,$seleccs){
+    public function save_pds_agend($agenda_id,$seleccs,$audit_list){
 
         foreach ($seleccs as $selecc => $val) {
-            $countpds = (new AgendaPd())->where(['pds_id'=>$val,'agenda_id'=>$agenda_id])->count();
-            if ($countpds == 0){
-                $ag_pds = new AgendaPd();
-                $ag_pds->agenda_id = $agenda_id;
-                $ag_pds->pds_id=$val;
-                $ag_pds->save();
+
+
+            foreach ($audit_list as $seleccx => $valx) {
+                $countaudit = (new PdsAuditore())->where(['auditor_id'=>$valx,'agenda_id'=>$agenda_id,'pds_id'=>$val])->count();
+                if ($countaudit == 0) {
+                    $ag_audit = new PdsAuditore();
+                    $ag_audit->agenda_id = $agenda_id;
+                    $ag_audit->pds_id = $val;
+                    $ag_audit->auditor_id = $valx;
+                    $ag_audit->save();
+                }
             }
+            //return $id_res;
 
 
         }

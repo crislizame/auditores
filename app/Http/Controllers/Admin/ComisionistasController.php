@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Comisionista;
+use App\Comisionistas_attachment;
 use App\Pdsperfile;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -51,7 +52,7 @@ class ComisionistasController extends Controller
                         <th scope=\"row\">".$comisionista->id."</th>
                         <td>".mb_strimwidth(strtoupper($comisionista->nombres),'0','15','...')."</td>
                         <td>".mb_strimwidth(strtoupper($comisionista->apellidos),'0','15','...')."</td>
-                        <td data-toggle='tooltip' title='$pdsname' data-placement='top'>".mb_strimwidth(strtoupper($pdsname),'0','20','...')."</td>
+                        <td data-toggle='tooltip' title='$pdsname' data-placement='top'>".strtoupper($pdsname)."</td>
                         <td>".strtoupper($ciudad)."</td>                       
                         <td>$comisionista->calificacion</td>
                         <td><button class=\"btn btn-sm btn-warning btnEditarComisionista\" data-id=\"$comisionista->id\"><i class=\"fa fa-lg fa-edit\"></i></button> | <button class=\"btn btn-sm btn-danger btnEliminarComisionista\" data-id=\"$comisionista->id\"><i class=\"fa fa-lg fa-trash\"></i></button></td>
@@ -64,6 +65,8 @@ class ComisionistasController extends Controller
 
 
     $comisionista = (new Comisionista())->where('id',$comi_id)->first();
+    $attach = (new Comisionistas_attachment())->where('comisionista_id',$comi_id)->value("attachments_id");
+        $comisionista->attach = $attach;
 
     $result = $comisionista;
 

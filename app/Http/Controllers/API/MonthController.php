@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Agenda;
 use App\AgendaAuditore;
 use App\AgendaPd;
+use App\PdsAuditore;
 use App\Pdsperfile;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -47,33 +48,44 @@ class MonthController extends Controller
             case 'getAgendas':
                 $idauditor = $request->post('idauditor');
                 $dateult = Carbon::parse($date)->format("Y-m");
-                $agendasAll = (new Agenda())->where('agenda_date','LIKE',$dateult.'%')->join('agenda_auditores','agenda_auditores.agenda_id','=','agendas.id')
-                    ->where('agenda_auditores.auditor_id',$idauditor)
-                    ->get();
+
+                $agendasAll = (new PdsAuditore())->where(['auditor_id'=>$idauditor])->get();
+
                 foreach ($agendasAll as $item) {
                     unset($item->updated_at);
                     unset($item->created_at);
                     unset($item->deleted_at);
-                    $fecha = Carbon::parse($item->agenda_date)->day;
-                    $item->dia = $fecha;
-                    $res[]= $item;
+                    $busquedas = (new Agenda())->where('id',$item->agenda_id)->where('agenda_date','LIKE',$dateult."%")->get();
+
+                    foreach ($busquedas as $busqueda) {
+
+                        $fecha = Carbon::parse($busqueda->agenda_date)->day;
+                        $item->dia = $fecha;
+                        $res[] = $item;
+                    }
                 }
 
                 break;
             case 'getPdsAgenda':
 
                     $idagenda = $request->post('idagenda');
-                $agendasAll = (new AgendaPd())->where('agenda_id','=',$idagenda)
-                    ->get();
-                foreach ($agendasAll as $item) {
-                    $pds  = (new Pdsperfile())->where('id',$item->pds_id)->get();
-                    foreach ($pds as $pd) {
-                        unset($item->updated_at);
-                        unset($item->created_at);
-                        unset($item->deleted_at);
+                $idauditor = $request->post('idauditor');
 
-                        $res[]= array('pds_name'=>$pd->pds_name,'id'=>$pd->id,'agenda_id'=>$idagenda);
+                $agendasAll = (new PdsAuditore())->where(['auditor_id'=>$idauditor,'agenda_id'=>$idagenda])->get();
+
+                foreach ($agendasAll as $item) {
+                    $busquedas = (new Agenda())->where('agendas.id',$item->agenda_id)->get();
+
+                    foreach ($busquedas as $busqueda) {
+                            $pds_name  = (new Pdsperfile())->where('id',$item->pds_id)->value('pds_name');
+                            $res[]= array('pds_name'=>$pds_name,'id'=>$item->pds_id,'agenda_id'=>$busqueda->id,'sql'=>$idauditor);
+
+
+
+
                     }
+
+
 
                 }
                 break;
@@ -81,19 +93,20 @@ class MonthController extends Controller
                     $idauditor = $request->post('idauditor');
 
                     $hoy = Carbon::now()->toDateString();
-                    $agendasAll = (new Agenda())->where('agenda_date','LIKE',$hoy.'%')->join('agenda_pds','agenda_pds.agenda_id','=','agendas.id')
-                        ->join('agenda_auditores','agenda_auditores.agenda_id','=','agendas.id')
-                        ->where(['agenda_auditores.auditor_id'=>$idauditor])
-                        ->get();
-                foreach ($agendasAll as $item) {
-                    $pds  = (new Pdsperfile())->where('id',$item->pds_id)->get();
-                    foreach ($pds as $pd) {
-                        unset($item->updated_at);
-                        unset($item->created_at);
-                        unset($item->deleted_at);
+                    $agendasAll = (new PdsAuditore())->where(['auditor_id'=>$idauditor])->get();
 
-                        $res[]= array('pds_name'=>$pd->pds_name,'id'=>$pd->id,'agenda_id'=>$item->agenda_id);
+                foreach ($agendasAll as $item) {
+                    $busquedas = (new Agenda())->where('agenda_date','LIKE',$hoy)->where('agendas.id',$item->agenda_id)->get();
+
+                    foreach ($busquedas as $busqueda) {
+                        $pds_id  = (new AgendaPd())->where('agenda_id',$busqueda->id)->value('pds_id');
+                        $pds  = (new AgendaPd())->where('agenda_id',$busqueda->id)->get();
+                            $pds_name  = (new Pdsperfile())->where('id',$item->pds_id)->value('pds_name');
+                            $res[]= array('pds_name'=>$pds_name,'id'=>$item->pds_id,'agenda_id'=>$busqueda->id,'sql'=>$idauditor);
+
                     }
+
+
 
                 }
                 break;

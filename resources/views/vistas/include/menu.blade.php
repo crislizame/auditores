@@ -2,8 +2,10 @@
 <div id="sidebar-wrapper" class="gradient-forest-ligth text-white" data-simplebar="" data-simplebar-auto-hide="true">
     <div class="brand-logo   text-center">
         <a href="index.html">
-            <img src="{{asset("assets/images/user_icon.png")}}" class="logo-icon m-0" alt="logo icon">
-            <h5 class="logo-text text-white">AD<span class="text-info">MIN</span></h5>
+            <img src="https://via.placeholder.com/200x100" width="90px" class="" alt="user avatar">
+
+{{--            <img src="{{asset("assets/images/user_icon.png")}}" class="logo-icon m-0" alt="logo icon">--}}
+{{--            <h5 class="logo-text text-white">AD<span class="text-info">MIN</span></h5>--}}
         </a>
     </div>
     <ul class="sidebar-menu do-nicescrol">
@@ -61,7 +63,10 @@
             <li class="nav-item">
                 <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown" href="#" aria-expanded="false">
                     {{-- <span class=""><img src="{{ asset('assets/images/a.png') }}" width="70px" class="" alt="user avatar"></span>--}}
-                    <span class=""><img src="https://via.placeholder.com/200x100" width="70px" class="" alt="user avatar"></span>
+
+                    <span class="">
+                                    <img src="{{asset("assets/images/user_icon.png")}}" class="logo-icon m-0 border-info rounded" style="border: solid 2px " alt="logo icon">
+                    </span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
                     <li class="dropdown-item user-details">

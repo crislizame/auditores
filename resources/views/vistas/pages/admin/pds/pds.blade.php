@@ -20,7 +20,7 @@
                         <thead>
                             <tr class="bg-primary text-white">
                                 <th scope="col">ID</th>
-                                <th>Punto de la Suerte</th>
+                                <th>Punto de Suerte</th>
                                 <th>Provincia</th>
                                 <th>Ciudad</th>
                                 <th>Supervisor</th>
@@ -297,15 +297,19 @@
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="pds_name">Nombre del PDS</label>
-                            <input class="form-control" id="pds_name2" name="pds_name" type="text">
+                        <div class="col-6">
+                            <img width="100%" height="200px" style="max-height: 200px" id="img_editar" class="img-fluid p-2">
                         </div>
-                        <div class="form-group col-md-6">
-                            <label for="pds_cod">Código de establecimiento ID</label>
-                            <input class="form-control" id="pds_cod2" name="pds_cod" type="text">
+                        <div class="col-6">
+                            <div class="form-group col-md-12">
+                                <label for="pds_name">Nombre del PDS</label>
+                                <input class="form-control" id="pds_name2" name="pds_name" type="text">
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="pds_cod">Código de establecimiento ID</label>
+                                <input class="form-control" id="pds_cod2" name="pds_cod" type="text">
+                            </div>
                         </div>
-
                     </div>
                     <div class="row">
                         <div class="col-12">
@@ -383,18 +387,18 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="pds_arrinicio">Inicio</label>
-                            <input class="form-control" id="pds_arrinicio2" name="pds_arrinicio" type="date">
+                            <input class="form-control" id="pds_arrinicio2" name="pds_arrinicio" type="text">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="pds_arrfin">Fin</label>
-                            <input class="form-control" id="pds_arrfin2" name="pds_arrfin" type="date">
+                            <input class="form-control" id="pds_arrfin2" name="pds_arrfin" type="text">
 
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="pds_fapertura">Fecha de apertura</label>
-                            <input class="form-control" id="pds_fapertura2" name="pds_fapertura" type="date">
+                            <input class="form-control" id="pds_fapertura2" name="pds_fapertura" type="text">
                         </div>
                         <div class="form-group col-md-3">
                             <label for="pds_telef">Teléfonos</label>
@@ -416,22 +420,22 @@
                     <div class="form-row">
                         <div class="form-group col-md-3">
                             <label for="pds_lvapertura">Hora de Entrada L-V</label>
-                            <input class="form-control" id="pds_lvapertura2" name="pds_lvapertura" type="time">
+                            <input class="form-control" id="pds_lvapertura2" name="pds_lvapertura" type="text">
 
                         </div>
                         <div class="form-group col-md-3">
                             <label for="pds_lvcierre">Hora de Salida L-V</label>
-                            <input class="form-control" id="pds_lvcierre2" name="pds_lvcierre" type="time">
+                            <input class="form-control" id="pds_lvcierre2" name="pds_lvcierre" type="text">
 
                         </div>
                         <div class="form-group col-md-3">
                             <label for="pds_sapertura">Hora de Entrada S</label>
-                            <input class="form-control" id="pds_sapertura2" name="pds_sapertura" type="time">
+                            <input class="form-control" id="pds_sapertura2" name="pds_sapertura" type="text">
 
                         </div>
                         <div class="form-group col-md-3">
                             <label for="pds_scierre">Hora de Salida S</label>
-                            <input class="form-control" id="pds_scierre2" name="pds_scierre" type="time">
+                            <input class="form-control" id="pds_scierre2" name="pds_scierre" type="text">
 
                         </div>
                     </div>
@@ -439,12 +443,12 @@
 
                         <div class="form-group col-md-6">
                             <label for="pds_dapertura">Hora de Entrada Domingos</label>
-                            <input class="form-control" id="pds_dapertura2" name="pds_dapertura" type="time">
+                            <input class="form-control" id="pds_dapertura2" name="pds_dapertura" type="text">
 
                         </div>
                         <div class="form-group col-md-6">
                             <label for="pds_dcierre">Hora de Salida Domingos</label>
-                            <input class="form-control" id="pds_dcierre2" name="pds_dcierre" type="time">
+                            <input class="form-control" id="pds_dcierre2" name="pds_dcierre" type="text">
 
                         </div>
                     </div>
@@ -620,6 +624,7 @@
                         $('#pds_logistic2').val('');
                         $('#pds_recaudo2').val('');
                         $('#pds_telef').val('');
+                        $('#img_editar').attr('src',"");
                         $('#bsenal2').removeAttr('checked');
                         $('#bextintores2').removeAttr('checked');
                         $('#msuelo2').removeAttr('checked');
@@ -656,6 +661,11 @@
                     $('#pds_cod2').val(data[0].pds_cod);
                     $('#pds_sventas2').val(data[0].pds_sventas);
                     $('#pds_fapertura2').val(data[0].pds_fapertura);
+                    if(data[0].attach == null || data[0].attach == "null" ){
+                        $('#img_editar').attr('src',"{{asset('nego.png')}}");
+                    }else{
+                        $('#img_editar').attr('src',"{{url('imagen')}}/"+data[0].attach);
+                    }
 
                     $('#pds_direccion2').val(data[0].pds_direccion);
                     $('#pds_arrinicio2').val(data[0].pds_arrinicio);
