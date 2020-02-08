@@ -26,7 +26,7 @@ Route::middleware(['auth'])->group(function () {
     //----Agenda
     Route::get('agenda/crear-agenda', 'Agenda\AgendaController@crearagenda')->name('agenda/crear-agenda');
     Route::get('agenda/ver-agenda', 'Agenda\AgendaController@veragenda')->name('agenda/ver-agenda');
-    Route::get('agenda/reportes', 'Agenda\AgendaController@reportes')-> name('agenda/reportes');
+    Route::get('agenda/reportes', 'Agenda\AgendaController@reportes')->name('agenda/reportes');
     Route::get('agenda/reportes-item', 'Agenda\AgendaController@reportesitem')->name('agenda/reportes-item');
     //----Comisionista
     Route::get('comisionista/listas', 'Admin\ComisionistasController@listas')->name('comisionista/listas');
