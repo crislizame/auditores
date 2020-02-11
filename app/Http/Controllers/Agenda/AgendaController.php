@@ -72,7 +72,7 @@ class AgendaController extends Controller
         foreach ($agendf as $item) {
             $res[] = array(
                 'title' => ' ', 'start' => $item->agenda_date, 'id' => $item->id,
-                'textfecha' => ucfirst(Carbon::parse($item->agenda_date)->isoFormat('dddd, D \d\e\ MMMM \d\e\l YYYY'))
+                'textfecha' => ucwords(Carbon::parse($item->agenda_date)->isoFormat('dddd, D \d\e\ MMMM \d\e\l YYYY'))
             );
         }
         return $res;
@@ -93,7 +93,7 @@ class AgendaController extends Controller
             $res .= "
             <tr>
                 <td>".(new Pdsperfile())->where('id',$pds_agenda->pds_id)->value("pds_name")."</td>
-                <td>".ucfirst(strtolower((new Auditore())->where('id',$pds_agenda->auditor_id)->value("aud_nombre")." ".(new Auditore())->where('id',$pds_agenda->auditor_id)->value("aud_apellidos")))."</td>
+                <td>".ucwords(strtolower((new Auditore())->where('id',$pds_agenda->auditor_id)->value("aud_nombre")." ".(new Auditore())->where('id',$pds_agenda->auditor_id)->value("aud_apellidos")))."</td>
                 <td><button class=\"btn btn-sm btn-danger btn-eliminarall\" data-id='".$pds_agenda->id."'><i class=\"fa fa-trash\"></i></button></td>
             </tr>
             ";
@@ -114,7 +114,7 @@ class AgendaController extends Controller
             $pds = new Pdsperfile();
             $pd = $pds->where('id', $pds_agenda->pds_id)->first();
             $res .= "<li class=\"nav-item\">
-                                            <div class=\"nav-link pds-lista-item text-left \">" . mb_strimwidth(ucfirst(strtolower($pd->pds_name)), 0, 80, '...') . " <i class=\"fa fa-trash float-right mini-btn btn-delpds text-info fa-lg\" data-id='$pd->id' data-agenda='$agendaid'></i><i class=\"fa fa-edit text-info float-right btn-editarpds mini-btn fa-lg\" data-agenda='$agendaid' data-id='$pd->id' data-nombre='$pd->pds_name'></i></div>
+                                            <div class=\"nav-link pds-lista-item text-left \">" . mb_strimwidth(ucwords(strtolower($pd->pds_name)), 0, 80, '...') . " <i class=\"fa fa-trash float-right mini-btn btn-delpds text-info fa-lg\" data-id='$pd->id' data-agenda='$agendaid'></i><i class=\"fa fa-edit text-info float-right btn-editarpds mini-btn fa-lg\" data-agenda='$agendaid' data-id='$pd->id' data-nombre='$pd->pds_name'></i></div>
                                         </li>";
         }
         return $res;
@@ -167,7 +167,7 @@ class AgendaController extends Controller
         foreach ($pds as $pd) {
             if (array_search($pd->id, $selects) !== false) {
                 $res .= "<li class=\"nav-item\" >
-                                            <span style='font-size: 0.8em;' class=\"nav-link titulos \" > " . mb_strimwidth(ucfirst(strtolower($pd->pds_name)), 0, 25, '...') . "</span>
+                                            <span style='font-size: 0.8em;' class=\"nav-link titulos \" > " . mb_strimwidth(ucwords(strtolower($pd->pds_name)), 0, 25, '...') . "</span>
                                             <hr class=\"p-0 m-0\">
                                         </li>";
             }
@@ -186,7 +186,7 @@ class AgendaController extends Controller
         foreach ($auditores as $auditore) {
             if (array_search($auditore->id, $selects) !== false) {
                 $res .= "<li class=\"nav-item\" >
-                                            <span style='font-size: 0.8em;' class=\"nav-link titulos \" > " . mb_strimwidth(ucfirst(strtolower($auditore->aud_nombre . ' ' . $auditore->aud_apellidos)), 0, 15, "...") . "</span>
+                                            <span style='font-size: 0.8em;' class=\"nav-link titulos \" > " . mb_strimwidth(ucwords(strtolower($auditore->aud_nombre . ' ' . $auditore->aud_apellidos)), 0, 15, "...") . "</span>
                                             <hr class=\"p-0 m-0\">
                                         </li>";
             }
@@ -304,11 +304,11 @@ class AgendaController extends Controller
 
             if ($i % 2) {
                 $res .= "<li class=\"nav-item audititem\" data-id='$auditore->id'>
-                                        <span  class=\"nav-link\" href=\"#\">" . mb_strimwidth(ucfirst(strtolower($auditore->aud_nombre . ' ' . $auditore->aud_apellidos)), 0, 15, "...") . " <span class=\"check-or-not\"><i class=\"fa float-right p-1 \"></i></span></span>
+                                        <span  class=\"nav-link\" href=\"#\">" . mb_strimwidth(ucwords(strtolower($auditore->aud_nombre . ' ' . $auditore->aud_apellidos)), 0, 15, "...") . " <span class=\"check-or-not\"><i class=\"fa float-right p-1 \"></i></span></span>
                                     </li>";
             } else {
                 $res .= "<li class=\"nav-item audititem bg-gray\" data-id='$auditore->id'>
-                                        <span class=\"nav-link\" href=\"#\">" . mb_strimwidth(ucfirst(strtolower($auditore->aud_nombre . ' ' . $auditore->aud_apellidos)), 0, 15, "...") . " <span class=\"check-or-not\"><i class=\"fa float-right p-1 \"></i></span></span>
+                                        <span class=\"nav-link\" href=\"#\">" . mb_strimwidth(ucwords(strtolower($auditore->aud_nombre . ' ' . $auditore->aud_apellidos)), 0, 15, "...") . " <span class=\"check-or-not\"><i class=\"fa float-right p-1 \"></i></span></span>
                                     </li>";
             }
             $i = $i + 1;
