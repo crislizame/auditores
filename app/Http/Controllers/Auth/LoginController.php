@@ -27,9 +27,9 @@ class LoginController extends Controller
      * @var string
      */
     protected $redirectTo = 'agenda/crear-agenda';
-//    public function username(){
-//        return 'username';
-//    }
+    //    public function username(){
+    //        return 'username';
+    //    }
     /**
      * Create a new controller instance.
      *
@@ -38,15 +38,16 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
-            $user_type = Auth::user()->user_type;
-            if($user_type == 'M'){
-                return redirect('problemas')->with('cat','loteria');
-            }else{
-                return redirect('agenda/crear-agenda');
-            }        
+        $user_type = Auth::user()->user_type;
+        if ($user_type == 'M') {
+            $redirectTo = 'problemas';
+        } else {
+            $redirectTo = 'agenda/crear-agenda';
+        }
     }
 
-    public function home(){
+    public function home()
+    {
         return redirect()->route('login');
     }
 }
