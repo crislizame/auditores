@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -38,12 +37,6 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
-            $user_type = Auth::user()->user_type;
-            if($user_type == 'M'){
-                return redirect('problemas')->with('cat','loteria');
-            }else{
-                return redirect('agenda/crear-agenda');
-            }        
     }
 
     public function home(){

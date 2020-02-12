@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
+use Illuminate\Support\Facades\Auth;
 
 class Authenticate extends Middleware
 {
@@ -16,6 +17,15 @@ class Authenticate extends Middleware
     {
         if (! $request->expectsJson()) {
             return route('login');
+        }else{
+            if (Auth::guard($guard)->check()) {
+                $user_type = Auth::user()->user_type;
+                if($user_type == 'M'){
+                    return redirect('problemas')->with('cat','loteria');
+                }else{
+                    return redirect('agenda/crear-agenda');
+                }
+            }
         }
     }
 }
