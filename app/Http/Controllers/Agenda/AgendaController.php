@@ -14,6 +14,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class AgendaController extends Controller
 {
@@ -21,6 +22,10 @@ class AgendaController extends Controller
     //Carga vista Ver Agenda
     public function veragenda()
     {
+        $user_type = Auth::user()->user_type;
+        if ($user_type == 'M') {
+            return redirect('problemas')->with('cat','loteria');
+        }
         return view('vistas.pages.admin.agenda.ver-agenda');
     }
     public function eliminarpdsdeagenda()

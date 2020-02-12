@@ -38,12 +38,6 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
-        $user_type = Auth::user()->user_type;
-        if ($user_type == 'M') {
-            $this->redirectTo = 'problemas';
-        } else {
-            $this->redirectTo = 'agenda/crear-agenda';
-        }
     }
 
     public function home()
