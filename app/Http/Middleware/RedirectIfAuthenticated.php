@@ -18,12 +18,7 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-            $user_type = Auth::user()->user_type;
-            if($user_type == 'M'){
-                return redirect('problemas')->with('cat','loteria');
-            }else{
-                return redirect('agenda/crear-agenda');
-            }
+            return redirect('agenda/crear-agenda');
         }
 
         return $next($request);
