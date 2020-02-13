@@ -119,11 +119,7 @@ class AgendaController extends Controller
     //Carga vista Crear Agenda
     public function crearagenda()
     {
-        $user_type = Auth::user()->user_type;
-        dd($user_type);
-        if($user_type=='M'){
-            return redirect('problemas')->with('cat','loteria');
-        }
+
         return view('vistas.pages.admin.agenda.crear-agenda');
     }
     //Save Data Ajax POST
