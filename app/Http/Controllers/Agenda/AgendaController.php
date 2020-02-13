@@ -24,7 +24,7 @@ class AgendaController extends Controller
     {
         $user_type = Auth::user()->user_type;
         if($user_type=='M'){
-            return redirect('problemas');
+            return redirect('problemas')->with('cat','loteria');
         }
         return view('vistas.pages.admin.agenda.ver-agenda');
     }

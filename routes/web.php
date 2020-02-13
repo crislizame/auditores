@@ -52,7 +52,7 @@ Route::middleware(['auth'])->group(function () {
     //editcrisfin
 
     // Mantenimiento
-    Route::get('problemas', 'Mantenimiento\MantenimientoController@problemas');
+    Route::get('problemas', 'Mantenimiento\MantenimientoController@problemas')->name('problemas');
     Route::post('problemas/cargar', 'Mantenimiento\MantenimientoController@cargar');
 
     Route::get('ordenes', 'Mantenimiento\MantenimientoController@ordenes');
