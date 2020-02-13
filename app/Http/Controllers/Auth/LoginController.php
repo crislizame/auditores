@@ -68,6 +68,7 @@ class LoginController extends Controller
 
         if (!empty($du)) {
             if (Hash::check($credentials['password'], $du[0]->password)) {
+                if (Auth::attempt($credentials)) {
                 $user_type = Auth::user()->user_type;
                 //dd($user_type);
                 if($user_type=='M'){
@@ -76,6 +77,7 @@ class LoginController extends Controller
                     return redirect('crear-agenda');
                 }
             }
+        }
         }
     }
 }
