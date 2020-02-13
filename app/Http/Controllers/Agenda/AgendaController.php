@@ -119,7 +119,6 @@ class AgendaController extends Controller
     //Carga vista Crear Agenda
     public function crearagenda()
     {
-
         return view('vistas.pages.admin.agenda.crear-agenda');
     }
     //Save Data Ajax POST
