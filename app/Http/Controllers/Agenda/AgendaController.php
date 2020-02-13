@@ -120,6 +120,7 @@ class AgendaController extends Controller
     public function crearagenda()
     {
         $user_type = Auth::user()->user_type;
+        dd($user_type);
         if($user_type=='M'){
             return redirect('problemas')->with('cat','loteria');
         }
