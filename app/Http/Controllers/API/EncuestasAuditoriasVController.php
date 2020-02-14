@@ -81,7 +81,7 @@ class EncuestasAuditoriasVController extends Controller
                         $idencauditdatas = (new Encauditdata())->where(['agenda_id'=>$agenda_id,'encauditvalues_id'=>$th->idencauditvalues,'pds_id'=>$idpds,'auditor_id'=>$auditor_id])->value('idencauditdatas');
                         $res[] = array('nombre' => $th->nombre_val,
                             'id' => $th->idencauditvalues,
-                            'categoria'=>'0s','carita'=>$carita==null?0:$carita,'observa'=>$observa==null?"":$observa,'idencauditdata'=>$idencauditdatas);
+                            'categoria'=>'0s','carita'=>$carita==null?0:(int)$carita,'observa'=>$observa==null?"":$observa,'idencauditdata'=>$idencauditdatas);
                     }
 
                 }
