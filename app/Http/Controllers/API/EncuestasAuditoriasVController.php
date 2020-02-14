@@ -81,7 +81,7 @@ class EncuestasAuditoriasVController extends Controller
                         $idencauditdatas = (new Encauditdata())->where(['agenda_id'=>$agenda_id,'encauditvalues_id'=>$th->idencauditvalues,'pds_id'=>$idpds,'auditor_id'=>$auditor_id])->value('idencauditdatas');
                         $res[] = array('nombre' => $th->nombre_val,
                             'id' => $th->idencauditvalues,
-                            'categoria'=>'0s','carita'=>$carita==null?0:$carita,'observa'=>$observa==null?"":$observa,'idencauditdata'=>$idencauditdatas);
+                            'categoria'=>'0s','carita'=>$carita==null?0:(int)$carita,'observa'=>$observa==null?"":$observa,'idencauditdata'=>$idencauditdatas);
                     }
 
                 }
@@ -133,7 +133,7 @@ class EncuestasAuditoriasVController extends Controller
                     $saveForm = (new Encauditdata());
                     $saveForm->exists = true;
                     $saveForm->idencauditdatas =$idform;
-                    $saveForm->carita = (int) $request->post('carita');
+                    $saveForm->carita = $request->post('carita');
                     //$saveForm->image = base64_decode($request->post('imagen'));
                     $saveForm->observa = $request->post('observa');
                     $saveForm->auditor_id =$auditor_id;
@@ -144,7 +144,7 @@ class EncuestasAuditoriasVController extends Controller
                     $saveForm->encauditvalues_id = $request->post('id');
                     $saveForm->agenda_id = $request->post('agenda_id');
                     $saveForm->pds_id = $request->post('idpds');
-                    $saveForm->carita = (int) $request->post('carita');
+                    $saveForm->carita = $request->post('carita');
                     //  $saveForm->image = base64_decode($request->post('imagen'));
                     $saveForm->observa = $request->post('observa');
                     $saveForm->auditor_id =$auditor_id;
