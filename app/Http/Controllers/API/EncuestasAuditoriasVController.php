@@ -133,7 +133,7 @@ class EncuestasAuditoriasVController extends Controller
                     $saveForm = (new Encauditdata());
                     $saveForm->exists = true;
                     $saveForm->idencauditdatas =$idform;
-                    $saveForm->carita = $request->post('carita');
+                    $saveForm->carita = (int) $request->post('carita');
                     //$saveForm->image = base64_decode($request->post('imagen'));
                     $saveForm->observa = $request->post('observa');
                     $saveForm->auditor_id =$auditor_id;
@@ -144,7 +144,7 @@ class EncuestasAuditoriasVController extends Controller
                     $saveForm->encauditvalues_id = $request->post('id');
                     $saveForm->agenda_id = $request->post('agenda_id');
                     $saveForm->pds_id = $request->post('idpds');
-                    $saveForm->carita = $request->post('carita');
+                    $saveForm->carita = (int) $request->post('carita');
                     //  $saveForm->image = base64_decode($request->post('imagen'));
                     $saveForm->observa = $request->post('observa');
                     $saveForm->auditor_id =$auditor_id;
