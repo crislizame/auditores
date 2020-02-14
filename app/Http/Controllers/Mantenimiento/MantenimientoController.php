@@ -15,15 +15,15 @@ class MantenimientoController extends Controller
     public function cargar(){
         $ordenes = DB::table('orden_requermientos')
         ->select(
-            'orden_requermientos.idorden_requermientos',
-            'areas.name',
-            'subareas.name',
+            DB::raw('orden_requermientos.idorden_requermientos',
+            'areas.name as area',
+            'subareas.name as subarea',
             'orden_requermientos.problema',
-            'pdsperfiles.pds_name',
-            'orden_requermientos.finicio',
+            'pdsperfiles.pds_name as cliente',
+            'orden_requermientos.finicio as rfinicio',
             'orden_trabajos.finicio',
             'orden_trabajos.ffin',
-            'orden_trabajos.estado_orden'
+            'orden_trabajos.estado_orden')
             )
         ->join('areas','orden_requermientos.area_id','areas.idareas')
         ->join('subareas','orden_requermientos.subarea_id','subareas.idsubareas')
@@ -31,7 +31,21 @@ class MantenimientoController extends Controller
         ->leftJoin('orden_trabajos','orden_requermientos.idorden_requermientos', 'orden_trabajos.orden_requermiento_id')
         ->get();
 
-        return $ordenes;
+        $tbody = "";
+        foreach ($ordenes as $orden) {
+            $tbody .= "<tr>
+                        <th scope=\"row\">" . $orden->idorden_requermientos . "</th>
+                        <td>" . mb_strimwidth(strtoupper($orden->area), '0', '15', '...') . "</td>
+                        <td>" . mb_strimwidth(strtoupper($orden->subarea), '0', '15', '...') . "</td>
+                        <td>" . mb_strimwidth(strtoupper($orden->problema), '0', '15', '...') . "</td>
+                        <td>" . mb_strimwidth(strtoupper($orden->cliente), '0', '15', '...') . "</td>
+                        <td>" . mb_strimwidth(strtoupper($orden->rfinicio), '0', '15', '...') . "</td>
+                        <td>" . mb_strimwidth(strtoupper($orden->finicio), '0', '15', '...') . "</td>
+                        <td>" . mb_strimwidth(strtoupper($orden->ffin), '0', '15', '...') . "</td>
+                        <td>" . mb_strimwidth(strtoupper($orden->estado_orden), '0', '15', '...') . "</td>
+                    </tr>";
+        }
+        return $tbody;
     }
 
     public function ordenes(){
