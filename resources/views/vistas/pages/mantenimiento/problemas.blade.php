@@ -52,9 +52,8 @@
 @section('script')
 
 <script>
-    var tableProblemas;
     $(document).ready(function() {
-        tableProblemas = $('#list_problemas').DataTable({
+        var tableProblemas = $('#list_problemas').DataTable({
             "lengthMenu": [
                 [25, 50, 100, -1],
                 [25, 50, 100, "Todos"]
@@ -62,41 +61,41 @@
         });
 
         cargar('loteria');
-    });
 
-    function cargar(cat) {
+        function cargar(cat) {
 
-        $.ajax({
-            url: "{{url('problemas/cargar')}}",
-            method: "post",
-            dataType: 'text',
-            data: {
-                '_token': "{{csrf_token()}}",
-                'cat': cat
-            },
-            beforeSend: function() {
-                swal({
-                    title: "Cargando Problemas",
-                    icon: "info",
-                    buttons: false,
-                    timer: 2000,
-                    closeOnClickOutside: false,
-                    closeOnEsc: false
+            $.ajax({
+                url: "{{url('problemas/cargar')}}",
+                method: "post",
+                dataType: 'text',
+                data: {
+                    '_token': "{{csrf_token()}}",
+                    'cat': cat
+                },
+                beforeSend: function() {
+                    swal({
+                        title: "Cargando Problemas",
+                        icon: "info",
+                        buttons: false,
+                        timer: 2000,
+                        closeOnClickOutside: false,
+                        closeOnEsc: false
+                    });
+                }
+            }).done(function(done) {
+                tableProblemas.destroy();
+                $('.TablaProblemas').html(done);
+                tableProblemas = $('#list_problemas').DataTable({
+                    "order": [
+                        [0, 'desc']
+                    ],
+                    "lengthMenu": [
+                        [25, 50, 100, -1],
+                        [25, 50, 100, "Todos"]
+                    ]
                 });
-            }
-        }).done(function(done) {
-            tableProblemas.destroy();
-            $('.TablaProblemas').html(done);
-            tableProblemas = $('#list_problemas').DataTable({
-                "order": [
-                    [0, 'desc']
-                ],
-                "lengthMenu": [
-                    [25, 50, 100, -1],
-                    [25, 50, 100, "Todos"]
-                ]
             });
-        });
-    }
+        }
+    });
 </script>
 @endsection
