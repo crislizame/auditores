@@ -31,7 +31,7 @@ class MantenimientoController extends Controller
         ->leftJoin('orden_trabajos','orden_requermientos.idorden_requermientos', 'orden_trabajos.orden_requermiento_id')
         ->get();
 
-        dd($ordenes);
+        return $ordenes;
     }
 
     public function ordenes(){
