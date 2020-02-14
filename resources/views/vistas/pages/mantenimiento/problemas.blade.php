@@ -18,10 +18,10 @@
                         <div class="col-12">
                             <ul class="nav lmhreporte mb-4">
                                 <a href="#" onclick="cargar('loteria')">
-                                    <li class="nav-item @if(request('cat') == " todos") active @endif">Todos</li>
+                                    <li class="nav-item @if(request('cat') == "loteria") active @endif">Loteria</li>
                                 </a>
                                 <a href="#" onclick="cargar('proveedores')">
-                                    <li href="#" class="nav-item @if(request('cat') == " estados") active @endif">Estados</li>
+                                    <li href="#" class="nav-item @if(request('cat') == "proveedores") active @endif">Proveedores</li>
                                 </a>
                             </ul>
                         </div>

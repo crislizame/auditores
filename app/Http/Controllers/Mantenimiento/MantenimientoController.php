@@ -37,7 +37,7 @@ class MantenimientoController extends Controller
         foreach ($ordenes as $orden) {
             $tbody .= "<tr>
                         <th scope=\"row\"><a href=\"#\">" . 'C-' . str_pad($orden->idorden_requermientos, 7, "0", STR_PAD_LEFT) . "</a></th>
-                        <td>" . $orden->area . "</td>
+                        <td>" . mb_strimwidth(strtoupper($orden->area), '0', '15', '...') . "</td>
                         <td>" . mb_strimwidth(strtoupper($orden->subarea), '0', '15', '...') . "</td>
                         <td>" . mb_strimwidth(strtoupper($orden->problema), '0', '15', '...') . "</td>
                         <td>" . mb_strimwidth(strtoupper($orden->cliente), '0', '15', '...') . "</td>
