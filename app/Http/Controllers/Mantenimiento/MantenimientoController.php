@@ -15,12 +15,12 @@ class MantenimientoController extends Controller
     public function cargar(){
         $ordenes = DB::table('orden_requermientos')
         ->select(
-            DB::raw('orden_requermientos.idorden_requermientos',
-            'areas.name as area',
-            'subareas.name as subarea',
+            'orden_requermientos.idorden_requermientos',
+            DB::raw('areas.name as area'),
+            DB::raw('subareas.name as subarea'),
             'orden_requermientos.problema',
-            'pdsperfiles.pds_name as cliente',
-            'orden_requermientos.finicio as rfinicio',
+            DB::raw('pdsperfiles.pds_name as cliente'),
+            DB::raw('orden_requermientos.finicio as rfinicio'),
             'orden_trabajos.finicio',
             'orden_trabajos.ffin',
             'orden_trabajos.estado_orden')
