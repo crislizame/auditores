@@ -31,9 +31,7 @@ class LoginController extends Controller
      * @var string
      */
     protected $redirectTo = 'agenda/crear-agenda';
-//    public function username(){
-//        return 'username';
-//    }
+
     /**
      * Create a new controller instance.
      *
@@ -44,17 +42,16 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function home(){
+    public function home()
+    {
         return redirect()->route('login');
     }
     public function login(Request $request)
     {
-
         $credentials = $this->validate(request(), [
             'email' => 'required|email',
             'password' => 'required|string'
         ]);
-
 
         $user = new User();
 
@@ -69,15 +66,14 @@ class LoginController extends Controller
         if (!empty($du)) {
             if (Hash::check($credentials['password'], $du[0]->password)) {
                 if (Auth::attempt($credentials)) {
-                $user_type = Auth::user()->user_type;
-                //dd($user_type);
-                if($user_type=='M'){
-                    return redirect('problemas')->with('cat','loteria');
-                }else if($user_type == "A"){
-                    return redirect('crear-agenda');
+                    $user_type = Auth::user()->user_type;
+                    if ($user_type == 'M') {
+                        return redirect('problemas')->with('cat', 'loteria');
+                    } else if ($user_type == "A") {
+                        return redirect('crear-agenda');
+                    }
                 }
             }
-        }
         }
     }
 }

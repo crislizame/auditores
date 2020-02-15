@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\DB;
 
 class MantenimientoController extends Controller
 {
-    public function problemas()
+    public function problemas(Request $request)
     {
-        return view('vistas.pages.mantenimiento.problemas');
+        return view('vistas.pages.mantenimiento.problemas')->with('cat', $request->input('cat'));
     }
 
     public function cargar()
@@ -53,7 +53,6 @@ class MantenimientoController extends Controller
             } else {
                 $estado = 'Sin orden de trabajo';
                 $estado .= ' <span style="background-color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
-
             }
 
             $rfinicio = ($orden->rfinicio != null ? mb_strimwidth(strtoupper($orden->rfinicio), '0', '15', '...') : '------');
