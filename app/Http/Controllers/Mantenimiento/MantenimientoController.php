@@ -37,6 +37,8 @@ class MantenimientoController extends Controller
         $tbody = "";
         foreach ($ordenes as $orden) {
             $estado = ($orden->estado_orden != null ? mb_strimwidth(strtoupper($orden->estado_orden), '0', '15', '...') : 'Sin orden de trabajo');
+            $estado .= '<span style="width: 20px;background-color: red;height: 20px;"></span>';
+
             $rfinicio = ($orden->rfinicio != null ? mb_strimwidth(strtoupper($orden->rfinicio), '0', '15', '...') : '------');
 
             $tiempo_estimado = '------';
