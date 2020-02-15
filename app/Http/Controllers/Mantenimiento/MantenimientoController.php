@@ -36,8 +36,25 @@ class MantenimientoController extends Controller
 
         $tbody = "";
         foreach ($ordenes as $orden) {
-            $estado = ($orden->estado_orden != null ? mb_strimwidth(strtoupper($orden->estado_orden), '0', '15', '...') : 'Sin orden de trabajo');
-            $estado .= '<span style="width: 20px;background-color: red;height: 20px;"></span>';
+            $estado = null;
+            if ($orden->estado_orden != null) {
+                $estado = mb_strimwidth(strtoupper($orden->estado_orden), '0', '15', '...');
+                switch ($estado) {
+                    case 'S':
+                        $estado .= ' <span style="background-color: red;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+                        break;
+                    case 'E':
+                        $estado .= ' <span style="background-color: orange;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+                        break;
+                    case 'F':
+                        $estado .= ' <span style="background-color: green;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+                        break;
+                }
+            } else {
+                $estado = 'Sin orden de trabajo';
+                $estado .= ' <span style="background-color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+
+            }
 
             $rfinicio = ($orden->rfinicio != null ? mb_strimwidth(strtoupper($orden->rfinicio), '0', '15', '...') : '------');
 
