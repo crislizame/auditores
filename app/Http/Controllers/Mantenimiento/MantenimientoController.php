@@ -35,6 +35,10 @@ class MantenimientoController extends Controller
 
         $tbody = "";
         foreach ($ordenes as $orden) {
+            $estado = ($orden->estado_orden != null ? mb_strimwidth(strtoupper($orden->estado_orden), '0', '15', '...') : 'Sin orden de trabajo');
+            $inicio = ($orden->finicio != null ? mb_strimwidth(strtoupper($orden->finicio), '0', '15', '...') : '------');
+            $fin = ($orden->ffin != null ? mb_strimwidth(strtoupper($orden->ffin), '0', '15', '...') : '------');
+
             $tbody .= "<tr>
                         <th scope=\"row\"><a href=\"#\">" . 'C-' . str_pad($orden->idorden_requermientos, 7, "0", STR_PAD_LEFT) . "</a></th>
                         <td>" . mb_strimwidth(strtoupper($orden->area), '0', '15', '...') . "</td>
@@ -42,9 +46,9 @@ class MantenimientoController extends Controller
                         <td>" . mb_strimwidth(strtoupper($orden->problema), '0', '15', '...') . "</td>
                         <td>" . mb_strimwidth(strtoupper($orden->cliente), '0', '15', '...') . "</td>
                         <td>" . mb_strimwidth(strtoupper($orden->rfinicio), '0', '15', '...') . "</td>
-                        <td>" . mb_strimwidth(strtoupper($orden->finicio), '0', '15', '...') . "</td>
-                        <td>" . mb_strimwidth(strtoupper($orden->ffin), '0', '15', '...') . "</td>
-                        <td>" . mb_strimwidth(strtoupper($orden->estado_orden), '0', '15', '...') . "</td>
+                        <td>" . $inicio . "</td>
+                        <td>" . $fin . "</td>
+                        <td>" . $estado . "</td>
                     </tr>";
         }
         return $tbody;
