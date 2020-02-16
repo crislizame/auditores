@@ -102,7 +102,6 @@
                                 </div>
                             </div>
 
-                            
                             <div class="row">
                                 <div class="col-12">
                                     <label>Problema</label>
@@ -130,6 +129,18 @@
                                 </div>
                                 <div class="col-4">
                                     <h5 id="req_rffin"></h5>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <label>Comentario</label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <h5 id="req_comentario"></h5>
                                 </div>
                             </div>
 
@@ -290,6 +301,8 @@
             $('#req_rfinicio').html(done.rfinicio);
             $('#req_rffin').html(done.rffin);
             
+            $('#req_comentario').html(done.rcomentario);
+
         });
 
     }
