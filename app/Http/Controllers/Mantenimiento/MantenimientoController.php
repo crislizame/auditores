@@ -93,6 +93,7 @@ class MantenimientoController extends Controller
                 DB::raw('orden_requermientos.finicio as rfinicio'),
                 DB::raw('orden_requermientos.ffin as rffin'),
                 DB::raw('orden_requermientos.comentario as rcomentario'),
+                DB::raw('orden_requermientos.observa as robservacion'),
                 'orden_trabajos.finicio',
                 'orden_trabajos.ffin',
                 'orden_trabajos.estado_orden'

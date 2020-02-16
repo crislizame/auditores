@@ -144,6 +144,30 @@
                                 </div>
                             </div>
 
+                            <div class="row">
+                                <div class="col-12">
+                                    <label>Imágenes</label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <!--IMAGENES-->
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <label>Observación de encargado de mantenimiento</label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <h5 id="req_observacion"></h5>
+                                </div>
+                            </div>
+
                         </div>
                         <div class="col-6">
 
@@ -302,6 +326,10 @@
             $('#req_rffin').html(done.rffin);
             
             $('#req_comentario').html(done.rcomentario);
+
+            // IMAGENES
+
+            $('#req_observacion').html(done.robservacion);
 
         });
 
