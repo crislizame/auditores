@@ -18,7 +18,6 @@
                         <div class="col-12">
                             <ul class="nav lmhreporte mb-4">
                                 <a href="#" onclick="cargar('loteria')">
-                                    {{dd($cat)}}
                                     <li class="nav-item @if($cat == "loteria") active @endif">Loteria</li>
                                 </a>
                                 <a href="#" onclick="cargar('proveedores')">
