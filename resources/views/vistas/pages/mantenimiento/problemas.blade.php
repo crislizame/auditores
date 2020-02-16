@@ -92,7 +92,7 @@
 
                             <div class="row">
                                 <div class="col-4">
-                                    <h4 id="req_cliente"></h4>
+                                    <h5 id="req_cliente"></h5>
                                 </div>
                                 <div class="col-4">
                                     <h4 id="req_area"></h4>
