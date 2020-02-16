@@ -51,12 +51,12 @@
 <div class="modal fade modal-asignar" tabindex="-1" role="dialog" aria-labelledby="modal-asignar" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header bg-primary">
                 <div class="col-6">
-                    <h4 class="modal-title">Orden de Requerimiento</h4>
+                    <h4 class="modal-title text-white">Orden de Requerimiento</h4>
                 </div>
-                <div class="col-6">
-                    <h4 class="modal-title">Orden de Trabajo</h4>
+                <div class="col-4">
+                    <h4 class="modal-title text-white">Orden de Trabajo</h4>
                 </div>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
