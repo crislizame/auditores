@@ -102,9 +102,25 @@
                                 </div>
                             </div>
 
+                            
+                            <div class="row">
+                                <div class="col-12">
+                                    <label>Problema</label>
+                                </div>
+                            </div>
+
                             <div class="row">
                                 <div class="col-12">
                                     <h5 id="req_problema"></h5>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-4">
+                                    <label>Fecha Inicio</label>
+                                </div>
+                                <div class="col-4">
+                                    <label>Fecha Fin</label>
                                 </div>
                             </div>
 
