@@ -245,6 +245,7 @@
                 });
             }
         }).done(function(done) {
+            done = done[0];
             $('.modal-asignar').modal('show');
             $('#req_num_orden').html(visualId);
             $('[name="req_num_orden"]').val(id);
