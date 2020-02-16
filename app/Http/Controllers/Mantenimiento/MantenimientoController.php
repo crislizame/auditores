@@ -100,7 +100,7 @@ class MantenimientoController extends Controller
             ->join('subareas', 'orden_requermientos.subarea_id', 'subareas.idsubareas')
             ->join('pdsperfiles', 'orden_requermientos.pds_id', 'pdsperfiles.id')
             ->leftJoin('orden_trabajos', 'orden_requermientos.idorden_requermientos', 'orden_trabajos.orden_requermiento_id')
-            ->where('orden_requermientos.idorden_requermientos', $request->input('id'))
+            ->where('orden_requermientos.idorden_requermientos', "'" . $request->input('id') . "'")
             ->first();
         return $orden;
     }
