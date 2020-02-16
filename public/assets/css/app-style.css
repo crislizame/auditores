@@ -6349,4 +6349,8 @@ ul .datosvertical {
     .col-3 > .img-responsive{
         max-height:24vh;
     }
+
+    .modal-lg {
+        max-width: 1400px;
+    }
 }

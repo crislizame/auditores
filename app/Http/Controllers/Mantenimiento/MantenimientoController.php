@@ -91,6 +91,7 @@ class MantenimientoController extends Controller
                 'orden_requermientos.problema',
                 DB::raw('pdsperfiles.pds_name as cliente'),
                 DB::raw('orden_requermientos.finicio as rfinicio'),
+                DB::raw('orden_requermientos.ffin as rffin'),
                 'orden_trabajos.finicio',
                 'orden_trabajos.ffin',
                 'orden_trabajos.estado_orden'

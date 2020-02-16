@@ -95,10 +95,25 @@
                                     <h5 id="req_cliente"></h5>
                                 </div>
                                 <div class="col-4">
-                                    <h4 id="req_area"></h4>
+                                    <h5 id="req_area"></h5>
                                 </div>
                                 <div class="col-4">
-                                    <h4 id="req_subarea"></h4>
+                                    <h5 id="req_subarea"></h5>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <h5 id="req_problema"></h5>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-4">
+                                    <h5 id="req_rfinicio"></h5>
+                                </div>
+                                <div class="col-4">
+                                    <h5 id="req_rffin"></h5>
                                 </div>
                             </div>
 
@@ -253,6 +268,12 @@
             $('#req_cliente').html(done.cliente);
             $('#req_area').html(done.area);
             $('#req_subarea').html(done.subarea);
+
+            $('#req_problema').html(done.problema);
+
+            $('#req_rfinicio').html(done.rfinicio);
+            $('#req_rffin').html(done.rffin);
+            
         });
 
     }
