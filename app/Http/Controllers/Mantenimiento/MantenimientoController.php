@@ -42,13 +42,13 @@ class MantenimientoController extends Controller
                 $estado = mb_strimwidth(strtoupper($orden->estado_orden), '0', '15', '...');
                 switch ($estado) {
                     case 'S':
-                        $estado .= ' <span style="background-color: red;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+                        $estado = 'Solicitado <span style="background-color: red;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
                         break;
                     case 'E':
-                        $estado .= ' <span style="background-color: orange;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+                        $estado = 'En proceso <span style="background-color: orange;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
                         break;
                     case 'F':
-                        $estado .= ' <span style="background-color: green;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+                        $estado .= 'Finalizado <span style="background-color: green;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
                         break;
                 }
             } else {

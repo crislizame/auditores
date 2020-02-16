@@ -16,7 +16,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-12">
-                            <ul class="nav lmhreporte mb-4">
+                            <ul class="nav mb-4">
                                 <a href="#" onclick="cargar('loteria')">
                                     <li class="nav-item @if($cat == "loteria") active @endif">Loteria</li>
                                 </a>
@@ -36,7 +36,7 @@
                                 <th>Cliente</th>
                                 <th>Fecha reportado</th>
                                 <th>Tiempo para resolver</th>
-                                <th>Estado</th>
+                                <th style="width=150px;">Estado</th>
                             </tr>
                         </thead>
                         <tbody class="TablaProblemas">
