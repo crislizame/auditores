@@ -29,7 +29,7 @@
                     <table class="table" id="list_problemas">
                         <thead>
                             <tr class="bg-primary text-white">
-                                <th>N. de Orden</th>
+                                <th style="width:90px:">N. de Orden</th>
                                 <th>Area</th>
                                 <th>Sub Area</th>
                                 <th>Problema</th>
