@@ -81,6 +81,28 @@ class MantenimientoController extends Controller
         return $tbody;
     }
 
+    public function verOrden(Request $request)
+    {
+        return DB::table('orden_requermientos')
+            ->select(
+                'orden_requermientos.idorden_requermientos',
+                DB::raw('areas.name as area'),
+                DB::raw('subareas.name as subarea'),
+                'orden_requermientos.problema',
+                DB::raw('pdsperfiles.pds_name as cliente'),
+                DB::raw('orden_requermientos.finicio as rfinicio'),
+                'orden_trabajos.finicio',
+                'orden_trabajos.ffin',
+                'orden_trabajos.estado_orden'
+            )
+            ->join('areas', 'orden_requermientos.area_id', 'areas.idareas')
+            ->join('subareas', 'orden_requermientos.subarea_id', 'subareas.idsubareas')
+            ->join('pdsperfiles', 'orden_requermientos.pds_id', 'pdsperfiles.id')
+            ->leftJoin('orden_trabajos', 'orden_requermientos.idorden_requermientos', 'orden_trabajos.orden_requermiento_id')
+            ->where('orden_requermientos.idorden_requermientos', $request->id)
+            ->first();
+    }
+
     public function ordenes()
     {
         return view('vistas.pages.mantenimiento.ordenes');

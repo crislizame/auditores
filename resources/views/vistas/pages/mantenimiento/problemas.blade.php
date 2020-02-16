@@ -221,9 +221,32 @@
     });
 
     function modalAsignarOrdenDeTrabajo(id, visualId) {
-        $('.modal-asignar').modal('show');
-        $('#req_num_orden').html(visualId);
-        $('[name="req_num_orden"]').val(id);
+        $.ajax({
+            url: "{{url('problemas/orden')}}/" + id,
+            method: "post",
+            data: {
+                '_token': "{{csrf_token()}}"
+            },
+            beforeSend: function() {
+                swal({
+                    title: "Cargando Datos de la orden",
+                    icon: "info",
+                    buttons: false,
+                    timer: 2000,
+                    closeOnClickOutside: false,
+                    closeOnEsc: false
+                });
+            }
+        }).done(function(done) {
+            $('.modal-asignar').modal('show');
+            $('#req_num_orden').html(visualId);
+            $('[name="req_num_orden"]').val(id);
+
+            $('#req_cliente').html(done.cliente);
+            $('#req_area').html(done.area);
+            $('#req_subarea').html(done.subarea);
+        });
+
     }
 </script>
 @endsection
