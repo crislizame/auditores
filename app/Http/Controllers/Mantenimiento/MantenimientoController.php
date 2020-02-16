@@ -11,8 +11,8 @@ class MantenimientoController extends Controller
 {
     public function problemas(Request $request)
     {
-        dd($request->all());
-        return view('vistas.pages.mantenimiento.problemas')->with('cat', $request->cat);
+        $cat = (isset($request->cat)?$request->cat:'loteria');
+        return view('vistas.pages.mantenimiento.problemas')->with('cat', $cat);
     }
 
     public function cargar()
