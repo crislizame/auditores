@@ -228,10 +228,11 @@
 
     function modalAsignarOrdenDeTrabajo(id, visualId) {
         $.ajax({
-            url: "{{url('problemas/orden')}}/" + id,
+            url: "{{url('problemas/orden')}}",
             method: "post",
             data: {
-                '_token': "{{csrf_token()}}"
+                '_token': "{{csrf_token()}}",
+                'id': id
             },
             beforeSend: function() {
                 swal({
