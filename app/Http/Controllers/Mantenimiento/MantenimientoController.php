@@ -83,7 +83,7 @@ class MantenimientoController extends Controller
 
     public function verOrden(Request $request)
     {
-        return DB::table('orden_requermientos')
+        $orden = DB::table('orden_requermientos')
             ->select(
                 'orden_requermientos.idorden_requermientos',
                 DB::raw('areas.name as area'),
@@ -101,6 +101,7 @@ class MantenimientoController extends Controller
             ->leftJoin('orden_trabajos', 'orden_requermientos.idorden_requermientos', 'orden_trabajos.orden_requermiento_id')
             ->where('orden_requermientos.idorden_requermientos', $request->id)
             ->first();
+        return $orden;
     }
 
     public function ordenes()
