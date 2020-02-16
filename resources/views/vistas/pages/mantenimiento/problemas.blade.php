@@ -149,6 +149,12 @@
 @section('script')
 
 <script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': @csrf
+        }
+    });
+
     $(document).ready(function() {
         var tableProblemas = $('#list_problemas').DataTable({
             "lengthMenu": [
