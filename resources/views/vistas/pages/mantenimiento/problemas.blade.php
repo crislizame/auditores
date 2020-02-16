@@ -205,10 +205,10 @@
                 });
             });
         }
-
-        function modalAsignarOrdenDeTrabajo(id) {
-            $('.modal-asignar').modal('show');
-        }
     });
+
+    function modalAsignarOrdenDeTrabajo(id) {
+        $('.modal-asignar').modal('show');
+    }
 </script>
 @endsection
