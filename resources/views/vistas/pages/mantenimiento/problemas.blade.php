@@ -29,14 +29,14 @@
                     <table class="table" id="list_problemas">
                         <thead>
                             <tr class="bg-primary text-white">
-                                <th style="width:90px:">N. de Orden</th>
+                                <th>N. de Orden</th>
                                 <th>Area</th>
                                 <th>Sub Area</th>
                                 <th>Problema</th>
                                 <th>Cliente</th>
                                 <th>Fecha reportado</th>
                                 <th>Tiempo para resolver</th>
-                                <th style="width=150px;">Estado</th>
+                                <th>Estado</th>
                             </tr>
                         </thead>
                         <tbody class="TablaProblemas">
@@ -92,6 +92,16 @@
                     "lengthMenu": [
                         [25, 50, 100, -1],
                         [25, 50, 100, "Todos"]
+                    ],
+                    "columns": [
+                        { "width": "10%" },
+                        { "width": "10%" },
+                        { "width": "10%" },
+                        { "width": "15%" },
+                        { "width": "20%" },
+                        { "width": "10%" },
+                        { "width": "10%" },
+                        { "width": "15%" }
                     ]
                 });
             });
