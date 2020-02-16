@@ -11,7 +11,7 @@ class MantenimientoController extends Controller
 {
     public function problemas(Request $request)
     {
-        $cat = (isset($request->cat)?$request->cat:'loteria');
+        $cat = (isset($request->cat) ? $request->cat : 'loteria');
         return view('vistas.pages.mantenimiento.problemas')->with('cat', $cat);
     }
 
@@ -37,6 +37,8 @@ class MantenimientoController extends Controller
 
         $tbody = "";
         foreach ($ordenes as $orden) {
+            $id = 'C-' . str_pad($orden->idorden_requermientos, 7, "0", STR_PAD_LEFT);
+
             $estado = null;
             if ($orden->estado_orden != null) {
                 $estado = mb_strimwidth(strtoupper($orden->estado_orden), '0', '15', '...');
@@ -66,7 +68,7 @@ class MantenimientoController extends Controller
             }
 
             $tbody .= "<tr>
-                        <th scope=\"row\"><a href=\"#\" onclick=\"modalAsignarOrdenDeTrabajo($orden->idorden_requermientos)\">" . 'C-' . str_pad($orden->idorden_requermientos, 7, "0", STR_PAD_LEFT) . "</a></th>
+                        <th scope=\"row\"><a href=\"#\" onclick=\"modalAsignarOrdenDeTrabajo(" . $orden->idorden_requermientos . "," . $id . ")\">" . $id . "</a></th>
                         <td>" . mb_strimwidth(strtoupper($orden->area), '0', '15', '...') . "</td>
                         <td>" . mb_strimwidth(strtoupper($orden->subarea), '0', '15', '...') . "</td>
                         <td>" . mb_strimwidth(strtoupper($orden->problema), '0', '15', '...') . "</td>

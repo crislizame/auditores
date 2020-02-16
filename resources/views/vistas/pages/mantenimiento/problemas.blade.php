@@ -63,54 +63,60 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="row">
-                    <div class="col-6">
-                        <div class="row">
-                            <div class="col-4">
-                                <label>Orden de Requerimiento</label>
-                            </div>
-                            <div class="col-8">
-                                <h3 id="req_num_orden"></h3>
-                            </div>
-                        </div>
 
-                        <div class="row">
-                            <div class="col-4">
-                                <label>WTC</label>
+                <form id="form-asignarOrden" method="POST">
+                    @csrf
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-4">
+                                    <label>No. de Orden</label>
+                                </div>
+                                <div class="col-8">
+                                    <h3 id="req_num_orden"></h3>
+                                    <input type="hidden" name="req_num_orden">
+                                </div>
                             </div>
-                            <div class="col-4">
-                                <label>Area</label>
+    
+                            <div class="row">
+                                <div class="col-4">
+                                    <label>WTC</label>
+                                </div>
+                                <div class="col-4">
+                                    <label>Area</label>
+                                </div>
+                                <div class="col-4">
+                                    <label>Sub Area</label>
+                                </div>
                             </div>
-                            <div class="col-4">
-                                <label>Sub Area</label>
+    
+                            <div class="row">
+                                <div class="col-4">
+                                    <h3 id="req_cliente"></h3>
+                                </div>
+                                <div class="col-4">
+                                    <h3 id="req_area"></h3>
+                                </div>
+                                <div class="col-4">
+                                    <h3 id="req_subarea"></h3>
+                                </div>
                             </div>
+    
                         </div>
-
-                        <div class="row">
-                            <div class="col-4">
-                                <h3 id="req_cliente"></h3>
-                            </div>
-                            <div class="col-4">
-                                <h3 id="req_area"></h3>
-                            </div>
-                            <div class="col-4">
-                                <h3 id="req_subarea"></h3>
-                            </div>
+                        <div class="col-6">
+                            
                         </div>
-
                     </div>
-                    <div class="col-6">
-                        
+                    <div class="row">
+                        <button class="btn btn-primary btn-crearagenda w-100">Generar Agenda</button>
                     </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
-
-                    
-
-
-
-
-
-                    {{--
+{{--
                     <div class="col-lg-4">
                         <h5 class="titulos-grandes text-center">PDS</h5>
                         <div class="pdsmenuflow">
@@ -138,14 +144,6 @@
                         <h6 class="cargardate text-center">Cargando ...</h6>
                     </div>
                     --}}
-                </div>
-                <div class="row">
-                    <button class="btn btn-primary btn-crearagenda w-100">Generar Agenda</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 @endsection
 @section('script')
