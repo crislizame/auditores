@@ -48,6 +48,105 @@
     </div>
 </div>
 
+<div class="modal fade modal-asignar" tabindex="-1" role="dialog" aria-labelledby="modal-asignar" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="col-6">
+                    <h4 class="modal-title">Orden de Requerimiento</h4>
+                </div>
+                <div class="col-6">
+                    <h4 class="modal-title">Orden de Trabajo</h4>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-4">
+                                <label>Orden de Requerimiento</label>
+                            </div>
+                            <div class="col-8">
+                                <h3 id="req_num_orden"></h3>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-4">
+                                <label>WTC</label>
+                            </div>
+                            <div class="col-4">
+                                <label>Area</label>
+                            </div>
+                            <div class="col-4">
+                                <label>Sub Area</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-4">
+                                <h3 id="req_cliente"></h3>
+                            </div>
+                            <div class="col-4">
+                                <h3 id="req_area"></h3>
+                            </div>
+                            <div class="col-4">
+                                <h3 id="req_subarea"></h3>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-6">
+                        
+                    </div>
+
+
+                    
+
+
+
+
+
+                    {{--
+                    <div class="col-lg-4">
+                        <h5 class="titulos-grandes text-center">PDS</h5>
+                        <div class="pdsmenuflow">
+                            <ul class="cargarpds pdslistarajax">
+                                <li class="nav-item">
+                                    <span class="nav-link titulos "> Cargando ...</span>
+                                    <hr class="p-0 m-0">
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <h5 class="titulos-grandes text-center">Auditores</h5>
+                        <div class="pdsmenuflow">
+                            <ul class=" cargarpds auditlistarajax">
+                                <li class="nav-item">
+                                    <span class="nav-link titulos "> Cargando ...</span>
+                                    <hr class="p-0 m-0">
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <h5 class="titulos-grandes text-center">Fecha Seleccionada</h5>
+                        <h6 class="cargardate text-center">Cargando ...</h6>
+                    </div>
+                    --}}
+                </div>
+                <div class="row">
+                    <button class="btn btn-primary btn-crearagenda w-100">Generar Agenda</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 @endsection
 @section('script')
 
@@ -105,6 +204,10 @@
                     ]
                 });
             });
+        }
+
+        function modalAsignarOrdenDeTrabajo(id) {
+            $('.modal-asignar').modal('show');
         }
     });
 </script>
