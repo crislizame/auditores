@@ -92,13 +92,13 @@
 
                             <div class="row">
                                 <div class="col-4">
-                                    <h3 id="req_cliente"></h3>
+                                    <h4 id="req_cliente"></h4>
                                 </div>
                                 <div class="col-4">
-                                    <h3 id="req_area"></h3>
+                                    <h4 id="req_area"></h4>
                                 </div>
                                 <div class="col-4">
-                                    <h3 id="req_subarea"></h3>
+                                    <h4 id="req_subarea"></h4>
                                 </div>
                             </div>
 
