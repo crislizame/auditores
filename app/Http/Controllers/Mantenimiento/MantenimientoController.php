@@ -83,7 +83,6 @@ class MantenimientoController extends Controller
 
     public function verOrden(Request $request)
     {
-        return $request->all();
         return DB::table('orden_requermientos')
             ->select(
                 'orden_requermientos.idorden_requermientos',
