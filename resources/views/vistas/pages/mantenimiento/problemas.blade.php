@@ -158,20 +158,8 @@
                                             <div class="card-body">
                                                 <div id="req_imagenes" class="carousel slide" data-ride="carousel">
                                                     <ol class="carousel-indicators">
-                                                        <li data-target="#req_imagenes" data-slide-to="0" class="active"></li>
-                                                        <li data-target="#req_imagenes" data-slide-to="1" class=""></li>
-                                                        <li data-target="#req_imagenes" data-slide-to="2" class=""></li>
                                                     </ol>
                                                     <div class="carousel-inner">
-                                                        <div class="carousel-item">
-                                                            <img class="d-block w-100" src="https://images.pexels.com/photos/2773565/pexels-photo-2773565.jpeg">
-                                                        </div>
-                                                        <div class="carousel-item">
-                                                            <img class="d-block w-100" src="https://images.pexels.com/photos/6992/forest-trees-northwestisbest-exploress.jpg">
-                                                        </div>
-                                                        <div class="carousel-item">
-                                                            <img class="d-block w-100" src="https://images.pexels.com/photos/3695327/pexels-photo-3695327.jpeg">
-                                                        </div>
                                                     </div>
                                                     <a class="carousel-control-prev" href="#req_imagenes" role="button" data-slide="prev">
                                                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -372,7 +360,6 @@
                     'id': id
                 }
             }).done(function(done) {
-                /*
                 $('#req_imagenes > .carousel-indicators').empty();
                 var indicators = '';
                 for (var i = 0; i < done.count; i++) {
@@ -385,7 +372,6 @@
                 $('#req_imagenes > .carousel-indicators').html(indicators);
                 $('#req_imagenes > .carousel-inner').empty();
                 $('#req_imagenes > .carousel-inner').html(done.images);
-                */
             });
         });
 

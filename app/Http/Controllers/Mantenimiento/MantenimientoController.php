@@ -112,8 +112,12 @@ class MantenimientoController extends Controller
     {
         $res = "";
         $imgs = (new Oreque_attachment())->where('orden_requermiento_id', $request->input('id'))->get();
-        foreach ($imgs as $img) {
-            $res .= "<div class=\"carousel-item\"><img class=\"d-block w-100\" src=\"" . url('imagen/' . $img->attachment_id) . "\"></div>";
+        for ($i = 0; $i < count($imgs); $i++) {
+            $active = '';
+            if ($i == 0) {
+                $active = 'active';
+            }
+            $res .= "<div class=\"carousel-item " . $active . "\"><img class=\"d-block w-100\" src=\"" . url('imagen/' . $imgs[$i]->attachment_id) . "\"></div>";
         }
         return response()->json(['images' => $res, 'count' => count($imgs)]);
     }
