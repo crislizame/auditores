@@ -140,7 +140,7 @@
 
                             <div class="row">
                                 <div class="col-12">
-                                    <h5 id="req_comentario"></h5>
+                                    <h5 id="req_comentario" style="height: 80px;"></h5>
                                 </div>
                             </div>
 
@@ -153,7 +153,7 @@
                             <div class="row">
                                 <div class="col-12">
                                     <!--IMAGENES-->
-                                    <div class="col-lg-6">
+                                    <div class="col-8 offset-2">
                                         <div class="card">
                                             <div class="card-body">
                                                 <div id="req_imagenes" class="carousel slide" data-ride="carousel">
@@ -185,52 +185,137 @@
 
                             <div class="row">
                                 <div class="col-12">
-                                    <h5 id="req_observacion"></h5>
+                                    <textarea class="form-control" name="req_observacion" rows="4"></textarea>
                                 </div>
                             </div>
 
                         </div>
                         <div class="col-6">
 
+                            <div class="row">
+                                <div class="col-6">
+                                    <label>Proveedor</label>
+                                </div>
+                                <div class="col-6">
+                                    <label>Estado</label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <select name="ot_proveedor">
+                                        @forelse ((new \App\Pdsperfile())->get() as $pds)
+                                        <option value="{{$pds->id}}">{{$pds->pds_name}}</option>
+                                        @empty
+
+                                        @endforelse
+                                    </select>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="ot_estado" value="U" checked>
+                                        <label class="form-check-label">
+                                            Urgente
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="ot_estado" value="S">
+                                        <label class="form-check-label">
+                                            Seguimiento
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <label>Fecha Inicio</label>
+                                </div>
+                                <div class="col-6">
+                                    <label>Fecha Fin</label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <h5 id="ot_finicio"></h5>
+                                </div>
+                                <div class="col-6">
+                                    <h5 id="ot_ffin"></h5>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <label>Presupuesto</label>
+                                </div>
+                                <div class="col-6">
+                                    <label>Garantía</label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <input type="text" name="ot_presupuesto" class="form-control">
+                                </div>
+                                <div class="col-6">
+                                    <input type="text" name="ot_garantia" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <label>Encargado</label>
+                                </div>
+                                <div class="col-6">
+                                    <label>Tiempo para resolver</label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <input type="text" name="ot_encargado" class="form-control">
+                                </div>
+                                <div class="col-6">
+                                    <h3 id="ot_tiempo"></h3>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6 offset-6">
+                                    <label>Extra</label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <input type="text" name="ot_extra" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <label>Comentario</label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <textarea class="form-control" name="ot_comentario" rows="4" placeholder="Incluir # de orden de compra"></textarea>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                     <div class="row">
-                        <button class="btn btn-primary btn-crearagenda w-100">Generar Agenda</button>
+                        <button class="btn btn-primary">Enviar</button>
+                        <button class="btn btn-primary">Completado</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
-
-{{--
-                    <div class="col-lg-4">
-                        <h5 class="titulos-grandes text-center">PDS</h5>
-                        <div class="pdsmenuflow">
-                            <ul class="cargarpds pdslistarajax">
-                                <li class="nav-item">
-                                    <span class="nav-link titulos "> Cargando ...</span>
-                                    <hr class="p-0 m-0">
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <h5 class="titulos-grandes text-center">Auditores</h5>
-                        <div class="pdsmenuflow">
-                            <ul class=" cargarpds auditlistarajax">
-                                <li class="nav-item">
-                                    <span class="nav-link titulos "> Cargando ...</span>
-                                    <hr class="p-0 m-0">
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <h5 class="titulos-grandes text-center">Fecha Seleccionada</h5>
-                        <h6 class="cargardate text-center">Cargando ...</h6>
-                    </div>
-                    --}}
 
 @endsection
 @section('script')
