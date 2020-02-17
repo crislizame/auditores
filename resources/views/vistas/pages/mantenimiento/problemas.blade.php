@@ -372,6 +372,7 @@
                     'id': id
                 }
             }).done(function(done) {
+                /*
                 $('#req_imagenes > .carousel-indicators').empty();
                 var indicators = '';
                 for (var i = 0; i < done.count; i++) {
@@ -384,6 +385,7 @@
                 $('#req_imagenes > .carousel-indicators').html(indicators);
                 $('#req_imagenes > .carousel-inner').empty();
                 $('#req_imagenes > .carousel-inner').html(done.images);
+                */
             });
         });
 
