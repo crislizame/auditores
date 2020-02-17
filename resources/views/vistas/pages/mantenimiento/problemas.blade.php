@@ -374,7 +374,7 @@
             }).done(function(done) {
                 $('#req_imagenes > .carousel-indicators').empty();
                 var indicators = '';
-                for (var i = 0; i < done.count.length; i++) {
+                for (var i = 0; i < done.count; i++) {
                     var active = '';
                     if (i == 0) {
                         active = 'active';
