@@ -110,10 +110,10 @@ class MantenimientoController extends Controller
 
     public function imagenesRequerimiento(Request $request)
     {
-        $res = '';
+        $res = "";
         $imgs = (new Oreque_attachment())->where('orden_requermiento_id', $request->input('id'))->get();
         foreach ($imgs as $img) {
-            $res .= '<div class="carousel-item"><img class="d-block w-100" src="' . url('imagen/' . $img->attachment_id) . '"></div>';
+            $res .= "<div class=\"carousel-item\"><img class=\"d-block w-100\" src=\"" . url('imagen/' . $img->attachment_id) . "\"></div>";
         }
         return response()->json(['images' => $res, 'count' => count($imgs)]);
     }
