@@ -308,8 +308,10 @@
                         </div>
                     </div>
                     <div class="row">
-                        <button class="btn btn-primary">Enviar</button>
-                        <button class="btn btn-primary">Completado</button>
+                        <div class="col-12">
+                            <button class="btn btn-primary float-right">Enviar</button>
+                            <button class="btn btn-primary float-right">Completado</button>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -336,6 +338,7 @@
         });
 
         cargar('loteria');
+        $('select').select2();
 
         function cargar(cat) {
 
@@ -418,6 +421,7 @@
             }
         }).done(function(done) {
             done = done[0];
+
             $('.modal-asignar').modal('show');
             $('#req_num_orden').html(visualId);
             $('[name="req_num_orden"]').val(id);
