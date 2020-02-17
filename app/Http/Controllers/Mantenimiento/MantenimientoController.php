@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Mantenimiento;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Oreque_attachment;
 use Illuminate\Support\Facades\DB;
 
 class MantenimientoController extends Controller
@@ -105,6 +106,16 @@ class MantenimientoController extends Controller
             ->where('orden_requermientos.idorden_requermientos', $request->input('id'))
             ->get();
         return $orden;
+    }
+
+    public function imagenesRequerimiento(Request $request)
+    {
+        $res = '';
+        $imgs = (new Oreque_attachment())->where('orden_requermiento_id', $request->input('id'))->get();
+        foreach ($imgs as $img) {
+            $res .= '<div class="carousel-item"><img class="d-block w-100" src="' . url('imagen/' . $img->attachment_id) . '"></div>';
+        }
+        return response()->json(['images' => $res, 'count' => count($imgs)]);
     }
 
     public function ordenes()

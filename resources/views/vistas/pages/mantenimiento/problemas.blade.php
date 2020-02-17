@@ -156,28 +156,28 @@
                                     <div class="col-lg-6">
                                         <div class="card">
                                             <div class="card-body">
-                                                <div id="carousel-3" class="carousel slide" data-ride="carousel">
+                                                <div id="req_imagenes" class="carousel slide" data-ride="carousel">
                                                     <ol class="carousel-indicators">
-                                                        <li data-target="#carousel-3" data-slide-to="0" class="active"></li>
-                                                        <li data-target="#carousel-3" data-slide-to="1" class=""></li>
-                                                        <li data-target="#carousel-3" data-slide-to="2" class=""></li>
+                                                        <li data-target="#req_imagenes" data-slide-to="0" class="active"></li>
+                                                        <li data-target="#req_imagenes" data-slide-to="1" class=""></li>
+                                                        <li data-target="#req_imagenes" data-slide-to="2" class=""></li>
                                                     </ol>
                                                     <div class="carousel-inner">
                                                         <div class="carousel-item">
-                                                            <img class="d-block w-100" src="https://images.pexels.com/photos/2773565/pexels-photo-2773565.jpeg" alt="First slide">
+                                                            <img class="d-block w-100" src="https://images.pexels.com/photos/2773565/pexels-photo-2773565.jpeg">
                                                         </div>
                                                         <div class="carousel-item">
-                                                            <img class="d-block w-100" src="https://images.pexels.com/photos/6992/forest-trees-northwestisbest-exploress.jpg" alt="Second slide">
+                                                            <img class="d-block w-100" src="https://images.pexels.com/photos/6992/forest-trees-northwestisbest-exploress.jpg">
                                                         </div>
                                                         <div class="carousel-item">
-                                                            <img class="d-block w-100" src="https://images.pexels.com/photos/3695327/pexels-photo-3695327.jpeg" alt="Third slide">
+                                                            <img class="d-block w-100" src="https://images.pexels.com/photos/3695327/pexels-photo-3695327.jpeg">
                                                         </div>
                                                     </div>
-                                                    <a class="carousel-control-prev" href="#carousel-3" role="button" data-slide="prev">
+                                                    <a class="carousel-control-prev" href="#req_imagenes" role="button" data-slide="prev">
                                                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                                         <span class="sr-only">Previous</span>
                                                     </a>
-                                                    <a class="carousel-control-next" href="#carousel-3" role="button" data-slide="next">
+                                                    <a class="carousel-control-next" href="#req_imagenes" role="button" data-slide="next">
                                                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                                         <span class="sr-only">Next</span>
                                                     </a>
@@ -364,6 +364,27 @@
 
             $('#req_observacion').html(done.robservacion);
 
+            $.ajax({
+                url: "{{url('problemas/imagenes')}}",
+                method: "post",
+                data: {
+                    '_token': "{{csrf_token()}}",
+                    'id': id
+                }
+            }).done(function(done) {
+                $('#req_imagenes > .carousel-indicators').empty();
+                var indicators = '';
+                for (var i = 0; i < done.count.length; i++) {
+                    var active = '';
+                    if (i == 0) {
+                        active = 'active';
+                    }
+                    indicators += '<li data-target="#req_imagenes" data-slide-to="' + i + '" class="' + active + '"></li>';
+                }
+                $('#req_imagenes > .carousel-indicators').html(indicators);
+                $('#req_imagenes > .carousel-inner').empty();
+                $('#req_imagenes > .carousel-inner').html(done.images);
+            });
         });
 
     }
