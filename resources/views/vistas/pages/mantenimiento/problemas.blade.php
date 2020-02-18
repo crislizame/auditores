@@ -311,6 +311,24 @@
                                 </div>
                             </div>
 
+                            <div class="row">
+                                <div class="col-6">
+                                    <label>Cotización <i class="fa fa-eye"></i><a href="#">Ver</a></label>
+                                </div>
+                                <div class="col-6">
+                                    <label>Garantía <i class="fa fa-eye"></i><a href="#">Ver</a></label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <input type="text" name="ot_presupuesto" class="form-control">
+                                </div>
+                                <div class="col-6">
+                                    <input type="text" name="ot_garantia" class="form-control">
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                     <div class="row">
