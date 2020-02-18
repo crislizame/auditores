@@ -204,9 +204,10 @@
                             <div class="row">
                                 <div class="col-6">
                                     <select name="ot_proveedor">
-                                        @for ((new \App\Proveedor())->get() as $proveedor)
+                                        @forelse ((new \App\Proveedor())->get() as $proveedor)
                                         <option value="{{$proveedor->idproveedores}}">{{$proveedor->nombre}}</option>
-                                        @endfor
+                                        @empty
+                                        @endforelse
                                     </select>
                                 </div>
                                 <div class="col-6">
