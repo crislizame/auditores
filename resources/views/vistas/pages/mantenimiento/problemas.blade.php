@@ -323,8 +323,8 @@
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <button class="btn btn-primary float-right">Completado</button>
-                            <button class="btn btn-primary float-right mr-3" onclick="asignarOrdenDeTrabajo()">Enviar</button>
+                            <button type="button" class="btn btn-primary float-right">Completado</button>
+                            <button type="button" class="btn btn-primary float-right mr-3" onclick="asignarOrdenDeTrabajo()">Enviar</button>
                         </div>
                     </div>
                 </form>
@@ -480,8 +480,36 @@
 
     }
 
-    function asignarOrdenDeTrabajo(){
-        console.log($('#form-asignarOrden').serialize());
+    function asignarOrdenDeTrabajo() {
+
+        $.post("{{url('problemas/orden/asignar')}}", $('#form-asignarOrden').serialize(), function(data, status, xhr) {
+            console.log(status);
+        });
+
+        /*
+        $.ajax({
+                url: "{{route('comisionista/listas/ajax/ciudadpds')}}",
+                method: "post",
+                dataType: 'text',
+                data: {
+                    'pds_id': data.id,
+                    '_token': "{{csrf_token()}}"
+                },
+                beforeSend: function() {
+                    // noti =  Lobibox.notify('info', {
+                    //     pauseDelayOnHover: true,
+                    //     title: "¡Eliminando!",
+                    //     continueDelayOnInactiveTab: false,
+                    //     position: 'top right',
+                    //     icon: 'fa fa-check-circle',
+                    //     msg: 'Por Favor Espere'
+                    // });
+                }
+            }).done(function(done) {
+                console.log(done);
+                $('#pds_ciudad').val(done).trigger('change');
+            });
+        */
     }
 </script>
 @endsection
