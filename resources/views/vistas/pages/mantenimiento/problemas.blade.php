@@ -323,8 +323,8 @@
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <button class="btn btn-primary float-right">Enviar</button>
                             <button class="btn btn-primary float-right">Completado</button>
+                            <button class="btn btn-primary float-right mr-3" onclick="asignarOrdenDeTrabajo()">Enviar</button>
                         </div>
                     </div>
                 </form>
@@ -478,6 +478,10 @@
             });
         });
 
+    }
+
+    function asignarOrdenDeTrabajo(){
+        console.log($('#form-asignarOrden').serialize());
     }
 </script>
 @endsection
