@@ -282,7 +282,7 @@
                                     <input type="text" name="ot_encargado" class="form-control">
                                 </div>
                                 <div class="col-6">
-                                    <h3 id="ot_tiempo"></h3>
+                                    <input type="time" id="time" name="ot_tiempo" value="00:00">
                                 </div>
                             </div>
 
