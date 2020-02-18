@@ -108,6 +108,10 @@ class MantenimientoController extends Controller
         return $orden;
     }
 
+    public function asignarOrden(Request $request){
+        return $request->all();
+    }
+
     public function imagenesRequerimiento(Request $request)
     {
         $res = "";
