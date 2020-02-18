@@ -204,11 +204,9 @@
                             <div class="row">
                                 <div class="col-6">
                                     <select name="ot_proveedor">
-                                        @forelse ((new \App\Pdsperfile())->get() as $pds)
-                                        <option value="{{$pds->id}}">{{$pds->pds_name}}</option>
-                                        @empty
-
-                                        @endforelse
+                                        @for ((new \App\Proveedor())->get() as $proveedor)
+                                        <option value="{{$proveedor->idproveedores}}">{{$proveedor->nombre}}</option>
+                                        @endfor
                                     </select>
                                 </div>
                                 <div class="col-6">
