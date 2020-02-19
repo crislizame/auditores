@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Oreque_attachment;
 use App\Orden_Requerimiento;
-use App\Orden_Trabajo;
+use App\Orden_trabajo;
 
 class MantenimientoController extends Controller
 {
