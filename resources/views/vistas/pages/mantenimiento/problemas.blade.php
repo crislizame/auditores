@@ -451,8 +451,6 @@
 
             $('#req_comentario').html(done.rcomentario);
 
-            // IMAGENES
-
             $('#req_observacion').html(done.robservacion);
 
             $.ajax({
@@ -482,7 +480,11 @@
 
     function asignarOrdenDeTrabajo() {
         $.post("{{url('problemas/orden/asignar')}}", $('#form-asignarOrden').serialize(), function(data, status, xhr) {
-            console.log(status);
+            if(status == 'success'){
+                $('.modal-asignar').modal('hide');
+
+                document.getElementById("form-asignarOrden").reset(); 
+            }
         });
     }
 </script>

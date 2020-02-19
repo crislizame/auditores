@@ -127,8 +127,6 @@ class MantenimientoController extends Controller
         $orden->extra = $request->ot_extra;
         $orden->comentario = $request->ot_comentario;
         $orden->save();
-
-        return 'Ok';
     }
 
     public function imagenesRequerimiento(Request $request)
