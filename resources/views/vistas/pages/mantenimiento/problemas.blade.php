@@ -282,7 +282,7 @@
                                     <input type="text" name="ot_encargado" class="form-control">
                                 </div>
                                 <div class="col-6">
-                                    <input type="time" id="time" name="ot_tiempo" value="00:00">
+                                    <input type="time" id="time" name="ot_tiempo">
                                 </div>
                             </div>
 
@@ -481,35 +481,9 @@
     }
 
     function asignarOrdenDeTrabajo() {
-
         $.post("{{url('problemas/orden/asignar')}}", $('#form-asignarOrden').serialize(), function(data, status, xhr) {
             console.log(status);
         });
-
-        /*
-        $.ajax({
-                url: "{{route('comisionista/listas/ajax/ciudadpds')}}",
-                method: "post",
-                dataType: 'text',
-                data: {
-                    'pds_id': data.id,
-                    '_token': "{{csrf_token()}}"
-                },
-                beforeSend: function() {
-                    // noti =  Lobibox.notify('info', {
-                    //     pauseDelayOnHover: true,
-                    //     title: "¡Eliminando!",
-                    //     continueDelayOnInactiveTab: false,
-                    //     position: 'top right',
-                    //     icon: 'fa fa-check-circle',
-                    //     msg: 'Por Favor Espere'
-                    // });
-                }
-            }).done(function(done) {
-                console.log(done);
-                $('#pds_ciudad').val(done).trigger('change');
-            });
-        */
     }
 </script>
 @endsection

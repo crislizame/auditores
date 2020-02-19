@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Mantenimiento;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Oreque_attachment;
 use Illuminate\Support\Facades\DB;
+use App\Oreque_attachment;
+use App\Orden_Requerimiento;
+use App\Orden_Trabajo;
 
 class MantenimientoController extends Controller
 {
@@ -108,8 +110,27 @@ class MantenimientoController extends Controller
         return $orden;
     }
 
-    public function asignarOrden(Request $request){
+    public function asignarOrden(Request $request)
+    {
         return $request->all();
+
+        $ordenreq = Orden_Requerimiento::find($request->req_num_orden);
+        $ordenreq->observa = $request->req_observacion;
+        $ordenreq->save();
+
+        $orden = new Orden_trabajo();
+        $orden->orden_requermiento_id = $request->req_num_orden;
+        $orden->proveedor_id = $request->ot_proveedor;
+        $orden->estado = $request->ot_estado;
+        $orden->presupuesto = $request->ot_presupuesto;
+        $orden->garantia = $request->ot_garantia;
+        $orden->encargado = $request->ot_encargado;
+        $orden->tresolver = $request->ot_tiempo;
+        $orden->extra = $request->ot_extra;
+        $orden->comentario = $request->ot_comentario;
+        $orden->save();
+
+        return 'Ok';
     }
 
     public function imagenesRequerimiento(Request $request)
