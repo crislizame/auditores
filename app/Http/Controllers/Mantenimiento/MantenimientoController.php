@@ -112,8 +112,6 @@ class MantenimientoController extends Controller
 
     public function asignarOrden(Request $request)
     {
-        return $request->all();
-
         $ordenreq = Orden_Requerimiento::find($request->req_num_orden);
         $ordenreq->observa = $request->req_observacion;
         $ordenreq->save();
