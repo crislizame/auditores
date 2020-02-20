@@ -81,7 +81,7 @@ class EncuestasAuditoriasVController extends Controller
                         $idencauditdatas = (new Encauditdata())->where(['agenda_id'=>$agenda_id,'encauditvalues_id'=>$th->idencauditvalues,'pds_id'=>$idpds,'auditor_id'=>$auditor_id])->value('idencauditdatas');
                         $res[] = array('nombre' => $th->nombre_val,
                             'id' => $th->idencauditvalues,
-                            'categoria'=>'0s','carita'=>$carita==null?0:(int)$carita,'observa'=>$observa==null?"":$observa,'idencauditdata'=>$idencauditdatas);
+                            'categoria'=>'0s','carita'=>$carita==null?0:(int)$carita,'observa'=>$observa==null?"":$observa,'idencauditdata'=>(string)$idencauditdatas);
                     }
 
                 }
@@ -99,14 +99,14 @@ class EncuestasAuditoriasVController extends Controller
                     $thc = (new Encauditvalue())->where('encaudit_id',$datosverticale->idencaudit)->get();
                     $res[] = array('nombre' => $datosverticale->nombre_estado,
                         'categoria' => $datosverticale->categoria,
-                        'id'=>$datosverticale->idencaudit,'value'=>0,'observa'=>'');
+                        'id'=>$datosverticale->idencaudit,'value'=>"0",'observa'=>'');
                     foreach ($thc as $th) {
                         $value = (new Informes_reporte())->where(['agenda_id'=>$agenda_id,'informes_id'=>$th->idencauditvalues,'pds_id'=>$idpds,'auditor_id'=>$auditor_id])->value('value');
                         $observa = (new Informes_reporte())->where(['agenda_id'=>$agenda_id,'informes_id'=>$th->idencauditvalues,'pds_id'=>$idpds,'auditor_id'=>$auditor_id])->value('observa');
                        // $image = (new Encauditdata())->where(['agenda_id'=>$agenda_id,'encauditvalues_id'=>$th->idencauditvalues,'pds_id'=>$idpds])->value('image');
                         $res[] = array('nombre' => $th->nombre_val,
                             'id' => $th->idencauditvalues,
-                            'categoria'=>'0s','value'=>$value==null?0:$value,'observa'=>$observa==null?"":$observa);
+                            'categoria'=>'0s','value'=>$value==null?"0":$value,'observa'=>$observa==null?"":$observa);
                     }
 
                 }

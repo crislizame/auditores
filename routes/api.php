@@ -31,3 +31,4 @@ Route::resource('v1/getencaudit', 'API\EncuestasAuditoriasController');//enviar 
 Route::resource('v1/getencauditv', 'API\EncuestasAuditoriasVController');//no values
 Route::resource('v1/getActivos', 'API\ActivosApiController');//no values
 Route::resource('v1/getPerfil', 'API\PerfilApiController');//no values
+Route::resource('v1/getperfil', 'API\PerfilApiController');//no values
