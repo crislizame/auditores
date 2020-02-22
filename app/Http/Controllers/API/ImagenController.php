@@ -45,11 +45,11 @@ class ImagenController extends Controller
                 $arqueo_id = $request->post('encauditdatas_id');
                 $images = (new Arqueo_attachment())->where(['arqueo_id'=>$arqueo_id])->get();
                 foreach ($images as $image) {
-                    $attach = (new Attachment())->where(['idattachments'=>$image->attachments_id])->first();
+                 //  $attach = (new Attachment())->where(['idattachments'=>$image->attachments_id])->first();
                     $res[] = array(
-                        'idimage'=> $attach->idattachments,
+                        'idimage'=> $image->attachments_id,
                         'image'=> "",
-                        'user_id'=> $attach->user_id
+                        'user_id'=> ""
                     );
                 }
                 return response()->json($res,200,[], JSON_UNESCAPED_UNICODE);

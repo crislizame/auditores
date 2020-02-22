@@ -168,15 +168,15 @@ class PerfilApiController extends Controller
         $permisos_count = (new Pdsperfiles_permiso())->where('pds_id',$id)->count();
         if($permisos_count == 0){
             //$permisos = (new Pdsperfiles_permiso())->where('pds_id',$id)->first();
-            $pds->bsenal=false;
-            $pds->bextintores=false;
-            $pds->msuelo=false;
-            $pds->msalud=false;
-            $pds->mpatente=false;
-            $pds->mtasa=false;
-            $pds->mpermisoanterior=false;
-            $pds->lpermiso=false;
-            $pds->lotros=false;
+            $pds->bsenal="false";
+            $pds->bextintores="false";
+            $pds->msuelo="false";
+            $pds->msalud="false";
+            $pds->mpatente="false";
+            $pds->mtasa="false";
+            $pds->mpermisoanterior="false";
+            $pds->lpermiso="false";
+            $pds->lotros="false";
         }else{
             $permisos = (new Pdsperfiles_permiso())->where('pds_id',$id)->first();
             $pds->bsenal=$permisos->bsenal;

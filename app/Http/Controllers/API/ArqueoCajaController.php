@@ -47,7 +47,8 @@ class ArqueoCajaController extends Controller
                 $arqueo_id = $request->post('arqueo_id');
                 $imagen = base64_decode($request->post('image'));
                 $aud_attach_count = (new Arqueo_attachment())->where('arqueo_id',$arqueo_id)->count();
-                if ($aud_attach_count == 0){
+//                if ($aud_attach_count == 0){
+
                     $attach = new Attachment();
                     $attach->file = $imagen;
                     $attach->user_id = $arqueo_id;
@@ -58,16 +59,17 @@ class ArqueoCajaController extends Controller
                     $aud_attach->attachments_id = $idattach;
                     $aud_attach->save();
                     $aud_attach_id = $idattach;
-                }else{
-                    $aud_attach_id = (new Arqueo_attachment())->where('arqueo_id',$arqueo_id)->value('attachments_id');
 
-                    $attach = new Attachment();
-                    $attach->exists = true;
-                    $attach->idattachments = $aud_attach_id;
-                    $attach->file = $imagen;
-                    $attach->save();
-
-                }
+//                }else{
+//                    $aud_attach_id = (new Arqueo_attachment())->where('arqueo_id',$arqueo_id)->value('attachments_id');
+//
+//                    $attach = new Attachment();
+//                    $attach->exists = true;
+//                    $attach->idattachments = $aud_attach_id;
+//                    $attach->file = $imagen;
+//                    $attach->save();
+//
+//                }
                 break;
             case "s":
                 //variables
