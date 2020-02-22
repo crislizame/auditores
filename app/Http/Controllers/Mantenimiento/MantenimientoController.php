@@ -98,8 +98,15 @@ class MantenimientoController extends Controller
                 DB::raw('orden_requermientos.comentario as rcomentario'),
                 DB::raw('orden_requermientos.observa as robservacion'),
                 'orden_trabajos.proveedor_id',
+                'orden_trabajos.estado',
                 'orden_trabajos.finicio',
                 'orden_trabajos.ffin',
+                'orden_trabajos.presupuesto',
+                'orden_trabajos.garantia',
+                'orden_trabajos.encargado',
+                'orden_trabajos.tresolver',
+                'orden_trabajos.extra',
+                'orden_trabajos.comentario',
                 'orden_trabajos.estado_orden'
             )
             ->join('areas', 'orden_requermientos.area_id', 'areas.idareas')
