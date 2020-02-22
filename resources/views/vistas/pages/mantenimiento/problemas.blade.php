@@ -324,7 +324,7 @@
                     <div class="row">
                         <div class="col-12">
                             <button type="button" class="btn btn-primary float-right">Completado</button>
-                            <button type="button" class="btn btn-primary float-right mr-3" onclick="asignarOrdenDeTrabajo()">Enviar</button>
+                            <button type="button" class="btn btn-primary float-right mr-3" id="benviar" onclick="asignarOrdenDeTrabajo()">Enviar</button>
                         </div>
                     </div>
                 </form>
@@ -495,6 +495,12 @@
                 $('[name="ot_garantia"]').val(done.garantia);
 
                 $('[name="ot_encargado"]').val(done.encargado);
+
+                $('[name="ot_comentario"]').val(done.comentario);
+
+                $('#benviar').prop('disabled', true);
+                $('#benviar').removeClass('btn-primary');
+                $('#benviar').addClass('btn-default');
             }
         });
 
