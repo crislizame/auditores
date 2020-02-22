@@ -495,6 +495,7 @@
                 $('[name="ot_garantia"]').val(done.garantia);
 
                 $('[name="ot_encargado"]').val(done.encargado);
+                $('[name="ot_tiempo"]').val(done.tresolver);
 
                 $('[name="ot_comentario"]').val(done.comentario);
 
