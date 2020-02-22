@@ -64,7 +64,7 @@
             </div>
             <div class="modal-body">
 
-                <form id="form-asignarOrden" method="POST">
+                <form id="form-asignarOrden" method="POST" autocomplate="off">
                     @csrf
                     <div class="row">
                         <div class="col-6">
