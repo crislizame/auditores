@@ -474,16 +474,37 @@
                 $('#req_imagenes > .carousel-inner').empty();
                 $('#req_imagenes > .carousel-inner').html(done.images);
             });
+
+            if (done.proveedor_id != null) {
+                $('[name="ot_proveedor"]').val(done.proveedor_id);
+                $('[name="ot_proveedor"]').select2().trigger('change');
+
+                switch (done.estado) {
+                    case 'U':
+                        $('#r1').click();
+                        break;
+                    case 'S':
+                        $('#r2').click();
+                        break;
+                }
+
+                $('#ot_finicio').html(done.finicio);
+                $('#ot_ffin').html(done.ffin);
+
+                $('[name="ot_presupuesto"]').val(done.presupuesto);
+                $('[name="ot_garantia"]').val(done.garantia);
+
+                $('[name="ot_encargado"]').val(done.encargado);
+            }
         });
 
     }
 
     function asignarOrdenDeTrabajo() {
         $.post("{{url('problemas/orden/asignar')}}", $('#form-asignarOrden').serialize(), function(data, status, xhr) {
-            if(status == 'success'){
+            if (status == 'success') {
                 $('.modal-asignar').modal('hide');
-
-                document.getElementById("form-asignarOrden").reset(); 
+                document.getElementById("form-asignarOrden").reset();
             }
         });
     }
