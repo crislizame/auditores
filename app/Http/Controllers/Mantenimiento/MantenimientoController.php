@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use App\Oreque_attachment;
 use App\Orden_Requerimiento;
 use App\Orden_trabajo;
+use App\Otrabajo_attachment;
 
 class MantenimientoController extends Controller
 {
@@ -97,6 +98,7 @@ class MantenimientoController extends Controller
                 DB::raw('orden_requermientos.ffin as rffin'),
                 DB::raw('orden_requermientos.comentario as rcomentario'),
                 DB::raw('orden_requermientos.observa as robservacion'),
+                'orden_trabajos.idorden_trabajos',
                 'orden_trabajos.proveedor_id',
                 'orden_trabajos.estado',
                 'orden_trabajos.finicio',
@@ -149,6 +151,12 @@ class MantenimientoController extends Controller
             $res .= "<div class=\"carousel-item " . $active . "\"><img class=\"d-block w-100\" src=\"" . url('imagen/' . $imgs[$i]->attachment_id) . "\"></div>";
         }
         return response()->json(['images' => $res, 'count' => count($imgs)]);
+    }
+
+    public function imagenesTrabajo(Request $request)
+    {
+        $img = (new Otrabajo_attachment())->select('attachment_id')->where([['orden_trabajos_id', '=', $request->input('id')], ['tipo', '=', 'C']])->first();
+        return $img;
     }
 
     public function ordenes()

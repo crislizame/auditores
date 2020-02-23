@@ -311,10 +311,16 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-6" id="cc" style="display: none;">
+                                    <label>Cotización <i class="fa fa-upload"></i><a href="#"> Cargar imagen</a></label>
+                                </div>
+                                <div class="col-6" id="cv" style="display: none;">
                                     <label>Cotización <i class="fa fa-eye"></i><a href="#"> Ver</a></label>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-6" id="gc" style="display: none;">
+                                    <label>Garantía <i class="fa fa-upload"></i><a href="#"> Cargar imagen</a></label>
+                                </div>
+                                <div class="col-6" id="gv" style="display: none;">
                                     <label>Garantía <i class="fa fa-eye"></i><a href="#"> Ver</a></label>
                                 </div>
                             </div>
@@ -496,12 +502,27 @@
 
                 $('[name="ot_encargado"]').val(done.encargado);
                 $('[name="ot_tiempo"]').val(done.tresolver);
+                $('[name="ot_extra"]').val(done.extra);
 
                 $('[name="ot_comentario"]').val(done.comentario);
 
                 $('#benviar').prop('disabled', true);
                 $('#benviar').removeClass('btn-primary');
                 $('#benviar').addClass('btn-default');
+
+                $.ajax({
+                    url: "{{url('problemas/trabajo/ver')}}",
+                    method: "post",
+                    data: {
+                        '_token': "{{csrf_token()}}",
+                        'id': done.idorden_trabajos,
+                        'tipo': 'C'
+                    }
+                }).done(function(done) {
+                    console.log(done);
+                    //$('#cc').show();
+                    //$('#cc').show();
+                });
             }
         });
 
