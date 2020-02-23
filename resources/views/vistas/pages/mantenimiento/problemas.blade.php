@@ -484,10 +484,10 @@
                     '_token': "{{csrf_token()}}",
                     'id': id
                 }
-            }).done(function(done) {
+            }).done(function(ok) {
                 $('#req_imagenes > .carousel-indicators').empty();
                 var indicators = '';
-                for (var i = 0; i < done.count; i++) {
+                for (var i = 0; i < ok.count; i++) {
                     var active = '';
                     if (i == 0) {
                         active = 'active';
@@ -496,7 +496,7 @@
                 }
                 $('#req_imagenes > .carousel-indicators').html(indicators);
                 $('#req_imagenes > .carousel-inner').empty();
-                $('#req_imagenes > .carousel-inner').html(done.images);
+                $('#req_imagenes > .carousel-inner').html(ok.images);
             });
 
             if (done.proveedor_id != null) {
