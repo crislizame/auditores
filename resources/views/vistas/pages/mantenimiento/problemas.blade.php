@@ -528,12 +528,13 @@
                 $('#benviar').removeClass('btn-primary');
                 $('#benviar').addClass('btn-default');
 
+                var otrabajo = done.idorden_trabajos;
                 $.ajax({
                     url: "{{url('problemas/trabajo/ver')}}",
                     method: "post",
                     data: {
                         '_token': "{{csrf_token()}}",
-                        'id': done.idorden_trabajos,
+                        'id': otrabajo,
                         'tipo': 'C'
                     }
                 }).done(function(ok) {
