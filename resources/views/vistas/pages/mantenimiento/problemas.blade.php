@@ -315,7 +315,7 @@
                                     <label>Cotización <i class="fa fa-upload"></i><a href="#"> Cargar imagen</a></label>
                                 </div>
                                 <div class="col-6" id="cv" style="display: none;">
-                                    <label>Cotización <i class="fa fa-eye"></i><a href="#"> Ver</a></label>
+                                    <label>Cotización <i class="fa fa-eye"></i><a href="#" id="cvl"> Ver</a></label>
                                 </div>
                                 <div class="col-6" id="gc" style="display: none;">
                                     <label>Garantía <i class="fa fa-upload"></i><a href="#"> Cargar imagen</a></label>
@@ -334,6 +334,22 @@
                         </div>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade modal-va" tabindex="-1" role="dialog" aria-labelledby="modal-va" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h4 class="modal-title text-white" id="vat"></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img class="img-responsive" id="vai">
             </div>
         </div>
     </div>
@@ -518,12 +534,13 @@
                         'id': done.idorden_trabajos,
                         'tipo': 'C'
                     }
-                }).done(function(done) {
-                    if(done.attachment_id>0){
+                }).done(function(ok) {
+                    if (ok.attachment_id > 0) {
                         $('#cv').show();
-                    }else{
+                        $('#cvl').attr('onclick', 'modalImagenTrabajo("{{url("/imagen")}}/' + ok.attachment_id + '")');
+                    } else {
                         $('#cc').show();
-                    }                    
+                    }
                 });
             }
         });
@@ -537,6 +554,12 @@
                 document.getElementById("form-asignarOrden").reset();
             }
         });
+    }
+
+    function modalImagenTrabajo(url) {
+        $('#vat').html("Cotización");
+        $('#vai').attr('src', url);
+        $('.modal-va').modal('show');
     }
 </script>
 @endsection
