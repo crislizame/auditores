@@ -313,12 +313,14 @@
                             <div class="row">
                                 <div class="col-6" id="cc" style="display: none;">
                                     <label>Cotización <i class="fa fa-upload"></i><a href="#"> Cargar imagen</a></label>
+                                    <input type="file" class="form-control-file border" name="ot_cotizacion">
                                 </div>
                                 <div class="col-6" id="cv" style="display: none;">
                                     <label>Cotización <i class="fa fa-eye"></i><a href="#" id="cvl"> Ver</a></label>
                                 </div>
                                 <div class="col-6" id="gc" style="display: none;">
                                     <label>Garantía <i class="fa fa-upload"></i><a href="#"> Cargar imagen</a></label>
+                                    <input type="file" class="form-control-file border" name="ot_garantia">
                                 </div>
                                 <div class="col-6" id="gv" style="display: none;">
                                     <label>Garantía <i class="fa fa-eye"></i><a href="#"> Ver</a></label>
@@ -348,7 +350,7 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body p-2">
                 <img class="img-responsive" id="vai">
             </div>
         </div>

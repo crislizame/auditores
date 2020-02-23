@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Mantenimiento;
 
+use App\Attachment;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use App\Oreque_attachment;
 use App\Orden_Requerimiento;
 use App\Orden_trabajo;
@@ -137,6 +140,17 @@ class MantenimientoController extends Controller
         $orden->extra = $request->ot_extra;
         $orden->comentario = $request->ot_comentario;
         $orden->save();
+
+        $cimagen = new Attachment();
+        $cimagen->file = base64_encode(file_get_contents($request->file('ot_cotizacion')->pat‌​h()));
+        $cimagen->user_id = Auth::user()->id;
+        $cimagen->save();
+
+        $otcimage = new Otrabajo_attachment();
+        $otcimage->orden_trabajos_id = $orden->idorden_trabajos;
+        $otcimage->attachment_id = $cimagen->idattachments;
+        $otcimage->tipo='C';
+        $otcimage->save();
     }
 
     public function imagenesRequerimiento(Request $request)
