@@ -519,9 +519,11 @@
                         'tipo': 'C'
                     }
                 }).done(function(done) {
-                    console.log(done);
-                    //$('#cc').show();
-                    //$('#cc').show();
+                    if(done.attachment_id>0){
+                        $('#cv').show();
+                    }else{
+                        $('#cc').show();
+                    }                    
                 });
             }
         });
