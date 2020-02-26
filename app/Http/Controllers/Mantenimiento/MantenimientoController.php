@@ -13,6 +13,7 @@ use App\Oreque_attachment;
 use App\Orden_Requerimiento;
 use App\Orden_trabajo;
 use App\Otrabajo_attachment;
+use App\User;
 
 class MantenimientoController extends Controller
 {
@@ -187,6 +188,7 @@ class MantenimientoController extends Controller
 
     public function perfil()
     {
-        return view('vistas.pages.mantenimiento.perfil');
+        $user = User::where('id', Auth::user()->id)->join('mantenimiento_users', 'users.id', 'mantenimiento_users.user_id')->first();
+        return view('vistas.pages.mantenimiento.perfil')->with('user', $user);
     }
 }
