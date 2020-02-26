@@ -556,7 +556,7 @@
     }
 
     function asignarOrdenDeTrabajo() {
-        $.post("{{url('problemas/orden/asignar')}}", $('#form-asignarOrden').serialize(), function(data, status, xhr) {
+        $.post("{{url('problemas/orden/asignar')}}", new FormData($('#form-asignarOrden')), function(data, status, xhr) {
             if (status == 'success') {
                 $('.modal-asignar').modal('hide');
                 document.getElementById("form-asignarOrden").reset();
