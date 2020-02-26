@@ -378,6 +378,10 @@
         cargar('loteria');
         $('select').select2();
 
+        $('.modal-asignar').on('hidden.bs.modal', function(e) {
+            document.getElementById("form-asignarOrden").reset();
+        });
+
         function cargar(cat) {
 
             $.ajax({
@@ -438,6 +442,7 @@
             });
         }
     });
+
 
     function modalAsignarOrdenDeTrabajo(id, visualId) {
         $.ajax({
