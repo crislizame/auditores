@@ -141,16 +141,18 @@ class MantenimientoController extends Controller
         $orden->comentario = $request->ot_comentario;
         $orden->save();
 
-        $cimagen = new Attachment();
-        $cimagen->file = base64_encode(file_get_contents($request->file('ot_cotizacion')->pat‌​h()));
-        $cimagen->user_id = Auth::user()->id;
-        $cimagen->save();
+        if ($request->has('ot_ccotizacion')) {
+            $cimagen = new Attachment();
+            $cimagen->file = base64_encode(file_get_contents($request->file('ot_ccotizacion')->pat‌​h()));
+            $cimagen->user_id = Auth::user()->id;
+            $cimagen->save();
 
-        $otcimage = new Otrabajo_attachment();
-        $otcimage->orden_trabajos_id = $orden->idorden_trabajos;
-        $otcimage->attachment_id = $cimagen->idattachments;
-        $otcimage->tipo='C';
-        $otcimage->save();
+            $otcimage = new Otrabajo_attachment();
+            $otcimage->orden_trabajos_id = $orden->idorden_trabajos;
+            $otcimage->attachment_id = $cimagen->idattachments;
+            $otcimage->tipo = 'C';
+            $otcimage->save();
+        }
     }
 
     public function imagenesRequerimiento(Request $request)
