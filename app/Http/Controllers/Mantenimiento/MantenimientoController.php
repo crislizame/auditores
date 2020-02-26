@@ -188,7 +188,7 @@ class MantenimientoController extends Controller
 
     public function perfil()
     {
-        $user = User::where('id', Auth::user()->id)->join('mantenimiento_users', 'users.id', 'mantenimiento_users.user_id')->first();
+        $user = User::where('id', Auth::user()->id)->leftJoin('mantenimiento_users', 'users.id', 'mantenimiento_users.user_id')->first();
         return view('vistas.pages.mantenimiento.perfil')->with('user', $user);
     }
 }

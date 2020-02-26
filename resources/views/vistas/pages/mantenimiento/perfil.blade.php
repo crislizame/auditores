@@ -23,21 +23,21 @@
                                 <input type="text" class="form-control" value="{{$user->name}}" readonly>
                             </div>
                         </div>
-
+                        @if($user->attachment_id!=null)
                         <div class="form-group">
                             <label class="col-form-label">Foto</label>
                             <div class="col-8 offset-2">
-                                <img class="img-thumbnail" src="https://images.pexels.com/photos/3568543/pexels-photo-3568543.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
+                                <img class="img-thumbnail" src="{{url('imagen/' . $user->attachment_id)}}">
                             </div>
                         </div>
-
+                        @endif
                     </div>
                     <div class="col-lg-8">
 
                         <div class="form-group">
                             <label class="col-form-label">Dirección</label>
                             <div>
-                                <input type="text" class="form-control" value="{{$user->direccion}}" readonly>
+                                <input type="text" class="form-control" value="@if($user->direccion!=null){{$user->direccion}}@endif" readonly>
                             </div>
                         </div>
 
@@ -45,14 +45,14 @@
                             <div class="form-group col-6">
                                 <label class="col-form-label">Celular</label>
                                 <div>
-                                    <input type="text" class="form-control" value="{{$user->celular}}" readonly>
+                                    <input type="text" class="form-control" value="@if($user->celular!=null){{$user->celular}}@endif" readonly>
                                 </div>
                             </div>
 
                             <div class="form-group col-6">
                                 <label class="col-form-label">Teléfono</label>
                                 <div>
-                                    <input type="text" class="form-control" value="{{$user->telefono}}" readonly>
+                                    <input type="text" class="form-control" value="@if($user->telefono!=null){{$user->telefono}}@endif" readonly>
                                 </div>
                             </div>
                         </div>
@@ -61,14 +61,14 @@
                             <div class="form-group col-6">
                                 <label class="col-form-label">Hora de entrada</label>
                                 <div>
-                                    <input type="text" class="form-control" value="{{$user->h_entrada}}" readonly>
+                                    <input type="text" class="form-control" value="@if($user->h_entrada!=null){{$user->h_entrada}}@endif" readonly>
                                 </div>
                             </div>
 
                             <div class="form-group col-6">
                                 <label class="col-form-label">Cédula</label>
                                 <div>
-                                    <input type="text" class="form-control" value="{{$user->cedula}}" readonly>
+                                    <input type="text" class="form-control" value="@if($user->cedula!=null){{$user->cedula}}@endif" readonly>
                                 </div>
                             </div>
                         </div>
@@ -77,7 +77,7 @@
                             <div class="form-group col-6">
                                 <label class="col-form-label">Hora de salida</label>
                                 <div>
-                                    <input type="text" class="form-control" value="{{$user->h_salida}}" readonly>
+                                    <input type="text" class="form-control" value="@if($user->h_salida!=null){{$user->h_salida}}@endif" readonly>
                                 </div>
                             </div>
 
