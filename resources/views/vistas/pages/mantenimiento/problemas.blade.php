@@ -457,8 +457,8 @@
                     closeOnEsc: false
                 });
             }
-        }).done(function(done) {
-            done = done[0];
+        }).done(function(data) {
+            var done = data[0];
 
             $('.modal-asignar').modal('show');
             $('#req_num_orden').html(visualId);
