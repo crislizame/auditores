@@ -64,7 +64,7 @@
             </div>
             <div class="modal-body">
 
-                <form id="form-asignarOrden" method="POST" autocomplate="off">
+                <form id="form-asignarOrden" method="POST" autocomplate="off" action="{{url('problemas/orden/asignar')}}">
                     @csrf
                     <div class="row">
                         <div class="col-6">
@@ -332,7 +332,7 @@
                     <div class="row">
                         <div class="col-12">
                             <button type="button" class="btn btn-primary float-right">Completado</button>
-                            <button type="button" class="btn btn-primary float-right mr-3" id="benviar" onclick="asignarOrdenDeTrabajo()">Enviar</button>
+                            <button type="submit" class="btn btn-primary float-right mr-3" id="benviar">Enviar</button>
                         </div>
                     </div>
                 </form>
@@ -553,15 +553,6 @@
             }
         });
 
-    }
-
-    function asignarOrdenDeTrabajo() {
-        $.post("{{url('problemas/orden/asignar')}}", new FormData($('#form-asignarOrden')), function(data, status, xhr) {
-            if (status == 'success') {
-                $('.modal-asignar').modal('hide');
-                document.getElementById("form-asignarOrden").reset();
-            }
-        });
     }
 
     function modalImagenTrabajo(url) {
