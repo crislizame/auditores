@@ -64,7 +64,7 @@
             </div>
             <div class="modal-body">
 
-                <form id="form-asignarOrden" method="POST" autocomplate="off" action="{{url('problemas/orden/asignar')}}">
+                <form id="form-asignarOrden" method="POST" autocomplate="off" action="{{url('problemas/orden/asignar')}}" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col-6">
