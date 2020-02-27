@@ -142,7 +142,7 @@ class MantenimientoController extends Controller
         $orden->comentario = $request->ot_comentario;
         $orden->save();
 
-        if ($request->hasFile('ot_ccotizacion')) {
+        if ($request->has('ot_ccotizacion')) {
             $cimagen = new Attachment();
             $cimagen->file = base64_encode(file_get_contents($request->file('ot_ccotizacion')->pat‌​h()));
             $cimagen->user_id = Auth::user()->id;
@@ -153,6 +153,7 @@ class MantenimientoController extends Controller
             $otcimage->attachment_id = $cimagen->idattachments;
             $otcimage->tipo = 'C';
             $otcimage->save();
+            return 'ok';
         }
     }
 
