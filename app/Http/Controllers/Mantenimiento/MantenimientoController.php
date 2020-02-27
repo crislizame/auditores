@@ -144,7 +144,7 @@ class MantenimientoController extends Controller
 
         if ($request->has('ot_ccotizacion')) {
             $cimagen = new Attachment();
-            $cimagen->file = base64_encode(file_get_contents($request->file('ot_ccotizacion')->pat‌​h()));
+            $cimagen->file = base64_encode(file_get_contents($request->file('ot_ccotizacion')));
             $cimagen->user_id = Auth::user()->id;
             $cimagen->save();
 
