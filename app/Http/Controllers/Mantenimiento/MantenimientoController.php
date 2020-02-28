@@ -230,7 +230,7 @@ class MantenimientoController extends Controller
 
     public function cargarProveedores(Request $request)
     {
-        $proveedores = Proveedor::orderBy('idproveedores', 'asc')->get();
+        $proveedores = Proveedor::all();
         $tbody = "";
         foreach ($proveedores as $proveedor) {
             $tbody .= "<tr>
