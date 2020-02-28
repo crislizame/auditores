@@ -494,8 +494,8 @@
 
             $('#req_problema').html(done.problema);
 
-            $('#req_rfinicio').html(done.rfinicio);
-            $('#req_rffin').html(done.rffin);
+            $('#req_rfinicio').html(done.solicitado);
+            $('#ot_finicio').html(done.solicitado);
 
             $('#req_comentario').html(done.rcomentario);
 
@@ -536,8 +536,7 @@
                         break;
                 }
 
-                $('#ot_finicio').html(done.finicio);
-                $('#ot_ffin').html(done.ffin);
+                $('#ot_ffin').html(done.finalizado);
 
                 $('[name="ot_presupuesto"]').val(done.presupuesto);
                 $('[name="ot_garantia"]').val(done.garantia);
