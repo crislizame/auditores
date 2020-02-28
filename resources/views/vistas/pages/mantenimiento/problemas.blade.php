@@ -17,10 +17,10 @@
                     <div class="row">
                         <div class="col-12">
                             <ul class="nav mb-4">
-                                <a href="#" onclick="{{url('/problemas')}}?cat=loteria">
+                                <a href="{{url('/problemas')}}?cat=loteria">
                                     <li class="nav-item @if($cat == 'loteria') active @endif">Loteria</li>
                                 </a>
-                                <a href="#" onclick="{{url('/problemas')}}?cat=proveedores">
+                                <a href="{{url('/problemas')}}?cat=proveedores">
                                     <li href="#" class="nav-item @if($cat == 'proveedores') active @endif">Proveedores</li>
                                 </a>
                             </ul>
