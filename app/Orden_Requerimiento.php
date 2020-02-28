@@ -8,4 +8,5 @@ class Orden_Requerimiento extends Model
 {
     protected $table = 'orden_requermientos';
     protected $primaryKey = 'idorden_requermientos';
+    const CREATED_AT = 'solicitado';
 }
