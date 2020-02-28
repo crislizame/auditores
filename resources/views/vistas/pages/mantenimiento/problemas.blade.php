@@ -18,14 +18,15 @@
                         <div class="col-12">
                             <ul class="nav mb-4">
                                 <a href="#" onclick="cargar('loteria')">
-                                    <li class="nav-item @if($cat == " loteria") active @endif">Loteria</li>
+                                    <li class="nav-item @if($cat == 'loteria') active @endif">Loteria</li>
                                 </a>
                                 <a href="#" onclick="cargar('proveedores')">
-                                    <li href="#" class="nav-item @if($cat == " proveedores") active @endif">Proveedores</li>
+                                    <li href="#" class="nav-item @if($cat == 'proveedores') active @endif">Proveedores</li>
                                 </a>
                             </ul>
                         </div>
                     </div>
+                    @if($cat == "loteria")
                     <table class="table" id="list_problemas">
                         <thead>
                             <tr class="bg-primary text-white">
@@ -42,6 +43,24 @@
                         <tbody class="TablaProblemas">
                         </tbody>
                     </table>
+                    @elseif($cat == "proveedores")
+                    <table class="table" id="list_problemas">
+                        <thead>
+                            <tr class="bg-primary text-white">
+                                <th>N. de Orden</th>
+                                <th>Proveedores</th>
+                                <th>Sub Area</th>
+                                <th>Problema</th>
+                                <th>Cliente</th>
+                                <th>Fecha reportado</th>
+                                <th>Tiempo para resolver</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody class="TablaProblemas">
+                        </tbody>
+                    </table>
+                    @endif
                 </div>
             </div>
         </div>
@@ -546,7 +565,7 @@
                     if (ok.attachment_id > 0) {
                         $('#cc').hide();
                         $('#cv').show();
-                        $('#cvl').attr('onclick', 'modalImagenTrabajo("{{url("/imagen")}}/' + ok.attachment_id + '")');
+                        $('#cvl').attr('onclick', 'modalImagenTrabajo("{{url("/imagen")}}/' + ok.attachment_id + '", "Cotización")');
                     } else {
                         $('#cc').show();
                         $('#cv').hide();
@@ -566,7 +585,7 @@
                     if (ok.attachment_id > 0) {
                         $('#gc').hide();
                         $('#gv').show();
-                        $('#gvl').attr('onclick', 'modalImagenTrabajo("{{url("/imagen")}}/' + ok.attachment_id + '")');
+                        $('#gvl').attr('onclick', 'modalImagenTrabajo("{{url("/imagen")}}/' + ok.attachment_id + '", "Garantía")');
                     } else {
                         $('#gc').show();
                         $('#gv').hide();
@@ -578,8 +597,8 @@
 
     }
 
-    function modalImagenTrabajo(url) {
-        $('#vat').html("Cotización");
+    function modalImagenTrabajo(url,tipo) {
+        $('#vat').html(tipo);
         $('#vai').attr('src', url);
         $('.modal-va').modal('show');
     }
