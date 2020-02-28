@@ -225,7 +225,7 @@
                                     <select name="ot_proveedor">
                                         @foreach ($proveedores as $proveedor)
                                         <option value="{{$proveedor->idproveedores}}">{{$proveedor->nombre}}</option>
-                                        @endfor
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="col-6">
