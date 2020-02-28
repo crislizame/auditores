@@ -136,7 +136,7 @@ class MantenimientoController extends Controller
                 'orden_trabajos.encargado',
                 'orden_trabajos.tresolver',
                 'orden_trabajos.extra',
-                'orden_trabajos.comentario',
+                'orden_trabajos.comentario'
             )
             ->join('areas', 'orden_requermientos.area_id', 'areas.idareas')
             ->join('subareas', 'orden_requermientos.subarea_id', 'subareas.idsubareas')
