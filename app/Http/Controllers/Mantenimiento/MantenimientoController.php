@@ -147,13 +147,27 @@ class MantenimientoController extends Controller
             $cimagen->file = base64_encode(file_get_contents($request->file('ot_ccotizacion')));
             $cimagen->user_id = Auth::user()->id;
             $cimagen->save();
-return $orden;
+            
             $otcimage = new Otrabajo_attachment();
             $otcimage->orden_trabajos_id = $orden->idorden_trabajos;
             $otcimage->attachment_id = $cimagen->idattachments;
             $otcimage->tipo = 'C';
             $otcimage->save();
         }
+
+        if ($request->has('ot_cgarantia')) {
+            $cimagen = new Attachment();
+            $cimagen->file = base64_encode(file_get_contents($request->file('ot_cgarantia')));
+            $cimagen->user_id = Auth::user()->id;
+            $cimagen->save();
+            
+            $otcimage = new Otrabajo_attachment();
+            $otcimage->orden_trabajos_id = $orden->idorden_trabajos;
+            $otcimage->attachment_id = $cimagen->idattachments;
+            $otcimage->tipo = 'G';
+            $otcimage->save();
+        }
+
         $cat = (isset($request->cat) ? $request->cat : 'loteria');
         return view('vistas.pages.mantenimiento.problemas')->with('cat', $cat);
     }
