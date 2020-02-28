@@ -394,7 +394,7 @@
             ]
         });
 
-        cargar('{{cat}}');
+        cargar('{{$cat}}');
         $('select').select2();
 
         $('.modal-asignar').on('hidden.bs.modal', function(e) {
