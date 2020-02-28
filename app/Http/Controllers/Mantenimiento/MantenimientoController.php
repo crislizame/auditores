@@ -223,7 +223,7 @@ class MantenimientoController extends Controller
 
     public function proveedores()
     {
-        return view('vistas.pages.mantenimiento.provedores');
+        return view('vistas.pages.mantenimiento.proveedores');
     }
 
     public function perfil()

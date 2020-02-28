@@ -15,8 +15,8 @@
                 <i class="icon-list"></i> <span>Ordenes</span>
             </a>
         </li>
-        <li @if(strpos (url()->current(), 'proovedores')!==false) class="active" @endif>
-            <a href="{{url('proovedores')}}" class="waves-effect">
+        <li @if(strpos (url()->current(), 'proveedores')!==false) class="active" @endif>
+            <a href="{{url('proveedores')}}" class="waves-effect">
                 <i class="icon-people"></i> <span>Proovedores</span>
             </a>
         </li>
