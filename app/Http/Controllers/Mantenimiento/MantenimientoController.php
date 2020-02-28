@@ -33,10 +33,6 @@ class MantenimientoController extends Controller
                     DB::raw('subareas.name as subarea'),
                     'orden_requermientos.problema',
                     DB::raw('pdsperfiles.pds_name as cliente'),
-                    DB::raw('orden_requermientos.finicio as rfinicio'),
-                    'orden_trabajos.finicio',
-                    'orden_trabajos.ffin',
-                    'orden_trabajos.estado_orden',
                     'orden_requermientos.solicitado',
                     'orden_requermientos.enproceso',
                     'orden_requermientos.finalizado'
@@ -60,23 +56,14 @@ class MantenimientoController extends Controller
                     $estado = 'Finalizado <span style="background-color: green;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
                 }
 
-                $rfinicio = ($orden->rfinicio != null ? mb_strimwidth(strtoupper($orden->rfinicio), '0', '15', '...') : '------');
-
-                $tiempo_estimado = '------';
-                if ($orden->finicio != null && $orden->ffin != null) {
-                    $finicio = Carbon::parse($orden->finicio);
-                    $ffin = Carbon::parse($orden->ffin);
-                    $tiempo_estimado = $finicio->diffForHumans($ffin);
-                }
-
                 $tbody .= "<tr>
                         <th scope=\"row\"><a href=\"#\" onclick=\"modalAsignarOrdenDeTrabajo(" . $orden->idorden_requermientos . ", '" . $id . "')\">" . $id . "</a></th>
                         <td>" . mb_strimwidth(strtoupper($orden->area), '0', '15', '...') . "</td>
                         <td>" . mb_strimwidth(strtoupper($orden->subarea), '0', '15', '...') . "</td>
                         <td>" . mb_strimwidth(strtoupper($orden->problema), '0', '15', '...') . "</td>
                         <td>" . mb_strimwidth(strtoupper($orden->cliente), '0', '15', '...') . "</td>
-                        <td>" . $rfinicio . "</td>
-                        <td>" . $tiempo_estimado . "</td>
+                        <td>" . $orden->solicitado . "</td>
+                        <td>{{--" . 'tiempo_para_resolver' . "--}}</td>
                         <td>" . $estado . "</td>
                     </tr>";
             }
@@ -89,10 +76,6 @@ class MantenimientoController extends Controller
                     DB::raw('subareas.name as subarea'),
                     'orden_requermientos.problema',
                     DB::raw('pdsperfiles.pds_name as cliente'),
-                    DB::raw('orden_requermientos.finicio as rfinicio'),
-                    'orden_trabajos.finicio',
-                    'orden_trabajos.ffin',
-                    'orden_trabajos.estado_orden',
                     'orden_requermientos.solicitado',
                     'orden_requermientos.enproceso',
                     'orden_requermientos.finalizado'
@@ -117,23 +100,14 @@ class MantenimientoController extends Controller
                     $estado = 'Finalizado <span style="background-color: green;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
                 }
 
-                $rfinicio = ($orden->rfinicio != null ? mb_strimwidth(strtoupper($orden->rfinicio), '0', '15', '...') : '------');
-
-                $tiempo_estimado = '------';
-                if ($orden->finicio != null && $orden->ffin != null) {
-                    $finicio = Carbon::parse($orden->finicio);
-                    $ffin = Carbon::parse($orden->ffin);
-                    $tiempo_estimado = $finicio->diffForHumans($ffin);
-                }
-
                 $tbody .= "<tr>
                         <th scope=\"row\"><a href=\"#\" onclick=\"modalAsignarOrdenDeTrabajo(" . $orden->idorden_requermientos . ", '" . $id . "')\">" . $id . "</a></th>
                         <td>" . mb_strimwidth(strtoupper($orden->proveedor), '0', '15', '...') . "</td>
                         <td>" . mb_strimwidth(strtoupper($orden->subarea), '0', '15', '...') . "</td>
                         <td>" . mb_strimwidth(strtoupper($orden->problema), '0', '15', '...') . "</td>
                         <td>" . mb_strimwidth(strtoupper($orden->cliente), '0', '15', '...') . "</td>
-                        <td>" . $rfinicio . "</td>
-                        <td>" . $tiempo_estimado . "</td>
+                        <td>" . $orden->solicitado . "</td>
+                        <td>{{--" . 'tiempo_para_resolver' . "--}}</td>
                         <td>" . $estado . "</td>
                     </tr>";
             }
@@ -150,22 +124,19 @@ class MantenimientoController extends Controller
                 DB::raw('subareas.name as subarea'),
                 'orden_requermientos.problema',
                 DB::raw('pdsperfiles.pds_name as cliente'),
-                DB::raw('orden_requermientos.finicio as rfinicio'),
-                DB::raw('orden_requermientos.ffin as rffin'),
                 DB::raw('orden_requermientos.comentario as rcomentario'),
                 DB::raw('orden_requermientos.observa as robservacion'),
+                'orden_requermientos.solicitado',
+                'orden_requermientos.enproceso',
+                'orden_requermientos.finalizado',
                 'orden_trabajos.idorden_trabajos',
-                'orden_trabajos.proveedor_id',
                 'orden_trabajos.estado',
-                'orden_trabajos.finicio',
-                'orden_trabajos.ffin',
                 'orden_trabajos.presupuesto',
                 'orden_trabajos.garantia',
                 'orden_trabajos.encargado',
                 'orden_trabajos.tresolver',
                 'orden_trabajos.extra',
                 'orden_trabajos.comentario',
-                'orden_trabajos.estado_orden'
             )
             ->join('areas', 'orden_requermientos.area_id', 'areas.idareas')
             ->join('subareas', 'orden_requermientos.subarea_id', 'subareas.idsubareas')
@@ -196,7 +167,7 @@ class MantenimientoController extends Controller
 
         if ($request->has('ot_ccotizacion')) {
             $cimagen = new Attachment();
-            $cimagen->file = base64_decode($request->post('ot_ccotizacion'));
+            $cimagen->file = $request->post('ot_ccotizacion');
             $cimagen->user_id = Auth::user()->id;
             $cimagen->save();
 
@@ -209,7 +180,7 @@ class MantenimientoController extends Controller
 
         if ($request->has('ot_cgarantia')) {
             $cimagen = new Attachment();
-            $cimagen->file = base64_decode($request->post('ot_cgarantia'));
+            $cimagen->file = $request->post('ot_cgarantia');
             $cimagen->user_id = Auth::user()->id;
             $cimagen->save();
 
