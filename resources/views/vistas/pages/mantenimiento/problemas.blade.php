@@ -380,6 +380,7 @@
 @section('script')
 
 <script>
+    var tableProblemas;
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': '{{csrf_token()}}'
@@ -387,7 +388,7 @@
     });
 
     $(document).ready(function() {
-        var tableProblemas = $('#list_problemas').DataTable({
+        tableProblemas = $('#list_problemas').DataTable({
             "lengthMenu": [
                 [25, 50, 100, -1],
                 [25, 50, 100, "Todos"]
