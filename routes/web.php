@@ -53,7 +53,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Mantenimiento
     Route::get('problemas', 'Mantenimiento\MantenimientoController@problemas')->name('problemas');
-    Route::post('problemas/cargar', 'Mantenimiento\MantenimientoController@cargar');
+    Route::post('problemas/cargar', 'Mantenimiento\MantenimientoController@cargarProblemas');
     Route::post('problemas/orden', 'Mantenimiento\MantenimientoController@verOrden');
     Route::post('problemas/orden/asignar', 'Mantenimiento\MantenimientoController@asignarOrden');
     Route::post('problemas/trabajo/ver', 'Mantenimiento\MantenimientoController@imagenesTrabajo');

@@ -13,6 +13,7 @@ use App\Oreque_attachment;
 use App\Orden_Requerimiento;
 use App\Orden_trabajo;
 use App\Otrabajo_attachment;
+use App\Proveedor;
 use App\User;
 
 class MantenimientoController extends Controller
@@ -24,7 +25,7 @@ class MantenimientoController extends Controller
         return view('vistas.pages.mantenimiento.problemas')->with('cat', $cat)->with('proveedores', $proveedores);
     }
 
-    public function cargar(Request $request)
+    public function cargarProblemas(Request $request)
     {
         if ($request->cat == 'loteria') {
             $ordenes = DB::table('orden_requermientos')
@@ -225,6 +226,24 @@ class MantenimientoController extends Controller
     public function proveedores()
     {
         return view('vistas.pages.mantenimiento.proveedores');
+    }
+
+    public function cargarProveedores(Request $request)
+    {
+        $proveedores = Proveedor::orderBy('idproveedores', 'asc')->get();
+
+        $tbody = "";
+        foreach ($proveedores as $proveedor) {
+            $tbody .= "<tr>
+                        <th scope=\"row\">".strtoupper($proveedor->nombre)."</th>
+                        <td>" . strtoupper($proveedor->ruc_cedula) . "</td>
+                        <td>" . strtoupper($proveedor->direccion) . "</td>
+                        <td>" . strtoupper($proveedor->telefono) . "</td>
+                        <td>" . strtoupper($proveedor->correo) . "</td>
+                        <td></td>
+                    </tr>";
+        }
+        return $tbody;
     }
 
     public function perfil()
