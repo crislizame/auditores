@@ -37,7 +37,9 @@ class MantenimientoController extends Controller
                     'orden_trabajos.finicio',
                     'orden_trabajos.ffin',
                     'orden_trabajos.estado_orden',
-                    'orden_requermientos.solicitado'
+                    'orden_requermientos.solicitado',
+                    'orden_requermientos.enproceso',
+                    'orden_requermientos.finalizado'
                 )
                 ->join('areas', 'orden_requermientos.area_id', 'areas.idareas')
                 ->join('subareas', 'orden_requermientos.subarea_id', 'subareas.idsubareas')
