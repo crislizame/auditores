@@ -55,7 +55,8 @@ class MantenimientoController extends Controller
 
                 if ($orden->enproceso != null) {
                     $estado = 'En proceso <span style="background-color: orange;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
-                } else if ($orden->finalizado != null) {
+                }
+                if ($orden->finalizado != null) {
                     $estado = 'Finalizado <span style="background-color: green;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
                 }
 
