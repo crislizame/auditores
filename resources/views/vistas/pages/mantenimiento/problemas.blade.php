@@ -401,67 +401,67 @@
         $('.modal-asignar').on('hidden.bs.modal', function(e) {
             document.getElementById("form-asignarOrden").reset();
         });
-    });
 
-    function cargar(cat) {
+        function cargar(cat) {
 
-        $.ajax({
-            url: "{{url('problemas/cargar')}}",
-            method: "post",
-            dataType: 'text',
-            data: {
-                '_token': "{{csrf_token()}}",
-                'cat': cat
-            },
-            beforeSend: function() {
-                swal({
-                    title: "Cargando Problemas",
-                    icon: "info",
-                    buttons: false,
-                    timer: 2000,
-                    closeOnClickOutside: false,
-                    closeOnEsc: false
+            $.ajax({
+                url: "{{url('problemas/cargar')}}",
+                method: "post",
+                dataType: 'text',
+                data: {
+                    '_token': "{{csrf_token()}}",
+                    'cat': cat
+                },
+                beforeSend: function() {
+                    swal({
+                        title: "Cargando Problemas",
+                        icon: "info",
+                        buttons: false,
+                        timer: 2000,
+                        closeOnClickOutside: false,
+                        closeOnEsc: false
+                    });
+                }
+            }).done(function(done) {
+                tableProblemas.destroy();
+                $('.TablaProblemas').html(done);
+                tableProblemas = $('#list_problemas').DataTable({
+                    "order": [
+                        [0, 'desc']
+                    ],
+                    "lengthMenu": [
+                        [25, 50, 100, -1],
+                        [25, 50, 100, "Todos"]
+                    ],
+                    "columns": [{
+                            "width": "10%"
+                        },
+                        {
+                            "width": "10%"
+                        },
+                        {
+                            "width": "10%"
+                        },
+                        {
+                            "width": "15%"
+                        },
+                        {
+                            "width": "20%"
+                        },
+                        {
+                            "width": "10%"
+                        },
+                        {
+                            "width": "10%"
+                        },
+                        {
+                            "width": "15%"
+                        }
+                    ]
                 });
-            }
-        }).done(function(done) {
-            tableProblemas.destroy();
-            $('.TablaProblemas').html(done);
-            tableProblemas = $('#list_problemas').DataTable({
-                "order": [
-                    [0, 'desc']
-                ],
-                "lengthMenu": [
-                    [25, 50, 100, -1],
-                    [25, 50, 100, "Todos"]
-                ],
-                "columns": [{
-                        "width": "10%"
-                    },
-                    {
-                        "width": "10%"
-                    },
-                    {
-                        "width": "10%"
-                    },
-                    {
-                        "width": "15%"
-                    },
-                    {
-                        "width": "20%"
-                    },
-                    {
-                        "width": "10%"
-                    },
-                    {
-                        "width": "10%"
-                    },
-                    {
-                        "width": "15%"
-                    }
-                ]
             });
-        });
-    }
+        }
+    });
 
     function modalAsignarOrdenDeTrabajo(id, visualId) {
         $.ajax({
