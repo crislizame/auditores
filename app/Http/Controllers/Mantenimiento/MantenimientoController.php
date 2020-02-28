@@ -87,6 +87,8 @@ class MantenimientoController extends Controller
                 ->join('pdsperfiles', 'orden_requermientos.pds_id', 'pdsperfiles.id')
                 ->join('entidades', 'entidades.identidad', 'areas.entidad_id')
                 ->leftJoin('orden_trabajos', 'orden_requermientos.idorden_requermientos', 'orden_trabajos.orden_requermiento_id')
+                ->where('entidades.nombre','Lotto Game')
+                ->orWhere('entidades.nombre','RP3')
                 ->get();
 
             $tbody = "";
