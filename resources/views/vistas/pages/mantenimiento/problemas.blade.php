@@ -17,10 +17,10 @@
                     <div class="row">
                         <div class="col-12">
                             <ul class="nav mb-4">
-                                <a href="#" onclick="cargar('loteria')">
+                                <a href="#" onclick="{{url('/problemas')}}?cat=loteria">
                                     <li class="nav-item @if($cat == 'loteria') active @endif">Loteria</li>
                                 </a>
-                                <a href="#" onclick="cargar('proveedores')">
+                                <a href="#" onclick="{{url('/problemas')}}?cat=proveedores">
                                     <li href="#" class="nav-item @if($cat == 'proveedores') active @endif">Proveedores</li>
                                 </a>
                             </ul>
@@ -400,68 +400,67 @@
         $('.modal-asignar').on('hidden.bs.modal', function(e) {
             document.getElementById("form-asignarOrden").reset();
         });
-
-        function cargar(cat) {
-
-            $.ajax({
-                url: "{{url('problemas/cargar')}}",
-                method: "post",
-                dataType: 'text',
-                data: {
-                    '_token': "{{csrf_token()}}",
-                    'cat': cat
-                },
-                beforeSend: function() {
-                    swal({
-                        title: "Cargando Problemas",
-                        icon: "info",
-                        buttons: false,
-                        timer: 2000,
-                        closeOnClickOutside: false,
-                        closeOnEsc: false
-                    });
-                }
-            }).done(function(done) {
-                tableProblemas.destroy();
-                $('.TablaProblemas').html(done);
-                tableProblemas = $('#list_problemas').DataTable({
-                    "order": [
-                        [0, 'desc']
-                    ],
-                    "lengthMenu": [
-                        [25, 50, 100, -1],
-                        [25, 50, 100, "Todos"]
-                    ],
-                    "columns": [{
-                            "width": "10%"
-                        },
-                        {
-                            "width": "10%"
-                        },
-                        {
-                            "width": "10%"
-                        },
-                        {
-                            "width": "15%"
-                        },
-                        {
-                            "width": "20%"
-                        },
-                        {
-                            "width": "10%"
-                        },
-                        {
-                            "width": "10%"
-                        },
-                        {
-                            "width": "15%"
-                        }
-                    ]
-                });
-            });
-        }
     });
 
+    function cargar(cat) {
+
+        $.ajax({
+            url: "{{url('problemas/cargar')}}",
+            method: "post",
+            dataType: 'text',
+            data: {
+                '_token': "{{csrf_token()}}",
+                'cat': cat
+            },
+            beforeSend: function() {
+                swal({
+                    title: "Cargando Problemas",
+                    icon: "info",
+                    buttons: false,
+                    timer: 2000,
+                    closeOnClickOutside: false,
+                    closeOnEsc: false
+                });
+            }
+        }).done(function(done) {
+            tableProblemas.destroy();
+            $('.TablaProblemas').html(done);
+            tableProblemas = $('#list_problemas').DataTable({
+                "order": [
+                    [0, 'desc']
+                ],
+                "lengthMenu": [
+                    [25, 50, 100, -1],
+                    [25, 50, 100, "Todos"]
+                ],
+                "columns": [{
+                        "width": "10%"
+                    },
+                    {
+                        "width": "10%"
+                    },
+                    {
+                        "width": "10%"
+                    },
+                    {
+                        "width": "15%"
+                    },
+                    {
+                        "width": "20%"
+                    },
+                    {
+                        "width": "10%"
+                    },
+                    {
+                        "width": "10%"
+                    },
+                    {
+                        "width": "15%"
+                    }
+                ]
+            });
+        });
+    }
 
     function modalAsignarOrdenDeTrabajo(id, visualId) {
         $.ajax({
@@ -597,7 +596,7 @@
 
     }
 
-    function modalImagenTrabajo(url,tipo) {
+    function modalImagenTrabajo(url, tipo) {
         $('#vat').html(tipo);
         $('#vai').attr('src', url);
         $('.modal-va').modal('show');
