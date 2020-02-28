@@ -215,9 +215,10 @@ class MantenimientoController extends Controller
         return $img;
     }
 
-    public function ordenes()
+    public function ordenes(Request $request)
     {
-        return view('vistas.pages.mantenimiento.ordenes');
+        $cat = (isset($request->cat) ? $request->cat : 'loteria');
+        return view('vistas.pages.mantenimiento.ordenes')->with('cat', $cat);
     }
 
     public function proveedores()

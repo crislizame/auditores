@@ -223,7 +223,7 @@
                             <div class="row">
                                 <div class="col-6">
                                     <select name="ot_proveedor">
-                                        @forelse ((new \App\Proveedor())->get() as $proveedor)
+                                        @forelse ((new \App\Proveedor())->orderBy('id','asc')->get() as $proveedor)
                                         <option value="{{$proveedor->idproveedores}}">{{$proveedor->nombre}}</option>
                                         @empty
                                         @endforelse
@@ -301,7 +301,7 @@
                                     <input type="text" name="ot_encargado" class="form-control">
                                 </div>
                                 <div class="col-6">
-                                    <input type="time" id="time" name="ot_tiempo">
+                                    <h5 id="ot_tiempo"></h5>
                                 </div>
                             </div>
 
