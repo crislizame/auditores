@@ -223,10 +223,9 @@
                             <div class="row">
                                 <div class="col-6">
                                     <select name="ot_proveedor">
-                                        @forelse ((new \App\Proveedor())->orderBy('id','asc')->get() as $proveedor)
+                                        @foreach ($proveedores as $proveedor)
                                         <option value="{{$proveedor->idproveedores}}">{{$proveedor->nombre}}</option>
-                                        @empty
-                                        @endforelse
+                                        @endfor
                                     </select>
                                 </div>
                                 <div class="col-6">

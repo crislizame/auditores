@@ -15,16 +15,17 @@
         <div class="col-lg-12 mt-3">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title"><button data-toggle="modal" data-target=".addComisionistaModal" class="btn btn-primary"><i class="fa fa-plus"></i> Agregar PDS</button></h5>
                     <table class="table" id="list_pds">
                         <thead>
                             <tr class="bg-primary text-white">
-                                <th scope="col">ID</th>
-                                <th>Punto de Suerte</th>
-                                <th>Provincia</th>
-                                <th>Ciudad</th>
-                                <th>Supervisor</th>
-                                <th>Opciones</th>
+                                <th>Nombre</th>
+                                <th>RUC</th>
+                                <th>Dirección</th>
+                                <th>Teléfono</th>
+                                <th>Celular</th>
+                                <th>Email</th>
+                                <th>Rango</th>
+                                <th>Score</th>
                             </tr>
                         </thead>
                         <tbody class="PDSTabla">

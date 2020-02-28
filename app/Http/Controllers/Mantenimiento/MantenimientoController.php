@@ -20,7 +20,8 @@ class MantenimientoController extends Controller
     public function problemas(Request $request)
     {
         $cat = (isset($request->cat) ? $request->cat : 'loteria');
-        return view('vistas.pages.mantenimiento.problemas')->with('cat', $cat);
+        $proveedores = DB::table('proveedores')->orderBy('id', 'asc')->get();
+        return view('vistas.pages.mantenimiento.problemas')->with('cat', $cat)->with('proveedores', $proveedores);
     }
 
     public function cargar(Request $request)
