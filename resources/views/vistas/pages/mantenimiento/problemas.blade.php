@@ -323,7 +323,7 @@
                                     <input type="file" class="form-control-file border" name="ot_cgarantia">
                                 </div>
                                 <div class="col-6" id="gv" style="display: none;">
-                                    <label>Garantía <i class="fa fa-eye"></i><a href="#"> Ver</a></label>
+                                    <label>Garantía <i class="fa fa-eye"></i><a href="#" id="gvl"> Ver</a></label>
                                 </div>
                             </div>
 
@@ -544,10 +544,33 @@
                     }
                 }).done(function(ok) {
                     if (ok.attachment_id > 0) {
+                        $('#cc').hide();
                         $('#cv').show();
                         $('#cvl').attr('onclick', 'modalImagenTrabajo("{{url("/imagen")}}/' + ok.attachment_id + '")');
                     } else {
                         $('#cc').show();
+                        $('#cv').hide();
+                        $('#cvl').removeAttr('onclick');
+                    }
+                });
+
+                $.ajax({
+                    url: "{{url('problemas/trabajo/ver')}}",
+                    method: "post",
+                    data: {
+                        '_token': "{{csrf_token()}}",
+                        'id': otrabajo,
+                        'tipo': 'G'
+                    }
+                }).done(function(ok) {
+                    if (ok.attachment_id > 0) {
+                        $('#gc').hide();
+                        $('#gv').show();
+                        $('#gvl').attr('onclick', 'modalImagenTrabajo("{{url("/imagen")}}/' + ok.attachment_id + '")');
+                    } else {
+                        $('#gc').show();
+                        $('#gv').hide();
+                        $('#gvl').removeAttr('onclick');
                     }
                 });
             }
