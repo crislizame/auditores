@@ -57,8 +57,7 @@
             method: "post",
             dataType: 'text',
             data: {
-                '_token': "{{csrf_token()}}",
-                'cat': cat
+                '_token': "{{csrf_token()}}"
             },
             beforeSend: function() {
                 swal({
