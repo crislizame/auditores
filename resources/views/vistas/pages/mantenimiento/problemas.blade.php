@@ -525,7 +525,7 @@
                 $('#req_imagenes > .carousel-inner').html(ok.images);
             });
 
-            if(entidad == {{(new App\Entidad())->where('identidad',Auth::user()->entidad_id)->value('nombre')}}){
+            if(entidad == '{{(new App\Entidad())->where('identidad',Auth::user()->entidad_id)->value('nombre')}}'){
                 $('#sel-pro').show();
             }else{
                 $('#tex-ent').show();
