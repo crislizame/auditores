@@ -351,9 +351,12 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-12">
-                            <button type="button" class="btn btn-primary float-right">Completado</button>
-                            <button type="submit" class="btn btn-primary float-right mr-3" id="benviar">Enviar</button>
+                        <div class="col-12" style="display: none;" id="gb-g">
+                            <button type="button" class="btn btn-primary float-right">Finalizar</button>
+                            <button type="submit" class="btn btn-primary float-right mr-3" id="benviar">Procesar</button>
+                        </div>
+                        <div class="col-12" style="display: none;" id="gb-c">
+                            <button type="button" class="btn btn-default float-right">Cerrar</button>
                         </div>
                     </div>
                 </form>
@@ -525,13 +528,6 @@
                 $('#req_imagenes > .carousel-inner').html(ok.images);
             });
 
-            if(entidad == '{{(new App\Entidad())->where('identidad',Auth::user()->entidad_id)->value('nombre')}}'){
-                $('#sel-pro').show();
-            }else{
-                $('#tex-ent').show();
-                $('#tex-ent').html(done.entidad);
-            }
-
             if (done.proveedor_id != null) {
                 $('[name="ot_proveedor"]').val(done.proveedor_id);
                 $('[name="ot_proveedor"]').select2().trigger('change');
@@ -600,6 +596,26 @@
                         $('#gvl').removeAttr('onclick');
                     }
                 });
+            }
+
+            if(entidad == '{{(new App\Entidad())->where('identidad',Auth::user()->entidad_id)->value('nombre')}}'){
+                $('#sel-pro').show();
+                
+                $('#gb-g').show();
+            }else{ 
+                $('#tex-ent').show();
+                $('#ot_entidad').html(done.entidad);
+
+                $('[name="ot_presupuesto"]').attr('readonly','true');
+                $('[name="ot_garantia"]').attr('readonly','true');
+                $('[name="ot_encargado"]').attr('readonly','true');
+                $('[name="ot_extra"]').attr('readonly','true');
+                $('[name="ot_comentario"]').attr('readonly','true');
+
+                $('#cc').hide();
+                $('#gc').hide();
+
+                $('#gb-c').show();
             }
         });
 
