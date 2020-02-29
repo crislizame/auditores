@@ -61,7 +61,7 @@ class MantenimientoController extends Controller
                 }
 
                 $tbody .= "<tr>
-                        <th scope=\"row\"><a href=\"#\" onclick=\"modalAsignarOrdenDeTrabajo(" . $orden->idorden_requermientos . ", '" . $id . "', '"+$orden->entidad+"')\">" . $id . "</a></th>
+                        <th scope=\"row\"><a href=\"#\" onclick=\"modalAsignarOrdenDeTrabajo(" . $orden->idorden_requermientos . ", '" . $id . "', '".$orden->entidad."')\">" . $id . "</a></th>
                         <td>" . mb_strimwidth(strtoupper($orden->area), '0', '15', '...') . "</td>
                         <td>" . mb_strimwidth(strtoupper($orden->subarea), '0', '15', '...') . "</td>
                         <td>" . mb_strimwidth(strtoupper($orden->problema), '0', '15', '...') . "</td>
