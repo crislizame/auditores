@@ -43,6 +43,7 @@ class MantenimientoController extends Controller
                 ->join('areas', 'orden_requermientos.area_id', 'areas.idareas')
                 ->join('subareas', 'orden_requermientos.subarea_id', 'subareas.idsubareas')
                 ->join('pdsperfiles', 'orden_requermientos.pds_id', 'pdsperfiles.id')
+                ->join('entidades', 'entidades.identidad', 'areas.entidad_id')
                 ->leftJoin('orden_trabajos', 'orden_requermientos.idorden_requermientos', 'orden_trabajos.orden_requermiento_id')
                 ->get();
 
