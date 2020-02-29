@@ -221,12 +221,15 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-6" id="sel-pro" style="display: none;">
                                     <select name="ot_proveedor">
                                         @foreach ($proveedores as $proveedor)
                                         <option value="{{$proveedor->idproveedores}}">{{$proveedor->nombre}}</option>
                                         @endforeach
                                     </select>
+                                </div>
+                                <div class="col-6" id="tex-ent" style="display: none;">
+                                    <h5 id="ot_entidad"></h5>
                                 </div>
                                 <div class="col-6">
                                     <div class="row">
@@ -462,7 +465,7 @@
         }
     });
 
-    function modalAsignarOrdenDeTrabajo(id, visualId) {
+    function modalAsignarOrdenDeTrabajo(id, visualId, entidad) {
         $.ajax({
             url: "{{url('problemas/orden')}}",
             method: "post",
@@ -521,6 +524,13 @@
                 $('#req_imagenes > .carousel-inner').empty();
                 $('#req_imagenes > .carousel-inner').html(ok.images);
             });
+
+            if(entidad == {{(new App\Entidad())->where('identidad',Auth::user()->entidad_id)->value('nombre')}}){
+                $('#sel-pro').show();
+            }else{
+                $('#tex-ent').show();
+                $('#tex-ent').html(done.entidad);
+            }
 
             if (done.proveedor_id != null) {
                 $('[name="ot_proveedor"]').val(done.proveedor_id);

@@ -37,7 +37,8 @@ class MantenimientoController extends Controller
                     DB::raw('pdsperfiles.pds_name as cliente'),
                     'orden_requermientos.solicitado',
                     'orden_requermientos.enproceso',
-                    'orden_requermientos.finalizado'
+                    'orden_requermientos.finalizado',
+                    DB::raw('entidades.nombre as entidad')
                 )
                 ->join('areas', 'orden_requermientos.area_id', 'areas.idareas')
                 ->join('subareas', 'orden_requermientos.subarea_id', 'subareas.idsubareas')
@@ -59,7 +60,7 @@ class MantenimientoController extends Controller
                 }
 
                 $tbody .= "<tr>
-                        <th scope=\"row\"><a href=\"#\" onclick=\"modalAsignarOrdenDeTrabajo(" . $orden->idorden_requermientos . ", '" . $id . "')\">" . $id . "</a></th>
+                        <th scope=\"row\"><a href=\"#\" onclick=\"modalAsignarOrdenDeTrabajo(" . $orden->idorden_requermientos . ", '" . $id . "', '"+$orden->entidad+"')\">" . $id . "</a></th>
                         <td>" . mb_strimwidth(strtoupper($orden->area), '0', '15', '...') . "</td>
                         <td>" . mb_strimwidth(strtoupper($orden->subarea), '0', '15', '...') . "</td>
                         <td>" . mb_strimwidth(strtoupper($orden->problema), '0', '15', '...') . "</td>
@@ -80,7 +81,8 @@ class MantenimientoController extends Controller
                     DB::raw('pdsperfiles.pds_name as cliente'),
                     'orden_requermientos.solicitado',
                     'orden_requermientos.enproceso',
-                    'orden_requermientos.finalizado'
+                    'orden_requermientos.finalizado',
+                    DB::raw('entidades.nombre as entidad')
                 )
                 ->join('areas', 'orden_requermientos.area_id', 'areas.idareas')
                 ->join('subareas', 'orden_requermientos.subarea_id', 'subareas.idsubareas')
@@ -105,7 +107,7 @@ class MantenimientoController extends Controller
                 }
 
                 $tbody .= "<tr>
-                        <th scope=\"row\"><a href=\"#\" onclick=\"modalAsignarOrdenDeTrabajo(" . $orden->idorden_requermientos . ", '" . $id . "')\">" . $id . "</a></th>
+                        <th scope=\"row\"><a href=\"#\" onclick=\"modalAsignarOrdenDeTrabajo(" . $orden->idorden_requermientos . ", '" . $id . "', '"+$orden->entidad+"')\">" . $id . "</a></th>
                         <td>" . mb_strimwidth(strtoupper($orden->proveedor), '0', '15', '...') . "</td>
                         <td>" . mb_strimwidth(strtoupper($orden->subarea), '0', '15', '...') . "</td>
                         <td>" . mb_strimwidth(strtoupper($orden->problema), '0', '15', '...') . "</td>
@@ -140,11 +142,13 @@ class MantenimientoController extends Controller
                 'orden_trabajos.encargado',
                 'orden_trabajos.tresolver',
                 'orden_trabajos.extra',
-                'orden_trabajos.comentario'
+                'orden_trabajos.comentario',
+                DB::raw('entidades.nombre as entidad')
             )
             ->join('areas', 'orden_requermientos.area_id', 'areas.idareas')
             ->join('subareas', 'orden_requermientos.subarea_id', 'subareas.idsubareas')
             ->join('pdsperfiles', 'orden_requermientos.pds_id', 'pdsperfiles.id')
+            ->join('entidades', 'entidades.identidad', 'areas.entidad_id')
             ->leftJoin('orden_trabajos', 'orden_requermientos.idorden_requermientos', 'orden_trabajos.orden_requermiento_id')
             ->where('orden_requermientos.idorden_requermientos', $request->input('id'))
             ->get();
