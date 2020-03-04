@@ -356,7 +356,7 @@
                             <button type="submit" class="btn btn-primary float-right mr-3" id="benviar">Procesar</button>
                         </div>
                         <div class="col-12" style="display: none;" id="gb-c">
-                            <button type="button" class="btn btn-default float-right">Cerrar</button>
+                            <button type="button" class="btn btn-default float-right" data-dismiss="modal">Cerrar</button>
                         </div>
                     </div>
                 </form>
@@ -528,6 +528,8 @@
                 $('#req_imagenes > .carousel-inner').html(ok.images);
             });
 
+            $('[name="ot_tiempo"]').val(done.tiempo);
+                
             if (done.proveedor_id != null) {
                 $('[name="ot_proveedor"]').val(done.proveedor_id);
                 $('[name="ot_proveedor"]').select2().trigger('change');
@@ -547,7 +549,6 @@
                 $('[name="ot_garantia"]').val(done.garantia);
 
                 $('[name="ot_encargado"]').val(done.encargado);
-                $('[name="ot_tiempo"]').val(done.tresolver);
                 $('[name="ot_extra"]').val(done.extra);
 
                 $('[name="ot_comentario"]').val(done.comentario);
