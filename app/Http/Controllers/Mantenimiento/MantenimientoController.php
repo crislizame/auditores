@@ -63,14 +63,17 @@ class MantenimientoController extends Controller
                     $estado = 'Finalizado <span style="background-color: green;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
                 }
 
+                $taux = new DateTime(date('Y-m-d'));
+                $taux->setTime($orden->tiempo, 0, 0);
+
                 $tbody .= "<tr>
                         <th scope=\"row\"><a href=\"#\" onclick=\"modalAsignarOrdenDeTrabajo(" . $orden->idorden_requermientos . ", '" . $id . "', '" . $orden->entidad . "')\">" . $id . "</a></th>
                         <td>" . mb_strimwidth(strtoupper($orden->area), '0', '15', '...') . "</td>
                         <td>" . mb_strimwidth(strtoupper($orden->subarea), '0', '15', '...') . "</td>
                         <td>" . mb_strimwidth(strtoupper($orden->problema), '0', '15', '...') . "</td>
                         <td>" . mb_strimwidth(strtoupper($orden->cliente), '0', '15', '...') . "</td>
-                        <td>" . $orden->solicitado . "</td>
-                        <td>" . $orden->tiempo . "</td>
+                        <td>" . Carbon::parse($orden->solicitado)->format('d/m/Y') . "</td>
+                        <td>" . date_format($taux, 'H:i') . "</td>
                         <td>" . $estado . "</td>
                     </tr>";
             }
@@ -113,6 +116,9 @@ class MantenimientoController extends Controller
                     $estado = 'Finalizado <span style="background-color: green;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
                 }
 
+                $taux = new DateTime(date('Y-m-d'));
+                $taux->setTime($orden->tiempo, 0, 0);
+
                 $tbody .= "<tr>
                         <th scope=\"row\"><a href=\"#\" onclick=\"modalAsignarOrdenDeTrabajo(" . $orden->idorden_requermientos . ", '" . $id . "', '" + $orden->entidad + "')\">" . $id . "</a></th>
                         <td>" . mb_strimwidth(strtoupper($orden->entidad), '0', '15', '...') . "</td>
@@ -120,7 +126,7 @@ class MantenimientoController extends Controller
                         <td>" . mb_strimwidth(strtoupper($orden->problema), '0', '15', '...') . "</td>
                         <td>" . mb_strimwidth(strtoupper($orden->cliente), '0', '15', '...') . "</td>
                         <td>" . $orden->solicitado . "</td>
-                        <td>" . $orden->tiempo . "</td>
+                        <td>" . date_format($taux, 'H:i') . "</td>
                         <td>" . $estado . "</td>
                     </tr>";
             }
