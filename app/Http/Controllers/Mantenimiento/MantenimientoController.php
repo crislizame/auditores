@@ -31,6 +31,7 @@ class MantenimientoController extends Controller
             $ordenes = DB::table('orden_requermientos')
                 ->select(
                     'orden_requermientos.idorden_requermientos',
+                    'problemas.tiempo',
                     DB::raw('problemas.nombre as problema'),
                     DB::raw('subareas.nombre as subarea'),
                     DB::raw('areas.nombre as area'),
@@ -69,7 +70,7 @@ class MantenimientoController extends Controller
                         <td>" . mb_strimwidth(strtoupper($orden->problema), '0', '15', '...') . "</td>
                         <td>" . mb_strimwidth(strtoupper($orden->cliente), '0', '15', '...') . "</td>
                         <td>" . $orden->solicitado . "</td>
-                        <td>{{--" . 'tiempo_para_resolver' . "--}}</td>
+                        <td>" . $orden->tiempo . "</td>
                         <td>" . $estado . "</td>
                     </tr>";
             }
@@ -78,6 +79,7 @@ class MantenimientoController extends Controller
             $ordenes = DB::table('orden_requermientos')
                 ->select(
                     'orden_requermientos.idorden_requermientos',
+                    'problemas.tiempo',
                     DB::raw('problemas.nombre as problema'),
                     DB::raw('subareas.nombre as subarea'),
                     DB::raw('areas.nombre as area'),
@@ -118,7 +120,7 @@ class MantenimientoController extends Controller
                         <td>" . mb_strimwidth(strtoupper($orden->problema), '0', '15', '...') . "</td>
                         <td>" . mb_strimwidth(strtoupper($orden->cliente), '0', '15', '...') . "</td>
                         <td>" . $orden->solicitado . "</td>
-                        <td>{{--" . 'tiempo_para_resolver' . "--}}</td>
+                        <td>" . $orden->tiempo . "</td>
                         <td>" . $estado . "</td>
                     </tr>";
             }
