@@ -14,9 +14,17 @@
         <div class="col-lg-12 mt-3">
             <div class="card">
                 <div class="card-body">
-                    <div class="row">
+                    {{--<div class="row">
                         <div class="col-12">
                             <ul class="nav mb-4">
+
+                            </ul>
+                        </div>
+                    </div>--}}
+
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <ul class="nav lmhorizontal">
                                 <a href="{{url('/problemas')}}?cat=loteria">
                                     <li class="nav-item @if($cat == 'loteria') active @endif">Loteria</li>
                                 </a>
@@ -26,6 +34,12 @@
                             </ul>
                         </div>
                     </div>
+
+
+
+
+
+
                     @if($cat == "loteria")
                     <table class="table" id="list_problemas">
                         <thead>
