@@ -1,4 +1,4 @@
-@extends('vistas.layout.mantenimiento')
+@extends('vistas.layout.soporte')
 
 @section('content')
 <div class="container-fluid ">
@@ -17,7 +17,7 @@
                         <div class="form-group">
                             <label class="col-form-label">Foto</label>
                             <div class="col-8 offset-2">
-                                <img class="img-thumbnail" src="{{url('mantenimiento/imagen/' . $user->attachment_id)}}">
+                                <img class="img-thumbnail" src="{{url('soporte/imagen/' . $user->attachment_id)}}">
                             </div>
                         </div>
                         @endif
