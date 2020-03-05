@@ -214,7 +214,8 @@ class MantenimientoController extends Controller
         }
 
         $cat = (isset($request->cat) ? $request->cat : 'loteria');
-        return view('vistas.pages.mantenimiento.problemas')->with('cat', $cat);
+        $proveedores = DB::table('proveedores')->orderBy('idproveedores', 'asc')->get();
+        return view('vistas.pages.mantenimiento.problemas')->with('cat', $cat)->with('proveedores', $proveedores);
     }
 
     public function imagenesRequerimiento(Request $request)
