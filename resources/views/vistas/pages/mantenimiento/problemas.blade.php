@@ -504,7 +504,7 @@
 
             $('#req_comentario').html(done.rcomentario);
 
-            $('#req_observacion').html(done.robservacion);
+            $('[name="req_observacion"]').html(done.robservacion);
 
             $.ajax({
                 url: "{{url('problemas/imagenes')}}",
@@ -598,7 +598,7 @@
                     }
                 });
 
-                
+
             }
 
             if (entidad == "{{(new App\Entidad())->where('identidad',Auth::user()->entidad_id)->value('nombre')}}") {

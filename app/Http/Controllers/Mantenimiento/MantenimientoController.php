@@ -151,6 +151,7 @@ class MantenimientoController extends Controller
                 'orden_requermientos.enproceso',
                 'orden_requermientos.finalizado',
                 'orden_trabajos.idorden_trabajos',
+                'orden_trabajos.proveedor_id',
                 'orden_trabajos.estado',
                 'orden_trabajos.presupuesto',
                 'orden_trabajos.garantia',
@@ -202,7 +203,7 @@ class MantenimientoController extends Controller
 
         if ($request->has('ot_cgarantia')) {
             $cimagen = new Attachment();
-            $cimagen->file = $request->post('ot_cgarantia');
+            $cimagen->file = file_get_contents($request->file('ot_cgarantia')->getRealPath());
             $cimagen->user_id = Auth::user()->id;
             $cimagen->save();
 
