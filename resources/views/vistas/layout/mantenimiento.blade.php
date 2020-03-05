@@ -95,13 +95,13 @@
         @include('vistas.include.mantenimiento.menu')
         @break
         @case('S')
-        @include('vistas.include.soporte_rp3_lottogame.menu')
+        @include('vistas.include.soporte.menu')
         @break
         @case('R')
-        @include('vistas.include.soporte_rp3_lottogame.menu')
+        @include('vistas.include.rp3.menu')
         @break
         @case('L')
-        @include('vistas.include.soporte_rp3_lottogame.menu')
+        @include('vistas.include.lottogame.menu')
         @break
         @case('P')
         @include('vistas.include.permisos.menu')

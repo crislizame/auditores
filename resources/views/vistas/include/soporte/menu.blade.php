@@ -6,17 +6,17 @@
     </div>
     <ul class="sidebar-menu do-nicescrol">
         <li @if(strpos (url()->current(), 'problemas')!==false) class="active" @endif>
-            <a href="{{url('problemas')}}?cat=loteria" class="waves-effect">
+            <a href="{{url('soporte/problemas')}}?cat=loteria" class="waves-effect">
                 <i class="icon-calendar"></i> <span>Solucionar problemas</span>
             </a>
         </li>
         <li @if(strpos (url()->current(), 'ordenes')!==false) class="active" @endif>
-            <a href="{{url('ordenes')}}?cat=loteria" class="waves-effect">
+            <a href="{{url('soporte/ordenes')}}?cat=loteria" class="waves-effect">
                 <i class="icon-list"></i> <span>Registro de ordenes</span>
             </a>
         </li>
         <li @if(strpos (url()->current(), 'perfil')!==false) class="active" @endif>
-            <a href="{{url('perfil')}}" class="waves-effect">
+            <a href="{{url('soporte/perfil')}}" class="waves-effect">
                 <i class="icon-home"></i> <span>Perfil</span>
             </a>
         </li>
