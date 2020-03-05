@@ -233,7 +233,7 @@ class MantenimientoController extends Controller
 
     public function imagenesTrabajo(Request $request)
     {
-        $img = (new Otrabajo_attachment())->select('attachment_id')->where([['orden_trabajos_id', '=', $request->input('id')], ['tipo', '=', 'C']])->first();
+        $img = (new Otrabajo_attachment())->select('attachment_id')->where([['orden_trabajos_id', '=', $request->input('id')], ['tipo', '=', $request->tipo]])->first();
         return $img;
     }
 
