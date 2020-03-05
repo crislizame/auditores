@@ -63,7 +63,7 @@ class MantenimientoController extends Controller
                     $estado = 'Finalizado <span style="background-color: green;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
                 }
 
-                $taux = new DateTime(date('Y-m-d'));
+                $taux = new \DateTime(date('Y-m-d'));
                 $taux->setTime($orden->tiempo, 0, 0);
 
                 $tbody .= "<tr>
@@ -116,7 +116,7 @@ class MantenimientoController extends Controller
                     $estado = 'Finalizado <span style="background-color: green;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
                 }
 
-                $taux = new DateTime(date('Y-m-d'));
+                $taux = new \DateTime(date('Y-m-d'));
                 $taux->setTime($orden->tiempo, 0, 0);
 
                 $tbody .= "<tr>
