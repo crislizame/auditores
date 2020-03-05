@@ -14,13 +14,13 @@
         <div class="col-lg-12 mt-3">
             <div class="card">
                 <div class="card-body">
-                    <div class="row">
+                    <div class="row mt-3">
                         <div class="col-12">
-                            <ul class="nav mb-4">
-                                <a href="{{url('/problemas')}}?cat=loteria">
+                            <ul class="nav lmhorizontal mb-4" style="grid-template-columns: repeat(2, 1fr);">
+                                <a href="{{url('/ordenes')}}?cat=loteria">
                                     <li class="nav-item @if($cat == 'loteria') active @endif">Loteria</li>
                                 </a>
-                                <a href="{{url('/problemas')}}?cat=proveedores">
+                                <a href="{{url('/ordenes')}}?cat=proveedores">
                                     <li href="#" class="nav-item @if($cat == 'proveedores') active @endif">Proveedores</li>
                                 </a>
                             </ul>
