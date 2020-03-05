@@ -20,6 +20,6 @@ class SoporteController extends Controller
     {
         $cat = (isset($request->cat) ? $request->cat : 'loteria');
         $proveedores = DB::table('proveedores')->orderBy('idproveedores', 'asc')->get();
-        return view('vistas.pages.mantenimiento.problemas')->with('cat', $cat)->with('proveedores', $proveedores);
+        return view('vistas.pages.soporte.problemas')->with('cat', $cat)->with('proveedores', $proveedores);
     }
 }
