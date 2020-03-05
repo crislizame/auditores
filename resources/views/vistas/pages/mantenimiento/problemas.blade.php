@@ -375,7 +375,7 @@
         function cargar(cat) {
 
             $.ajax({
-                url: "{{url('problemas/cargar')}}",
+                url: "{{url('mantenimiento/problemas/cargar')}}",
                 method: "post",
                 dataType: 'text',
                 data: {
