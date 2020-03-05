@@ -2,18 +2,16 @@
 
 namespace App\Http\Controllers\Mantenimiento;
 
-use App\Attachment;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
-use App\Oreque_attachment;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use App\Orden_Requerimiento;
-use App\Orden_trabajo;
 use App\Otrabajo_attachment;
-use App\Proveedor;
+use App\Oreque_attachment;
+use App\Orden_trabajo;
+use App\Attachment;
 use App\User;
 
 class MantenimientoController extends Controller
