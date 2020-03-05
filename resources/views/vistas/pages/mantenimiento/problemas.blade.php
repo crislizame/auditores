@@ -528,7 +528,7 @@
                 $('#req_imagenes > .carousel-inner').html(ok.images);
             });
 
-            $('[name="ot_tiempo"]').val(zfill(done.tiempo,2)+":00");
+            $('[name="ot_tiempo"]').val(zfill(done.tiempo, 2) + ":00");
 
             if (done.proveedor_id != null) {
                 $('[name="ot_proveedor"]').val(done.proveedor_id);
@@ -599,9 +599,7 @@
                 });
             }
 
-            if (entidad == '{{(new App\Entidad())->where('
-                identidad ',Auth::user()->entidad_id)->value('
-                nombre ')}}') {
+            if (entidad == "{{(new App\Entidad())->where('identidad',Auth::user()->entidad_id)->value('nombre')}}") {
                 $('#sel-pro').show();
 
                 $('#gb-g').show();
