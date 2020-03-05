@@ -173,7 +173,7 @@ class MantenimientoController extends Controller
     {
         $ordenreq = Orden_Requerimiento::where('idorden_requermientos', $request->req_num_orden)->first();
         $ordenreq->observa = $request->req_observacion;
-        $ordenreq->enproceso = Carbon::now(); 
+        $ordenreq->enproceso = Carbon::now();
         $ordenreq->save();
 
         $orden = new Orden_trabajo();
@@ -189,7 +189,7 @@ class MantenimientoController extends Controller
 
         if ($request->has('ot_ccotizacion')) {
             $cimagen = new Attachment();
-            $cimagen->file = $request->post('ot_ccotizacion');
+            $cimagen->file = file_get_contents($request->file('ot_ccotizacion')->getRealPath());
             $cimagen->user_id = Auth::user()->id;
             $cimagen->save();
 
