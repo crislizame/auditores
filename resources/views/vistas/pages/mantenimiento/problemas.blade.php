@@ -530,7 +530,7 @@
 
             $('#ot_tiempo').html(zfill(done.tiempo, 2) + ":00");
 
-            if (done.proveedor_id != null) {
+            if (done.enproceso != null) {
                 $('[name="ot_proveedor"]').val(done.proveedor_id);
                 $('[name="ot_proveedor"]').select2().trigger('change');
 
