@@ -66,6 +66,19 @@ Route::middleware(['auth'])->group(function () {
     });
     // Mantenimiento
 
+    // Soporte
+    Route::prefix('soporte')->group(function () {
+        Route::get('problemas', 'Soporte/SoporteController@problemas')->name('problemas');
+        Route::post('problemas/cargar', 'Soporte/SoporteController@cargarProblemas');
+        Route::post('problemas/orden', 'Soporte/SoporteController@verOrden');
+        Route::post('problemas/orden/asignar', 'Soporte/SoporteController@asignarOrden');
+        Route::post('problemas/trabajo/ver', 'Soporte/SoporteController@imagenesTrabajo');
+        Route::post('problemas/imagenes', 'Soporte/SoporteController@imagenesRequerimiento');
+        Route::get('ordenes', 'Soporte/SoporteController@ordenes');
+        Route::get('perfil', 'Soporte/SoporteController@perfil');
+    });
+    // Soporte
+    
     //----Indicadores
     Route::any('indicadores', 'Admin\IndicadoresController@index')->name('indicadores');
     //--Rutas Ajax

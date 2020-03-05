@@ -70,7 +70,7 @@ class LoginController extends Controller
                     if ($user_type == 'M') {
                         return redirect('mantenimiento/problemas')->with('cat', 'loteria');
                     } else if ($user_type == 'S') {
-                        return redirect('problemas')->with('cat', 'loteria');
+                        return redirect('soporte/problemas')->with('cat', 'loteria');
                     } else if ($user_type == 'R') {
                         return redirect('problemas')->with('cat', 'loteria');
                     } else if ($user_type == 'L') {
