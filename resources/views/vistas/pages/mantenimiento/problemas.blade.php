@@ -528,8 +528,8 @@
                 $('#req_imagenes > .carousel-inner').html(ok.images);
             });
 
-            $('[name="ot_tiempo"]').val(done.tiempo);
-                
+            $('[name="ot_tiempo"]').val(zfill(done.tiempo,2)+":00");
+
             if (done.proveedor_id != null) {
                 $('[name="ot_proveedor"]').val(done.proveedor_id);
                 $('[name="ot_proveedor"]').select2().trigger('change');
@@ -599,19 +599,21 @@
                 });
             }
 
-            if(entidad == '{{(new App\Entidad())->where('identidad',Auth::user()->entidad_id)->value('nombre')}}'){
+            if (entidad == '{{(new App\Entidad())->where('
+                identidad ',Auth::user()->entidad_id)->value('
+                nombre ')}}') {
                 $('#sel-pro').show();
-                
+
                 $('#gb-g').show();
-            }else{ 
+            } else {
                 $('#tex-ent').show();
                 $('#ot_entidad').html(done.entidad);
 
-                $('[name="ot_presupuesto"]').attr('readonly','true');
-                $('[name="ot_garantia"]').attr('readonly','true');
-                $('[name="ot_encargado"]').attr('readonly','true');
-                $('[name="ot_extra"]').attr('readonly','true');
-                $('[name="ot_comentario"]').attr('readonly','true');
+                $('[name="ot_presupuesto"]').attr('readonly', 'true');
+                $('[name="ot_garantia"]').attr('readonly', 'true');
+                $('[name="ot_encargado"]').attr('readonly', 'true');
+                $('[name="ot_extra"]').attr('readonly', 'true');
+                $('[name="ot_comentario"]').attr('readonly', 'true');
 
                 $('#cc').hide();
                 $('#gc').hide();
@@ -626,6 +628,26 @@
         $('#vat').html(tipo);
         $('#vai').attr('src', url);
         $('.modal-va').modal('show');
+    }
+
+    function zfill(number, width) {
+        var numberOutput = Math.abs(number);
+        var length = number.toString().length;
+        var zero = "0";
+
+        if (width <= length) {
+            if (number < 0) {
+                return ("-" + numberOutput.toString());
+            } else {
+                return numberOutput.toString();
+            }
+        } else {
+            if (number < 0) {
+                return ("-" + (zero.repeat(width - length)) + numberOutput.toString());
+            } else {
+                return ((zero.repeat(width - length)) + numberOutput.toString());
+            }
+        }
     }
 </script>
 @endsection
