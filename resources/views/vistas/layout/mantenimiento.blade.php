@@ -89,7 +89,25 @@
     <!-- Start wrapper-->
     <div id="wrapper">
         {{--<div class="wrapper sidebar_minimize">--}}
+
+        @switch(Auth::user()->user_type)
+        @case('M')
         @include('vistas.include.mantenimiento.menu')
+        @break
+        @case('S')
+        @include('vistas.include.soporte_rp3_lottogame.menu')
+        @break
+        @case('R')
+        @include('vistas.include.soporte_rp3_lottogame.menu')
+        @break
+        @case('L')
+        @include('vistas.include.soporte_rp3_lottogame.menu')
+        @break
+        @case('P')
+        @include('vistas.include.permisos.menu')
+        @break
+        @endswitch
+
         <div class="content-wrapper pl-0">
             @yield('content')
 
@@ -99,7 +117,7 @@
         <a href="javaScript:void();" class="back-to-top"><i class="fa fa-angle-double-up"></i> </a>
 
     </div>
-    
+
     <link href="{{asset("assets/css/app-style.css")}}" rel="stylesheet" />
     <!--End wrapper-->
     <!-- Bootstrap core JavaScript-->

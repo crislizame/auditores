@@ -15,11 +15,6 @@
                 <i class="icon-list"></i> <span>Registro de ordenes</span>
             </a>
         </li>
-        <li @if(strpos (url()->current(), 'proveedores')!==false) class="active" @endif>
-            <a href="{{url('proveedores')}}" class="waves-effect">
-                <i class="icon-people"></i> <span>Proovedores</span>
-            </a>
-        </li>
         <li @if(strpos (url()->current(), 'perfil')!==false) class="active" @endif>
             <a href="{{url('perfil')}}" class="waves-effect">
                 <i class="icon-home"></i> <span>Perfil</span>
