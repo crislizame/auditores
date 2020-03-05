@@ -17,7 +17,7 @@
                         <div class="form-group">
                             <label class="col-form-label">Foto</label>
                             <div class="col-8 offset-2">
-                                <img class="img-thumbnail" src="{{url('soporte/imagen/' . $user->attachment_id)}}">
+                                <img class="img-thumbnail" src="{{url('/imagen/' . $user->attachment_id)}}">
                             </div>
                         </div>
                         @endif
