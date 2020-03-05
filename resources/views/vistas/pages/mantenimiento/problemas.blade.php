@@ -24,7 +24,7 @@
 
                     <div class="row mt-3">
                         <div class="col-12">
-                            <ul class="nav lmhorizontal">
+                            <ul class="nav lmhorizontal" style="grid-template-columns: repeat(2, 1fr);">
                                 <a href="{{url('/problemas')}}?cat=loteria">
                                     <li class="nav-item @if($cat == 'loteria') active @endif">Loteria</li>
                                 </a>
