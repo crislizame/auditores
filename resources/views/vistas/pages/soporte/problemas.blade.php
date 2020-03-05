@@ -1,4 +1,4 @@
-@extends('vistas.layout.soporte')
+@extends('vistas.layout.mantenimiento')
 
 @section('content')
 
