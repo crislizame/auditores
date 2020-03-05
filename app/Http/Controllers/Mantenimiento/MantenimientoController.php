@@ -173,6 +173,7 @@ class MantenimientoController extends Controller
     {
         $ordenreq = Orden_Requerimiento::where('idorden_requermientos', $request->req_num_orden)->first();
         $ordenreq->observa = $request->req_observacion;
+        $ordenreq->enproceso = Carbon::now(); 
         $ordenreq->save();
 
         $orden = new Orden_trabajo();
