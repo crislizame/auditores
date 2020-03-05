@@ -214,7 +214,7 @@ class MantenimientoController extends Controller
             $otcimage->save();
         }
 
-        return redirect('problemas');
+        return redirect('mantenimiento/problemas');
     }
 
     public function imagenesRequerimiento(Request $request)

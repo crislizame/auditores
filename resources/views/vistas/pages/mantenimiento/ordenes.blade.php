@@ -1,11 +1,4 @@
 @extends('vistas.layout.mantenimiento')
-@section('styles')
-<style>
-    .pds-lista-item:hover {
-        background: #e3e3e3;
-    }
-</style>
-@endsection
 
 @section('content')
 
@@ -17,10 +10,10 @@
                     <div class="row mt-3">
                         <div class="col-12">
                             <ul class="nav lmhorizontal mb-4" style="grid-template-columns: repeat(2, 1fr);">
-                                <a href="{{url('/ordenes')}}?cat=loteria">
+                                <a href="{{url('mantenimiento/ordenes')}}?cat=loteria">
                                     <li class="nav-item @if($cat == 'loteria') active @endif">Loteria</li>
                                 </a>
-                                <a href="{{url('/ordenes')}}?cat=proveedores">
+                                <a href="{{url('mantenimiento/ordenes')}}?cat=proveedores">
                                     <li href="#" class="nav-item @if($cat == 'proveedores') active @endif">Proveedores</li>
                                 </a>
                             </ul>
@@ -82,8 +75,7 @@
                 </button>
             </div>
             <div class="modal-body">
-
-                <form id="form-asignarOrden" method="POST" autocomplate="off" action="{{url('problemas/orden/asignar')}}" enctype="multipart/form-data">
+                <form id="form-asignarOrden" method="POST" autocomplate="off" action="{{url('mantenimiento/problemas/orden/asignar')}}" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col-6">
@@ -96,7 +88,6 @@
                                     <input type="hidden" name="req_num_orden">
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-4">
                                     <label>WTC</label>
@@ -108,7 +99,6 @@
                                     <label>Sub Area</label>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-4">
                                     <h5 id="req_cliente"></h5>
@@ -120,19 +110,16 @@
                                     <h5 id="req_subarea"></h5>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-12">
                                     <label>Problema</label>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-12">
                                     <h5 id="req_problema"></h5>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-4">
                                     <label>Fecha Inicio</label>
@@ -141,7 +128,6 @@
                                     <label>Fecha Fin</label>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-4">
                                     <h5 id="req_rfinicio"></h5>
@@ -150,25 +136,21 @@
                                     <h5 id="req_rffin"></h5>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-12">
                                     <label>Comentario</label>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-12">
                                     <h5 id="req_comentario" style="height: 80px;"></h5>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-12">
                                     <label>Imágenes</label>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-12">
                                     <!--IMAGENES-->
@@ -195,22 +177,18 @@
                                     <!--IMAGENES-->
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-12">
                                     <label>Observación de encargado de mantenimiento</label>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-12">
                                     <textarea class="form-control" name="req_observacion" rows="4"></textarea>
                                 </div>
                             </div>
-
                         </div>
                         <div class="col-6">
-
                             <div class="row">
                                 <div class="col-6">
                                     <label>Proveedor</label>
@@ -219,7 +197,6 @@
                                     <label>Estado</label>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-6">
                                     <select name="ot_proveedor">
@@ -250,7 +227,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-6">
                                     <label>Fecha Inicio</label>
@@ -259,7 +235,6 @@
                                     <label>Fecha Fin</label>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-6">
                                     <h5 id="ot_finicio"></h5>
@@ -268,7 +243,6 @@
                                     <h5 id="ot_ffin"></h5>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-6">
                                     <label>Presupuesto</label>
@@ -277,7 +251,6 @@
                                     <label>Garantía</label>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-6">
                                     <input type="text" name="ot_presupuesto" class="form-control">
@@ -286,7 +259,6 @@
                                     <input type="text" name="ot_garantia" class="form-control">
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-6">
                                     <label>Encargado</label>
@@ -295,7 +267,6 @@
                                     <label>Tiempo para resolver</label>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-6">
                                     <input type="text" name="ot_encargado" class="form-control">
@@ -304,31 +275,26 @@
                                     <input type="time" id="time" name="ot_tiempo">
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-6 offset-6">
                                     <label>Extra</label>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-6 offset-6">
                                     <input type="text" name="ot_extra" class="form-control">
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-12">
                                     <label>Comentario</label>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-12">
                                     <textarea class="form-control" name="ot_comentario" rows="4" placeholder="Incluir # de orden de compra"></textarea>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-6" id="cc">
                                     <label>Cotización <i class="fa fa-upload"></i> Cargar imagen</label>
@@ -345,7 +311,6 @@
                                     <label>Garantía <i class="fa fa-eye"></i><a href="#" id="gvl"> Ver</a></label>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                     <div class="row">
@@ -375,232 +340,7 @@
         </div>
     </div>
 </div>
-
 @endsection
 @section('script')
 
-<script>
-    var tableProblemas;
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': '{{csrf_token()}}'
-        }
-    });
-
-    $(document).ready(function() {
-        tableProblemas = $('#list_problemas').DataTable({
-            "lengthMenu": [
-                [25, 50, 100, -1],
-                [25, 50, 100, "Todos"]
-            ]
-        });
-
-        cargar('{{$cat}}');
-        $('select').select2();
-
-        $('.modal-asignar').on('hidden.bs.modal', function(e) {
-            document.getElementById("form-asignarOrden").reset();
-        });
-
-        function cargar(cat) {
-
-            $.ajax({
-                url: "{{url('problemas/cargar')}}",
-                method: "post",
-                dataType: 'text',
-                data: {
-                    '_token': "{{csrf_token()}}",
-                    'cat': cat
-                },
-                beforeSend: function() {
-                    swal({
-                        title: "Cargando Problemas",
-                        icon: "info",
-                        buttons: false,
-                        timer: 2000,
-                        closeOnClickOutside: false,
-                        closeOnEsc: false
-                    });
-                }
-            }).done(function(done) {
-                tableProblemas.destroy();
-                $('.TablaProblemas').html(done);
-                tableProblemas = $('#list_problemas').DataTable({
-                    "order": [
-                        [0, 'desc']
-                    ],
-                    "lengthMenu": [
-                        [25, 50, 100, -1],
-                        [25, 50, 100, "Todos"]
-                    ],
-                    "columns": [{
-                            "width": "10%"
-                        },
-                        {
-                            "width": "10%"
-                        },
-                        {
-                            "width": "10%"
-                        },
-                        {
-                            "width": "15%"
-                        },
-                        {
-                            "width": "20%"
-                        },
-                        {
-                            "width": "10%"
-                        },
-                        {
-                            "width": "10%"
-                        },
-                        {
-                            "width": "15%"
-                        }
-                    ]
-                });
-            });
-        }
-    });
-
-    function modalAsignarOrdenDeTrabajo(id, visualId) {
-        $.ajax({
-            url: "{{url('problemas/orden')}}",
-            method: "post",
-            data: {
-                '_token': "{{csrf_token()}}",
-                'id': id
-            },
-            beforeSend: function() {
-                swal({
-                    title: "Cargando Datos de la orden",
-                    icon: "info",
-                    buttons: false,
-                    timer: 2000,
-                    closeOnClickOutside: false,
-                    closeOnEsc: false
-                });
-            }
-        }).done(function(data) {
-            var done = data[0];
-
-            $('.modal-asignar').modal('show');
-            $('#req_num_orden').html(visualId);
-            $('[name="req_num_orden"]').val(id);
-
-            $('#req_cliente').html(done.cliente);
-            $('#req_area').html(done.area);
-            $('#req_subarea').html(done.subarea);
-
-            $('#req_problema').html(done.problema);
-
-            $('#req_rfinicio').html(done.solicitado);
-            $('#ot_finicio').html(done.solicitado);
-            //$('#req_rffin').html(done.rffin);
-
-            $('#req_comentario').html(done.rcomentario);
-
-            $('#req_observacion').html(done.robservacion);
-
-            $.ajax({
-                url: "{{url('problemas/imagenes')}}",
-                method: "post",
-                data: {
-                    '_token': "{{csrf_token()}}",
-                    'id': id
-                }
-            }).done(function(ok) {
-                $('#req_imagenes > .carousel-indicators').empty();
-                var indicators = '';
-                for (var i = 0; i < ok.count; i++) {
-                    var active = '';
-                    if (i == 0) {
-                        active = 'active';
-                    }
-                    indicators += '<li data-target="#req_imagenes" data-slide-to="' + i + '" class="' + active + '"></li>';
-                }
-                $('#req_imagenes > .carousel-indicators').html(indicators);
-                $('#req_imagenes > .carousel-inner').empty();
-                $('#req_imagenes > .carousel-inner').html(ok.images);
-            });
-
-            if (done.proveedor_id != null) {
-                $('[name="ot_proveedor"]').val(done.proveedor_id);
-                $('[name="ot_proveedor"]').select2().trigger('change');
-
-                switch (done.estado) {
-                    case 'U':
-                        $('#r1').click();
-                        break;
-                    case 'S':
-                        $('#r2').click();
-                        break;
-                }
-
-                $('#ot_ffin').html(done.finalizado);
-
-                $('[name="ot_presupuesto"]').val(done.presupuesto);
-                $('[name="ot_garantia"]').val(done.garantia);
-
-                $('[name="ot_encargado"]').val(done.encargado);
-                $('[name="ot_tiempo"]').val(done.tresolver);
-                $('[name="ot_extra"]').val(done.extra);
-
-                $('[name="ot_comentario"]').val(done.comentario);
-
-                $('#benviar').prop('disabled', true);
-                $('#benviar').removeClass('btn-primary');
-                $('#benviar').addClass('btn-default');
-
-                var otrabajo = done.idorden_trabajos;
-                $.ajax({
-                    url: "{{url('problemas/trabajo/ver')}}",
-                    method: "post",
-                    data: {
-                        '_token': "{{csrf_token()}}",
-                        'id': otrabajo,
-                        'tipo': 'C'
-                    }
-                }).done(function(ok) {
-                    if (ok.attachment_id > 0) {
-                        $('#cc').hide();
-                        $('#cv').show();
-                        $('#cvl').attr('onclick', 'modalImagenTrabajo("{{url("/imagen")}}/' + ok.attachment_id + '", "Cotización")');
-                    } else {
-                        $('#cc').show();
-                        $('#cv').hide();
-                        $('#cvl').removeAttr('onclick');
-                    }
-                });
-
-                $.ajax({
-                    url: "{{url('problemas/trabajo/ver')}}",
-                    method: "post",
-                    data: {
-                        '_token': "{{csrf_token()}}",
-                        'id': otrabajo,
-                        'tipo': 'G'
-                    }
-                }).done(function(ok) {
-                    if (ok.attachment_id > 0) {
-                        $('#gc').hide();
-                        $('#gv').show();
-                        $('#gvl').attr('onclick', 'modalImagenTrabajo("{{url("/imagen")}}/' + ok.attachment_id + '", "Garantía")');
-                    } else {
-                        $('#gc').show();
-                        $('#gv').hide();
-                        $('#gvl').removeAttr('onclick');
-                    }
-                });
-            }
-        });
-
-    }
-
-    function modalImagenTrabajo(url, tipo) {
-        $('#vat').html(tipo);
-        $('#vai').attr('src', url);
-        $('.modal-va').modal('show');
-    }
-</script>
 @endsection

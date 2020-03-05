@@ -1,22 +1,12 @@
 @extends('vistas.layout.mantenimiento')
-@section('styles')
-<style>
-    .pds-lista-item:hover {
-        background: #e3e3e3;
-    }
-</style>
-@endsection
 
 @section('content')
-
 <div class="container-fluid ">
     <div class="row ">
-        <!-- Start Row principal -->
         <div class="col-lg-12 mt-3">
             <div class="card">
                 <div class="card-body row">
                     <div class="col-lg-4">
-
                         <div class="form-group">
                             <label class="col-form-label">Nombre</label>
                             <div>
@@ -27,20 +17,18 @@
                         <div class="form-group">
                             <label class="col-form-label">Foto</label>
                             <div class="col-8 offset-2">
-                                <img class="img-thumbnail" src="{{url('imagen/' . $user->attachment_id)}}">
+                                <img class="img-thumbnail" src="{{url('mantenimiento/imagen/' . $user->attachment_id)}}">
                             </div>
                         </div>
                         @endif
                     </div>
                     <div class="col-lg-8">
-
                         <div class="form-group">
                             <label class="col-form-label">Dirección</label>
                             <div>
                                 <input type="text" class="form-control" value="@if($user->direccion!=null){{$user->direccion}}@endif" readonly>
                             </div>
                         </div>
-
                         <div class="row">
                             <div class="form-group col-6">
                                 <label class="col-form-label">Celular</label>
@@ -48,7 +36,6 @@
                                     <input type="text" class="form-control" value="@if($user->celular!=null){{$user->celular}}@endif" readonly>
                                 </div>
                             </div>
-
                             <div class="form-group col-6">
                                 <label class="col-form-label">Teléfono</label>
                                 <div>
@@ -56,7 +43,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="row">
                             <div class="form-group col-6">
                                 <label class="col-form-label">Hora de entrada</label>
@@ -64,7 +50,6 @@
                                     <input type="text" class="form-control" value="@if($user->h_entrada!=null){{$user->h_entrada}}@endif" readonly>
                                 </div>
                             </div>
-
                             <div class="form-group col-6">
                                 <label class="col-form-label">Cédula</label>
                                 <div>
@@ -72,7 +57,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="row">
                             <div class="form-group col-6">
                                 <label class="col-form-label">Hora de salida</label>
@@ -80,7 +64,6 @@
                                     <input type="text" class="form-control" value="@if($user->h_salida!=null){{$user->h_salida}}@endif" readonly>
                                 </div>
                             </div>
-
                             <div class="form-group col-6">
                                 <label class="col-form-label">Calificación</label>
                                 <div class="border rounded text-center mb-4" style="min-height: 80px;">
@@ -93,73 +76,17 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
-
-
 @endsection
 @section('script')
-
 <script>
     $(document).ready(function() {
-        {
-            {
-                --
-                var tablePDS = $('#list_pds').DataTable({
-                    "lengthMenu": [
-                        [25, 50, 100, -1],
-                        [25, 50, 100, "Todos"]
-                    ]
-                });
 
-                //comisionista/listas/ajax/cargarPDS
-                cargarPDS();
-
-                function cargarPDS() {
-
-                    $.ajax({
-                        url: "{{route('cargarpds')}}",
-                        method: "post",
-                        dataType: 'text',
-                        data: {
-                            '_token': "{{csrf_token()}}"
-                        },
-                        beforeSend: function() {
-                            //$('.btnPDSEditar').removeAttr('disabled');
-                            swal({
-                                title: "Cargando PDS",
-                                icon: "info",
-                                buttons: false,
-                                timer: 2000,
-                                closeOnClickOutside: false,
-                                closeOnEsc: false
-                            });
-                        }
-                    }).done(function(done) {
-                        tablePDS.destroy();
-                        //$('.btnPDSEditar').attr('disabled');
-                        $('.PDSTabla').html(done);
-                        tablePDS = $('#list_pds').DataTable({
-                            "order": [
-                                [0, 'desc']
-                            ],
-                            "lengthMenu": [
-                                [25, 50, 100, -1],
-                                [25, 50, 100, "Todos"]
-                            ]
-                        });
-                    });
-                }
-                --
-            }
-        }
     });
 </script>
 @endsection

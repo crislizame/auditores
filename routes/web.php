@@ -52,18 +52,18 @@ Route::middleware(['auth'])->group(function () {
     //editcrisfin
 
     // Mantenimiento
-    Route::get('problemas', 'Mantenimiento\MantenimientoController@problemas')->name('problemas');
-    Route::post('problemas/cargar', 'Mantenimiento\MantenimientoController@cargarProblemas');
-    Route::post('problemas/orden', 'Mantenimiento\MantenimientoController@verOrden');
-    Route::post('problemas/orden/asignar', 'Mantenimiento\MantenimientoController@asignarOrden');
-    Route::post('problemas/trabajo/ver', 'Mantenimiento\MantenimientoController@imagenesTrabajo');
-    Route::post('problemas/imagenes', 'Mantenimiento\MantenimientoController@imagenesRequerimiento');
-
-    Route::get('ordenes', 'Mantenimiento\MantenimientoController@ordenes');
-    Route::get('proveedores', 'Mantenimiento\MantenimientoController@proveedores');
-    Route::post('proveedores/cargar', 'Mantenimiento\MantenimientoController@cargarProveedores');
-    Route::get('perfil', 'Mantenimiento\MantenimientoController@perfil');
-
+    Route::prefix('mantenimiento')->group(function () {
+        Route::get('problemas', 'Mantenimiento\MantenimientoController@problemas')->name('problemas');
+        Route::post('problemas/cargar', 'Mantenimiento\MantenimientoController@cargarProblemas');
+        Route::post('problemas/orden', 'Mantenimiento\MantenimientoController@verOrden');
+        Route::post('problemas/orden/asignar', 'Mantenimiento\MantenimientoController@asignarOrden');
+        Route::post('problemas/trabajo/ver', 'Mantenimiento\MantenimientoController@imagenesTrabajo');
+        Route::post('problemas/imagenes', 'Mantenimiento\MantenimientoController@imagenesRequerimiento');
+        Route::get('ordenes', 'Mantenimiento\MantenimientoController@ordenes');
+        Route::get('proveedores', 'Mantenimiento\MantenimientoController@proveedores');
+        Route::post('proveedores/cargar', 'Mantenimiento\MantenimientoController@cargarProveedores');
+        Route::get('perfil', 'Mantenimiento\MantenimientoController@perfil');
+    });
     // Mantenimiento
 
     //----Indicadores

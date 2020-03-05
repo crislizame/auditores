@@ -1,11 +1,4 @@
 @extends('vistas.layout.mantenimiento')
-@section('styles')
-<style>
-    .pds-lista-item:hover {
-        background: #e3e3e3;
-    }
-</style>
-@endsection
 
 @section('content')
 
@@ -17,10 +10,10 @@
                     <div class="row mt-3">
                         <div class="col-12">
                             <ul class="nav lmhorizontal mb-4" style="grid-template-columns: repeat(2, 1fr);">
-                                <a href="{{url('/problemas')}}?cat=loteria">
+                                <a href="{{url('mantenimiento/problemas')}}?cat=loteria">
                                     <li class="nav-item @if($cat == 'loteria') active @endif">Loteria</li>
                                 </a>
-                                <a href="{{url('/problemas')}}?cat=proveedores">
+                                <a href="{{url('mantenimiento/problemas')}}?cat=proveedores">
                                     <li href="#" class="nav-item @if($cat == 'proveedores') active @endif">Proveedores</li>
                                 </a>
                             </ul>
@@ -82,8 +75,7 @@
                 </button>
             </div>
             <div class="modal-body">
-
-                <form id="form-asignarOrden" method="POST" autocomplate="off" action="{{url('problemas/orden/asignar')}}" enctype="multipart/form-data">
+                <form id="form-asignarOrden" method="POST" autocomplate="off" action="{{url('mantenimiento/problemas/orden/asignar')}}" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col-6">
@@ -96,7 +88,6 @@
                                     <input type="hidden" name="req_num_orden">
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-4">
                                     <label>WTC</label>
@@ -108,7 +99,6 @@
                                     <label>Sub Area</label>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-4">
                                     <h5 id="req_cliente"></h5>
@@ -120,19 +110,16 @@
                                     <h5 id="req_subarea"></h5>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-12">
                                     <label>Problema</label>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-12">
                                     <h5 id="req_problema"></h5>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-4">
                                     <label>Fecha Inicio</label>
@@ -141,7 +128,6 @@
                                     <label>Fecha Fin</label>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-4">
                                     <h5 id="req_rfinicio"></h5>
@@ -150,25 +136,21 @@
                                     <h5 id="req_rffin"></h5>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-12">
                                     <label>Comentario</label>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-12">
                                     <h5 id="req_comentario" style="height: 80px;"></h5>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-12">
                                     <label>Imágenes</label>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-12">
                                     <!--IMAGENES-->
@@ -195,22 +177,18 @@
                                     <!--IMAGENES-->
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-12">
                                     <label>Observación de encargado de mantenimiento</label>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-12">
                                     <textarea class="form-control" name="req_observacion" rows="4"></textarea>
                                 </div>
                             </div>
-
                         </div>
                         <div class="col-6">
-
                             <div class="row">
                                 <div class="col-6">
                                     <label>Proveedor</label>
@@ -219,7 +197,6 @@
                                     <label>Estado</label>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-6" id="sel-pro" style="display: none;">
                                     <select name="ot_proveedor">
@@ -252,7 +229,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-6">
                                     <label>Fecha Inicio</label>
@@ -261,7 +237,6 @@
                                     <label>Fecha Fin</label>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-6">
                                     <h5 id="ot_finicio"></h5>
@@ -270,7 +245,6 @@
                                     <h5 id="ot_ffin"></h5>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-6">
                                     <label>Presupuesto</label>
@@ -279,7 +253,6 @@
                                     <label>Garantía</label>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-6">
                                     <input type="text" name="ot_presupuesto" class="form-control">
@@ -288,7 +261,6 @@
                                     <input type="text" name="ot_garantia" class="form-control">
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-6">
                                     <label>Encargado</label>
@@ -297,7 +269,6 @@
                                     <label>Tiempo para resolver</label>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-6">
                                     <input type="text" name="ot_encargado" class="form-control">
@@ -306,31 +277,26 @@
                                     <h5 id="ot_tiempo"></h5>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-6 offset-6">
                                     <label>Extra</label>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-6 offset-6">
                                     <input type="text" name="ot_extra" class="form-control">
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-12">
                                     <label>Comentario</label>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-12">
                                     <textarea class="form-control" name="ot_comentario" rows="4" placeholder="Incluir # de orden de compra"></textarea>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-6" id="cc">
                                     <label>Cotización <i class="fa fa-upload"></i> Cargar imagen</label>
@@ -347,7 +313,6 @@
                                     <label>Garantía <i class="fa fa-eye"></i><a href="#" id="gvl"> Ver</a></label>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                     <div class="row">
@@ -470,7 +435,7 @@
 
     function modalAsignarOrdenDeTrabajo(id, visualId, entidad) {
         $.ajax({
-            url: "{{url('problemas/orden')}}",
+            url: "{{url('mantenimiento/problemas/orden')}}",
             method: "post",
             data: {
                 '_token': "{{csrf_token()}}",
@@ -507,7 +472,7 @@
             $('[name="req_observacion"]').html(done.robservacion);
 
             $.ajax({
-                url: "{{url('problemas/imagenes')}}",
+                url: "{{url('mantenimiento/problemas/imagenes')}}",
                 method: "post",
                 data: {
                     '_token': "{{csrf_token()}}",
@@ -559,7 +524,7 @@
 
                 var otrabajo = done.idorden_trabajos;
                 $.ajax({
-                    url: "{{url('problemas/trabajo/ver')}}",
+                    url: "{{url('mantenimiento/problemas/trabajo/ver')}}",
                     method: "post",
                     data: {
                         '_token': "{{csrf_token()}}",
@@ -579,7 +544,7 @@
                 });
 
                 $.ajax({
-                    url: "{{url('problemas/trabajo/ver')}}",
+                    url: "{{url('mantenimiento/problemas/trabajo/ver')}}",
                     method: "post",
                     data: {
                         '_token': "{{csrf_token()}}",
@@ -597,8 +562,6 @@
                         $('#gvl').removeAttr('onclick');
                     }
                 });
-
-
             }
 
             if (entidad == "{{(new App\Entidad())->where('identidad',Auth::user()->entidad_id)->value('nombre')}}") {
@@ -620,10 +583,7 @@
 
                 $('#gb-c').show();
             }
-
-
         });
-
     }
 
     function modalImagenTrabajo(url, tipo) {

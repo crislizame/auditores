@@ -68,7 +68,15 @@ class LoginController extends Controller
                 if (Auth::attempt($credentials)) {
                     $user_type = Auth::user()->user_type;
                     if ($user_type == 'M') {
+                        return redirect('mantenimiento/problemas')->with('cat', 'loteria');
+                    } else if ($user_type == 'S') {
                         return redirect('problemas')->with('cat', 'loteria');
+                    } else if ($user_type == 'R') {
+                        return redirect('problemas')->with('cat', 'loteria');
+                    } else if ($user_type == 'L') {
+                        return redirect('problemas')->with('cat', 'loteria');
+                    } else if ($user_type == 'P') {
+                        return redirect('permisos');
                     } else if ($user_type == "A") {
                         return redirect('crear-agenda');
                     }
