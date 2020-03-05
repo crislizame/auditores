@@ -597,6 +597,8 @@
                         $('#gvl').removeAttr('onclick');
                     }
                 });
+
+                
             }
 
             if (entidad == "{{(new App\Entidad())->where('identidad',Auth::user()->entidad_id)->value('nombre')}}") {
@@ -618,6 +620,8 @@
 
                 $('#gb-c').show();
             }
+
+
         });
 
     }
