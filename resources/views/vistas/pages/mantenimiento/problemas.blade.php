@@ -317,7 +317,6 @@
                     </div>
                     <div class="row">
                         <div class="col-12" style="display: none;" id="gb-g">
-                            <button type="button" class="btn btn-primary float-right" onclick="finalizar()">Finalizar</button>
                             <a onclick="finalizar()" class="btn btn-primary float-right text-white">Finalizar</a>
                             <button type="submit" class="btn btn-primary float-right mr-3" id="benviar">Procesar</button>
                         </div>
