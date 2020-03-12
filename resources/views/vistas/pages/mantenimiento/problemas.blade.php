@@ -618,7 +618,7 @@
             method: "post",
             data: {
                 '_token': "{{csrf_token()}}",
-                'id': $('#req_num_orden').val()
+                'id': $('[name="req_num_orden"]').val()
             }
         }).done(function(ok) {
             //location.reload();
