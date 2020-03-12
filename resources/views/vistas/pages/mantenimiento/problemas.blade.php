@@ -621,7 +621,7 @@
                 'id': $('[name="req_num_orden"]').val()
             }
         }).done(function(ok) {
-            //location.reload();
+            location.reload();
         });
     }
 </script>
