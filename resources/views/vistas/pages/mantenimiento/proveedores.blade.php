@@ -53,7 +53,7 @@
         });
 
         $.ajax({
-            url: "{{url('proveedores/cargar')}}",
+            url: "{{url('mantenimiento/proveedores/cargar')}}",
             method: "post",
             dataType: 'text',
             data: {
