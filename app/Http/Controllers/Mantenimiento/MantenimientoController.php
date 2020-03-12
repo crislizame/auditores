@@ -271,7 +271,7 @@ class MantenimientoController extends Controller
 
     public function finalizarOrdenDeRequerimiento(Request $request){
         
-        $orden = Orden_Requerimiento::find($request->input('id'))->get();
+        $orden = Orden_Requerimiento::find($request->input('id'));
         $orden->finalizado = Carbon::now();
         $orden->save();
     }
