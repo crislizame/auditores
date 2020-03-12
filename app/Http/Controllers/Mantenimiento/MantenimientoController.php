@@ -268,4 +268,8 @@ class MantenimientoController extends Controller
         $user = User::where('id', Auth::user()->id)->leftJoin('mantenimiento_users', 'users.id', 'mantenimiento_users.user_id')->first();
         return view('vistas.pages.mantenimiento.perfil')->with('user', $user);
     }
+
+    public function finalizarOrdenDeRequerimiento(Request $request){
+        return $request->all();
+    }
 }

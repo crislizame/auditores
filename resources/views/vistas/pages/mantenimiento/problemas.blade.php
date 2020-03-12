@@ -317,7 +317,7 @@
                     </div>
                     <div class="row">
                         <div class="col-12" style="display: none;" id="gb-g">
-                            <button type="button" class="btn btn-primary float-right">Finalizar</button>
+                            <button type="button" class="btn btn-primary float-right" id="finalizar">Finalizar</button>
                             <button type="submit" class="btn btn-primary float-right mr-3" id="benviar">Procesar</button>
                         </div>
                         <div class="col-12" style="display: none;" id="gb-c">
@@ -610,6 +610,19 @@
                 return ((zero.repeat(width - length)) + numberOutput.toString());
             }
         }
+    }
+
+    function finalizar() {
+        $.ajax({
+            url: "{{url('mantenimiento/problemas/finalizar')}}",
+            method: "post",
+            data: {
+                '_token': "{{csrf_token()}}",
+                'id': $('#req_num_orden')
+            }
+        }).done(function(ok) {
+            //location.reload();
+        });
     }
 </script>
 @endsection
