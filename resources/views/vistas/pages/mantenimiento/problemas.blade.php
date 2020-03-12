@@ -567,7 +567,11 @@
             if (entidad == "{{(new App\Entidad())->where('identidad',Auth::user()->entidad_id)->value('nombre')}}") {
                 $('#sel-pro').show();
 
-                $('#gb-g').show();
+                if(done.finalizado!=null){
+                    $('#gb-c').show();
+                }else{
+                    $('#gb-g').show();
+                }
             } else {
                 $('#tex-ent').show();
                 $('#ot_entidad').html(done.entidad);
