@@ -318,6 +318,7 @@
                     <div class="row">
                         <div class="col-12" style="display: none;" id="gb-g">
                             <button type="button" class="btn btn-primary float-right" onclick="finalizar()">Finalizar</button>
+                            <a onclick="finalizar()" class="btn btn-primary float-right text-white">Finalizar</a>
                             <button type="submit" class="btn btn-primary float-right mr-3" id="benviar">Procesar</button>
                         </div>
                         <div class="col-12" style="display: none;" id="gb-c">
@@ -618,7 +619,7 @@
             method: "post",
             data: {
                 '_token': "{{csrf_token()}}",
-                'id': $('#req_num_orden')
+                'id': $('#req_num_orden').val()
             }
         }).done(function(ok) {
             //location.reload();
