@@ -77,6 +77,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('problemas/trabajo/ver', 'Soporte\SoporteController@imagenesTrabajo');
         Route::post('problemas/imagenes', 'Soporte\SoporteController@imagenesRequerimiento');
         Route::get('ordenes', 'Soporte\SoporteController@ordenes');
+        Route::post('ordenes/cargar', 'Soporte\SoporteController@cargarOrdenes');
         Route::get('perfil', 'Soporte\SoporteController@perfil');
     });
     // Soporte
