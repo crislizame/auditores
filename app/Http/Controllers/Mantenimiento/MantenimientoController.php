@@ -367,7 +367,8 @@ class MantenimientoController extends Controller
     public function ordenes(Request $request)
     {
         $cat = (isset($request->cat) ? $request->cat : 'loteria');
-        return view('vistas.pages.mantenimiento.ordenes')->with('cat', $cat);
+        $proveedores = DB::table('proveedores')->orderBy('idproveedores', 'asc')->get();
+        return view('vistas.pages.mantenimiento.ordenes')->with('cat', $cat)->with('proveedores', $proveedores);
     }
 
     public function proveedores()
