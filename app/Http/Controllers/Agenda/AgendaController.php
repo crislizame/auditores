@@ -8,13 +8,13 @@ use App\AgendaPd;
 use App\Attachment;
 use App\Auditore;
 use App\Encauditdata_attachment;
+use App\PdsAuditore;
 use App\Pdsperfile;
 use App\Arqueo_attachment;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
 
 class AgendaController extends Controller
 {
@@ -27,8 +27,8 @@ class AgendaController extends Controller
     public function eliminarpdsdeagenda()
     {
         $idpds = \request('id');
-        $idagenda = \request('idagenda');
-        (new AgendaPd())->where(['pds_id' => $idpds, 'agenda_id' => $idagenda])->delete();
+        //$idagenda = \request('idagenda');
+        (new PdsAuditore())->where(['id' => $idpds])->delete();
         return 1;
     }
     public function eliminarauditordeagenda()
@@ -36,6 +36,7 @@ class AgendaController extends Controller
         $idpds = \request('id');
         $idagenda = \request('idagenda');
         (new AgendaAuditore())->where(['auditor_id' => $idpds, 'agenda_id' => $idagenda])->delete();
+        //(new Pdsperfile())->where(['auditor_id' => $idpds, 'agenda_id' => $idagenda])->delete();
         return 1;
     }
     public function editarpdsdeagenda()
@@ -71,7 +72,7 @@ class AgendaController extends Controller
         foreach ($agendf as $item) {
             $res[] = array(
                 'title' => ' ', 'start' => $item->agenda_date, 'id' => $item->id,
-                'textfecha' => ucfirst(Carbon::parse($item->agenda_date)->isoFormat('dddd, D \d\e\ MMMM \d\e\l YYYY'))
+                'textfecha' => ucwords(Carbon::parse($item->agenda_date)->isoFormat('dddd, D \d\e\ MMMM \d\e\l YYYY'))
             );
         }
         return $res;
@@ -79,7 +80,7 @@ class AgendaController extends Controller
     public function cargarauditxfecha()
     {
         $agendaid = json_decode(\request('id'));
-        $mpds = new AgendaAuditore();
+        $mpds = new PdsAuditore();
 
         $sqlend = null;
         $sql = $mpds;
@@ -87,11 +88,15 @@ class AgendaController extends Controller
         $res = null;
         $active = null;
         foreach ($pds_agendas as $pds_agenda) {
-            $pds = new Auditore();
-            $auditore = $pds->where('id', $pds_agenda->auditor_id)->first();
-            $res .= "<li class=\"nav-item audititem\">
-                                            <span class=\"nav-link \" >" . mb_strimwidth($auditore->aud_nombre . ' ' . $auditore->aud_apellidos, 0, 15, "...") . " <span class=\"check-or-not\"><i class=\"fa fa-trash float-right text-info btn-delaudit p-1 \" data-id='$auditore->id' data-agenda='$agendaid'></i><i class=\"fa fa-edit text-info btn-editaudit float-right p-1 \" data-id='$auditore->id' data-nombre='$auditore->aud_nombre $auditore->aud_apellidos' data-agenda='$agendaid'></i></span></span>
-                                        </li>";
+            // $pds = new Auditore();
+            //$auditore = $pds->where('id', $pds_agenda->auditor_id)->first();
+            $res .= "
+            <tr>
+                <td>".(new Pdsperfile())->where('id',$pds_agenda->pds_id)->value("pds_name")."</td>
+                <td>".ucwords(strtolower((new Auditore())->where('id',$pds_agenda->auditor_id)->value("aud_nombre")." ".(new Auditore())->where('id',$pds_agenda->auditor_id)->value("aud_apellidos")))."</td>
+                <td><button class=\"btn btn-sm btn-danger btn-eliminarall\" data-id='".$pds_agenda->id."'><i class=\"fa fa-trash\"></i></button></td>
+            </tr>
+            ";
         }
         return $res;
     }
@@ -109,7 +114,7 @@ class AgendaController extends Controller
             $pds = new Pdsperfile();
             $pd = $pds->where('id', $pds_agenda->pds_id)->first();
             $res .= "<li class=\"nav-item\">
-                                            <div class=\"nav-link pds-lista-item text-left \">" . mb_strimwidth($pd->pds_name, 0, 80, '...') . " <i class=\"fa fa-trash float-right mini-btn btn-delpds text-info fa-lg\" data-id='$pd->id' data-agenda='$agendaid'></i><i class=\"fa fa-edit text-info float-right btn-editarpds mini-btn fa-lg\" data-agenda='$agendaid' data-id='$pd->id' data-nombre='$pd->pds_name'></i></div>
+                                            <div class=\"nav-link pds-lista-item text-left \">" . mb_strimwidth(ucwords(strtolower($pd->pds_name)), 0, 80, '...') . " <i class=\"fa fa-trash float-right mini-btn btn-delpds text-info fa-lg\" data-id='$pd->id' data-agenda='$agendaid'></i><i class=\"fa fa-edit text-info float-right btn-editarpds mini-btn fa-lg\" data-agenda='$agendaid' data-id='$pd->id' data-nombre='$pd->pds_name'></i></div>
                                         </li>";
         }
         return $res;
@@ -139,8 +144,8 @@ class AgendaController extends Controller
                     $agenda_id = $agendamodel->id;
                 }
 
-                (new AgendaPd())->save_pds_agend($agenda_id, $pdslist);
-                (new AgendaAuditore())->save_audit_agend($agenda_id, $auditlist);
+                (new AgendaPd())->save_pds_agend($agenda_id, $pdslist,$auditlist);
+                // (new AgendaAuditore())->save_audit_agend($agenda_id, $auditlist);
             });
             return 1;
         } catch (\Exception $e) {
@@ -162,7 +167,7 @@ class AgendaController extends Controller
         foreach ($pds as $pd) {
             if (array_search($pd->id, $selects) !== false) {
                 $res .= "<li class=\"nav-item\" >
-                                            <span style='font-size: 0.8em;' class=\"nav-link titulos \" > " . mb_strimwidth($pd->pds_name, 0, 25, '...') . "</span>
+                                            <span style='font-size: 0.8em;' class=\"nav-link titulos \" > " . mb_strimwidth(ucwords(strtolower($pd->pds_name)), 0, 25, '...') . "</span>
                                             <hr class=\"p-0 m-0\">
                                         </li>";
             }
@@ -181,7 +186,7 @@ class AgendaController extends Controller
         foreach ($auditores as $auditore) {
             if (array_search($auditore->id, $selects) !== false) {
                 $res .= "<li class=\"nav-item\" >
-                                            <span style='font-size: 0.8em;' class=\"nav-link titulos \" > " . mb_strimwidth($auditore->aud_nombre . ' ' . $auditore->aud_apellidos, 0, 15, "...") . "</span>
+                                            <span style='font-size: 0.8em;' class=\"nav-link titulos \" > " . mb_strimwidth(ucwords(strtolower($auditore->aud_nombre . ' ' . $auditore->aud_apellidos)), 0, 15, "...") . "</span>
                                             <hr class=\"p-0 m-0\">
                                         </li>";
             }
@@ -299,11 +304,11 @@ class AgendaController extends Controller
 
             if ($i % 2) {
                 $res .= "<li class=\"nav-item audititem\" data-id='$auditore->id'>
-                                        <span  class=\"nav-link\" href=\"#\">" . mb_strimwidth($auditore->aud_nombre . ' ' . $auditore->aud_apellidos, 0, 15, "...") . " <span class=\"check-or-not\"><i class=\"fa float-right p-1 \"></i></span></span>
+                                        <span  class=\"nav-link\" href=\"#\">" . mb_strimwidth(ucwords(strtolower($auditore->aud_nombre . ' ' . $auditore->aud_apellidos)), 0, 15, "...") . " <span class=\"check-or-not\"><i class=\"fa float-right p-1 \"></i></span></span>
                                     </li>";
             } else {
                 $res .= "<li class=\"nav-item audititem bg-gray\" data-id='$auditore->id'>
-                                        <span class=\"nav-link\" href=\"#\">" . mb_strimwidth($auditore->aud_nombre . ' ' . $auditore->aud_apellidos, 0, 15, "...") . " <span class=\"check-or-not\"><i class=\"fa float-right p-1 \"></i></span></span>
+                                        <span class=\"nav-link\" href=\"#\">" . mb_strimwidth(ucwords(strtolower($auditore->aud_nombre . ' ' . $auditore->aud_apellidos)), 0, 15, "...") . " <span class=\"check-or-not\"><i class=\"fa float-right p-1 \"></i></span></span>
                                     </li>";
             }
             $i = $i + 1;
