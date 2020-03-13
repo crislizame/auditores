@@ -10,10 +10,10 @@
                     <div class="row mt-3">
                         <div class="col-12">
                             <ul class="nav lmhorizontal mb-4" style="grid-template-columns: repeat(2, 1fr);">
-                                <a href="{{url('mantenimiento/ordenes')}}?cat=loteria">
+                                <a href="{{url('rp3/ordenes')}}?cat=loteria">
                                     <li class="nav-item @if($cat == 'loteria') active @endif">Loteria</li>
                                 </a>
-                                <a href="{{url('mantenimiento/ordenes')}}?cat=proveedores">
+                                <a href="{{url('rp3/ordenes')}}?cat=proveedores">
                                     <li href="#" class="nav-item @if($cat == 'proveedores') active @endif">Proveedores</li>
                                 </a>
                             </ul>
@@ -75,7 +75,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="form-asignarOrden" method="POST" autocomplate="off" action="{{url('mantenimiento/problemas/orden/asignar')}}" enctype="multipart/form-data">
+                <form id="form-asignarOrden" method="POST" autocomplate="off" action="{{url('rp3/problemas/orden/asignar')}}" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col-6">
@@ -179,7 +179,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-12">
-                                    <label>Observación de encargado de mantenimiento</label>
+                                    <label>Observación de encargado de rp3</label>
                                 </div>
                             </div>
                             <div class="row">
@@ -198,13 +198,15 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-6" id="sel-pro" style="display: none;">
                                     <select name="ot_proveedor">
-                                        @forelse ((new \App\Proveedor())->get() as $proveedor)
+                                        @foreach ($proveedores as $proveedor)
                                         <option value="{{$proveedor->idproveedores}}">{{$proveedor->nombre}}</option>
-                                        @empty
-                                        @endforelse
+                                        @endforeach
                                     </select>
+                                </div>
+                                <div class="col-6" id="tex-ent" style="display: none;">
+                                    <h5 id="ot_entidad"></h5>
                                 </div>
                                 <div class="col-6">
                                     <div class="row">
@@ -272,7 +274,7 @@
                                     <input type="text" name="ot_encargado" class="form-control">
                                 </div>
                                 <div class="col-6">
-                                    <input type="time" id="time" name="ot_tiempo">
+                                    <h5 id="ot_tiempo"></h5>
                                 </div>
                             </div>
                             <div class="row">
@@ -314,9 +316,12 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-12">
-                            <button type="button" class="btn btn-primary float-right">Completado</button>
-                            <button type="submit" class="btn btn-primary float-right mr-3" id="benviar">Enviar</button>
+                        <div class="col-12" style="display: none;" id="gb-g">
+                            <a onclick="finalizar()" class="btn btn-primary float-right text-white">Finalizar</a>
+                            <button type="submit" class="btn btn-primary float-right mr-3" id="benviar">Procesar</button>
+                        </div>
+                        <div class="col-12" style="display: none;" id="gb-c">
+                            <button type="button" class="btn btn-default float-right" data-dismiss="modal">Cerrar</button>
                         </div>
                     </div>
                 </form>
@@ -343,4 +348,284 @@
 @endsection
 @section('script')
 
+<script>
+    var tableProblemas;
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': '{{csrf_token()}}'
+        }
+    });
+
+    $(document).ready(function() {
+        tableProblemas = $('#list_problemas').DataTable({
+            "lengthMenu": [
+                [25, 50, 100, -1],
+                [25, 50, 100, "Todos"]
+            ]
+        });
+
+        cargar('{{$cat}}');
+        $('select').select2();
+
+        $('.modal-asignar').on('hidden.bs.modal', function(e) {
+            document.getElementById("form-asignarOrden").reset();
+        });
+
+        function cargar(cat) {
+
+            $.ajax({
+                url: "{{url('rp3/ordenes/cargar')}}",
+                method: "post",
+                dataType: 'text',
+                data: {
+                    '_token': "{{csrf_token()}}",
+                    'cat': cat
+                },
+                beforeSend: function() {
+                    swal({
+                        title: "Cargando Ordenes",
+                        icon: "info",
+                        buttons: false,
+                        timer: 2000,
+                        closeOnClickOutside: false,
+                        closeOnEsc: false
+                    });
+                }
+            }).done(function(done) {
+                tableProblemas.destroy();
+                $('.TablaProblemas').html(done);
+                tableProblemas = $('#list_problemas').DataTable({
+                    "order": [
+                        [0, 'desc']
+                    ],
+                    "lengthMenu": [
+                        [25, 50, 100, -1],
+                        [25, 50, 100, "Todos"]
+                    ],
+                    "columns": [{
+                            "width": "10%"
+                        },
+                        {
+                            "width": "10%"
+                        },
+                        {
+                            "width": "10%"
+                        },
+                        {
+                            "width": "15%"
+                        },
+                        {
+                            "width": "20%"
+                        },
+                        {
+                            "width": "10%"
+                        },
+                        {
+                            "width": "10%"
+                        },
+                        {
+                            "width": "15%"
+                        }
+                    ]
+                });
+            });
+        }
+    });
+
+    function modalAsignarOrdenDeTrabajo(id, visualId, entidad) {
+        $.ajax({
+            url: "{{url('rp3/problemas/orden')}}",
+            method: "post",
+            data: {
+                '_token': "{{csrf_token()}}",
+                'id': id
+            },
+            beforeSend: function() {
+                swal({
+                    title: "Cargando Datos de la orden",
+                    icon: "info",
+                    buttons: false,
+                    timer: 2000,
+                    closeOnClickOutside: false,
+                    closeOnEsc: false
+                });
+            }
+        }).done(function(data) {
+            var done = data[0];
+
+            $('.modal-asignar').modal('show');
+            $('#req_num_orden').html(visualId);
+            $('[name="req_num_orden"]').val(id);
+
+            $('#req_cliente').html(done.cliente);
+            $('#req_area').html(done.area);
+            $('#req_subarea').html(done.subarea);
+
+            $('#req_problema').html(done.problema);
+
+            $('#req_rfinicio').html(done.solicitado);
+            $('#ot_finicio').html(done.solicitado);
+
+            $('#req_comentario').html(done.rcomentario);
+
+            $('[name="req_observacion"]').html(done.robservacion);
+
+            $.ajax({
+                url: "{{url('rp3/problemas/imagenes')}}",
+                method: "post",
+                data: {
+                    '_token': "{{csrf_token()}}",
+                    'id': id
+                }
+            }).done(function(ok) {
+                $('#req_imagenes > .carousel-indicators').empty();
+                var indicators = '';
+                for (var i = 0; i < ok.count; i++) {
+                    var active = '';
+                    if (i == 0) {
+                        active = 'active';
+                    }
+                    indicators += '<li data-target="#req_imagenes" data-slide-to="' + i + '" class="' + active + '"></li>';
+                }
+                $('#req_imagenes > .carousel-indicators').html(indicators);
+                $('#req_imagenes > .carousel-inner').empty();
+                $('#req_imagenes > .carousel-inner').html(ok.images);
+            });
+
+            $('#ot_tiempo').html(zfill(done.tiempo, 2) + ":00");
+
+            if (done.enproceso != null) {
+                $('[name="ot_proveedor"]').val(done.proveedor_id);
+                $('[name="ot_proveedor"]').select2().trigger('change');
+
+                switch (done.estado) {
+                    case 'U':
+                        $('#r1').click();
+                        break;
+                    case 'S':
+                        $('#r2').click();
+                        break;
+                }
+
+                $('#ot_ffin').html(done.finalizado);
+
+                $('[name="ot_presupuesto"]').val(done.presupuesto);
+                $('[name="ot_garantia"]').val(done.garantia);
+
+                $('[name="ot_encargado"]').val(done.encargado);
+                $('[name="ot_extra"]').val(done.extra);
+
+                $('[name="ot_comentario"]').val(done.comentario);
+
+                $('#benviar').prop('disabled', true);
+                $('#benviar').removeClass('btn-primary');
+                $('#benviar').addClass('btn-default');
+
+                var otrabajo = done.idorden_trabajos;
+                $.ajax({
+                    url: "{{url('rp3/problemas/trabajo/ver')}}",
+                    method: "post",
+                    data: {
+                        '_token': "{{csrf_token()}}",
+                        'id': otrabajo,
+                        'tipo': 'C'
+                    }
+                }).done(function(ok) {
+                    if (ok.attachment_id > 0) {
+                        $('#cc').hide();
+                        $('#cv').show();
+                        $('#cvl').attr('onclick', 'modalImagenTrabajo("{{url("/imagen")}}/' + ok.attachment_id + '", "Cotización")');
+                    } else {
+                        $('#cc').show();
+                        $('#cv').hide();
+                        $('#cvl').removeAttr('onclick');
+                    }
+                });
+
+                $.ajax({
+                    url: "{{url('rp3/problemas/trabajo/ver')}}",
+                    method: "post",
+                    data: {
+                        '_token': "{{csrf_token()}}",
+                        'id': otrabajo,
+                        'tipo': 'G'
+                    }
+                }).done(function(ok) {
+                    if (ok.attachment_id > 0) {
+                        $('#gc').hide();
+                        $('#gv').show();
+                        $('#gvl').attr('onclick', 'modalImagenTrabajo("{{url("/imagen")}}/' + ok.attachment_id + '", "Garantía")');
+                    } else {
+                        $('#gc').show();
+                        $('#gv').hide();
+                        $('#gvl').removeAttr('onclick');
+                    }
+                });
+            }
+
+            if (entidad == "{{(new App\Entidad())->where('identidad',Auth::user()->entidad_id)->value('nombre')}}") {
+                $('#sel-pro').show();
+
+                if(done.finalizado!=null){
+                    $('#gb-c').show();
+                }else{
+                    $('#gb-g').show();
+                }
+            } else {
+                $('#tex-ent').show();
+                $('#ot_entidad').html(done.entidad);
+
+                $('[name="ot_presupuesto"]').attr('readonly', 'true');
+                $('[name="ot_garantia"]').attr('readonly', 'true');
+                $('[name="ot_encargado"]').attr('readonly', 'true');
+                $('[name="ot_extra"]').attr('readonly', 'true');
+                $('[name="ot_comentario"]').attr('readonly', 'true');
+
+                $('#cc').hide();
+                $('#gc').hide();
+
+                $('#gb-c').show();
+            }
+        });
+    }
+
+    function modalImagenTrabajo(url, tipo) {
+        $('#vat').html(tipo);
+        $('#vai').attr('src', url);
+        $('.modal-va').modal('show');
+    }
+
+    function zfill(number, width) {
+        var numberOutput = Math.abs(number);
+        var length = number.toString().length;
+        var zero = "0";
+
+        if (width <= length) {
+            if (number < 0) {
+                return ("-" + numberOutput.toString());
+            } else {
+                return numberOutput.toString();
+            }
+        } else {
+            if (number < 0) {
+                return ("-" + (zero.repeat(width - length)) + numberOutput.toString());
+            } else {
+                return ((zero.repeat(width - length)) + numberOutput.toString());
+            }
+        }
+    }
+
+    function finalizar() {
+        $.ajax({
+            url: "{{url('rp3/problemas/finalizar')}}",
+            method: "post",
+            data: {
+                '_token': "{{csrf_token()}}",
+                'id': $('[name="req_num_orden"]').val()
+            }
+        }).done(function(ok) {
+            location.reload();
+        });
+    }
+</script>
 @endsection

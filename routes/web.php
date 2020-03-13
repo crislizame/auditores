@@ -81,7 +81,21 @@ Route::middleware(['auth'])->group(function () {
         Route::get('perfil', 'Soporte\SoporteController@perfil');
     });
     // Soporte
-    
+
+    // RP3
+    Route::prefix('rp3')->group(function () {
+        Route::get('problemas', 'RP3\RP3Controller@problemas')->name('problemas');
+        Route::post('problemas/cargar', 'RP3\RP3Controller@cargarProblemas');
+        Route::post('problemas/orden', 'RP3\RP3Controller@verOrden');
+        Route::post('problemas/orden/asignar', 'RP3\RP3Controller@asignarOrden');
+        Route::post('problemas/trabajo/ver', 'RP3\RP3Controller@imagenesTrabajo');
+        Route::post('problemas/imagenes', 'RP3\RP3Controller@imagenesRequerimiento');
+        Route::get('ordenes', 'RP3\RP3Controller@ordenes');
+        Route::post('ordenes/cargar', 'RP3\RP3Controller@cargarOrdenes');
+        Route::get('perfil', 'RP3\RP3Controller@perfil');
+    });
+    // RP3
+
     //----Indicadores
     Route::any('indicadores', 'Admin\IndicadoresController@index')->name('indicadores');
     //--Rutas Ajax
