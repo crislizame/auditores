@@ -76,7 +76,7 @@ class LoginController extends Controller
                     } else if ($user_type == 'L') {
                         return redirect('lottogame/problemas')->with('cat', 'loteria');
                     } else if ($user_type == 'P') {
-                        return redirect('permisos');
+                        return redirect('permisos/permisos');
                     } else if ($user_type == "A") {
                         return redirect('crear-agenda');
                     }
