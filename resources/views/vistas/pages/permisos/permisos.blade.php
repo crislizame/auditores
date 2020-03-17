@@ -17,10 +17,10 @@
                             </ul>
                         </div>
                     </div>
-                    <table class="table">
+                    <table class="table" id="tabla">
                         <thead>
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" placeholder="Buscar">
+                                <input type="text" class="form-control" placeholder="Buscar" onkeyup="filtrar()" id="buscar">
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-primary" type="button"><i class="icon-magnifier"></i> Buscar</button>
                                 </div>
@@ -47,10 +47,26 @@
 @section('script')
 <script>
     $(document).ready(function() {
-        var tf = new TableFilter(document.querySelector('.table'), {
-            base_path: '{{ url('js') }}'
-        });
-        tf.init();
+        
     });
+
+    function filtrar() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("buscar");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("tabla");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
 </script>
 @endsection
