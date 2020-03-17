@@ -112,8 +112,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Permisos
     Route::prefix('permisos')->group(function () {
-        Route::get('problemas', 'LottoGame\LottoGameController@problemas')->name('problemas');
-        Route::post('problemas/cargar', 'LottoGame\LottoGameController@cargarProblemas');
+        Route::get('permisos', 'LottoGame\LottoGameController@problemas');
         Route::get('perfil', 'LottoGame\LottoGameController@perfil');
     });
     // Permisos
