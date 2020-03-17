@@ -21,9 +21,6 @@
                         <thead>
                             <div class="input-group mb-3">
                                 <input type="text" class="form-control" placeholder="Buscar" onkeyup="filtrar()" id="buscar">
-                                <div class="input-group-append">
-                                    <button class="btn btn-outline-primary" type="button"><i class="icon-magnifier"></i> Buscar</button>
-                                </div>
                             </div>
                         </thead>
                         <tbody>
