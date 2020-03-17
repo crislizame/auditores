@@ -74,7 +74,7 @@ class LoginController extends Controller
                     } else if ($user_type == 'R') {
                         return redirect('rp3/problemas')->with('cat', 'loteria');
                     } else if ($user_type == 'L') {
-                        return redirect('problemas')->with('cat', 'loteria');
+                        return redirect('lottogame/problemas')->with('cat', 'loteria');
                     } else if ($user_type == 'P') {
                         return redirect('permisos');
                     } else if ($user_type == "A") {

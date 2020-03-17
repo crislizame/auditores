@@ -10,10 +10,10 @@
                     <div class="row mt-3">
                         <div class="col-12">
                             <ul class="nav lmhorizontal mb-4" style="grid-template-columns: repeat(2, 1fr);">
-                                <a href="{{url('mantenimiento/problemas')}}?cat=loteria">
+                                <a href="{{url('lottogame/problemas')}}?cat=loteria">
                                     <li class="nav-item @if($cat == 'loteria') active @endif">Loteria</li>
                                 </a>
-                                <a href="{{url('mantenimiento/problemas')}}?cat=proveedores">
+                                <a href="{{url('lottogame/problemas')}}?cat=proveedores">
                                     <li href="#" class="nav-item @if($cat == 'proveedores') active @endif">Proveedores</li>
                                 </a>
                             </ul>
@@ -75,7 +75,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="form-asignarOrden" method="POST" autocomplate="off" action="{{url('mantenimiento/problemas/orden/asignar')}}" enctype="multipart/form-data">
+                <form id="form-asignarOrden" method="POST" autocomplate="off" action="{{url('lottogame/problemas/orden/asignar')}}" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col-6">
@@ -179,7 +179,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-12">
-                                    <label>Observación de encargado de mantenimiento</label>
+                                    <label>Observación de encargado de lottogame</label>
                                 </div>
                             </div>
                             <div class="row">
@@ -317,7 +317,7 @@
                     </div>
                     <div class="row">
                         <div class="col-12" style="display: none;" id="gb-g">
-                            <button type="button" class="btn btn-primary float-right">Finalizar</button>
+                            <a onclick="finalizar()" class="btn btn-primary float-right text-white">Finalizar</a>
                             <button type="submit" class="btn btn-primary float-right mr-3" id="benviar">Procesar</button>
                         </div>
                         <div class="col-12" style="display: none;" id="gb-c">
@@ -375,7 +375,7 @@
         function cargar(cat) {
 
             $.ajax({
-                url: "{{url('problemas/cargar')}}",
+                url: "{{url('lottogame/problemas/cargar')}}",
                 method: "post",
                 dataType: 'text',
                 data: {
@@ -435,7 +435,7 @@
 
     function modalAsignarOrdenDeTrabajo(id, visualId, entidad) {
         $.ajax({
-            url: "{{url('mantenimiento/problemas/orden')}}",
+            url: "{{url('lottogame/problemas/orden')}}",
             method: "post",
             data: {
                 '_token': "{{csrf_token()}}",
@@ -472,7 +472,7 @@
             $('[name="req_observacion"]').html(done.robservacion);
 
             $.ajax({
-                url: "{{url('mantenimiento/problemas/imagenes')}}",
+                url: "{{url('lottogame/problemas/imagenes')}}",
                 method: "post",
                 data: {
                     '_token': "{{csrf_token()}}",
@@ -524,7 +524,7 @@
 
                 var otrabajo = done.idorden_trabajos;
                 $.ajax({
-                    url: "{{url('mantenimiento/problemas/trabajo/ver')}}",
+                    url: "{{url('lottogame/problemas/trabajo/ver')}}",
                     method: "post",
                     data: {
                         '_token': "{{csrf_token()}}",
@@ -544,7 +544,7 @@
                 });
 
                 $.ajax({
-                    url: "{{url('mantenimiento/problemas/trabajo/ver')}}",
+                    url: "{{url('lottogame/problemas/trabajo/ver')}}",
                     method: "post",
                     data: {
                         '_token': "{{csrf_token()}}",
@@ -567,7 +567,11 @@
             if (entidad == "{{(new App\Entidad())->where('identidad',Auth::user()->entidad_id)->value('nombre')}}") {
                 $('#sel-pro').show();
 
-                $('#gb-g').show();
+                if(done.finalizado!=null){
+                    $('#gb-c').show();
+                }else{
+                    $('#gb-g').show();
+                }
             } else {
                 $('#tex-ent').show();
                 $('#ot_entidad').html(done.entidad);
@@ -610,6 +614,19 @@
                 return ((zero.repeat(width - length)) + numberOutput.toString());
             }
         }
+    }
+
+    function finalizar() {
+        $.ajax({
+            url: "{{url('lottogame/problemas/finalizar')}}",
+            method: "post",
+            data: {
+                '_token': "{{csrf_token()}}",
+                'id': $('[name="req_num_orden"]').val()
+            }
+        }).done(function(ok) {
+            location.reload();
+        });
     }
 </script>
 @endsection

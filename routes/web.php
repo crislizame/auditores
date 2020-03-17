@@ -95,6 +95,20 @@ Route::middleware(['auth'])->group(function () {
         Route::get('perfil', 'RP3\RP3Controller@perfil');
     });
     // RP3
+    
+    // LottoGame
+    Route::prefix('lottogame')->group(function () {
+        Route::get('problemas', 'LottoGame\LottoGameController@problemas')->name('problemas');
+        Route::post('problemas/cargar', 'LottoGame\LottoGameController@cargarProblemas');
+        Route::post('problemas/orden', 'LottoGame\LottoGameController@verOrden');
+        Route::post('problemas/orden/asignar', 'LottoGame\LottoGameController@asignarOrden');
+        Route::post('problemas/trabajo/ver', 'LottoGame\LottoGameController@imagenesTrabajo');
+        Route::post('problemas/imagenes', 'LottoGame\LottoGameController@imagenesRequerimiento');
+        Route::get('ordenes', 'LottoGame\LottoGameController@ordenes');
+        Route::post('ordenes/cargar', 'LottoGame\LottoGameController@cargarOrdenes');
+        Route::get('perfil', 'LottoGame\LottoGameController@perfil');
+    });
+    // LottoGame
 
     //----Indicadores
     Route::any('indicadores', 'Admin\IndicadoresController@index')->name('indicadores');
