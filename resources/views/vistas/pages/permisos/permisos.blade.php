@@ -12,17 +12,19 @@
                         <div class="col-12">
                             <ul class="nav lmhorizontal mb-4" style="grid-template-columns: repeat(1, 1fr);">
                                 <a href="#">
-                                    <li class="nav-item">Clientes</li>
+                                    <li class="nav-item active">Clientes</li>
                                 </a>
                             </ul>
                         </div>
                     </div>
                     <table class="table">
                         <thead>
-                            <form class="search-bar">
-                                <input type="text" class="form-control" placeholder="Buscar">
-                                <a href="javascript:void();"><i class="icon-magnifier"></i></a>
-                            </form>
+                            <div class="input-group mb-3">
+							  <input type="text" class="form-control" placeholder="Buscar">
+							  <div class="input-group-append">
+								<button class="btn btn-outline-primary" type="button"><i class="icon-magnifier"></i> Buscar</button>
+							  </div>
+							</div>
                         </thead>
                         <tbody>
                             @foreach($pds as $row)
