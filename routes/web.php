@@ -112,8 +112,8 @@ Route::middleware(['auth'])->group(function () {
 
     // Permisos
     Route::prefix('permisos')->group(function () {
-        Route::get('permisos', 'LottoGame\LottoGameController@problemas');
-        Route::get('perfil', 'LottoGame\LottoGameController@perfil');
+        Route::get('permisos', 'Permisos\PermisosController@permisos');
+        Route::get('perfil', 'Permisos\PermisosController@perfil');
     });
     // Permisos
 

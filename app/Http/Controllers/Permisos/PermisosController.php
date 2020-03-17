@@ -10,15 +10,10 @@ use App\User;
 
 class PermisosController extends Controller
 {
-    public function problemas(Request $request)
+    public function permisos(Request $request)
     {
         $pds = DB::table('pdsperfiles')->orderBy('id', 'asc')->get();
         return view('vistas.pages.permisos.permisos')->with('pds', $pds);
-    }
-
-    public function cargarProblemas(Request $request)
-    {
-        
     }
 
     public function perfil()
