@@ -6,12 +6,12 @@
     </div>
     <ul class="sidebar-menu do-nicescrol">
         <li @if(strpos (url()->current(), 'problemas')!==false) class="active" @endif>
-            <a href="{{url('permisos')}}" class="waves-effect">
+            <a href="{{url('permisos/permisos')}}" class="waves-effect">
                 <i class="icon-calendar"></i> <span>Permisos</span>
             </a>
         </li>
         <li @if(strpos (url()->current(), 'perfil')!==false) class="active" @endif>
-            <a href="{{url('perfil')}}" class="waves-effect">
+            <a href="{{url('permisos/perfil')}}" class="waves-effect">
                 <i class="icon-home"></i> <span>Perfil</span>
             </a>
         </li>

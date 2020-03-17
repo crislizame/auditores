@@ -110,6 +110,14 @@ Route::middleware(['auth'])->group(function () {
     });
     // LottoGame
 
+    // Permisos
+    Route::prefix('permisos')->group(function () {
+        Route::get('problemas', 'LottoGame\LottoGameController@problemas')->name('problemas');
+        Route::post('problemas/cargar', 'LottoGame\LottoGameController@cargarProblemas');
+        Route::get('perfil', 'LottoGame\LottoGameController@perfil');
+    });
+    // Permisos
+
     //----Indicadores
     Route::any('indicadores', 'Admin\IndicadoresController@index')->name('indicadores');
     //--Rutas Ajax
