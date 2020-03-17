@@ -20,11 +20,11 @@
                     <table class="table">
                         <thead>
                             <div class="input-group mb-3">
-							  <input type="text" class="form-control" placeholder="Buscar">
-							  <div class="input-group-append">
-								<button class="btn btn-outline-primary" type="button"><i class="icon-magnifier"></i> Buscar</button>
-							  </div>
-							</div>
+                                <input type="text" class="form-control" placeholder="Buscar">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-primary" type="button"><i class="icon-magnifier"></i> Buscar</button>
+                                </div>
+                            </div>
                         </thead>
                         <tbody>
                             @foreach($pds as $row)
@@ -42,7 +42,15 @@
     </div>
 </div>
 
+<script src="{{ asset('js/tablefilter.js') }}"></script>
 @endsection
 @section('script')
-
+<script>
+    $(document).ready(function() {
+        var tf = new TableFilter(document.querySelector('.table'), {
+            base_path: '{{ url('js') }}'
+        });
+        tf.init();
+    });
+</script>
 @endsection
