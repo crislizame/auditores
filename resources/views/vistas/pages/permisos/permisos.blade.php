@@ -85,7 +85,7 @@
                                             <h4>Fecha de expedición</h4>
                                         </div>
                                         <div class="col-5">
-                                            <input type="text" class="form-control" placeholder="00-00-0000" value="{{ $row->expedicion }}">
+                                            <input type="date" class="form-control" placeholder="00-00-0000" value="{{ $row->expedicion }}">
                                         </div>
                                     </div>
 
@@ -94,7 +94,7 @@
                                             <h4>Fecha de caducidad</h4>
                                         </div>
                                         <div class="col-5">
-                                            <input type="text" class="form-control" placeholder="00-00-0000" value="{{ $row->caducidad }}">
+                                            <input type="date" class="form-control" placeholder="00-00-0000" value="{{ $row->caducidad }}">
                                         </div>
                                     </div>
 
@@ -104,11 +104,11 @@
                                         </div>
                                         <div class="col-5">
                                             @php
-                                                if( date() >= $row->caducidad ){
+                                                if( date('Y-m-d') >= $row->caducidad ){
 
                                                 }
                                             @endphp
-                                            <h4>{{ date() }}</h4>
+                                            <h4>{{ date('Y-m-d') }}</h4>
                                         </div>
                                     </div>
 
