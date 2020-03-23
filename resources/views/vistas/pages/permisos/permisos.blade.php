@@ -1,7 +1,11 @@
 @extends('vistas.layout.mantenimiento')
 
 @section('content')
-
+<style>
+    .titulos{
+        font-weight: 400;
+    }
+</style>
 <div class="container-fluid ">
     <div class="row ">
 
@@ -58,19 +62,19 @@
 
                                     <div class="row">
                                         <div class="col-8">
-                                            <h2>{{ $row->nombre }}</h2>
+                                            <h4>{{ $row->nombre }}</h4>
                                         </div>
                                         <div class="col-2">
-                                            <h2>Si</h2>
+                                            <h4>Si</h2>
                                         </div>
                                         <div class="col-2">
-                                            <h2>No</h2>
+                                            <h4>No</h4>
                                         </div>
                                     </div>
 
                                     <div class="row">
                                         <div class="col-8">
-                                            <h3>Estatus</h3>
+                                            <h5>Estatus</h5>
                                         </div>
                                         <div class="col-2">
                                             <input class="form-check-input" type="radio" name="aplica" id="aplica_si" value="1" @if($row->aplica==1) checked @endif>
@@ -82,7 +86,7 @@
 
                                     <div class="row">
                                         <div class="col-7">
-                                            <h4>Fecha de expedición</h4>
+                                            <h5 class="titulos">Fecha de expedición</h5>
                                         </div>
                                         <div class="col-5">
                                             <input type="date" class="form-control" placeholder="00-00-0000" value="{{ $row->expedicion }}">
@@ -91,7 +95,7 @@
 
                                     <div class="row">
                                         <div class="col-7">
-                                            <h4>Fecha de caducidad</h4>
+                                            <h5 class="titulos">Fecha de caducidad</h5>
                                         </div>
                                         <div class="col-5">
                                             <input type="date" class="form-control" placeholder="00-00-0000" value="{{ $row->caducidad }}">
@@ -100,7 +104,7 @@
 
                                     <div class="row">
                                         <div class="col-7">
-                                            <h4>Conteo regresivo</h4>
+                                            <h5 class="titulos">Conteo regresivo</h5>
                                         </div>
                                         <div class="col-5">
                                             @php
