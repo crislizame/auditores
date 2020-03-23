@@ -13,7 +13,15 @@ class PermisosController extends Controller
     public function permisos(Request $request)
     {
         $pds = DB::table('pdsperfiles')->orderBy('id', 'asc')->get();
-        return view('vistas.pages.permisos.permisos')->with('pds', $pds);
+        $pds_permisos = null;
+        $find_pds = (isset($request->pds) ? $request->pds : null);
+        if ($find_pds != null) {
+            $pds_permisos = DB::table('permisos')->where('id_pds', $find_pds)->orderBy('id', 'asc')->get();
+        } else {
+            $pds_id = DB::table('pdsperfiles')->orderBy('id', 'asc')->first()->id;
+            $pds_permisos = DB::table('permisos')->where('id_pds', $pds_id)->orderBy('id', 'asc')->get();
+        }
+        return view('vistas.pages.permisos.permisos')->with('pds', $pds)->with('pds_permisos', $pds_permisos);
     }
 
     public function perfil()
