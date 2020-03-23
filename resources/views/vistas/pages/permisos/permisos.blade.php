@@ -114,7 +114,7 @@
                                             @php
                                             $tiempo_restante = 0;
                                             if( date('Y-m-d') < $row->caducidad ){
-                                                $tiempo_restante = \Carbon\Carbon::parse($row->caducidad)->diffForHumans();
+                                                $tiempo_restante = \Carbon\Carbon::parse($row->caducidad)->diffInDays(\Carbon\Carbon::now());
                                             }
                                             @endphp
                                             <h4 class="mt-1">{{ $tiempo_restante }}</h4>
