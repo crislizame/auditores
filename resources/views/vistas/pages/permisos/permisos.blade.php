@@ -103,7 +103,12 @@
                                             <h4>Conteo regresivo</h4>
                                         </div>
                                         <div class="col-5">
-                                            <h4>{{  }}</h4>
+                                            @php
+                                                if( date() >= $row->caducidad ){
+
+                                                }
+                                            @endphp
+                                            <h4>{{ date() }}</h4>
                                         </div>
                                     </div>
 
