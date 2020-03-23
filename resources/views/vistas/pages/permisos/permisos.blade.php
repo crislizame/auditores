@@ -6,12 +6,6 @@
         border-top: 2px solid #52699B;
     }
 
-    [type="radio"]:checked,
-    [type="radio"]:not(:checked) {
-        left: 30%;
-        opacity: 1;
-    }
-
     .titulos {
         font-weight: 400;
     }
@@ -87,16 +81,16 @@
                                             <h5>Estatus</h5>
                                         </div>
                                         <div class="col-2">
-                                            <input class="form-check-input" type="radio" name="aplica" id="aplica_si" value="1" @if($row->aplica==1) checked @endif>
+                                            <input class="form-check-input" type="radio" name="aplica" id="aplica_si" value="1" style="left: 30%; opacity: 1;" @if($row->aplica==1) checked @endif>
                                         </div>
                                         <div class="col-2">
-                                            <input class="form-check-input" type="radio" name="aplica" id="aplica_no" value="0" @if($row->aplica==0) checked @endif>
+                                            <input class="form-check-input" type="radio" name="aplica" id="aplica_no" value="0" style="left: 30%; opacity: 1;" @if($row->aplica==0) checked @endif>
                                         </div>
                                     </div>
 
                                     <div class="row my-2">
                                         <div class="col-7">
-                                            <h5 class="titulos">Fecha de expedición</h5>
+                                            <h5 class="titulos mt-2">Fecha de expedición</h5>
                                         </div>
                                         <div class="col-5">
                                             <input type="date" class="form-control" placeholder="00-00-0000" value="{{ $row->expedicion }}">
@@ -105,7 +99,7 @@
                                     <hr>
                                     <div class="row my-2">
                                         <div class="col-7">
-                                            <h5 class="titulos">Fecha de caducidad</h5>
+                                            <h5 class="titulos mt-2">Fecha de caducidad</h5>
                                         </div>
                                         <div class="col-5">
                                             <input type="date" class="form-control" placeholder="00-00-0000" value="{{ $row->caducidad }}">
@@ -114,15 +108,16 @@
                                     <hr>
                                     <div class="row my-2">
                                         <div class="col-7">
-                                            <h5 class="titulos">Conteo regresivo</h5>
+                                            <h5 class="titulos mt-2">Conteo regresivo</h5>
                                         </div>
                                         <div class="col-5">
                                             @php
-                                            if( date('Y-m-d') >= $row->caducidad ){
-
+                                            $tiempo_restante = 0;
+                                            if( date('Y-m-d') < $row->caducidad ){
+                                                $tiempo_restante = Carbon::parse($row->caducidad)->diffForHumans();
                                             }
                                             @endphp
-                                            <h4>{{ date('Y-m-d') }}</h4>
+                                            <h4 class="mt-1">{{ $tiempo_restante }}</h4>
                                         </div>
                                     </div>
                                     <hr>
