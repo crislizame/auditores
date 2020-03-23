@@ -2,7 +2,17 @@
 
 @section('content')
 <style>
-    .titulos{
+    hr{
+        border-top: 2px solid #52699B;
+    }
+
+    [type="radio"]:checked,
+    [type="radio"]:not(:checked) {
+        left: 30%;
+        opacity: 1;
+    }
+
+    .titulos {
         font-weight: 400;
     }
 </style>
@@ -62,7 +72,7 @@
 
                                     <div class="row">
                                         <div class="col-8">
-                                            <h4>{{ $row->nombre }}</h4>
+                                            <h4 class="text-uppercase">{{ $row->nombre }}</h4>
                                         </div>
                                         <div class="col-2">
                                             <h4>Si</h2>
@@ -84,7 +94,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="row">
+                                    <div class="row my-2">
                                         <div class="col-7">
                                             <h5 class="titulos">Fecha de expedición</h5>
                                         </div>
@@ -92,8 +102,8 @@
                                             <input type="date" class="form-control" placeholder="00-00-0000" value="{{ $row->expedicion }}">
                                         </div>
                                     </div>
-
-                                    <div class="row">
+                                    <hr>
+                                    <div class="row my-2">
                                         <div class="col-7">
                                             <h5 class="titulos">Fecha de caducidad</h5>
                                         </div>
@@ -101,21 +111,21 @@
                                             <input type="date" class="form-control" placeholder="00-00-0000" value="{{ $row->caducidad }}">
                                         </div>
                                     </div>
-
-                                    <div class="row">
+                                    <hr>
+                                    <div class="row my-2">
                                         <div class="col-7">
                                             <h5 class="titulos">Conteo regresivo</h5>
                                         </div>
                                         <div class="col-5">
                                             @php
-                                                if( date('Y-m-d') >= $row->caducidad ){
+                                            if( date('Y-m-d') >= $row->caducidad ){
 
-                                                }
+                                            }
                                             @endphp
                                             <h4>{{ date('Y-m-d') }}</h4>
                                         </div>
                                     </div>
-
+                                    <hr>
                                 </div>
                                 <div class="col-3">
                                 </div>
