@@ -355,33 +355,63 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <div class="modal-body p-2">
+            <div class="modal-body p-2 m-5 p-5">
 
-                <div class="row m-5 p-5">
+                <div class="row mb-3">
                     <div class="col-5">
-                        <h2 class="text-center">Precio</h2>
+                        <h2 class="text-center mt-3">Precio</h2>
                     </div>
                     <div class="col-7">
                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
 
                             <label class="btn btn-1">
-                                <input type="radio" name="options" value="1" autocomplete="off">
+                                <input type="radio" name="precio" value="1" autocomplete="off">
                             </label>
 
                             <label class="btn btn-2">
-                                <input type="radio" name="options" value="2" autocomplete="off">
+                                <input type="radio" name="precio" value="2" autocomplete="off">
                             </label>
 
                             <label class="btn btn-3">
-                                <input type="radio" name="options" value="3" autocomplete="off">
+                                <input type="radio" name="precio" value="3" autocomplete="off">
                             </label>
 
                             <label class="btn btn-4">
-                                <input type="radio" name="options" value="4" autocomplete="off">
+                                <input type="radio" name="precio" value="4" autocomplete="off">
                             </label>
 
                             <label class="btn btn-5">
-                                <input type="radio" name="options" value="5" autocomplete="off">
+                                <input type="radio" name="precio" value="5" autocomplete="off">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-5">
+                        <h2 class="text-center mt-3">Disponibilidad</h2>
+                    </div>
+                    <div class="col-7">
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+
+                            <label class="btn btn-1">
+                                <input type="radio" name="disponibilidad" value="1" autocomplete="off">
+                            </label>
+
+                            <label class="btn btn-2">
+                                <input type="radio" name="disponibilidad" value="2" autocomplete="off">
+                            </label>
+
+                            <label class="btn btn-3">
+                                <input type="radio" name="disponibilidad" value="3" autocomplete="off">
+                            </label>
+
+                            <label class="btn btn-4">
+                                <input type="radio" name="disponibilidad" value="4" autocomplete="off">
+                            </label>
+
+                            <label class="btn btn-5">
+                                <input type="radio" name="disponibilidad" value="5" autocomplete="off">
                             </label>
                         </div>
                     </div>
@@ -394,12 +424,6 @@
 
 <style>
     .btn-1.active.focus {
-        width: 80px;
-        height: 80px;
-        margin-left: 1rem;
-        margin-right: 1rem;
-        background-repeat: no-repeat;
-        background-position: center;
         background-image:url("{{url('/img/cara1.jpg')}}");
     }
 
@@ -414,12 +438,6 @@
     }
 
     .btn-2.active.focus {
-        width: 80px;
-        height: 80px;
-        margin-left: 1rem;
-        margin-right: 1rem;
-        background-repeat: no-repeat;
-        background-position: center;
         background-image:url("{{url('/img/cara2.jpg')}}");
     }
 
@@ -434,12 +452,6 @@
     }
 
     .btn-3.active.focus {
-        width: 80px;
-        height: 80px;
-        margin-left: 1rem;
-        margin-right: 1rem;
-        background-repeat: no-repeat;
-        background-position: center;
         background-image:url("{{url('/img/cara3.jpg')}}");
     }
 
@@ -454,12 +466,6 @@
     }
 
     .btn-4.active.focus {
-        width: 80px;
-        height: 80px;
-        margin-left: 1rem;
-        margin-right: 1rem;
-        background-repeat: no-repeat;
-        background-position: center;
         background-image:url("{{url('/img/cara4.jpg')}}");
     }
 
@@ -474,12 +480,6 @@
     }
 
     .btn-5.active.focus {
-        width: 80px;
-        height: 80px;
-        margin-left: 1rem;
-        margin-right: 1rem;
-        background-repeat: no-repeat;
-        background-position: center;
         background-image:url("{{url('/img/cara5.jpg')}}");
     }
 
