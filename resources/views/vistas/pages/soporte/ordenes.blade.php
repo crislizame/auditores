@@ -212,7 +212,7 @@
                                     <div class="row">
                                         <div class="col-6">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="ot_estado" id="r1" value="U" checked="">
+                                                <input class="form-check-input" type="radio" name="ot_estado" id="r1" value="U" checked="" disabled>
                                                 <label class="form-check-label" for="r1">
                                                     Urgente
                                                 </label>
@@ -220,7 +220,7 @@
                                         </div>
                                         <div class="col-6">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="ot_estado" id="r2" value="S">
+                                                <input class="form-check-input" type="radio" name="ot_estado" id="r2" value="S" disabled>
                                                 <label class="form-check-label" for="r2">
                                                     Seguimiento
                                                 </label>
