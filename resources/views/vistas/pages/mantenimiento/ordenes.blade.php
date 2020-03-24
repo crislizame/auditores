@@ -381,14 +381,14 @@
 </div>
 
 <style>
-.btn-1 {
+.btn-1 .active .focus{
     width: 100px;
     height: 100px;
     background-repeat:no-repeat;
     background-position:center;
     background-image:url("{{url('/img/cara1.jpg')}}");
 }
-.btn-1 .active{
+.btn-1{
     width: 100px;
     height: 100px;
     background-repeat:no-repeat;
