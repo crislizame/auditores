@@ -364,7 +364,7 @@
                         <input type="radio" name="options" value="1" autocomplete="off">
                     </label>
 
-                    <label class="btn btn-secondary">
+                    <label class="btn btn-2">
                         <input type="radio" name="options" value="2" autocomplete="off"> Radio
                     </label>
 
@@ -381,19 +381,42 @@
 </div>
 
 <style>
-.btn-1 .active .focus{
-    width: 100px;
-    height: 100px;
+.btn-1.active.focus{
+    width: 80px;
+    height: 80px;
+    margin-left: 1rem;
+    margin-right: 1rem;
     background-repeat:no-repeat;
     background-position:center;
     background-image:url("{{url('/img/cara1.jpg')}}");
 }
 .btn-1{
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
+    margin-left: 1rem;
+    margin-right: 1rem;
     background-repeat:no-repeat;
     background-position:center;
     background-image:url("{{url('/img/cara1inactive.png')}}");
+}
+
+.btn-2.active.focus{
+    width: 80px;
+    height: 80px;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    background-repeat:no-repeat;
+    background-position:center;
+    background-image:url("{{url('/img/cara2.jpg')}}");
+}
+.btn-2{
+    width: 80px;
+    height: 80px;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    background-repeat:no-repeat;
+    background-position:center;
+    background-image:url("{{url('/img/cara2inactive.png')}}");
 }
 </style>
 
