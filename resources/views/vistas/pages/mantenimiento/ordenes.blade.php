@@ -345,6 +345,58 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade modal-calificar" tabindex="-1" role="dialog" aria-labelledby="modal-calificar" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h4 class="modal-title text-white">Calificar</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body p-2">
+            
+            <div class="row">
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+
+                    <label class="btn btn-1">
+                        <input type="radio" name="options" value="1" autocomplete="off">
+                    </label>
+
+                    <label class="btn btn-secondary">
+                        <input type="radio" name="options" value="2" autocomplete="off"> Radio
+                    </label>
+
+                    <label class="btn btn-secondary">
+                        <input type="radio" name="options" value="3" autocomplete="off"> Radio
+                    </label>
+
+                </div>
+            </div>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.btn-1 {
+    width: 100px;
+    height: 100px;
+    background-repeat:no-repeat;
+    background-position:center;
+    background-image:url("{{url('/img/cara1.jpg')}}");
+}
+.btn-1 .active{
+    width: 100px;
+    height: 100px;
+    background-repeat:no-repeat;
+    background-position:center;
+    background-image:url("{{url('/img/cara1inactive.png')}}");
+}
+</style>
+
 @endsection
 @section('script')
 
@@ -357,6 +409,8 @@
     });
 
     $(document).ready(function() {
+        $('.modal-calificar').modal('show');
+
         tableProblemas = $('#list_problemas').DataTable({
             "lengthMenu": [
                 [25, 50, 100, -1],
