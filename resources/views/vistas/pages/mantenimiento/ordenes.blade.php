@@ -347,7 +347,7 @@
 </div>
 
 <div class="modal fade modal-calificar" tabindex="-1" role="dialog" aria-labelledby="modal-calificar" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header bg-primary">
                 <h4 class="modal-title text-white">Calificar</h4>
@@ -356,68 +356,142 @@
                 </button>
             </div>
             <div class="modal-body p-2">
-            
-            <div class="row">
-                <div class="btn-group btn-group-toggle" data-toggle="buttons">
 
-                    <label class="btn btn-1">
-                        <input type="radio" name="options" value="1" autocomplete="off">
-                    </label>
+                <div class="row m-5 p-5">
+                    <div class="col-5">
+                        <h2 class="text-center">Precio</h2>
+                    </div>
+                    <div class="col-7">
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
 
-                    <label class="btn btn-2">
-                        <input type="radio" name="options" value="2" autocomplete="off"> Radio
-                    </label>
+                            <label class="btn btn-1">
+                                <input type="radio" name="options" value="1" autocomplete="off">
+                            </label>
 
-                    <label class="btn btn-secondary">
-                        <input type="radio" name="options" value="3" autocomplete="off"> Radio
-                    </label>
+                            <label class="btn btn-2">
+                                <input type="radio" name="options" value="2" autocomplete="off">
+                            </label>
 
+                            <label class="btn btn-3">
+                                <input type="radio" name="options" value="3" autocomplete="off">
+                            </label>
+
+                            <label class="btn btn-4">
+                                <input type="radio" name="options" value="4" autocomplete="off">
+                            </label>
+
+                            <label class="btn btn-5">
+                                <input type="radio" name="options" value="5" autocomplete="off">
+                            </label>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            
+
             </div>
         </div>
     </div>
 </div>
 
 <style>
-.btn-1.active.focus{
-    width: 80px;
-    height: 80px;
-    margin-left: 1rem;
-    margin-right: 1rem;
-    background-repeat:no-repeat;
-    background-position:center;
-    background-image:url("{{url('/img/cara1.jpg')}}");
-}
-.btn-1{
-    width: 80px;
-    height: 80px;
-    margin-left: 1rem;
-    margin-right: 1rem;
-    background-repeat:no-repeat;
-    background-position:center;
-    background-image:url("{{url('/img/cara1inactive.png')}}");
-}
+    .btn-1.active.focus {
+        width: 80px;
+        height: 80px;
+        margin-left: 1rem;
+        margin-right: 1rem;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-image:url("{{url('/img/cara1.jpg')}}");
+    }
 
-.btn-2.active.focus{
-    width: 80px;
-    height: 80px;
-    margin-left: 1rem;
-    margin-right: 1rem;
-    background-repeat:no-repeat;
-    background-position:center;
-    background-image:url("{{url('/img/cara2.jpg')}}");
-}
-.btn-2{
-    width: 80px;
-    height: 80px;
-    margin-left: 1rem;
-    margin-right: 1rem;
-    background-repeat:no-repeat;
-    background-position:center;
-    background-image:url("{{url('/img/cara2inactive.png')}}");
-}
+    .btn-1 {
+        width: 80px;
+        height: 80px;
+        margin-left: 1rem;
+        margin-right: 1rem;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-image:url("{{url('/img/cara1inactive.png')}}");
+    }
+
+    .btn-2.active.focus {
+        width: 80px;
+        height: 80px;
+        margin-left: 1rem;
+        margin-right: 1rem;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-image:url("{{url('/img/cara2.jpg')}}");
+    }
+
+    .btn-2 {
+        width: 80px;
+        height: 80px;
+        margin-left: 1rem;
+        margin-right: 1rem;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-image:url("{{url('/img/cara2inactive.png')}}");
+    }
+
+    .btn-3.active.focus {
+        width: 80px;
+        height: 80px;
+        margin-left: 1rem;
+        margin-right: 1rem;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-image:url("{{url('/img/cara3.jpg')}}");
+    }
+
+    .btn-3 {
+        width: 80px;
+        height: 80px;
+        margin-left: 1rem;
+        margin-right: 1rem;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-image:url("{{url('/img/cara3inactive.png')}}");
+    }
+
+    .btn-4.active.focus {
+        width: 80px;
+        height: 80px;
+        margin-left: 1rem;
+        margin-right: 1rem;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-image:url("{{url('/img/cara4.jpg')}}");
+    }
+
+    .btn-4 {
+        width: 80px;
+        height: 80px;
+        margin-left: 1rem;
+        margin-right: 1rem;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-image:url("{{url('/img/cara4inactive.png')}}");
+    }
+
+    .btn-5.active.focus {
+        width: 80px;
+        height: 80px;
+        margin-left: 1rem;
+        margin-right: 1rem;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-image:url("{{url('/img/cara5.jpg')}}");
+    }
+
+    .btn-5 {
+        width: 80px;
+        height: 80px;
+        margin-left: 1rem;
+        margin-right: 1rem;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-image:url("{{url('/img/cara5inactive.png')}}");
+    }
 </style>
 
 @endsection
@@ -643,9 +717,9 @@
             if (entidad == "{{(new App\Entidad())->where('identidad',Auth::user()->entidad_id)->value('nombre')}}") {
                 $('#sel-pro').show();
 
-                if(done.finalizado!=null){
+                if (done.finalizado != null) {
                     $('#gb-c').show();
-                }else{
+                } else {
                     $('#gb-g').show();
                 }
             } else {
