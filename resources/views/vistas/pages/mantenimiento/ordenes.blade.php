@@ -423,7 +423,7 @@
 </div>
 
 <style>
-    .btn-1.active.focus {
+    .btn-1.active {
         background-image:url("{{url('/img/cara1.jpg')}}");
     }
 
@@ -437,7 +437,7 @@
         background-image:url("{{url('/img/cara1inactive.png')}}");
     }
 
-    .btn-2.active.focus {
+    .btn-2.active {
         background-image:url("{{url('/img/cara2.jpg')}}");
     }
 
@@ -451,7 +451,7 @@
         background-image:url("{{url('/img/cara2inactive.png')}}");
     }
 
-    .btn-3.active.focus {
+    .btn-3.active {
         background-image:url("{{url('/img/cara3.jpg')}}");
     }
 
@@ -465,7 +465,7 @@
         background-image:url("{{url('/img/cara3inactive.png')}}");
     }
 
-    .btn-4.active.focus {
+    .btn-4.active {
         background-image:url("{{url('/img/cara4.jpg')}}");
     }
 
@@ -479,7 +479,7 @@
         background-image:url("{{url('/img/cara4inactive.png')}}");
     }
 
-    .btn-5.active.focus {
+    .btn-5.active {
         background-image:url("{{url('/img/cara5.jpg')}}");
     }
 
