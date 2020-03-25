@@ -78,16 +78,16 @@
                                     @php
                                         switch($calificacion){
                                             case 1:
-                                                $porcentaje = 20;
+                                                $porcentaje = 0;
                                                 break;
                                             case 2:
-                                                $porcentaje = 40;
+                                                $porcentaje = 25;
                                                 break;
                                             case 3:
-                                                $porcentaje = 60;
+                                                $porcentaje = 50;
                                                 break;
                                             case 4:
-                                                $porcentaje = 80;
+                                                $porcentaje = 75;
                                                 break;
                                             case 5:
                                                 $porcentaje = 100;
