@@ -11,6 +11,7 @@ use App\Orden_Requerimiento;
 use App\Otrabajo_attachment;
 use App\Oreque_attachment;
 use App\Orden_trabajo;
+use App\Calificacion;
 use App\Attachment;
 use App\User;
 
@@ -374,6 +375,7 @@ class SoporteController extends Controller
     public function perfil()
     {
         $user = User::where('id', Auth::user()->id)->leftJoin('mantenimiento_users', 'users.id', 'mantenimiento_users.user_id')->first();
-        return view('vistas.pages.soporte.perfil')->with('user', $user);
+        $calificacion = Calificacion::where('id_user_calificado', $user->id)->avg('calificacion');
+        return view('vistas.pages.soporte.perfil')->with('user', $user)->with('calificacion', $calificacion);
     }
 }
