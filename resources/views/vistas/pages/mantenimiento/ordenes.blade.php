@@ -454,7 +454,7 @@
                         <h2 class="text-center mt-3">Calidad</h2>
                     </div>
                     <div class="col-7">
-                        <div class="btn-group" data-toggle="buttons" id="c">
+                        <div data-toggle="buttons" id="c">
 
                             <label class="btn btn-1" data-toggle="button" aria-pressed="false">
                                 <input type="radio" name="calidad" value="1" id="c1" autocomplete="off">
@@ -484,7 +484,7 @@
                         <h2 class="text-center mt-3">Garantía</h2>
                     </div>
                     <div class="col-7">
-                        <div class="btn-group" data-toggle="buttons" id="g">
+                        <div data-toggle="buttons" id="g">
 
                             <label class="btn btn-1" data-toggle="button" aria-pressed="false">
                                 <input type="radio" name="garantia" value="1" id="g1" autocomplete="off">
@@ -528,8 +528,6 @@
     .btn-1 {
         width: 80px;
         height: 80px;
-        margin-left: 1rem;
-        margin-right: 1rem;
         background-repeat: no-repeat;
         background-position: center;
         background-image:url("{{url('/img/cara1inactive.png')}}");
@@ -542,8 +540,6 @@
     .btn-2 {
         width: 80px;
         height: 80px;
-        margin-left: 1rem;
-        margin-right: 1rem;
         background-repeat: no-repeat;
         background-position: center;
         background-image:url("{{url('/img/cara2inactive.png')}}");
@@ -556,8 +552,6 @@
     .btn-3 {
         width: 80px;
         height: 80px;
-        margin-left: 1rem;
-        margin-right: 1rem;
         background-repeat: no-repeat;
         background-position: center;
         background-image:url("{{url('/img/cara3inactive.png')}}");
@@ -570,8 +564,6 @@
     .btn-4 {
         width: 80px;
         height: 80px;
-        margin-left: 1rem;
-        margin-right: 1rem;
         background-repeat: no-repeat;
         background-position: center;
         background-image:url("{{url('/img/cara4inactive.png')}}");
@@ -584,8 +576,6 @@
     .btn-5 {
         width: 80px;
         height: 80px;
-        margin-left: 1rem;
-        margin-right: 1rem;
         background-repeat: no-repeat;
         background-position: center;
         background-image:url("{{url('/img/cara5inactive.png')}}");
