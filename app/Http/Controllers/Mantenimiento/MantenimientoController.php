@@ -190,7 +190,7 @@ class MantenimientoController extends Controller
                     if($calificado){
                         $estado = 'Finalizado <span style="background-color: green;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
                     }else{
-                        $estado = '<a onclick="modalCalificar('.$orden->idorden_trabajos.')">Finalizado</a> <span style="background-color: green;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+                        $estado = '<a href="" onclick="modalCalificar('.$orden->idorden_trabajos.')">Finalizado</a> <span style="background-color: green;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
                     }
                 }
 
