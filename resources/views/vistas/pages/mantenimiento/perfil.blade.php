@@ -113,7 +113,7 @@
         height: 80px;
         background-repeat: no-repeat;
         background-position: center;
-        background-image:url("{{url('/img/cara{{ $calificacion }}inactive.png')}}");
+        background-image:url("{{url('/img/cara')}}{{ $calificacion }}inactive.png");
     }
 </style>
 @endsection
