@@ -76,6 +76,7 @@
                                     <br>
                                         <div class="calificacion mx-auto"></div>
                                     @php
+                                        $porcentaje = 0;
                                         switch($calificacion){
                                             case 1:
                                                 $porcentaje = 0;
