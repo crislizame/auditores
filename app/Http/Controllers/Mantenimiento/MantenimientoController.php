@@ -112,8 +112,8 @@ class MantenimientoController extends Controller
                     $query->where('entidades.nombre', 'Lotto Game')
                         ->orWhere('entidades.nombre', 'RP3');
                 })
-                ->get();
-
+                ->toSql();
+dd($ordenes);
             $tbody = "";
             foreach ($ordenes as $orden) {
                 $id = 'C-' . str_pad($orden->idorden_requermientos, 7, "0", STR_PAD_LEFT);
