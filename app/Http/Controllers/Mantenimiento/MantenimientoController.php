@@ -416,7 +416,7 @@ class MantenimientoController extends Controller
                         <td>" . strtoupper($proveedor->direccion) . "</td>
                         <td>" . strtoupper($proveedor->telefono) . "</td>
                         <td>" . strtoupper($proveedor->correo) . "</td>
-                        <td><span class=\"col\">" . $porcentaje . "%</span><img style=\"width: 80px;height: 80px;\" src=\"" . url('/img/cara') . "$calificacion.jpg\"></td>
+                        <td><span class=\"col\">" . $porcentaje . "%</span><img style=\"width: 40px;height: 40px;\" src=\"" . url('/img/cara') . "$calificacion.jpg\"></td>
                     </tr>";
         }
         return $tbody;
