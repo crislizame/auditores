@@ -49,7 +49,7 @@ class MantenimientoController extends Controller
                 ->leftJoin('orden_trabajos', 'orden_requermientos.idorden_requermientos', 'orden_trabajos.orden_requermiento_id')
                 ->where(function ($query) {
                     $query->whereNull('orden_requermientos.enproceso')
-                          ->orWhereNotNull('orden_requermientos.enproceso');
+                        ->orWhereNotNull('orden_requermientos.enproceso');
                 })
                 ->whereNull('orden_requermientos.finalizado')
                 ->get();
@@ -105,9 +105,9 @@ class MantenimientoController extends Controller
                 ->leftJoin('orden_trabajos', 'orden_requermientos.idorden_requermientos', 'orden_trabajos.orden_requermiento_id')
                 ->where(function ($query) {
                     $query->whereNull('orden_requermientos.enproceso')
-                          ->orWhereNotNull('orden_requermientos.enproceso');
+                        ->orWhereNotNull('orden_requermientos.enproceso');
                 })
-                ->whereNull('orden_requermientos.finalizado')            
+                ->whereNull('orden_requermientos.finalizado')
                 ->where(function ($query) {
                     $query->where('entidades.nombre', 'Lotto Game')
                         ->orWhere('entidades.nombre', 'RP3');
@@ -129,7 +129,7 @@ class MantenimientoController extends Controller
 
                 $taux = new \DateTime(date('Y-m-d'));
                 $taux->setTime($orden->tiempo, 0, 0);
-                
+
                 $tbody .= "<tr>
                         <th scope=\"row\"><a href=\"#\" onclick=\"modalAsignarOrdenDeTrabajo(" . $orden->idorden_requermientos . ", '" . $id . "', '" . $orden->entidad . "')\">" . $id . "</a></th>
                         <td>" . mb_strimwidth(strtoupper($orden->entidad), '0', '15', '...') . "</td>
@@ -172,7 +172,7 @@ class MantenimientoController extends Controller
                 ->whereNotNull('orden_requermientos.enproceso')
                 ->where(function ($query) {
                     $query->whereNull('orden_requermientos.finalizado')
-                          ->orWhereNotNull('orden_requermientos.finalizado');
+                        ->orWhereNotNull('orden_requermientos.finalizado');
                 })
                 ->get();
 
@@ -187,10 +187,10 @@ class MantenimientoController extends Controller
                 }
                 if ($orden->finalizado != null) {
                     $calificado = Calificacion::where('id_orden_trabajo', $orden->idorden_trabajos)->exists();
-                    if($calificado){
+                    if ($calificado) {
                         $estado = 'Finalizado <span style="background-color: green;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
-                    }else{
-                        $estado = '<a href="#" onclick="modalCalificar('.$orden->idorden_trabajos.')">Finalizado</a> <span style="background-color: green;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+                    } else {
+                        $estado = '<a href="#" onclick="modalCalificar(' . $orden->idorden_trabajos . ')">Finalizado</a> <span style="background-color: green;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
                     }
                 }
 
@@ -235,7 +235,7 @@ class MantenimientoController extends Controller
                 ->whereNotNull('orden_requermientos.enproceso')
                 ->where(function ($query) {
                     $query->whereNull('orden_requermientos.finalizado')
-                          ->orWhereNotNull('orden_requermientos.finalizado');
+                        ->orWhereNotNull('orden_requermientos.finalizado');
                 })
                 ->get();
 
@@ -408,14 +408,22 @@ class MantenimientoController extends Controller
         return view('vistas.pages.mantenimiento.perfil')->with('user', $user);
     }
 
-    public function finalizarOrdenDeRequerimiento(Request $request){
-        
+    public function finalizarOrdenDeRequerimiento(Request $request)
+    {
+
         $orden = Orden_Requerimiento::find($request->input('id'));
         $orden->finalizado = Carbon::now();
         $orden->save();
     }
 
-    public function calificar(Request $request){
-        return $request->all();
+    public function calificar(Request $request)
+    {
+        $calificacion = new Calificacion();
+        $calificacion->id_calificador = Auth::user()->id;
+        $calificacion->id_orden_trabajo = $request->orden;
+        $calificacion->calificacion = ($request->precio + $request->disponibilidad + $request->rapidez + $request->calidad + $request->garantia) / 5;
+        $calificacion->save();
+
+        return redirect('ordenes')->with('cat', 'proveedores');
     }
 }
