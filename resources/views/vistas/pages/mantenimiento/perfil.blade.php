@@ -70,14 +70,11 @@
                                     <label class="col-form-label">Rango de cumplimiento</label>
                                     <span class="text-center" id="p_compliance"></span>
                                 </div>
-                                <div class="border rounded text-center row" style="min-height: 80px;">
+                                <div class="border rounded text-center" style="min-height: 80px;">
                                 
-                                    <label class="col-form-label">Grado de satisfacción</label>
+                                    <label class="col-form-label col">Grado de satisfacción</label>
                                     <br>
-                                    <div class="text-center">
-                                        <div class="calificacion"></div>
-                                    </div>
-                                    <br>
+                                        <div class="calificacion mx-auto"></div>
                                     @php
                                         switch($calificacion){
                                             case 1:
@@ -97,7 +94,7 @@
                                                 break;
                                         }
                                     @endphp
-                                <label class="col-form-label"><b>{{ $porcentaje }}%</b></label>
+                                <label class="col-form-label col"><b>{{ $porcentaje }}%</b></label>
                                 </div>
                             </div>
                         </div>
