@@ -493,7 +493,11 @@
                 $('#req_imagenes > .carousel-inner').html(ok.images);
             });
 
-            $('#ot_tiempo').html(zfill(done.tiempo, 2) + ":00");
+            if(done.tiempo!=null)[
+                $('#ot_tiempo').html(zfill(done.tiempo, 2) + ":00");
+            ]else{
+                $('#ot_tiempo').html("Indefinido");
+            }
 
             if (done.enproceso != null) {
                 $('[name="ot_proveedor"]').val(done.proveedor_id);
