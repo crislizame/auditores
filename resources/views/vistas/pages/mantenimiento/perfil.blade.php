@@ -72,12 +72,12 @@
                                 </div>
                                 <div class="border rounded text-center row" style="min-height: 80px;">
                                 
-                                <label class="col-form-label">Grado de satisfacción</label>
-                                    
+                                    <label class="col-form-label">Grado de satisfacción</label>
+                                    <br>
                                     <div class="text-center">
-                                        <div class="btn-{{ $calificacion }}"></div>
+                                        <div class="calificacion"></div>
                                     </div>
-
+                                    <br>
                                     @php
                                         switch($calificacion){
                                             case 1:
@@ -108,12 +108,12 @@
     </div>
 </div>
 <style>
-    .btn-5 {
+    .calificacion {
         width: 80px;
         height: 80px;
         background-repeat: no-repeat;
         background-position: center;
-        background-image:url("{{url('/img/cara5inactive.png')}}");
+        background-image:url("{{url('/img/cara{{ $calificacion }}inactive.png')}}");
     }
 </style>
 @endsection
