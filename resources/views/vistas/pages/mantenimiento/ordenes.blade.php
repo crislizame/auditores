@@ -369,7 +369,7 @@
                             <div data-toggle="buttons" id="p">
 
                                 <label class="btn btn-1" data-toggle="button" aria-pressed="false">
-                                    <input type="radio" name="precio" value="1" id="p1" autocomplete="off">
+                                    <input type="radio" name="precio" value="1" id="p1" autocomplete="off" checked>
                                 </label>
 
                                 <label class="btn btn-2" data-toggle="button" aria-pressed="false">
@@ -399,7 +399,7 @@
                             <div data-toggle="buttons" id="d">
 
                                 <label class="btn btn-1" data-toggle="button" aria-pressed="false">
-                                    <input type="radio" name="disponibilidad" value="1" id="d1" autocomplete="off">
+                                    <input type="radio" name="disponibilidad" value="1" id="d1" autocomplete="off" checked>
                                 </label>
 
                                 <label class="btn btn-2" data-toggle="button" aria-pressed="false">
@@ -429,7 +429,7 @@
                             <div data-toggle="buttons" id="r">
 
                                 <label class="btn btn-1" data-toggle="button" aria-pressed="false">
-                                    <input type="radio" name="rapidez" value="1" id="r1" autocomplete="off">
+                                    <input type="radio" name="rapidez" value="1" id="r1" autocomplete="off" checked>
                                 </label>
 
                                 <label class="btn btn-2" data-toggle="button" aria-pressed="false">
@@ -459,7 +459,7 @@
                             <div data-toggle="buttons" id="c">
 
                                 <label class="btn btn-1" data-toggle="button" aria-pressed="false">
-                                    <input type="radio" name="calidad" value="1" id="c1" autocomplete="off">
+                                    <input type="radio" name="calidad" value="1" id="c1" autocomplete="off" checked>
                                 </label>
 
                                 <label class="btn btn-2" data-toggle="button" aria-pressed="false">
@@ -488,8 +488,8 @@
                         <div class="col-7">
                             <div data-toggle="buttons" id="g">
 
-                                <label class="btn btn-1" data-toggle="button" aria-pressed="false">
-                                    <input type="radio" name="garantia" value="1" id="g1" autocomplete="off">
+                                <label class="btn btn-1 active" data-toggle="button" aria-pressed="false">
+                                    <input type="radio" name="garantia" value="1" id="g1" autocomplete="off" checked>
                                 </label>
 
                                 <label class="btn btn-2" data-toggle="button" aria-pressed="false">
