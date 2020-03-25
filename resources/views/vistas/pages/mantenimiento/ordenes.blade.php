@@ -362,26 +362,26 @@
                         <h2 class="text-center mt-3">Precio</h2>
                     </div>
                     <div class="col-7">
-                        <div class="btn-group" data-toggle="buttons">
+                        <div class="btn-group" data-toggle="buttons" id="p">
 
-                            <label class="btn btn-1 active">
-                                <input type="radio" name="precio" value="1" autocomplete="off" checked>
+                            <label class="btn btn-1 active focus">
+                                <input type="radio" name="precio" value="1" id="p1" autocomplete="off" checked>
                             </label>
 
                             <label class="btn btn-2">
-                                <input type="radio" name="precio" value="2" autocomplete="off">
+                                <input type="radio" name="precio" value="2" id="p2" autocomplete="off">
                             </label>
 
                             <label class="btn btn-3">
-                                <input type="radio" name="precio" value="3" autocomplete="off">
+                                <input type="radio" name="precio" value="3" id="p3" autocomplete="off">
                             </label>
 
                             <label class="btn btn-4">
-                                <input type="radio" name="precio" value="4" autocomplete="off">
+                                <input type="radio" name="precio" value="4" id="p4" autocomplete="off">
                             </label>
 
                             <label class="btn btn-5">
-                                <input type="radio" name="precio" value="5" autocomplete="off">
+                                <input type="radio" name="precio" value="5" id="p5" autocomplete="off">
                             </label>
                         </div>
                     </div>
@@ -392,26 +392,26 @@
                         <h2 class="text-center mt-3">Disponibilidad</h2>
                     </div>
                     <div class="col-7">
-                        <div class="btn-group" data-toggle="buttons">
+                        <div class="btn-group" data-toggle="buttons" id="d">
 
-                            <label class="btn btn-1 active">
-                                <input type="radio" name="disponibilidad" value="1" autocomplete="off" checked>
+                            <label class="btn btn-1 active focus">
+                                <input type="radio" name="disponibilidad" value="1" id="d1" autocomplete="off" checked>
                             </label>
 
                             <label class="btn btn-2">
-                                <input type="radio" name="disponibilidad" value="2" autocomplete="off">
+                                <input type="radio" name="disponibilidad" value="2" id="d2" autocomplete="off">
                             </label>
 
                             <label class="btn btn-3">
-                                <input type="radio" name="disponibilidad" value="3" autocomplete="off">
+                                <input type="radio" name="disponibilidad" value="3" id="d3" autocomplete="off">
                             </label>
 
                             <label class="btn btn-4">
-                                <input type="radio" name="disponibilidad" value="4" autocomplete="off">
+                                <input type="radio" name="disponibilidad" value="4" id="d4" autocomplete="off">
                             </label>
 
                             <label class="btn btn-5">
-                                <input type="radio" name="disponibilidad" value="5" autocomplete="off">
+                                <input type="radio" name="disponibilidad" value="5" id="d5" autocomplete="off">
                             </label>
                         </div>
                     </div>
