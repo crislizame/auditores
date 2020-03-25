@@ -49,7 +49,7 @@ class SoporteController extends Controller
                 ->leftJoin('orden_trabajos', 'orden_requermientos.idorden_requermientos', 'orden_trabajos.orden_requermiento_id')
                 ->where(function ($query) {
                     $query->whereNull('orden_requermientos.enproceso')
-                          ->orWhereNotNull('orden_requermientos.enproceso');
+                        ->orWhereNotNull('orden_requermientos.enproceso');
                 })
                 ->whereNull('orden_requermientos.finalizado')
                 ->get();
@@ -103,13 +103,15 @@ class SoporteController extends Controller
                 ->join('entidades', 'entidades.identidad', 'areas.entidad_id')
                 ->join('pdsperfiles', 'orden_requermientos.pds_id', 'pdsperfiles.id')
                 ->leftJoin('orden_trabajos', 'orden_requermientos.idorden_requermientos', 'orden_trabajos.orden_requermiento_id')
-                ->where('entidades.nombre', 'Lotto Game')
-                ->orWhere('entidades.nombre', 'RP3')
                 ->where(function ($query) {
                     $query->whereNull('orden_requermientos.enproceso')
-                          ->orWhereNotNull('orden_requermientos.enproceso');
+                        ->orWhereNotNull('orden_requermientos.enproceso');
                 })
                 ->whereNull('orden_requermientos.finalizado')
+                ->where(function ($query) {
+                    $query->where('entidades.nombre', 'Lotto Game')
+                        ->orWhere('entidades.nombre', 'RP3');
+                })
                 ->get();
 
             $tbody = "";
@@ -129,7 +131,7 @@ class SoporteController extends Controller
                 $taux->setTime($orden->tiempo, 0, 0);
 
                 $tbody .= "<tr>
-                        <th scope=\"row\"><a href=\"#\" onclick=\"modalAsignarOrdenDeTrabajo(" . $orden->idorden_requermientos . ", '" . $id . "', '" + $orden->entidad + "')\">" . $id . "</a></th>
+                        <th scope=\"row\"><a href=\"#\" onclick=\"modalAsignarOrdenDeTrabajo(" . $orden->idorden_requermientos . ", '" . $id . "', '" . $orden->entidad . "')\">" . $id . "</a></th>
                         <td>" . mb_strimwidth(strtoupper($orden->entidad), '0', '15', '...') . "</td>
                         <td>" . mb_strimwidth(strtoupper($orden->subarea), '0', '15', '...') . "</td>
                         <td>" . $orden->problema . "</td>
