@@ -103,13 +103,15 @@ class MantenimientoController extends Controller
                 ->join('entidades', 'entidades.identidad', 'areas.entidad_id')
                 ->join('pdsperfiles', 'orden_requermientos.pds_id', 'pdsperfiles.id')
                 ->leftJoin('orden_trabajos', 'orden_requermientos.idorden_requermientos', 'orden_trabajos.orden_requermiento_id')
-                ->where('entidades.nombre', 'Lotto Game')
-                ->orWhere('entidades.nombre', 'RP3')
                 ->where(function ($query) {
                     $query->whereNull('orden_requermientos.enproceso')
                           ->orWhereNotNull('orden_requermientos.enproceso');
                 })
-                ->whereNull('orden_requermientos.finalizado')
+                ->whereNull('orden_requermientos.finalizado')            
+                ->where(function ($query) {
+                    $query->where('entidades.nombre', 'Lotto Game')
+                        ->orWhere('entidades.nombre', 'RP3');
+                })
                 ->get();
 
             $tbody = "";
