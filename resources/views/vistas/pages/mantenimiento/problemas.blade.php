@@ -603,12 +603,6 @@
                 }else{
                     $('#gb-g').show();
                 }
-
-                $('[name="ot_presupuesto"]').removeAttr('disabled');
-                $('[name="ot_garantia"]').removeAttr('disabled');
-                $('[name="ot_encargado"]').removeAttr('disabled');
-                $('[name="ot_extra"]').removeAttr('disabled');
-                $('[name="ot_comentario"]').removeAttr('disabled');
             } else {
                 $('#tex-ent').show();
                 $('#ot_entidad').html(done.entidad);
