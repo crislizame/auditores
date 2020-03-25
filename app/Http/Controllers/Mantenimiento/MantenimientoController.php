@@ -141,6 +141,7 @@ class MantenimientoController extends Controller
                         <td>" . $estado . "</td>
                     </tr>";
             }
+            return $tbody;
         }
     }
 
