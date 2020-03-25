@@ -566,6 +566,20 @@
                         $('#gvl').removeAttr('onclick');
                     }
                 });
+
+                $('[name="ot_proveedor"]').attr('disabled','true');
+                $('[name="ot_presupuesto"]').attr('disabled','true');
+                $('[name="ot_garantia"]').attr('disabled','true');
+                $('[name="ot_encargado"]').attr('disabled','true');
+                $('[name="ot_extra"]').attr('disabled','true');
+                $('[name="ot_comentario"]').attr('disabled','true');
+            }else{
+                $('[name="ot_proveedor"]').attr('disabled','false');
+                $('[name="ot_presupuesto"]').attr('disabled','false');
+                $('[name="ot_garantia"]').attr('disabled','false');
+                $('[name="ot_encargado"]').attr('disabled','false');
+                $('[name="ot_extra"]').attr('disabled','false');
+                $('[name="ot_comentario"]').attr('disabled','false');
             }
 
             if (entidad == "{{(new App\Entidad())->where('identidad',Auth::user()->entidad_id)->value('nombre')}}") {
