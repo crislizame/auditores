@@ -488,7 +488,7 @@
                         <div class="col-7">
                             <div data-toggle="buttons" id="g">
 
-                                <label class="btn btn-1 active" data-toggle="button" aria-pressed="false">
+                                <label class="btn btn-1" data-toggle="button" aria-pressed="false">
                                     <input type="radio" name="garantia" value="1" id="g1" autocomplete="off" checked>
                                 </label>
 
