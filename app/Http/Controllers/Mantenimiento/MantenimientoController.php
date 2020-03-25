@@ -129,9 +129,9 @@ class MantenimientoController extends Controller
 
                 $taux = new \DateTime(date('Y-m-d'));
                 $taux->setTime($orden->tiempo, 0, 0);
-dd($orden);
+                
                 $tbody .= "<tr>
-                        <th scope=\"row\"><a href=\"#\" onclick=\"modalAsignarOrdenDeTrabajo(" . $orden->idorden_requermientos . ", '" . $id . "', '" + $orden->entidad + "')\">" . $id . "</a></th>
+                        <th scope=\"row\"><a href=\"#\" onclick=\"modalAsignarOrdenDeTrabajo(" . $orden->idorden_requermientos . ", '" . $id . "', '" . $orden->entidad . "')\">" . $id . "</a></th>
                         <td>" . mb_strimwidth(strtoupper($orden->entidad), '0', '15', '...') . "</td>
                         <td>" . mb_strimwidth(strtoupper($orden->subarea), '0', '15', '...') . "</td>
                         <td>" . $orden->problema . "</td>
