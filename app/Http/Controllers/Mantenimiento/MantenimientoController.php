@@ -390,13 +390,33 @@ class MantenimientoController extends Controller
         $proveedores = DB::table('proveedores')->orderBy('idproveedores', 'asc')->get();
         $tbody = "";
         foreach ($proveedores as $proveedor) {
+            $calificacion = Calificacion::join('orden_trabajos', 'calificaciones.id_orden_trabajo', 'orden_trabajos.idorden_trabajos')->where('proveedor_id', $proveedor->idproveedores)->avg('calificacion');
+
+            switch($calificacion){
+                case 1:
+                    $porcentaje = 0;
+                    break;
+                case 2:
+                    $porcentaje = 25;
+                    break;
+                case 3:
+                    $porcentaje = 50;
+                    break;
+                case 4:
+                    $porcentaje = 75;
+                    break;
+                case 5:
+                    $porcentaje = 100;
+                    break;
+            }
+    
             $tbody .= "<tr>
                         <th scope=\"row\">" . strtoupper($proveedor->nombre) . "</th>
                         <td>" . strtoupper($proveedor->ruc_cedula) . "</td>
                         <td>" . strtoupper($proveedor->direccion) . "</td>
                         <td>" . strtoupper($proveedor->telefono) . "</td>
                         <td>" . strtoupper($proveedor->correo) . "</td>
-                        <td></td>
+                        <td><span class=\"col\">".$porcentaje."%</span><div style=\"width: 80px;height: 80px;background-repeat: no-repeat;background-image:url(\"{{url('/img/cara')}}{{ $calificacion }}.jpg\");\"></div></td>
                     </tr>";
         }
         return $tbody;
