@@ -574,12 +574,12 @@
                 $('[name="ot_extra"]').attr('disabled','true');
                 $('[name="ot_comentario"]').attr('disabled','true');
             }else{
-                $('[name="ot_proveedor"]').attr('disabled','false');
-                $('[name="ot_presupuesto"]').attr('disabled','false');
-                $('[name="ot_garantia"]').attr('disabled','false');
-                $('[name="ot_encargado"]').attr('disabled','false');
-                $('[name="ot_extra"]').attr('disabled','false');
-                $('[name="ot_comentario"]').attr('disabled','false');
+                $('[name="ot_proveedor"]').removeAttr('disabled');
+                $('[name="ot_presupuesto"]').removeAttr('disabled');
+                $('[name="ot_garantia"]').removeAttr('disabled');
+                $('[name="ot_encargado"]').removeAttr('disabled');
+                $('[name="ot_extra"]').removeAttr('disabled');
+                $('[name="ot_comentario"]').removeAttr('disabled');
             }
 
             if (entidad == "{{(new App\Entidad())->where('identidad',Auth::user()->entidad_id)->value('nombre')}}") {
@@ -590,15 +590,21 @@
                 }else{
                     $('#gb-g').show();
                 }
+
+                $('[name="ot_presupuesto"]').removeAttr('disabled');
+                $('[name="ot_garantia"]').removeAttr('disabled');
+                $('[name="ot_encargado"]').removeAttr('disabled');
+                $('[name="ot_extra"]').removeAttr('disabled');
+                $('[name="ot_comentario"]').removeAttr('disabled');
             } else {
                 $('#tex-ent').show();
                 $('#ot_entidad').html(done.entidad);
 
-                $('[name="ot_presupuesto"]').attr('readonly', 'true');
-                $('[name="ot_garantia"]').attr('readonly', 'true');
-                $('[name="ot_encargado"]').attr('readonly', 'true');
-                $('[name="ot_extra"]').attr('readonly', 'true');
-                $('[name="ot_comentario"]').attr('readonly', 'true');
+                $('[name="ot_presupuesto"]').attr('disabled','true');
+                $('[name="ot_garantia"]').attr('disabled','true');
+                $('[name="ot_encargado"]').attr('disabled','true');
+                $('[name="ot_extra"]').attr('disabled','true');
+                $('[name="ot_comentario"]').attr('disabled','true');
 
                 $('#cc').hide();
                 $('#gc').hide();
