@@ -349,6 +349,8 @@
 <div class="modal fade modal-calificar" tabindex="-1" role="dialog" aria-labelledby="modal-calificar" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
+            <form action="{{ url('/mantenimiento/ordenes/calificar') }}" method="post">
+                    @csrf
             <div class="modal-header bg-primary">
                 <h4 class="modal-title text-white">Calificar</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -356,8 +358,7 @@
                 </button>
             </div>
             <div class="modal-body p-2 m-5 p-5">
-                <form action="{{ url('/mantenimiento/ordenes/calificar') }}" method="post">
-                    @csrf
+                
                     <input type="hidden" name="orden" id="orden">
 
                     <div class="row mb-3">
@@ -512,11 +513,16 @@
 
                     <div class="row">
                         <div class="col-12">
-                            <button type="submit" class="btn btn-primary float-right mr-3">Enviar</button>
+                            
                         </div>
                     </div>
-                </form>
+
             </div>
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary float-right mr-3">Enviar</button>
+            </div>
+            </form>
         </div>
     </div>
 </div>
