@@ -356,158 +356,159 @@
                 </button>
             </div>
             <div class="modal-body p-2 m-5 p-5">
-                <form action="{{ url('/ordenes/calificar') }}" method="post">
+                <form action="{{ url('/mantenimiento/ordenes/calificar') }}" method="post">
                     @csrf
                     <input type="hidden" name="orden" id="orden">
-                <div class="row mb-3">
-                    <div class="col-5">
-                        <h2 class="text-center mt-3">Precio</h2>
-                    </div>
-                    <div class="col-7">
-                        <div class="btn-group" data-toggle="buttons" id="p">
 
-                            <label class="btn btn-1" data-toggle="button" aria-pressed="false">
-                                <input type="radio" name="precio" value="1" id="p1" autocomplete="off">
-                            </label>
+                    <div class="row mb-3">
+                        <div class="col-5">
+                            <h2 class="text-center mt-3">Precio</h2>
+                        </div>
+                        <div class="col-7">
+                            <div data-toggle="buttons" id="p">
 
-                            <label class="btn btn-2" data-toggle="button" aria-pressed="false">
-                                <input type="radio" name="precio" value="2" id="p2" autocomplete="off">
-                            </label>
+                                <label class="btn btn-1" data-toggle="button" aria-pressed="false">
+                                    <input type="radio" name="precio" value="1" id="p1" autocomplete="off">
+                                </label>
 
-                            <label class="btn btn-3" data-toggle="button" aria-pressed="false">
-                                <input type="radio" name="precio" value="3" id="p3" autocomplete="off">
-                            </label>
+                                <label class="btn btn-2" data-toggle="button" aria-pressed="false">
+                                    <input type="radio" name="precio" value="2" id="p2" autocomplete="off">
+                                </label>
 
-                            <label class="btn btn-4" data-toggle="button" aria-pressed="false">
-                                <input type="radio" name="precio" value="4" id="p4" autocomplete="off">
-                            </label>
+                                <label class="btn btn-3" data-toggle="button" aria-pressed="false">
+                                    <input type="radio" name="precio" value="3" id="p3" autocomplete="off">
+                                </label>
 
-                            <label class="btn btn-5" data-toggle="button" aria-pressed="false">
-                                <input type="radio" name="precio" value="5" id="p5" autocomplete="off">
-                            </label>
+                                <label class="btn btn-4" data-toggle="button" aria-pressed="false">
+                                    <input type="radio" name="precio" value="4" id="p4" autocomplete="off">
+                                </label>
+
+                                <label class="btn btn-5" data-toggle="button" aria-pressed="false">
+                                    <input type="radio" name="precio" value="5" id="p5" autocomplete="off">
+                                </label>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="row mb-3">
-                    <div class="col-5">
-                        <h2 class="text-center mt-3">Disponibilidad</h2>
-                    </div>
-                    <div class="col-7">
-                        <div class="btn-group" data-toggle="buttons" id="d">
+                    <div class="row mb-3">
+                        <div class="col-5">
+                            <h2 class="text-center mt-3">Disponibilidad</h2>
+                        </div>
+                        <div class="col-7">
+                            <div data-toggle="buttons" id="d">
 
-                            <label class="btn btn-1" data-toggle="button" aria-pressed="false">
-                                <input type="radio" name="disponibilidad" value="1" id="d1" autocomplete="off">
-                            </label>
+                                <label class="btn btn-1" data-toggle="button" aria-pressed="false">
+                                    <input type="radio" name="disponibilidad" value="1" id="d1" autocomplete="off">
+                                </label>
 
-                            <label class="btn btn-2" data-toggle="button" aria-pressed="false">
-                                <input type="radio" name="disponibilidad" value="2" id="d2" autocomplete="off">
-                            </label>
+                                <label class="btn btn-2" data-toggle="button" aria-pressed="false">
+                                    <input type="radio" name="disponibilidad" value="2" id="d2" autocomplete="off">
+                                </label>
 
-                            <label class="btn btn-3" data-toggle="button" aria-pressed="false">
-                                <input type="radio" name="disponibilidad" value="3" id="d3" autocomplete="off">
-                            </label>
+                                <label class="btn btn-3" data-toggle="button" aria-pressed="false">
+                                    <input type="radio" name="disponibilidad" value="3" id="d3" autocomplete="off">
+                                </label>
 
-                            <label class="btn btn-4" data-toggle="button" aria-pressed="false">
-                                <input type="radio" name="disponibilidad" value="4" id="d4" autocomplete="off">
-                            </label>
+                                <label class="btn btn-4" data-toggle="button" aria-pressed="false">
+                                    <input type="radio" name="disponibilidad" value="4" id="d4" autocomplete="off">
+                                </label>
 
-                            <label class="btn btn-5" data-toggle="button" aria-pressed="false">
-                                <input type="radio" name="disponibilidad" value="5" id="d5" autocomplete="off">
-                            </label>
+                                <label class="btn btn-5" data-toggle="button" aria-pressed="false">
+                                    <input type="radio" name="disponibilidad" value="5" id="d5" autocomplete="off">
+                                </label>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="row mb-3">
-                    <div class="col-5">
-                        <h2 class="text-center mt-3">Rapidez</h2>
-                    </div>
-                    <div class="col-7">
-                        <div class="btn-group" data-toggle="buttons" id="r">
+                    <div class="row mb-3">
+                        <div class="col-5">
+                            <h2 class="text-center mt-3">Rapidez</h2>
+                        </div>
+                        <div class="col-7">
+                            <div data-toggle="buttons" id="r">
 
-                            <label class="btn btn-1" data-toggle="button" aria-pressed="false">
-                                <input type="radio" name="rapidez" value="1" id="r1" autocomplete="off">
-                            </label>
+                                <label class="btn btn-1" data-toggle="button" aria-pressed="false">
+                                    <input type="radio" name="rapidez" value="1" id="r1" autocomplete="off">
+                                </label>
 
-                            <label class="btn btn-2" data-toggle="button" aria-pressed="false">
-                                <input type="radio" name="rapidez" value="2" id="r2" autocomplete="off">
-                            </label>
+                                <label class="btn btn-2" data-toggle="button" aria-pressed="false">
+                                    <input type="radio" name="rapidez" value="2" id="r2" autocomplete="off">
+                                </label>
 
-                            <label class="btn btn-3" data-toggle="button" aria-pressed="false">
-                                <input type="radio" name="rapidez" value="3" id="r3" autocomplete="off">
-                            </label>
+                                <label class="btn btn-3" data-toggle="button" aria-pressed="false">
+                                    <input type="radio" name="rapidez" value="3" id="r3" autocomplete="off">
+                                </label>
 
-                            <label class="btn btn-4" data-toggle="button" aria-pressed="false">
-                                <input type="radio" name="rapidez" value="4" id="r4" autocomplete="off">
-                            </label>
+                                <label class="btn btn-4" data-toggle="button" aria-pressed="false">
+                                    <input type="radio" name="rapidez" value="4" id="r4" autocomplete="off">
+                                </label>
 
-                            <label class="btn btn-5" data-toggle="button" aria-pressed="false">
-                                <input type="radio" name="rapidez" value="5" id="r5" autocomplete="off">
-                            </label>
+                                <label class="btn btn-5" data-toggle="button" aria-pressed="false">
+                                    <input type="radio" name="rapidez" value="5" id="r5" autocomplete="off">
+                                </label>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="row mb-3">
-                    <div class="col-5">
-                        <h2 class="text-center mt-3">Calidad</h2>
-                    </div>
-                    <div class="col-7">
-                        <div data-toggle="buttons" id="c">
+                    <div class="row mb-3">
+                        <div class="col-5">
+                            <h2 class="text-center mt-3">Calidad</h2>
+                        </div>
+                        <div class="col-7">
+                            <div data-toggle="buttons" id="c">
 
-                            <label class="btn btn-1" data-toggle="button" aria-pressed="false">
-                                <input type="radio" name="calidad" value="1" id="c1" autocomplete="off">
-                            </label>
+                                <label class="btn btn-1" data-toggle="button" aria-pressed="false">
+                                    <input type="radio" name="calidad" value="1" id="c1" autocomplete="off">
+                                </label>
 
-                            <label class="btn btn-2" data-toggle="button" aria-pressed="false">
-                                <input type="radio" name="calidad" value="2" id="c2" autocomplete="off">
-                            </label>
+                                <label class="btn btn-2" data-toggle="button" aria-pressed="false">
+                                    <input type="radio" name="calidad" value="2" id="c2" autocomplete="off">
+                                </label>
 
-                            <label class="btn btn-3" data-toggle="button" aria-pressed="false">
-                                <input type="radio" name="calidad" value="3" id="c3" autocomplete="off">
-                            </label>
+                                <label class="btn btn-3" data-toggle="button" aria-pressed="false">
+                                    <input type="radio" name="calidad" value="3" id="c3" autocomplete="off">
+                                </label>
 
-                            <label class="btn btn-4" data-toggle="button" aria-pressed="false">
-                                <input type="radio" name="calidad" value="4" id="c4" autocomplete="off">
-                            </label>
+                                <label class="btn btn-4" data-toggle="button" aria-pressed="false">
+                                    <input type="radio" name="calidad" value="4" id="c4" autocomplete="off">
+                                </label>
 
-                            <label class="btn btn-5" data-toggle="button" aria-pressed="false">
-                                <input type="radio" name="calidad" value="5" id="c5" autocomplete="off">
-                            </label>
+                                <label class="btn btn-5" data-toggle="button" aria-pressed="false">
+                                    <input type="radio" name="calidad" value="5" id="c5" autocomplete="off">
+                                </label>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="row mb-3">
-                    <div class="col-5">
-                        <h2 class="text-center mt-3">Garantía</h2>
-                    </div>
-                    <div class="col-7">
-                        <div data-toggle="buttons" id="g">
+                    <div class="row mb-3">
+                        <div class="col-5">
+                            <h2 class="text-center mt-3">Garantía</h2>
+                        </div>
+                        <div class="col-7">
+                            <div data-toggle="buttons" id="g">
 
-                            <label class="btn btn-1" data-toggle="button" aria-pressed="false">
-                                <input type="radio" name="garantia" value="1" id="g1" autocomplete="off">
-                            </label>
+                                <label class="btn btn-1" data-toggle="button" aria-pressed="false">
+                                    <input type="radio" name="garantia" value="1" id="g1" autocomplete="off">
+                                </label>
 
-                            <label class="btn btn-2" data-toggle="button" aria-pressed="false">
-                                <input type="radio" name="garantia" value="2" id="g2" autocomplete="off">
-                            </label>
+                                <label class="btn btn-2" data-toggle="button" aria-pressed="false">
+                                    <input type="radio" name="garantia" value="2" id="g2" autocomplete="off">
+                                </label>
 
-                            <label class="btn btn-3" data-toggle="button" aria-pressed="false">
-                                <input type="radio" name="garantia" value="3" id="g3" autocomplete="off">
-                            </label>
+                                <label class="btn btn-3" data-toggle="button" aria-pressed="false">
+                                    <input type="radio" name="garantia" value="3" id="g3" autocomplete="off">
+                                </label>
 
-                            <label class="btn btn-4" data-toggle="button" aria-pressed="false">
-                                <input type="radio" name="garantia" value="4" id="g4" autocomplete="off">
-                            </label>
+                                <label class="btn btn-4" data-toggle="button" aria-pressed="false">
+                                    <input type="radio" name="garantia" value="4" id="g4" autocomplete="off">
+                                </label>
 
-                            <label class="btn btn-5" data-toggle="button" aria-pressed="false">
-                                <input type="radio" name="garantia" value="5" id="g5" autocomplete="off">
-                            </label>
+                                <label class="btn btn-5" data-toggle="button" aria-pressed="false">
+                                    <input type="radio" name="garantia" value="5" id="g5" autocomplete="off">
+                                </label>
+                            </div>
                         </div>
                     </div>
-                </div>
 
                     <div class="row">
                         <div class="col-12">
@@ -528,6 +529,8 @@
     .btn-1 {
         width: 80px;
         height: 80px;
+        margin-left: 1rem;
+        margin-right: 1rem;
         background-repeat: no-repeat;
         background-position: center;
         background-image:url("{{url('/img/cara1inactive.png')}}");
@@ -540,6 +543,8 @@
     .btn-2 {
         width: 80px;
         height: 80px;
+        margin-left: 1rem;
+        margin-right: 1rem;
         background-repeat: no-repeat;
         background-position: center;
         background-image:url("{{url('/img/cara2inactive.png')}}");
@@ -552,6 +557,8 @@
     .btn-3 {
         width: 80px;
         height: 80px;
+        margin-left: 1rem;
+        margin-right: 1rem;
         background-repeat: no-repeat;
         background-position: center;
         background-image:url("{{url('/img/cara3inactive.png')}}");
@@ -564,6 +571,8 @@
     .btn-4 {
         width: 80px;
         height: 80px;
+        margin-left: 1rem;
+        margin-right: 1rem;
         background-repeat: no-repeat;
         background-position: center;
         background-image:url("{{url('/img/cara4inactive.png')}}");
@@ -576,6 +585,8 @@
     .btn-5 {
         width: 80px;
         height: 80px;
+        margin-left: 1rem;
+        margin-right: 1rem;
         background-repeat: no-repeat;
         background-position: center;
         background-image:url("{{url('/img/cara5inactive.png')}}");
@@ -866,7 +877,7 @@
         });
     }
 
-    function modalCalificar(orden){
+    function modalCalificar(orden) {
         $('#orden').val(orden);
         $('.modal-calificar').modal('show');
     }
