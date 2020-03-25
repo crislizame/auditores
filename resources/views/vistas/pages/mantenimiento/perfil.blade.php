@@ -70,9 +70,34 @@
                                     <label class="col-form-label">Rango de cumplimiento</label>
                                     <span class="text-center" id="p_compliance"></span>
                                 </div>
-                                <div class="border rounded text-center" style="min-height: 80px;">
-                                    <label class="col-form-label">Grado de satisfacción</label>
-                                    <span class="text-center" id="p_satisfaction"></span>
+                                <div class="border rounded text-center row" style="min-height: 80px;">
+                                
+                                <label class="col-form-label">Grado de satisfacción</label>
+                                    
+                                    <div class="text-center">
+                                        <div class="btn-{{ $calificacion }}"></div>
+                                    </div>
+
+                                    @php
+                                        switch($calificacion){
+                                            case 1:
+                                                $porcentaje = 20;
+                                                break;
+                                            case 2:
+                                                $porcentaje = 40;
+                                                break;
+                                            case 3:
+                                                $porcentaje = 60;
+                                                break;
+                                            case 4:
+                                                $porcentaje = 80;
+                                                break;
+                                            case 5:
+                                                $porcentaje = 100;
+                                                break;
+                                        }
+                                    @endphp
+                                <label class="col-form-label"><b>{{ $porcentaje }}%</b></label>
                                 </div>
                             </div>
                         </div>
@@ -82,6 +107,15 @@
         </div>
     </div>
 </div>
+<style>
+    .btn-5 {
+        width: 80px;
+        height: 80px;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-image:url("{{url('/img/cara5inactive.png')}}");
+    }
+</style>
 @endsection
 @section('script')
 <script>
