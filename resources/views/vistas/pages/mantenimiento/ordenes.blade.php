@@ -364,8 +364,8 @@
                     <div class="col-7">
                         <div class="btn-group" data-toggle="buttons">
 
-                            <label class="btn btn-1">
-                                <input type="radio" name="precio" value="1" autocomplete="off">
+                            <label class="btn btn-1 active">
+                                <input type="radio" name="precio" value="1" autocomplete="off" checked>
                             </label>
 
                             <label class="btn btn-2">
@@ -394,8 +394,8 @@
                     <div class="col-7">
                         <div class="btn-group" data-toggle="buttons">
 
-                            <label class="btn btn-1">
-                                <input type="radio" name="disponibilidad" value="1" autocomplete="off">
+                            <label class="btn btn-1 active">
+                                <input type="radio" name="disponibilidad" value="1" autocomplete="off" checked>
                             </label>
 
                             <label class="btn btn-2">
