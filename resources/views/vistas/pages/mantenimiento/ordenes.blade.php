@@ -362,7 +362,7 @@
                         <h2 class="text-center mt-3">Precio</h2>
                     </div>
                     <div class="col-7">
-                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <div class="btn-group" data-toggle="buttons">
 
                             <label class="btn btn-1">
                                 <input type="radio" name="precio" value="1" autocomplete="off">
@@ -392,7 +392,7 @@
                         <h2 class="text-center mt-3">Disponibilidad</h2>
                     </div>
                     <div class="col-7">
-                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <div class="btn-group" data-toggle="buttons">
 
                             <label class="btn btn-1">
                                 <input type="radio" name="disponibilidad" value="1" autocomplete="off">
