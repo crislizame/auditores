@@ -356,7 +356,9 @@
                 </button>
             </div>
             <div class="modal-body p-2 m-5 p-5">
-
+                <form action="{{ url('/ordenes/calificar') }}" method="post">
+                    @csrf
+                    <input type="hidden" name="orden" id="orden">
                 <div class="row mb-3">
                     <div class="col-5">
                         <h2 class="text-center mt-3">Precio</h2>
@@ -507,6 +509,12 @@
                     </div>
                 </div>
 
+                    <div class="row">
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary float-right mr-3">Enviar</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -596,7 +604,6 @@
     });
 
     $(document).ready(function() {
-        $('.modal-calificar').modal('show');
 
         tableProblemas = $('#list_problemas').DataTable({
             "lengthMenu": [
@@ -867,6 +874,11 @@
         }).done(function(ok) {
             location.reload();
         });
+    }
+
+    function modalCalificar(orden){
+        $('#orden').val(orden);
+        $('.modal-calificar').modal('show');
     }
 </script>
 @endsection

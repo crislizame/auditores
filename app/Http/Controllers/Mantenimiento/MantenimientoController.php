@@ -11,6 +11,7 @@ use App\Orden_Requerimiento;
 use App\Otrabajo_attachment;
 use App\Oreque_attachment;
 use App\Orden_trabajo;
+use App\Calificacion;
 use App\Attachment;
 use App\User;
 
@@ -157,7 +158,8 @@ class MantenimientoController extends Controller
                     'orden_requermientos.solicitado',
                     'orden_requermientos.enproceso',
                     'orden_requermientos.finalizado',
-                    DB::raw('entidades.nombre as entidad')
+                    DB::raw('entidades.nombre as entidad'),
+                    'orden_trabajos.idorden_trabajos'
                 )
                 ->join('problemas', 'orden_requermientos.problema_id', 'problemas.id')
                 ->join('subareas', 'problemas.subarea_id', 'subareas.idsubareas')
@@ -182,7 +184,12 @@ class MantenimientoController extends Controller
                     $estado = 'En proceso <span style="background-color: orange;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
                 }
                 if ($orden->finalizado != null) {
-                    $estado = 'Finalizado <span style="background-color: green;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+                    $calificado = Calificacion::where('id_orden_trabajo', $orden->idorden_trabajos)->exists();
+                    if($calificado){
+                        $estado = 'Finalizado <span style="background-color: green;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+                    }else{
+                        $estado = '<a onclick="modalCalificar('.$orden->idorden_trabajos.')">Finalizado</a> <span style="background-color: green;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+                    }
                 }
 
                 $taux = new \DateTime(date('Y-m-d'));
@@ -404,5 +411,9 @@ class MantenimientoController extends Controller
         $orden = Orden_Requerimiento::find($request->input('id'));
         $orden->finalizado = Carbon::now();
         $orden->save();
+    }
+
+    public function calificar(Request $request){
+        return $request->all();
     }
 }
