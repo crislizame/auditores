@@ -493,9 +493,9 @@
                 $('#req_imagenes > .carousel-inner').html(ok.images);
             });
 
-            if(done.tiempo!=null)[
+            if(done.tiempo!=null){
                 $('#ot_tiempo').html(zfill(done.tiempo, 2) + ":00");
-            ]else{
+            }else{
                 $('#ot_tiempo').html("Indefinido");
             }
 
