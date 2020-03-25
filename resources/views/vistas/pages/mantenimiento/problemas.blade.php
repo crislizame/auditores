@@ -321,7 +321,7 @@
                             <button type="submit" class="btn btn-primary float-right mr-3" id="benviar">Procesar</button>
                         </div>
                         <div class="col-12" style="display: none;" id="gb-c">
-                            <button type="button" class="btn btn-default float-right" data-dismiss="modal" onclick="$('#gb-g').hide();$('#gb-c').hide();">Cerrar</button>
+                            <button type="button" class="btn btn-default float-right" data-dismiss="modal" onclick="$('#gb-g').hide();$('#gb-c').hide();$('#text-ent').hide();">Cerrar</button>
                         </div>
                     </div>
                 </form>
