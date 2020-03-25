@@ -417,6 +417,96 @@
                     </div>
                 </div>
 
+                <div class="row mb-3">
+                    <div class="col-5">
+                        <h2 class="text-center mt-3">Rapidez</h2>
+                    </div>
+                    <div class="col-7">
+                        <div class="btn-group" data-toggle="buttons" id="r">
+
+                            <label class="btn btn-1" data-toggle="button" aria-pressed="false">
+                                <input type="radio" name="rapidez" value="1" id="r1" autocomplete="off">
+                            </label>
+
+                            <label class="btn btn-2" data-toggle="button" aria-pressed="false">
+                                <input type="radio" name="rapidez" value="2" id="r2" autocomplete="off">
+                            </label>
+
+                            <label class="btn btn-3" data-toggle="button" aria-pressed="false">
+                                <input type="radio" name="rapidez" value="3" id="r3" autocomplete="off">
+                            </label>
+
+                            <label class="btn btn-4" data-toggle="button" aria-pressed="false">
+                                <input type="radio" name="rapidez" value="4" id="r4" autocomplete="off">
+                            </label>
+
+                            <label class="btn btn-5" data-toggle="button" aria-pressed="false">
+                                <input type="radio" name="rapidez" value="5" id="r5" autocomplete="off">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-5">
+                        <h2 class="text-center mt-3">Calidad</h2>
+                    </div>
+                    <div class="col-7">
+                        <div class="btn-group" data-toggle="buttons" id="c">
+
+                            <label class="btn btn-1" data-toggle="button" aria-pressed="false">
+                                <input type="radio" name="calidad" value="1" id="c1" autocomplete="off">
+                            </label>
+
+                            <label class="btn btn-2" data-toggle="button" aria-pressed="false">
+                                <input type="radio" name="calidad" value="2" id="c2" autocomplete="off">
+                            </label>
+
+                            <label class="btn btn-3" data-toggle="button" aria-pressed="false">
+                                <input type="radio" name="calidad" value="3" id="c3" autocomplete="off">
+                            </label>
+
+                            <label class="btn btn-4" data-toggle="button" aria-pressed="false">
+                                <input type="radio" name="calidad" value="4" id="c4" autocomplete="off">
+                            </label>
+
+                            <label class="btn btn-5" data-toggle="button" aria-pressed="false">
+                                <input type="radio" name="calidad" value="5" id="c5" autocomplete="off">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-5">
+                        <h2 class="text-center mt-3">Garantía</h2>
+                    </div>
+                    <div class="col-7">
+                        <div class="btn-group" data-toggle="buttons" id="g">
+
+                            <label class="btn btn-1" data-toggle="button" aria-pressed="false">
+                                <input type="radio" name="garantia" value="1" id="g1" autocomplete="off">
+                            </label>
+
+                            <label class="btn btn-2" data-toggle="button" aria-pressed="false">
+                                <input type="radio" name="garantia" value="2" id="g2" autocomplete="off">
+                            </label>
+
+                            <label class="btn btn-3" data-toggle="button" aria-pressed="false">
+                                <input type="radio" name="garantia" value="3" id="g3" autocomplete="off">
+                            </label>
+
+                            <label class="btn btn-4" data-toggle="button" aria-pressed="false">
+                                <input type="radio" name="garantia" value="4" id="g4" autocomplete="off">
+                            </label>
+
+                            <label class="btn btn-5" data-toggle="button" aria-pressed="false">
+                                <input type="radio" name="garantia" value="5" id="g5" autocomplete="off">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
