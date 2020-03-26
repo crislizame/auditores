@@ -444,6 +444,6 @@ class MantenimientoController extends Controller
         $calificacion->calificacion = ($request->precio + $request->disponibilidad + $request->rapidez + $request->calidad + $request->garantia) / 5;
         $calificacion->save();
 
-        return redirect('mantenimiento/ordenes')->with('cat', 'proveedores');
+        return redirect('mantenimiento/ordenes')->with('cat', 'loteria');
     }
 }

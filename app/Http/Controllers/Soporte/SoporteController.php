@@ -393,4 +393,15 @@ class SoporteController extends Controller
         $orden->finalizado = Carbon::now();
         $orden->save();
     }
+
+    public function calificar(Request $request)
+    {
+        $calificacion = new Calificacion();
+        $calificacion->id_user_calificador = Auth::user()->id;
+        $calificacion->id_orden_trabajo = $request->orden;
+        $calificacion->calificacion = ($request->precio + $request->disponibilidad + $request->rapidez + $request->calidad + $request->garantia) / 5;
+        $calificacion->save();
+
+        return redirect('soporte/ordenes')->with('cat', 'loteria');
+    }
 }
