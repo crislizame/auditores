@@ -432,7 +432,7 @@ class MantenimientoController extends Controller
             ->join('orden_trabajos', 'proveedores.idproveedores', 'orden_trabajos.proveedor_id')
             ->join('orden_requermientos', 'orden_trabajos.orden_requermiento_id', 'orden_requermientos.idorden_requermientos')
             ->join('problemas', 'orden_requermientos.problema_id', 'problemas.id')
-            ->where('nombre', 'Mantenimiento')
+            ->where('proveedores.nombre', 'Mantenimiento')
             ->get();
 
         $cumplido = 0;
