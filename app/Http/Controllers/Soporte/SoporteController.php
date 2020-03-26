@@ -160,7 +160,8 @@ class SoporteController extends Controller
                     'orden_requermientos.solicitado',
                     'orden_requermientos.enproceso',
                     'orden_requermientos.finalizado',
-                    DB::raw('entidades.nombre as entidad')
+                    DB::raw('entidades.nombre as entidad'),
+                    'orden_trabajos.idorden_trabajos'
                 )
                 ->join('problemas', 'orden_requermientos.problema_id', 'problemas.id')
                 ->join('subareas', 'problemas.subarea_id', 'subareas.idsubareas')
@@ -171,7 +172,7 @@ class SoporteController extends Controller
                 ->whereNotNull('orden_requermientos.enproceso')
                 ->where(function ($query) {
                     $query->whereNull('orden_requermientos.finalizado')
-                          ->orWhereNotNull('orden_requermientos.finalizado');
+                        ->orWhereNotNull('orden_requermientos.finalizado');
                 })
                 ->get();
 
@@ -185,7 +186,12 @@ class SoporteController extends Controller
                     $estado = 'En proceso <span style="background-color: orange;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
                 }
                 if ($orden->finalizado != null) {
-                    $estado = 'Finalizado <span style="background-color: green;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+                    $calificado = Calificacion::where('id_orden_trabajo', $orden->idorden_trabajos)->exists();
+                    if ($calificado) {
+                        $estado = 'Finalizado <span style="background-color: green;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+                    } else {
+                        $estado = '<a href="#" onclick="modalCalificar(' . $orden->idorden_trabajos . ')">Finalizado</a> <span style="background-color: green;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+                    }
                 }
 
                 $taux = new \DateTime(date('Y-m-d'));
@@ -229,7 +235,7 @@ class SoporteController extends Controller
                 ->whereNotNull('orden_requermientos.enproceso')
                 ->where(function ($query) {
                     $query->whereNull('orden_requermientos.finalizado')
-                          ->orWhereNotNull('orden_requermientos.finalizado');
+                        ->orWhereNotNull('orden_requermientos.finalizado');
                 })
                 ->get();
 
@@ -250,7 +256,7 @@ class SoporteController extends Controller
                 $taux->setTime($orden->tiempo, 0, 0);
 
                 $tbody .= "<tr>
-                        <th scope=\"row\"><a href=\"#\" onclick=\"modalAsignarOrdenDeTrabajo(" . $orden->idorden_requermientos . ", '" . $id . "', '" + $orden->entidad + "')\">" . $id . "</a></th>
+                        <th scope=\"row\"><a href=\"#\" onclick=\"modalAsignarOrdenDeTrabajo(" . $orden->idorden_requermientos . ", '" . $id . "', '" . $orden->entidad . "')\">" . $id . "</a></th>
                         <td>" . mb_strimwidth(strtoupper($orden->entidad), '0', '15', '...') . "</td>
                         <td>" . mb_strimwidth(strtoupper($orden->subarea), '0', '15', '...') . "</td>
                         <td>" . $orden->problema . "</td>
