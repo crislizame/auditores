@@ -431,6 +431,19 @@
                 });
             });
         }
+
+        $('.modal-asignar').on('hidden.bs.modal', function (e) {
+            $('#gb-g').hide();
+            $('#gb-c').hide();
+            $('#text-ent').hide();
+
+            $('[name="ot_proveedor"]').removeAttr('disabled');
+            $('[name="ot_presupuesto"]').removeAttr('disabled');
+            $('[name="ot_garantia"]').removeAttr('disabled');
+            $('[name="ot_encargado"]').removeAttr('disabled');
+            $('[name="ot_extra"]').removeAttr('disabled');
+            $('[name="ot_comentario"]').removeAttr('disabled');
+        })
     });
 
     function modalAsignarOrdenDeTrabajo(id, visualId, entidad) {
@@ -493,7 +506,11 @@
                 $('#req_imagenes > .carousel-inner').html(ok.images);
             });
 
-            $('#ot_tiempo').html(zfill(done.tiempo, 2) + ":00");
+            if(done.tiempo!=null){
+                $('#ot_tiempo').html(zfill(done.tiempo, 2) + ":00");
+            }else{
+                $('#ot_tiempo').html("Indefinido");
+            }
 
             if (done.enproceso != null) {
                 $('[name="ot_proveedor"]').val(done.proveedor_id);
@@ -562,6 +579,20 @@
                         $('#gvl').removeAttr('onclick');
                     }
                 });
+
+                $('[name="ot_proveedor"]').attr('disabled','true');
+                $('[name="ot_presupuesto"]').attr('disabled','true');
+                $('[name="ot_garantia"]').attr('disabled','true');
+                $('[name="ot_encargado"]').attr('disabled','true');
+                $('[name="ot_extra"]').attr('disabled','true');
+                $('[name="ot_comentario"]').attr('disabled','true');
+            }else{
+                $('[name="ot_proveedor"]').removeAttr('disabled');
+                $('[name="ot_presupuesto"]').removeAttr('disabled');
+                $('[name="ot_garantia"]').removeAttr('disabled');
+                $('[name="ot_encargado"]').removeAttr('disabled');
+                $('[name="ot_extra"]').removeAttr('disabled');
+                $('[name="ot_comentario"]').removeAttr('disabled');
             }
 
             if (entidad == "{{(new App\Entidad())->where('identidad',Auth::user()->entidad_id)->value('nombre')}}") {
@@ -576,11 +607,11 @@
                 $('#tex-ent').show();
                 $('#ot_entidad').html(done.entidad);
 
-                $('[name="ot_presupuesto"]').attr('readonly', 'true');
-                $('[name="ot_garantia"]').attr('readonly', 'true');
-                $('[name="ot_encargado"]').attr('readonly', 'true');
-                $('[name="ot_extra"]').attr('readonly', 'true');
-                $('[name="ot_comentario"]').attr('readonly', 'true');
+                $('[name="ot_presupuesto"]').attr('disabled','true');
+                $('[name="ot_garantia"]').attr('disabled','true');
+                $('[name="ot_encargado"]').attr('disabled','true');
+                $('[name="ot_extra"]').attr('disabled','true');
+                $('[name="ot_comentario"]').attr('disabled','true');
 
                 $('#cc').hide();
                 $('#gc').hide();
