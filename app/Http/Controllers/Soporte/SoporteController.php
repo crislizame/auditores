@@ -380,4 +380,11 @@ class SoporteController extends Controller
         $calificacion = Calificacion::where('id_user_calificado', $user->id)->avg('calificacion');
         return view('vistas.pages.soporte.perfil')->with('user', $user)->with('calificacion', $calificacion);
     }
+
+    public function finalizarOrdenDeRequerimiento(Request $request)
+    {
+        $orden = Orden_Requerimiento::find($request->input('id'));
+        $orden->finalizado = Carbon::now();
+        $orden->save();
+    }
 }

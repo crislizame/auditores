@@ -198,12 +198,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-6" id="sel-pro" style="display: none;">
-                                    <select name="ot_proveedor">
-                                        @foreach ($proveedores as $proveedor)
-                                        <option value="{{$proveedor->idproveedores}}">{{$proveedor->nombre}}</option>
-                                        @endforeach
-                                    </select>
+                                <div class="col-6">
                                 </div>
                                 <div class="col-6" id="tex-ent" style="display: none;">
                                     <h5 id="ot_entidad"></h5>
@@ -596,8 +591,6 @@
             }
 
             if (entidad == "{{(new App\Entidad())->where('identidad',Auth::user()->entidad_id)->value('nombre')}}") {
-                $('#sel-pro').show();
-
                 if(done.finalizado!=null){
                     $('#gb-c').show();
                 }else{
