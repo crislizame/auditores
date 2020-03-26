@@ -80,6 +80,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('problemas/finalizar', 'Soporte\SoporteController@finalizarOrdenDeRequerimiento');
         Route::get('ordenes', 'Soporte\SoporteController@ordenes');
         Route::post('ordenes/cargar', 'Soporte\SoporteController@cargarOrdenes');
+        Route::post('ordenes/calificar', 'Soporte\SoporteController@calificar');
         Route::get('perfil', 'Soporte\SoporteController@perfil');
     });
     // Soporte
