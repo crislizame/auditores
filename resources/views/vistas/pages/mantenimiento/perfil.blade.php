@@ -68,6 +68,7 @@
                                 <label class="col-form-label">Calificación</label>
                                 <div class="border rounded text-center mb-4" style="min-height: 80px;">
                                     <label class="col-form-label">Rango de cumplimiento</label>
+                                    <br>
                                     <label class="col-form-label"><b>{{ $cumple }}</b></label>
                                 </div>
                                 <div class="border rounded text-center" style="min-height: 80px;">
