@@ -432,7 +432,6 @@
             $('#gb-c').hide();
             $('#text-ent').hide();
 
-            $('[name="ot_proveedor"]').removeAttr('disabled');
             $('[name="ot_presupuesto"]').removeAttr('disabled');
             $('[name="ot_garantia"]').removeAttr('disabled');
             $('[name="ot_encargado"]').removeAttr('disabled');
@@ -508,8 +507,6 @@
             }
 
             if (done.enproceso != null) {
-                $('[name="ot_proveedor"]').val(done.proveedor_id);
-                $('[name="ot_proveedor"]').select2().trigger('change');
 
                 switch (done.estado) {
                     case 'U':
@@ -575,14 +572,12 @@
                     }
                 });
 
-                $('[name="ot_proveedor"]').attr('disabled','true');
                 $('[name="ot_presupuesto"]').attr('disabled','true');
                 $('[name="ot_garantia"]').attr('disabled','true');
                 $('[name="ot_encargado"]').attr('disabled','true');
                 $('[name="ot_extra"]').attr('disabled','true');
                 $('[name="ot_comentario"]').attr('disabled','true');
             }else{
-                $('[name="ot_proveedor"]').removeAttr('disabled');
                 $('[name="ot_presupuesto"]').removeAttr('disabled');
                 $('[name="ot_garantia"]').removeAttr('disabled');
                 $('[name="ot_encargado"]').removeAttr('disabled');
