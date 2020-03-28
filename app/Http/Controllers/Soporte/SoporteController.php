@@ -13,6 +13,7 @@ use App\Oreque_attachment;
 use App\Orden_trabajo;
 use App\Calificacion;
 use App\Attachment;
+use App\Proveedor;
 use App\User;
 
 class SoporteController extends Controller
