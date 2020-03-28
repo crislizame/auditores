@@ -198,12 +198,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-6" id="sel-pro" style="display: none;">
-                                    <select name="ot_proveedor">
-                                        @foreach ($proveedores as $proveedor)
-                                        <option value="{{$proveedor->idproveedores}}">{{$proveedor->nombre}}</option>
-                                        @endforeach
-                                    </select>
+                                <div class="col-6">
                                 </div>
                                 <div class="col-6" id="tex-ent" style="display: none;">
                                     <h5 id="ot_entidad"></h5>
@@ -212,7 +207,7 @@
                                     <div class="row">
                                         <div class="col-6">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="ot_estado" id="r1" value="U" checked="">
+                                                <input class="form-check-input" type="radio" name="ot_estado" id="r1" value="U" checked="" disabled>
                                                 <label class="form-check-label" for="r1">
                                                     Urgente
                                                 </label>
@@ -220,7 +215,7 @@
                                         </div>
                                         <div class="col-6">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="ot_estado" id="r2" value="S">
+                                                <input class="form-check-input" type="radio" name="ot_estado" id="r2" value="S" disabled>
                                                 <label class="form-check-label" for="r2">
                                                     Seguimiento
                                                 </label>
@@ -431,6 +426,18 @@
                 });
             });
         }
+
+        $('.modal-asignar').on('hidden.bs.modal', function (e) {
+            $('#gb-g').hide();
+            $('#gb-c').hide();
+            $('#text-ent').hide();
+
+            $('[name="ot_presupuesto"]').removeAttr('disabled');
+            $('[name="ot_garantia"]').removeAttr('disabled');
+            $('[name="ot_encargado"]').removeAttr('disabled');
+            $('[name="ot_extra"]').removeAttr('disabled');
+            $('[name="ot_comentario"]').removeAttr('disabled');
+        })
     });
 
     function modalAsignarOrdenDeTrabajo(id, visualId, entidad) {
@@ -493,11 +500,13 @@
                 $('#req_imagenes > .carousel-inner').html(ok.images);
             });
 
-            $('#ot_tiempo').html(zfill(done.tiempo, 2) + ":00");
+            if(done.tiempo!=null){
+                $('#ot_tiempo').html(zfill(done.tiempo, 2) + ":00");
+            }else{
+                $('#ot_tiempo').html("Indefinido");
+            }
 
             if (done.enproceso != null) {
-                $('[name="ot_proveedor"]').val(done.proveedor_id);
-                $('[name="ot_proveedor"]').select2().trigger('change');
 
                 switch (done.estado) {
                     case 'U':
@@ -562,11 +571,21 @@
                         $('#gvl').removeAttr('onclick');
                     }
                 });
+
+                $('[name="ot_presupuesto"]').attr('disabled','true');
+                $('[name="ot_garantia"]').attr('disabled','true');
+                $('[name="ot_encargado"]').attr('disabled','true');
+                $('[name="ot_extra"]').attr('disabled','true');
+                $('[name="ot_comentario"]').attr('disabled','true');
+            }else{
+                $('[name="ot_presupuesto"]').removeAttr('disabled');
+                $('[name="ot_garantia"]').removeAttr('disabled');
+                $('[name="ot_encargado"]').removeAttr('disabled');
+                $('[name="ot_extra"]').removeAttr('disabled');
+                $('[name="ot_comentario"]').removeAttr('disabled');
             }
 
             if (entidad == "{{(new App\Entidad())->where('identidad',Auth::user()->entidad_id)->value('nombre')}}") {
-                $('#sel-pro').show();
-
                 if(done.finalizado!=null){
                     $('#gb-c').show();
                 }else{
@@ -576,11 +595,11 @@
                 $('#tex-ent').show();
                 $('#ot_entidad').html(done.entidad);
 
-                $('[name="ot_presupuesto"]').attr('readonly', 'true');
-                $('[name="ot_garantia"]').attr('readonly', 'true');
-                $('[name="ot_encargado"]').attr('readonly', 'true');
-                $('[name="ot_extra"]').attr('readonly', 'true');
-                $('[name="ot_comentario"]').attr('readonly', 'true');
+                $('[name="ot_presupuesto"]').attr('disabled','true');
+                $('[name="ot_garantia"]').attr('disabled','true');
+                $('[name="ot_encargado"]').attr('disabled','true');
+                $('[name="ot_extra"]').attr('disabled','true');
+                $('[name="ot_comentario"]').attr('disabled','true');
 
                 $('#cc').hide();
                 $('#gc').hide();
