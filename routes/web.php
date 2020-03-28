@@ -93,8 +93,10 @@ Route::middleware(['auth'])->group(function () {
         Route::post('problemas/orden/asignar', 'RP3\RP3Controller@asignarOrden');
         Route::post('problemas/trabajo/ver', 'RP3\RP3Controller@imagenesTrabajo');
         Route::post('problemas/imagenes', 'RP3\RP3Controller@imagenesRequerimiento');
+        Route::post('problemas/finalizar', 'RP3\RP3Controller@finalizarOrdenDeRequerimiento');
         Route::get('ordenes', 'RP3\RP3Controller@ordenes');
         Route::post('ordenes/cargar', 'RP3\RP3Controller@cargarOrdenes');
+        Route::post('ordenes/calificar', 'RP3\RP3Controller@calificar');
         Route::get('perfil', 'RP3\RP3Controller@perfil');
     });
     // RP3
