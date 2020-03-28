@@ -68,10 +68,10 @@
                                 <label class="col-form-label">Calificación</label>
                                 <div class="border rounded text-center mb-4" style="min-height: 80px;">
                                     <label class="col-form-label">Rango de cumplimiento</label>
-                                    <span class="text-center" id="p_compliance"></span>
+                                    <br>
+                                    <label class="col-form-label"><b>{{ $cumple }}</b></label>
                                 </div>
                                 <div class="border rounded text-center" style="min-height: 80px;">
-                                
                                     <label class="col-form-label col">Grado de satisfacción</label>
                                     <br>
                                         <div class="calificacion mx-auto"></div>
