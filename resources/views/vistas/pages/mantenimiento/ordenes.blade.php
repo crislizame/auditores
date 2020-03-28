@@ -212,7 +212,7 @@
                                     <div class="row">
                                         <div class="col-6">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="ot_estado" id="r1" value="U" checked="">
+                                                <input class="form-check-input" type="radio" name="ot_estado" id="r1" value="U" checked="" disabled>
                                                 <label class="form-check-label" for="r1">
                                                     Urgente
                                                 </label>
@@ -220,7 +220,7 @@
                                         </div>
                                         <div class="col-6">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="ot_estado" id="r2" value="S">
+                                                <input class="form-check-input" type="radio" name="ot_estado" id="r2" value="S" disabled>
                                                 <label class="form-check-label" for="r2">
                                                     Seguimiento
                                                 </label>
@@ -345,6 +345,260 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade modal-calificar" tabindex="-1" role="dialog" aria-labelledby="modal-calificar" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form action="{{ url('/mantenimiento/ordenes/calificar') }}" method="post">
+                    @csrf
+            <div class="modal-header bg-primary">
+                <h4 class="modal-title text-white">Calificar</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body p-2 m-5 p-5">
+                
+                    <input type="hidden" name="orden" id="orden">
+
+                    <div class="row mb-3">
+                        <div class="col-5">
+                            <h2 class="text-center mt-3">Precio</h2>
+                        </div>
+                        <div class="col-7">
+                            <div data-toggle="buttons" id="p">
+
+                                <label class="btn btn-1" data-toggle="button" aria-pressed="false">
+                                    <input type="radio" name="precio" value="1" id="p1" autocomplete="off" checked>
+                                </label>
+
+                                <label class="btn btn-2" data-toggle="button" aria-pressed="false">
+                                    <input type="radio" name="precio" value="2" id="p2" autocomplete="off">
+                                </label>
+
+                                <label class="btn btn-3" data-toggle="button" aria-pressed="false">
+                                    <input type="radio" name="precio" value="3" id="p3" autocomplete="off">
+                                </label>
+
+                                <label class="btn btn-4" data-toggle="button" aria-pressed="false">
+                                    <input type="radio" name="precio" value="4" id="p4" autocomplete="off">
+                                </label>
+
+                                <label class="btn btn-5" data-toggle="button" aria-pressed="false">
+                                    <input type="radio" name="precio" value="5" id="p5" autocomplete="off">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-5">
+                            <h2 class="text-center mt-3">Disponibilidad</h2>
+                        </div>
+                        <div class="col-7">
+                            <div data-toggle="buttons" id="d">
+
+                                <label class="btn btn-1" data-toggle="button" aria-pressed="false">
+                                    <input type="radio" name="disponibilidad" value="1" id="d1" autocomplete="off" checked>
+                                </label>
+
+                                <label class="btn btn-2" data-toggle="button" aria-pressed="false">
+                                    <input type="radio" name="disponibilidad" value="2" id="d2" autocomplete="off">
+                                </label>
+
+                                <label class="btn btn-3" data-toggle="button" aria-pressed="false">
+                                    <input type="radio" name="disponibilidad" value="3" id="d3" autocomplete="off">
+                                </label>
+
+                                <label class="btn btn-4" data-toggle="button" aria-pressed="false">
+                                    <input type="radio" name="disponibilidad" value="4" id="d4" autocomplete="off">
+                                </label>
+
+                                <label class="btn btn-5" data-toggle="button" aria-pressed="false">
+                                    <input type="radio" name="disponibilidad" value="5" id="d5" autocomplete="off">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-5">
+                            <h2 class="text-center mt-3">Rapidez</h2>
+                        </div>
+                        <div class="col-7">
+                            <div data-toggle="buttons" id="r">
+
+                                <label class="btn btn-1" data-toggle="button" aria-pressed="false">
+                                    <input type="radio" name="rapidez" value="1" id="r1" autocomplete="off" checked>
+                                </label>
+
+                                <label class="btn btn-2" data-toggle="button" aria-pressed="false">
+                                    <input type="radio" name="rapidez" value="2" id="r2" autocomplete="off">
+                                </label>
+
+                                <label class="btn btn-3" data-toggle="button" aria-pressed="false">
+                                    <input type="radio" name="rapidez" value="3" id="r3" autocomplete="off">
+                                </label>
+
+                                <label class="btn btn-4" data-toggle="button" aria-pressed="false">
+                                    <input type="radio" name="rapidez" value="4" id="r4" autocomplete="off">
+                                </label>
+
+                                <label class="btn btn-5" data-toggle="button" aria-pressed="false">
+                                    <input type="radio" name="rapidez" value="5" id="r5" autocomplete="off">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-5">
+                            <h2 class="text-center mt-3">Calidad</h2>
+                        </div>
+                        <div class="col-7">
+                            <div data-toggle="buttons" id="c">
+
+                                <label class="btn btn-1" data-toggle="button" aria-pressed="false">
+                                    <input type="radio" name="calidad" value="1" id="c1" autocomplete="off" checked>
+                                </label>
+
+                                <label class="btn btn-2" data-toggle="button" aria-pressed="false">
+                                    <input type="radio" name="calidad" value="2" id="c2" autocomplete="off">
+                                </label>
+
+                                <label class="btn btn-3" data-toggle="button" aria-pressed="false">
+                                    <input type="radio" name="calidad" value="3" id="c3" autocomplete="off">
+                                </label>
+
+                                <label class="btn btn-4" data-toggle="button" aria-pressed="false">
+                                    <input type="radio" name="calidad" value="4" id="c4" autocomplete="off">
+                                </label>
+
+                                <label class="btn btn-5" data-toggle="button" aria-pressed="false">
+                                    <input type="radio" name="calidad" value="5" id="c5" autocomplete="off">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-5">
+                            <h2 class="text-center mt-3">Garantía</h2>
+                        </div>
+                        <div class="col-7">
+                            <div data-toggle="buttons" id="g">
+
+                                <label class="btn btn-1" data-toggle="button" aria-pressed="false">
+                                    <input type="radio" name="garantia" value="1" id="g1" autocomplete="off" checked>
+                                </label>
+
+                                <label class="btn btn-2" data-toggle="button" aria-pressed="false">
+                                    <input type="radio" name="garantia" value="2" id="g2" autocomplete="off">
+                                </label>
+
+                                <label class="btn btn-3" data-toggle="button" aria-pressed="false">
+                                    <input type="radio" name="garantia" value="3" id="g3" autocomplete="off">
+                                </label>
+
+                                <label class="btn btn-4" data-toggle="button" aria-pressed="false">
+                                    <input type="radio" name="garantia" value="4" id="g4" autocomplete="off">
+                                </label>
+
+                                <label class="btn btn-5" data-toggle="button" aria-pressed="false">
+                                    <input type="radio" name="garantia" value="5" id="g5" autocomplete="off">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            
+                        </div>
+                    </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary float-right mr-3">Enviar</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    .btn-1.active {
+        background-image:url("{{url('/img/cara1.jpg')}}");
+    }
+
+    .btn-1 {
+        width: 80px;
+        height: 80px;
+        margin-left: 1rem;
+        margin-right: 1rem;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-image:url("{{url('/img/cara1inactive.png')}}");
+    }
+
+    .btn-2.active {
+        background-image:url("{{url('/img/cara2.jpg')}}");
+    }
+
+    .btn-2 {
+        width: 80px;
+        height: 80px;
+        margin-left: 1rem;
+        margin-right: 1rem;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-image:url("{{url('/img/cara2inactive.png')}}");
+    }
+
+    .btn-3.active {
+        background-image:url("{{url('/img/cara3.jpg')}}");
+    }
+
+    .btn-3 {
+        width: 80px;
+        height: 80px;
+        margin-left: 1rem;
+        margin-right: 1rem;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-image:url("{{url('/img/cara3inactive.png')}}");
+    }
+
+    .btn-4.active {
+        background-image:url("{{url('/img/cara4.jpg')}}");
+    }
+
+    .btn-4 {
+        width: 80px;
+        height: 80px;
+        margin-left: 1rem;
+        margin-right: 1rem;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-image:url("{{url('/img/cara4inactive.png')}}");
+    }
+
+    .btn-5.active {
+        background-image:url("{{url('/img/cara5.jpg')}}");
+    }
+
+    .btn-5 {
+        width: 80px;
+        height: 80px;
+        margin-left: 1rem;
+        margin-right: 1rem;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-image:url("{{url('/img/cara5inactive.png')}}");
+    }
+</style>
+
 @endsection
 @section('script')
 
@@ -357,6 +611,7 @@
     });
 
     $(document).ready(function() {
+
         tableProblemas = $('#list_problemas').DataTable({
             "lengthMenu": [
                 [25, 50, 100, -1],
@@ -566,9 +821,9 @@
             if (entidad == "{{(new App\Entidad())->where('identidad',Auth::user()->entidad_id)->value('nombre')}}") {
                 $('#sel-pro').show();
 
-                if(done.finalizado!=null){
+                if (done.finalizado != null) {
                     $('#gb-c').show();
-                }else{
+                } else {
                     $('#gb-g').show();
                 }
             } else {
@@ -626,6 +881,11 @@
         }).done(function(ok) {
             location.reload();
         });
+    }
+
+    function modalCalificar(orden) {
+        $('#orden').val(orden);
+        $('.modal-calificar').modal('show');
     }
 </script>
 @endsection

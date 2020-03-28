@@ -62,6 +62,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('problemas/finalizar', 'Mantenimiento\MantenimientoController@finalizarOrdenDeRequerimiento');
         Route::get('ordenes', 'Mantenimiento\MantenimientoController@ordenes');
         Route::post('ordenes/cargar', 'Mantenimiento\MantenimientoController@cargarOrdenes');
+        Route::post('ordenes/calificar', 'Mantenimiento\MantenimientoController@calificar');
         Route::get('proveedores', 'Mantenimiento\MantenimientoController@proveedores');
         Route::post('proveedores/cargar', 'Mantenimiento\MantenimientoController@cargarProveedores');
         Route::get('perfil', 'Mantenimiento\MantenimientoController@perfil');
@@ -76,8 +77,10 @@ Route::middleware(['auth'])->group(function () {
         Route::post('problemas/orden/asignar', 'Soporte\SoporteController@asignarOrden');
         Route::post('problemas/trabajo/ver', 'Soporte\SoporteController@imagenesTrabajo');
         Route::post('problemas/imagenes', 'Soporte\SoporteController@imagenesRequerimiento');
+        Route::post('problemas/finalizar', 'Soporte\SoporteController@finalizarOrdenDeRequerimiento');
         Route::get('ordenes', 'Soporte\SoporteController@ordenes');
         Route::post('ordenes/cargar', 'Soporte\SoporteController@cargarOrdenes');
+        Route::post('ordenes/calificar', 'Soporte\SoporteController@calificar');
         Route::get('perfil', 'Soporte\SoporteController@perfil');
     });
     // Soporte

@@ -11,6 +11,7 @@ use App\Orden_Requerimiento;
 use App\Otrabajo_attachment;
 use App\Oreque_attachment;
 use App\Orden_trabajo;
+use App\Calificacion;
 use App\Attachment;
 use App\User;
 
@@ -48,7 +49,7 @@ class SoporteController extends Controller
                 ->leftJoin('orden_trabajos', 'orden_requermientos.idorden_requermientos', 'orden_trabajos.orden_requermiento_id')
                 ->where(function ($query) {
                     $query->whereNull('orden_requermientos.enproceso')
-                          ->orWhereNotNull('orden_requermientos.enproceso');
+                        ->orWhereNotNull('orden_requermientos.enproceso');
                 })
                 ->whereNull('orden_requermientos.finalizado')
                 ->get();
@@ -102,13 +103,15 @@ class SoporteController extends Controller
                 ->join('entidades', 'entidades.identidad', 'areas.entidad_id')
                 ->join('pdsperfiles', 'orden_requermientos.pds_id', 'pdsperfiles.id')
                 ->leftJoin('orden_trabajos', 'orden_requermientos.idorden_requermientos', 'orden_trabajos.orden_requermiento_id')
-                ->where('entidades.nombre', 'Lotto Game')
-                ->orWhere('entidades.nombre', 'RP3')
                 ->where(function ($query) {
                     $query->whereNull('orden_requermientos.enproceso')
-                          ->orWhereNotNull('orden_requermientos.enproceso');
+                        ->orWhereNotNull('orden_requermientos.enproceso');
                 })
                 ->whereNull('orden_requermientos.finalizado')
+                ->where(function ($query) {
+                    $query->where('entidades.nombre', 'Lotto Game')
+                        ->orWhere('entidades.nombre', 'RP3');
+                })
                 ->get();
 
             $tbody = "";
@@ -128,7 +131,7 @@ class SoporteController extends Controller
                 $taux->setTime($orden->tiempo, 0, 0);
 
                 $tbody .= "<tr>
-                        <th scope=\"row\"><a href=\"#\" onclick=\"modalAsignarOrdenDeTrabajo(" . $orden->idorden_requermientos . ", '" . $id . "', '" + $orden->entidad + "')\">" . $id . "</a></th>
+                        <th scope=\"row\"><a href=\"#\" onclick=\"modalAsignarOrdenDeTrabajo(" . $orden->idorden_requermientos . ", '" . $id . "', '" . $orden->entidad . "')\">" . $id . "</a></th>
                         <td>" . mb_strimwidth(strtoupper($orden->entidad), '0', '15', '...') . "</td>
                         <td>" . mb_strimwidth(strtoupper($orden->subarea), '0', '15', '...') . "</td>
                         <td>" . $orden->problema . "</td>
@@ -157,7 +160,8 @@ class SoporteController extends Controller
                     'orden_requermientos.solicitado',
                     'orden_requermientos.enproceso',
                     'orden_requermientos.finalizado',
-                    DB::raw('entidades.nombre as entidad')
+                    DB::raw('entidades.nombre as entidad'),
+                    'orden_trabajos.idorden_trabajos'
                 )
                 ->join('problemas', 'orden_requermientos.problema_id', 'problemas.id')
                 ->join('subareas', 'problemas.subarea_id', 'subareas.idsubareas')
@@ -168,7 +172,7 @@ class SoporteController extends Controller
                 ->whereNotNull('orden_requermientos.enproceso')
                 ->where(function ($query) {
                     $query->whereNull('orden_requermientos.finalizado')
-                          ->orWhereNotNull('orden_requermientos.finalizado');
+                        ->orWhereNotNull('orden_requermientos.finalizado');
                 })
                 ->get();
 
@@ -182,7 +186,12 @@ class SoporteController extends Controller
                     $estado = 'En proceso <span style="background-color: orange;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
                 }
                 if ($orden->finalizado != null) {
-                    $estado = 'Finalizado <span style="background-color: green;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+                    $calificado = Calificacion::where('id_orden_trabajo', $orden->idorden_trabajos)->exists();
+                    if ($calificado) {
+                        $estado = 'Finalizado <span style="background-color: green;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+                    } else {
+                        $estado = '<a href="#" onclick="modalCalificar(' . $orden->idorden_trabajos . ')">Finalizado</a> <span style="background-color: green;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+                    }
                 }
 
                 $taux = new \DateTime(date('Y-m-d'));
@@ -226,7 +235,7 @@ class SoporteController extends Controller
                 ->whereNotNull('orden_requermientos.enproceso')
                 ->where(function ($query) {
                     $query->whereNull('orden_requermientos.finalizado')
-                          ->orWhereNotNull('orden_requermientos.finalizado');
+                        ->orWhereNotNull('orden_requermientos.finalizado');
                 })
                 ->get();
 
@@ -247,7 +256,7 @@ class SoporteController extends Controller
                 $taux->setTime($orden->tiempo, 0, 0);
 
                 $tbody .= "<tr>
-                        <th scope=\"row\"><a href=\"#\" onclick=\"modalAsignarOrdenDeTrabajo(" . $orden->idorden_requermientos . ", '" . $id . "', '" + $orden->entidad + "')\">" . $id . "</a></th>
+                        <th scope=\"row\"><a href=\"#\" onclick=\"modalAsignarOrdenDeTrabajo(" . $orden->idorden_requermientos . ", '" . $id . "', '" . $orden->entidad . "')\">" . $id . "</a></th>
                         <td>" . mb_strimwidth(strtoupper($orden->entidad), '0', '15', '...') . "</td>
                         <td>" . mb_strimwidth(strtoupper($orden->subarea), '0', '15', '...') . "</td>
                         <td>" . $orden->problema . "</td>
@@ -374,6 +383,25 @@ class SoporteController extends Controller
     public function perfil()
     {
         $user = User::where('id', Auth::user()->id)->leftJoin('mantenimiento_users', 'users.id', 'mantenimiento_users.user_id')->first();
-        return view('vistas.pages.soporte.perfil')->with('user', $user);
+        $calificacion = Calificacion::where('id_user_calificado', $user->id)->avg('calificacion');
+        return view('vistas.pages.soporte.perfil')->with('user', $user)->with('calificacion', $calificacion);
+    }
+
+    public function finalizarOrdenDeRequerimiento(Request $request)
+    {
+        $orden = Orden_Requerimiento::find($request->input('id'));
+        $orden->finalizado = Carbon::now();
+        $orden->save();
+    }
+
+    public function calificar(Request $request)
+    {
+        $calificacion = new Calificacion();
+        $calificacion->id_user_calificador = Auth::user()->id;
+        $calificacion->id_orden_trabajo = $request->orden;
+        $calificacion->calificacion = ($request->precio + $request->disponibilidad + $request->rapidez + $request->calidad + $request->garantia) / 5;
+        $calificacion->save();
+
+        return redirect('soporte/ordenes')->with('cat', 'loteria');
     }
 }

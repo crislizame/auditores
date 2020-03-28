@@ -4,8 +4,50 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1564301491b0155aff59d5581b714582",
+    "content-hash": "6f1e182ba1d92f0dda4e075bdbaf8a5b",
     "packages": [
+        {
+            "name": "alymosul/exponent-server-sdk-php",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Alymosul/exponent-server-sdk-php.git",
+                "reference": "e4e89b289ec37dc92e940d91d8f3eb33d7ffc2b2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Alymosul/exponent-server-sdk-php/zipball/e4e89b289ec37dc92e940d91d8f3eb33d7ffc2b2",
+                "reference": "e4e89b289ec37dc92e940d91d8f3eb33d7ffc2b2",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ExponentPhpSDK\\": "lib"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Aly Suleiman",
+                    "email": "alymosul@gmail.com"
+                }
+            ],
+            "description": "Server-side library for working with Expo push notifications using PHP",
+            "keywords": [
+                "expo",
+                "exponent",
+                "notifications",
+                "push"
+            ],
+            "time": "2019-12-11T11:19:40+00:00"
+        },
         {
             "name": "arrilot/laravel-widgets",
             "version": "3.13.0",

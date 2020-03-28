@@ -71,8 +71,31 @@
                                     <span class="text-center" id="p_compliance"></span>
                                 </div>
                                 <div class="border rounded text-center" style="min-height: 80px;">
-                                    <label class="col-form-label">Grado de satisfacción</label>
-                                    <span class="text-center" id="p_satisfaction"></span>
+                                
+                                    <label class="col-form-label col">Grado de satisfacción</label>
+                                    <br>
+                                        <div class="calificacion mx-auto"></div>
+                                    @php
+                                        $porcentaje = 0;
+                                        switch($calificacion){
+                                            case 1:
+                                                $porcentaje = 0;
+                                                break;
+                                            case 2:
+                                                $porcentaje = 25;
+                                                break;
+                                            case 3:
+                                                $porcentaje = 50;
+                                                break;
+                                            case 4:
+                                                $porcentaje = 75;
+                                                break;
+                                            case 5:
+                                                $porcentaje = 100;
+                                                break;
+                                        }
+                                    @endphp
+                                <label class="col-form-label col"><b>{{ $porcentaje }}%</b></label>
                                 </div>
                             </div>
                         </div>
@@ -82,6 +105,15 @@
         </div>
     </div>
 </div>
+<style>
+    .calificacion {
+        width: 80px;
+        height: 80px;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-image:url("{{url('/img/cara')}}{{ $calificacion }}.jpg");
+    }
+</style>
 @endsection
 @section('script')
 <script>
