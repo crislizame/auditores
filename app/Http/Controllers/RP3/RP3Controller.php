@@ -177,8 +177,7 @@ class RP3Controller extends Controller
                     DB::raw('entidades.nombre as entidad'),
                     'orden_requermientos.enproceso',
                     DB::raw('entidades.nombre as entidad'),
-                    'orden_trabajos.estado',
-                    'orden_trabajos.idorden_trabajos'
+                    'orden_trabajos.estado'
                 )
                 ->join('problemas', 'orden_requermientos.problema_id', 'problemas.id')
                 ->join('subareas', 'problemas.subarea_id', 'subareas.idsubareas')
@@ -205,12 +204,7 @@ class RP3Controller extends Controller
                         $estado = 'En proceso <span style="background-color: orange;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
                     }
                     if ($orden->finalizado != null) {
-                        $calificado = Calificacion::where('id_orden_trabajo', $orden->idorden_trabajos)->exists();
-                        if ($calificado) {
-                            $estado = 'Finalizado <span style="background-color: green;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
-                        } else {
-                            $estado = '<a href="#" onclick="modalCalificar(' . $orden->idorden_trabajos . ')">Finalizado</a> <span style="background-color: green;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
-                        }
+                        $estado = 'Finalizado <span style="background-color: green;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
                     }
 
                     $taux = new \DateTime(date('Y-m-d'));
@@ -248,8 +242,7 @@ class RP3Controller extends Controller
                     DB::raw('areas.nombre as area'),
                     DB::raw('entidades.nombre as entidad'),
                     'orden_requermientos.enproceso',
-                    DB::raw('entidades.nombre as entidad'),
-                    'orden_trabajos.idorden_trabajos'
+                    DB::raw('entidades.nombre as entidad')
                 )
                 ->join('problemas', 'orden_requermientos.problema_id', 'problemas.id')
                 ->join('subareas', 'problemas.subarea_id', 'subareas.idsubareas')
@@ -276,12 +269,7 @@ class RP3Controller extends Controller
                         $estado = 'En proceso <span style="background-color: orange;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
                     }
                     if ($orden->finalizado != null) {
-                        $calificado = Calificacion::where('id_orden_trabajo', $orden->idorden_trabajos)->exists();
-                        if ($calificado) {
-                            $estado = 'Finalizado <span style="background-color: green;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
-                        } else {
-                            $estado = '<a href="#" onclick="modalCalificar(' . $orden->idorden_trabajos . ')">Finalizado</a> <span style="background-color: green;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
-                        }
+                        $estado = 'Finalizado <span style="background-color: green;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
                     }
 
                     $taux = new \DateTime(date('Y-m-d'));
