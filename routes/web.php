@@ -51,6 +51,12 @@ Route::middleware(['auth'])->group(function () {
     Route::post('auditor/listas/ajax/editarAuditor', 'Auditores\AuditoresController@editarAuditores')->name('auditor/listas/ajax/editarAuditor');
     //editcrisfin
 
+    // Proveedores
+    Route::get('proveedores', 'Proveedores\ProveedoresController@index');
+    Route::post('proveedores/listas/ajax/mostrarProveedores', 'Proveedores\ProveedoresController@mostrar');
+    Route::post('proveedores/listas/ajax/guardarProveedores', 'Proveedores\ProveedoresController@guardar');
+    // Proveedores
+
     // Mantenimiento
     Route::prefix('mantenimiento')->group(function () {
         Route::get('problemas', 'Mantenimiento\MantenimientoController@problemas')->name('problemas');
