@@ -10,43 +10,45 @@
                     <div class="row mt-3">
                         <div class="col-12">
                             <ul class="nav lmhorizontal mb-4" style="grid-template-columns: repeat(2, 1fr);">
-                                <a href="{{url('rp3/problemas')}}?cat=loteria">
-                                    <li class="nav-item @if($cat == 'loteria') active @endif">Loteria</li>
+                                <a href="{{url('rp3/problemas')}}?cat=urgente">
+                                    <li class="nav-item @if($cat == 'urgente') active @endif">Urgente</li>
                                 </a>
-                                <a href="{{url('rp3/problemas')}}?cat=proveedores">
-                                    <li href="#" class="nav-item @if($cat == 'proveedores') active @endif">Proveedores</li>
+                                <a href="{{url('rp3/problemas')}}?cat=seguimiento">
+                                    <li href="#" class="nav-item @if($cat == 'seguimiento') active @endif">Seguimiento</li>
                                 </a>
                             </ul>
                         </div>
                     </div>
-                    @if($cat == "loteria")
+                    @if($cat == "urgente")
                     <table class="table" id="list_problemas">
                         <thead>
                             <tr class="bg-primary text-white">
                                 <th>N. de Orden</th>
-                                <th>Area</th>
                                 <th>Sub Area</th>
                                 <th>Problema</th>
                                 <th>Cliente</th>
                                 <th>Fecha reportado</th>
+                                <th>Fecha finalizado</th>
                                 <th>Tiempo para resolver</th>
+                                <th>Tiempo de solución</th>
                                 <th>Estado</th>
                             </tr>
                         </thead>
                         <tbody class="TablaProblemas">
                         </tbody>
                     </table>
-                    @elseif($cat == "proveedores")
+                    @elseif($cat == "seguimiento")
                     <table class="table" id="list_problemas">
                         <thead>
                             <tr class="bg-primary text-white">
                                 <th>N. de Orden</th>
-                                <th>Entidad</th>
                                 <th>Sub Area</th>
                                 <th>Problema</th>
                                 <th>Cliente</th>
                                 <th>Fecha reportado</th>
+                                <th>Fecha finalizado</th>
                                 <th>Tiempo para resolver</th>
+                                <th>Tiempo de solución</th>
                                 <th>Estado</th>
                             </tr>
                         </thead>
@@ -207,7 +209,7 @@
                                     <div class="row">
                                         <div class="col-6">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="ot_estado" id="r1" value="U" checked="" disabled>
+                                                <input class="form-check-input" type="radio" name="ot_estado" id="r1" value="U" checked="">
                                                 <label class="form-check-label" for="r1">
                                                     Urgente
                                                 </label>
@@ -215,7 +217,7 @@
                                         </div>
                                         <div class="col-6">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="ot_estado" id="r2" value="S" disabled>
+                                                <input class="form-check-input" type="radio" name="ot_estado" id="r2" value="S">
                                                 <label class="form-check-label" for="r2">
                                                     Seguimiento
                                                 </label>
@@ -411,7 +413,7 @@
                             "width": "15%"
                         },
                         {
-                            "width": "20%"
+                            "width": "10%"
                         },
                         {
                             "width": "10%"
@@ -421,6 +423,9 @@
                         },
                         {
                             "width": "15%"
+                        },
+                        {
+                            "width": "10%"
                         }
                     ]
                 });

@@ -20,26 +20,26 @@ class RP3Controller extends Controller
 {
     public function problemas(Request $request)
     {
-        $cat = (isset($request->cat) ? $request->cat : 'loteria');
+        $cat = (isset($request->cat) ? $request->cat : 'urgente');
         $proveedores = DB::table('proveedores')->orderBy('idproveedores', 'asc')->get();
         return view('vistas.pages.rp3.problemas')->with('cat', $cat)->with('proveedores', $proveedores);
     }
 
     public function cargarProblemas(Request $request)
     {
-        if ($request->cat == 'loteria') {
+        if ($request->cat == 'urgente') {
             $ordenes = DB::table('orden_requermientos')
                 ->select(
                     'orden_requermientos.idorden_requermientos',
-                    'problemas.tiempo',
-                    DB::raw('problemas.nombre as problema'),
                     DB::raw('subareas.nombre as subarea'),
-                    DB::raw('areas.nombre as area'),
-                    DB::raw('entidades.nombre as entidad'),
+                    DB::raw('problemas.nombre as problema'),
                     DB::raw('pdsperfiles.pds_name as cliente'),
                     'orden_requermientos.solicitado',
-                    'orden_requermientos.enproceso',
                     'orden_requermientos.finalizado',
+                    'problemas.tiempo',
+                    DB::raw('areas.nombre as area'),
+                    DB::raw('entidades.nombre as entidad'),
+                    'orden_requermientos.enproceso',
                     DB::raw('entidades.nombre as entidad')
                 )
                 ->join('problemas', 'orden_requermientos.problema_id', 'problemas.id')
@@ -53,6 +53,8 @@ class RP3Controller extends Controller
                         ->orWhereNotNull('orden_requermientos.enproceso');
                 })
                 ->whereNull('orden_requermientos.finalizado')
+                ->where('entidades.nombre', 'RP3')
+                ->where('orden_trabajos.estado','U')
                 ->get();
 
             $tbody = "";
@@ -71,31 +73,37 @@ class RP3Controller extends Controller
                 $taux = new \DateTime(date('Y-m-d'));
                 $taux->setTime($orden->tiempo, 0, 0);
 
+                $diff = new Carbon($orden->enproceso);
+                $diff = $diff->diffInHours($orden->finalizado);
+                $tdiff = new \DateTime(date('Y-m-d'));
+                $tdiff->setTime($diff, 0, 0);
+
                 $tbody .= "<tr>
-                        <th scope=\"row\"><a href=\"#\" onclick=\"modalAsignarOrdenDeTrabajo(" . $orden->idorden_requermientos . ", '" . $id . "', '" . $orden->entidad . "')\">" . $id . "</a></th>
-                        <td>" . mb_strimwidth(strtoupper($orden->area), '0', '15', '...') . "</td>
-                        <td>" . mb_strimwidth(strtoupper($orden->subarea), '0', '15', '...') . "</td>
-                        <td>" . $orden->problema . "</td>
-                        <td>" . $orden->cliente . "</td>
-                        <td>" . Carbon::parse($orden->solicitado)->format('d/m/Y') . "</td>
-                        <td>" . date_format($taux, 'H:i') . "</td>
-                        <td>" . $estado . "</td>
-                    </tr>";
+                    <th scope=\"row\"><a href=\"#\" onclick=\"modalAsignarOrdenDeTrabajo(" . $orden->idorden_requermientos . ", '" . $id . "', '" . $orden->entidad . "')\">" . $id . "</a></th>
+                    <td>" . mb_strimwidth(strtoupper($orden->subarea), '0', '15', '...') . "</td>
+                    <td>" . $orden->problema . "</td>
+                    <td>" . $orden->cliente . "</td>
+                    <td>" . Carbon::parse($orden->solicitado)->format('d/m/Y') . "</td>
+                    <td>" . Carbon::parse($orden->finalizado)->format('d/m/Y') . "</td>
+                    <td>" . date_format($taux, 'H:i') . "</td>
+                    <td>" . date_format($tdiff, 'H:i') . "</td>
+                    <td>" . $estado . "</td>
+                </tr>";
             }
             return $tbody;
-        } else if ($request->cat == 'proveedores') {
+        } else if ($request->cat == 'seguimiento') {
             $ordenes = DB::table('orden_requermientos')
                 ->select(
                     'orden_requermientos.idorden_requermientos',
-                    'problemas.tiempo',
-                    DB::raw('problemas.nombre as problema'),
                     DB::raw('subareas.nombre as subarea'),
-                    DB::raw('areas.nombre as area'),
-                    DB::raw('entidades.nombre as entidad'),
+                    DB::raw('problemas.nombre as problema'),
                     DB::raw('pdsperfiles.pds_name as cliente'),
                     'orden_requermientos.solicitado',
-                    'orden_requermientos.enproceso',
                     'orden_requermientos.finalizado',
+                    'problemas.tiempo',
+                    DB::raw('areas.nombre as area'),
+                    DB::raw('entidades.nombre as entidad'),
+                    'orden_requermientos.enproceso',
                     DB::raw('entidades.nombre as entidad')
                 )
                 ->join('problemas', 'orden_requermientos.problema_id', 'problemas.id')
@@ -109,10 +117,8 @@ class RP3Controller extends Controller
                         ->orWhereNotNull('orden_requermientos.enproceso');
                 })
                 ->whereNull('orden_requermientos.finalizado')
-                ->where(function ($query) {
-                    $query->where('entidades.nombre', 'Lotto Game')
-                        ->orWhere('entidades.nombre', 'RP3');
-                })
+                ->where('entidades.nombre', 'RP3')
+                ->where('orden_trabajos.estado','S')
                 ->get();
 
             $tbody = "";
@@ -131,16 +137,22 @@ class RP3Controller extends Controller
                 $taux = new \DateTime(date('Y-m-d'));
                 $taux->setTime($orden->tiempo, 0, 0);
 
+                $diff = new Carbon($orden->enproceso);
+                $diff = $diff->diffInHours($orden->finalizado);
+                $tdiff = new \DateTime(date('Y-m-d'));
+                $tdiff->setTime($diff, 0, 0);
+
                 $tbody .= "<tr>
-                        <th scope=\"row\"><a href=\"#\" onclick=\"modalAsignarOrdenDeTrabajo(" . $orden->idorden_requermientos . ", '" . $id . "', '" . $orden->entidad . "')\">" . $id . "</a></th>
-                        <td>" . mb_strimwidth(strtoupper($orden->entidad), '0', '15', '...') . "</td>
-                        <td>" . mb_strimwidth(strtoupper($orden->subarea), '0', '15', '...') . "</td>
-                        <td>" . $orden->problema . "</td>
-                        <td>" . $orden->cliente . "</td>
-                        <td>" . $orden->solicitado . "</td>
-                        <td>" . date_format($taux, 'H:i') . "</td>
-                        <td>" . $estado . "</td>
-                    </tr>";
+                    <th scope=\"row\"><a href=\"#\" onclick=\"modalAsignarOrdenDeTrabajo(" . $orden->idorden_requermientos . ", '" . $id . "', '" . $orden->entidad . "')\">" . $id . "</a></th>
+                    <td>" . mb_strimwidth(strtoupper($orden->subarea), '0', '15', '...') . "</td>
+                    <td>" . $orden->problema . "</td>
+                    <td>" . $orden->cliente . "</td>
+                    <td>" . Carbon::parse($orden->solicitado)->format('d/m/Y') . "</td>
+                    <td>" . Carbon::parse($orden->finalizado)->format('d/m/Y') . "</td>
+                    <td>" . date_format($taux, 'H:i') . "</td>
+                    <td>" . date_format($tdiff, 'H:i') . "</td>
+                    <td>" . $estado . "</td>
+                </tr>";
             }
             return $tbody;
         }
@@ -148,7 +160,7 @@ class RP3Controller extends Controller
 
     public function cargarOrdenes(Request $request)
     {
-        if ($request->cat == 'loteria') {
+        if ($request->cat == 'urgente') {
             $ordenes = DB::table('orden_requermientos')
                 ->select(
                     'orden_requermientos.idorden_requermientos',
@@ -210,7 +222,7 @@ class RP3Controller extends Controller
                     </tr>";
             }
             return $tbody;
-        } else if ($request->cat == 'proveedores') {
+        } else if ($request->cat == 'seguimiento') {
             $ordenes = DB::table('orden_requermientos')
                 ->select(
                     'orden_requermientos.idorden_requermientos',
@@ -376,7 +388,7 @@ class RP3Controller extends Controller
 
     public function ordenes(Request $request)
     {
-        $cat = (isset($request->cat) ? $request->cat : 'loteria');
+        $cat = (isset($request->cat) ? $request->cat : 'urgente');
         $proveedores = DB::table('proveedores')->orderBy('idproveedores', 'asc')->get();
         return view('vistas.pages.rp3.ordenes')->with('cat', $cat)->with('proveedores', $proveedores);
     }
@@ -429,6 +441,6 @@ class RP3Controller extends Controller
         $calificacion->calificacion = ($request->precio + $request->disponibilidad + $request->rapidez + $request->calidad + $request->garantia) / 5;
         $calificacion->save();
 
-        return redirect('rp3/ordenes')->with('cat', 'loteria');
+        return redirect('rp3/ordenes')->with('cat', 'urgente');
     }
 }
