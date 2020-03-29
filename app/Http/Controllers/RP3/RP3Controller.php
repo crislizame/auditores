@@ -54,7 +54,10 @@ class RP3Controller extends Controller
                 })
                 ->whereNull('orden_requermientos.finalizado')
                 ->where('entidades.nombre', 'RP3')
-                ->where('orden_trabajos.estado','U')
+                ->where(function ($query) {
+                    $query->whereNull('orden_trabajos.estado','U')
+                        ->orWhere('orden_trabajos.estado','U');
+                })
                 ->get();
 dd($ordenes);
             $tbody = "";
