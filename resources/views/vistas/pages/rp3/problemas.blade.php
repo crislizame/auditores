@@ -193,18 +193,10 @@
                         <div class="col-6">
                             <div class="row">
                                 <div class="col-6">
-                                    <label>Proveedor</label>
-                                </div>
-                                <div class="col-6">
                                     <label>Estado</label>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-6">
-                                </div>
-                                <div class="col-6" id="tex-ent" style="display: none;">
-                                    <h5 id="ot_entidad"></h5>
-                                </div>
                                 <div class="col-6">
                                     <div class="row">
                                         <div class="col-6">
@@ -597,9 +589,6 @@
                     $('#gb-g').show();
                 }
             } else {
-                $('#tex-ent').show();
-                $('#ot_entidad').html(done.entidad);
-
                 $('[name="ot_presupuesto"]').attr('disabled','true');
                 $('[name="ot_garantia"]').attr('disabled','true');
                 $('[name="ot_encargado"]').attr('disabled','true');
