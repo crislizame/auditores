@@ -10,10 +10,10 @@
                     <div class="row mt-3">
                         <div class="col-12">
                             <ul class="nav lmhorizontal mb-4" style="grid-template-columns: repeat(2, 1fr);">
-                                <a href="{{url('rp3/problemas')}}?cat=urgente">
+                                <a href="{{url('rp3/ordenes')}}?cat=urgente">
                                     <li class="nav-item @if($cat == 'urgente') active @endif">Urgente</li>
                                 </a>
-                                <a href="{{url('rp3/problemas')}}?cat=seguimiento">
+                                <a href="{{url('rp3/ordenes')}}?cat=seguimiento">
                                     <li href="#" class="nav-item @if($cat == 'seguimiento') active @endif">Seguimiento</li>
                                 </a>
                             </ul>
@@ -617,7 +617,7 @@
         function cargar(cat) {
 
             $.ajax({
-                url: "{{url('rp3/problemas/cargar')}}",
+                url: "{{url('rp3/ordenes/cargar')}}",
                 method: "post",
                 dataType: 'text',
                 data: {
