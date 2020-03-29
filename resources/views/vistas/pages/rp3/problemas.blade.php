@@ -81,7 +81,15 @@
                     @csrf
                     <div class="row">
                         <div class="col-6">
-                            <input type="hidden" name="req_num_orden">
+                            <div class="row">
+                                <div class="col-4">
+                                    <label>No. de Orden</label>
+                                </div>
+                                <div class="col-8">
+                                    <h3 id="req_num_orden"></h3>
+                                    <input type="hidden" name="req_num_orden">
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-4">
                                     <label>WTC</label>
@@ -182,13 +190,154 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-6">
+                                    <label>Proveedor</label>
+                                </div>
+                                <div class="col-6">
+                                    <label>Estado</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                </div>
+                                <div class="col-6" id="tex-ent" style="display: none;">
+                                    <h5 id="ot_entidad"></h5>
+                                </div>
+                                <div class="col-6">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="ot_estado" id="r1" value="U" checked="">
+                                                <label class="form-check-label" for="r1">
+                                                    Urgente
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="ot_estado" id="r2" value="S">
+                                                <label class="form-check-label" for="r2">
+                                                    Seguimiento
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <label>Fecha Inicio</label>
+                                </div>
+                                <div class="col-6">
+                                    <label>Fecha Fin</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <h5 id="ot_finicio"></h5>
+                                </div>
+                                <div class="col-6">
+                                    <h5 id="ot_ffin"></h5>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <label>Presupuesto</label>
+                                </div>
+                                <div class="col-6">
+                                    <label>Garantía</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <input type="text" name="ot_presupuesto" class="form-control">
+                                </div>
+                                <div class="col-6">
+                                    <input type="text" name="ot_garantia" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <label>Encargado</label>
+                                </div>
+                                <div class="col-6">
+                                    <label>Tiempo para resolver</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <input type="text" name="ot_encargado" class="form-control">
+                                </div>
+                                <div class="col-6">
+                                    <h5 id="ot_tiempo"></h5>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6 offset-6">
+                                    <label>Extra</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6 offset-6">
+                                    <input type="text" name="ot_extra" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <label>Comentario</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <textarea class="form-control" name="ot_comentario" rows="4" placeholder="Incluir # de orden de compra"></textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6" id="cc">
+                                    <label>Cotización <i class="fa fa-upload"></i> Cargar imagen</label>
+                                    <input type="file" class="form-control-file border" name="ot_ccotizacion">
+                                </div>
+                                <div class="col-6" id="cv" style="display: none;">
+                                    <label>Cotización <i class="fa fa-eye"></i><a href="#" id="cvl"> Ver</a></label>
+                                </div>
+                                <div class="col-6" id="gc">
+                                    <label>Garantía <i class="fa fa-upload"></i> Cargar imagen</label>
+                                    <input type="file" class="form-control-file border" name="ot_cgarantia">
+                                </div>
+                                <div class="col-6" id="gv" style="display: none;">
+                                    <label>Garantía <i class="fa fa-eye"></i><a href="#" id="gvl"> Ver</a></label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="row">
-                        <div class="col-12">
-                            <button type="submit" class="btn btn-primary float-right mr-3" id="benviar">Confirmar trabajo realizado</button>
+                        <div class="col-12" style="display: none;" id="gb-g">
+                            <a onclick="finalizar()" class="btn btn-primary float-right text-white">Finalizar</a>
+                            <button type="submit" class="btn btn-primary float-right mr-3" id="benviar">Procesar</button>
+                        </div>
+                        <div class="col-12" style="display: none;" id="gb-c">
+                            <button type="button" class="btn btn-default float-right" data-dismiss="modal">Cerrar</button>
                         </div>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade modal-va" tabindex="-1" role="dialog" aria-labelledby="modal-va" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h4 class="modal-title text-white" id="vat"></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body p-2">
+                <img class="img-responsive" id="vai">
             </div>
         </div>
     </div>
@@ -283,10 +432,16 @@
             });
         }
 
-        $('.modal-asignar').on('hidden.bs.modal', function(e) {
+        $('.modal-asignar').on('hidden.bs.modal', function (e) {
             $('#gb-g').hide();
             $('#gb-c').hide();
             $('#text-ent').hide();
+
+            $('[name="ot_presupuesto"]').removeAttr('disabled');
+            $('[name="ot_garantia"]').removeAttr('disabled');
+            $('[name="ot_encargado"]').removeAttr('disabled');
+            $('[name="ot_extra"]').removeAttr('disabled');
+            $('[name="ot_comentario"]').removeAttr('disabled');
         })
     });
 
@@ -312,6 +467,7 @@
             var done = data[0];
 
             $('.modal-asignar').modal('show');
+            $('#req_num_orden').html(visualId);
             $('[name="req_num_orden"]').val(id);
 
             $('#req_cliente').html(done.cliente);
@@ -321,6 +477,7 @@
             $('#req_problema').html(done.problema);
 
             $('#req_rfinicio').html(done.solicitado);
+            $('#ot_finicio').html(done.solicitado);
 
             $('#req_comentario').html(done.rcomentario);
 
@@ -348,6 +505,12 @@
                 $('#req_imagenes > .carousel-inner').html(ok.images);
             });
 
+            if(done.tiempo!=null){
+                $('#ot_tiempo').html(zfill(done.tiempo, 2) + ":00");
+            }else{
+                $('#ot_tiempo').html("Indefinido");
+            }
+
             if (done.enproceso != null) {
 
                 switch (done.estado) {
@@ -359,13 +522,102 @@
                         break;
                 }
 
+                $('#ot_ffin').html(done.finalizado);
+
+                $('[name="ot_presupuesto"]').val(done.presupuesto);
+                $('[name="ot_garantia"]').val(done.garantia);
+
+                $('[name="ot_encargado"]').val(done.encargado);
+                $('[name="ot_extra"]').val(done.extra);
+
+                $('[name="ot_comentario"]').val(done.comentario);
+
                 $('#benviar').prop('disabled', true);
                 $('#benviar').removeClass('btn-primary');
                 $('#benviar').addClass('btn-default');
 
+                var otrabajo = done.idorden_trabajos;
+                $.ajax({
+                    url: "{{url('rp3/problemas/trabajo/ver')}}",
+                    method: "post",
+                    data: {
+                        '_token': "{{csrf_token()}}",
+                        'id': otrabajo,
+                        'tipo': 'C'
+                    }
+                }).done(function(ok) {
+                    if (ok.attachment_id > 0) {
+                        $('#cc').hide();
+                        $('#cv').show();
+                        $('#cvl').attr('onclick', 'modalImagenTrabajo("{{url("/imagen")}}/' + ok.attachment_id + '", "Cotización")');
+                    } else {
+                        $('#cc').show();
+                        $('#cv').hide();
+                        $('#cvl').removeAttr('onclick');
+                    }
+                });
+
+                $.ajax({
+                    url: "{{url('rp3/problemas/trabajo/ver')}}",
+                    method: "post",
+                    data: {
+                        '_token': "{{csrf_token()}}",
+                        'id': otrabajo,
+                        'tipo': 'G'
+                    }
+                }).done(function(ok) {
+                    if (ok.attachment_id > 0) {
+                        $('#gc').hide();
+                        $('#gv').show();
+                        $('#gvl').attr('onclick', 'modalImagenTrabajo("{{url("/imagen")}}/' + ok.attachment_id + '", "Garantía")');
+                    } else {
+                        $('#gc').show();
+                        $('#gv').hide();
+                        $('#gvl').removeAttr('onclick');
+                    }
+                });
+
+                $('[name="ot_presupuesto"]').attr('disabled','true');
+                $('[name="ot_garantia"]').attr('disabled','true');
+                $('[name="ot_encargado"]').attr('disabled','true');
+                $('[name="ot_extra"]').attr('disabled','true');
+                $('[name="ot_comentario"]').attr('disabled','true');
+            }else{
+                $('[name="ot_presupuesto"]').removeAttr('disabled');
+                $('[name="ot_garantia"]').removeAttr('disabled');
+                $('[name="ot_encargado"]').removeAttr('disabled');
+                $('[name="ot_extra"]').removeAttr('disabled');
+                $('[name="ot_comentario"]').removeAttr('disabled');
             }
 
+            if (entidad == "{{(new App\Entidad())->where('identidad',Auth::user()->entidad_id)->value('nombre')}}") {
+                if(done.finalizado!=null){
+                    $('#gb-c').show();
+                }else{
+                    $('#gb-g').show();
+                }
+            } else {
+                $('#tex-ent').show();
+                $('#ot_entidad').html(done.entidad);
+
+                $('[name="ot_presupuesto"]').attr('disabled','true');
+                $('[name="ot_garantia"]').attr('disabled','true');
+                $('[name="ot_encargado"]').attr('disabled','true');
+                $('[name="ot_extra"]').attr('disabled','true');
+                $('[name="ot_comentario"]').attr('disabled','true');
+
+                $('#cc').hide();
+                $('#gc').hide();
+
+                $('#gb-c').show();
+            }
         });
+    }
+
+    function modalImagenTrabajo(url, tipo) {
+        $('#vat').html(tipo);
+        $('#vai').attr('src', url);
+        $('.modal-va').modal('show');
     }
 
     function zfill(number, width) {
