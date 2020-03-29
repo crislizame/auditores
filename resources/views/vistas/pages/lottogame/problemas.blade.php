@@ -10,43 +10,45 @@
                     <div class="row mt-3">
                         <div class="col-12">
                             <ul class="nav lmhorizontal mb-4" style="grid-template-columns: repeat(2, 1fr);">
-                                <a href="{{url('lottogame/problemas')}}?cat=loteria">
-                                    <li class="nav-item @if($cat == 'loteria') active @endif">Loteria</li>
+                                <a href="{{url('lottogame/problemas')}}?cat=urgente">
+                                    <li class="nav-item @if($cat == 'urgente') active @endif">Urgente</li>
                                 </a>
-                                <a href="{{url('lottogame/problemas')}}?cat=proveedores">
-                                    <li href="#" class="nav-item @if($cat == 'proveedores') active @endif">Proveedores</li>
+                                <a href="{{url('lottogame/problemas')}}?cat=seguimiento">
+                                    <li href="#" class="nav-item @if($cat == 'seguimiento') active @endif">Seguimiento</li>
                                 </a>
                             </ul>
                         </div>
                     </div>
-                    @if($cat == "loteria")
+                    @if($cat == "urgente")
                     <table class="table" id="list_problemas">
                         <thead>
                             <tr class="bg-primary text-white">
                                 <th>N. de Orden</th>
-                                <th>Area</th>
                                 <th>Sub Area</th>
                                 <th>Problema</th>
                                 <th>Cliente</th>
                                 <th>Fecha reportado</th>
+                                <th>Fecha finalizado</th>
                                 <th>Tiempo para resolver</th>
+                                <th>Tiempo de solución</th>
                                 <th>Estado</th>
                             </tr>
                         </thead>
                         <tbody class="TablaProblemas">
                         </tbody>
                     </table>
-                    @elseif($cat == "proveedores")
+                    @elseif($cat == "seguimiento")
                     <table class="table" id="list_problemas">
                         <thead>
                             <tr class="bg-primary text-white">
                                 <th>N. de Orden</th>
-                                <th>Entidad</th>
                                 <th>Sub Area</th>
                                 <th>Problema</th>
                                 <th>Cliente</th>
                                 <th>Fecha reportado</th>
+                                <th>Fecha finalizado</th>
                                 <th>Tiempo para resolver</th>
+                                <th>Tiempo de solución</th>
                                 <th>Estado</th>
                             </tr>
                         </thead>
@@ -191,23 +193,10 @@
                         <div class="col-6">
                             <div class="row">
                                 <div class="col-6">
-                                    <label>Proveedor</label>
-                                </div>
-                                <div class="col-6">
                                     <label>Estado</label>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-6" id="sel-pro" style="display: none;">
-                                    <select name="ot_proveedor">
-                                        @foreach ($proveedores as $proveedor)
-                                        <option value="{{$proveedor->idproveedores}}">{{$proveedor->nombre}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-6" id="tex-ent" style="display: none;">
-                                    <h5 id="ot_entidad"></h5>
-                                </div>
                                 <div class="col-6">
                                     <div class="row">
                                         <div class="col-6">
@@ -416,7 +405,7 @@
                             "width": "15%"
                         },
                         {
-                            "width": "20%"
+                            "width": "10%"
                         },
                         {
                             "width": "10%"
@@ -426,11 +415,26 @@
                         },
                         {
                             "width": "15%"
+                        },
+                        {
+                            "width": "10%"
                         }
                     ]
                 });
             });
         }
+
+        $('.modal-asignar').on('hidden.bs.modal', function (e) {
+            $('#gb-g').hide();
+            $('#gb-c').hide();
+            $('#text-ent').hide();
+
+            $('[name="ot_presupuesto"]').removeAttr('disabled');
+            $('[name="ot_garantia"]').removeAttr('disabled');
+            $('[name="ot_encargado"]').removeAttr('disabled');
+            $('[name="ot_extra"]').removeAttr('disabled');
+            $('[name="ot_comentario"]').removeAttr('disabled');
+        })
     });
 
     function modalAsignarOrdenDeTrabajo(id, visualId, entidad) {
@@ -493,11 +497,13 @@
                 $('#req_imagenes > .carousel-inner').html(ok.images);
             });
 
-            $('#ot_tiempo').html(zfill(done.tiempo, 2) + ":00");
+            if(done.tiempo!=null){
+                $('#ot_tiempo').html(zfill(done.tiempo, 2) + ":00");
+            }else{
+                $('#ot_tiempo').html("Indefinido");
+            }
 
             if (done.enproceso != null) {
-                $('[name="ot_proveedor"]').val(done.proveedor_id);
-                $('[name="ot_proveedor"]').select2().trigger('change');
 
                 switch (done.estado) {
                     case 'U':
@@ -562,25 +568,32 @@
                         $('#gvl').removeAttr('onclick');
                     }
                 });
+
+                $('[name="ot_presupuesto"]').attr('disabled','true');
+                $('[name="ot_garantia"]').attr('disabled','true');
+                $('[name="ot_encargado"]').attr('disabled','true');
+                $('[name="ot_extra"]').attr('disabled','true');
+                $('[name="ot_comentario"]').attr('disabled','true');
+            }else{
+                $('[name="ot_presupuesto"]').removeAttr('disabled');
+                $('[name="ot_garantia"]').removeAttr('disabled');
+                $('[name="ot_encargado"]').removeAttr('disabled');
+                $('[name="ot_extra"]').removeAttr('disabled');
+                $('[name="ot_comentario"]').removeAttr('disabled');
             }
 
             if (entidad == "{{(new App\Entidad())->where('identidad',Auth::user()->entidad_id)->value('nombre')}}") {
-                $('#sel-pro').show();
-
                 if(done.finalizado!=null){
                     $('#gb-c').show();
                 }else{
                     $('#gb-g').show();
                 }
             } else {
-                $('#tex-ent').show();
-                $('#ot_entidad').html(done.entidad);
-
-                $('[name="ot_presupuesto"]').attr('readonly', 'true');
-                $('[name="ot_garantia"]').attr('readonly', 'true');
-                $('[name="ot_encargado"]').attr('readonly', 'true');
-                $('[name="ot_extra"]').attr('readonly', 'true');
-                $('[name="ot_comentario"]').attr('readonly', 'true');
+                $('[name="ot_presupuesto"]').attr('disabled','true');
+                $('[name="ot_garantia"]').attr('disabled','true');
+                $('[name="ot_encargado"]').attr('disabled','true');
+                $('[name="ot_extra"]').attr('disabled','true');
+                $('[name="ot_comentario"]').attr('disabled','true');
 
                 $('#cc').hide();
                 $('#gc').hide();

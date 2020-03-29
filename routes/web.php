@@ -96,7 +96,6 @@ Route::middleware(['auth'])->group(function () {
         Route::post('problemas/finalizar', 'RP3\RP3Controller@finalizarOrdenDeRequerimiento');
         Route::get('ordenes', 'RP3\RP3Controller@ordenes');
         Route::post('ordenes/cargar', 'RP3\RP3Controller@cargarOrdenes');
-        Route::post('ordenes/calificar', 'RP3\RP3Controller@calificar');
         Route::get('perfil', 'RP3\RP3Controller@perfil');
     });
     // RP3
@@ -109,6 +108,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('problemas/orden/asignar', 'LottoGame\LottoGameController@asignarOrden');
         Route::post('problemas/trabajo/ver', 'LottoGame\LottoGameController@imagenesTrabajo');
         Route::post('problemas/imagenes', 'LottoGame\LottoGameController@imagenesRequerimiento');
+        Route::post('problemas/finalizar', 'LottoGame\LottoGameController@finalizarOrdenDeRequerimiento');
         Route::get('ordenes', 'LottoGame\LottoGameController@ordenes');
         Route::post('ordenes/cargar', 'LottoGame\LottoGameController@cargarOrdenes');
         Route::get('perfil', 'LottoGame\LottoGameController@perfil');

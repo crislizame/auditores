@@ -6,12 +6,12 @@
     </div>
     <ul class="sidebar-menu do-nicescrol">
         <li @if(strpos (url()->current(), 'problemas')!==false) class="active" @endif>
-            <a href="{{url('lottogame/problemas')}}?cat=loteria" class="waves-effect">
+            <a href="{{url('lottogame/problemas')}}?cat=urgente" class="waves-effect">
                 <i class="icon-calendar"></i> <span>Solucionar problemas</span>
             </a>
         </li>
         <li @if(strpos (url()->current(), 'ordenes')!==false) class="active" @endif>
-            <a href="{{url('lottogame/ordenes')}}?cat=loteria" class="waves-effect">
+            <a href="{{url('lottogame/ordenes')}}?cat=urgente" class="waves-effect">
                 <i class="icon-list"></i> <span>Registro de ordenes</span>
             </a>
         </li>
