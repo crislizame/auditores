@@ -40,7 +40,8 @@ class RP3Controller extends Controller
                     DB::raw('areas.nombre as area'),
                     DB::raw('entidades.nombre as entidad'),
                     'orden_requermientos.enproceso',
-                    DB::raw('entidades.nombre as entidad')
+                    DB::raw('entidades.nombre as entidad'),
+                    'orden_trabajos.estado'
                 )
                 ->join('problemas', 'orden_requermientos.problema_id', 'problemas.id')
                 ->join('subareas', 'problemas.subarea_id', 'subareas.idsubareas')
@@ -55,29 +56,30 @@ class RP3Controller extends Controller
                 ->whereNull('orden_requermientos.finalizado')
                 ->where('entidades.nombre', 'RP3')
                 ->get();
-dd($ordenes);
+
             $tbody = "";
             foreach ($ordenes as $orden) {
-                $id = 'C-' . str_pad($orden->idorden_requermientos, 7, "0", STR_PAD_LEFT);
+                if (($orden->estado != null && $orden->estado == 'U') || $orden->estado == null) {
+                    $id = 'C-' . str_pad($orden->idorden_requermientos, 7, "0", STR_PAD_LEFT);
 
-                $estado = 'Solicitado <span style="background-color: red;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+                    $estado = 'Solicitado <span style="background-color: red;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
 
-                if ($orden->enproceso != null) {
-                    $estado = 'En proceso <span style="background-color: orange;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
-                }
-                if ($orden->finalizado != null) {
-                    $estado = 'Finalizado <span style="background-color: green;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
-                }
+                    if ($orden->enproceso != null) {
+                        $estado = 'En proceso <span style="background-color: orange;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+                    }
+                    if ($orden->finalizado != null) {
+                        $estado = 'Finalizado <span style="background-color: green;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+                    }
 
-                $taux = new \DateTime(date('Y-m-d'));
-                $taux->setTime($orden->tiempo, 0, 0);
+                    $taux = new \DateTime(date('Y-m-d'));
+                    $taux->setTime($orden->tiempo, 0, 0);
 
-                $diff = new Carbon($orden->enproceso);
-                $diff = $diff->diffInHours($orden->finalizado);
-                $tdiff = new \DateTime(date('Y-m-d'));
-                $tdiff->setTime($diff, 0, 0);
+                    $diff = new Carbon($orden->enproceso);
+                    $diff = $diff->diffInHours($orden->finalizado);
+                    $tdiff = new \DateTime(date('Y-m-d'));
+                    $tdiff->setTime($diff, 0, 0);
 
-                $tbody .= "<tr>
+                    $tbody .= "<tr>
                     <th scope=\"row\"><a href=\"#\" onclick=\"modalAsignarOrdenDeTrabajo(" . $orden->idorden_requermientos . ", '" . $id . "', '" . $orden->entidad . "')\">" . $id . "</a></th>
                     <td>" . mb_strimwidth(strtoupper($orden->subarea), '0', '15', '...') . "</td>
                     <td>" . $orden->problema . "</td>
@@ -88,6 +90,7 @@ dd($ordenes);
                     <td>" . date_format($tdiff, 'H:i') . "</td>
                     <td>" . $estado . "</td>
                 </tr>";
+                }
             }
             return $tbody;
         } else if ($request->cat == 'seguimiento') {
@@ -117,31 +120,31 @@ dd($ordenes);
                 })
                 ->whereNull('orden_requermientos.finalizado')
                 ->where('entidades.nombre', 'RP3')
-                ->where('orden_trabajos.estado','S')
                 ->get();
 
             $tbody = "";
             foreach ($ordenes as $orden) {
-                $id = 'C-' . str_pad($orden->idorden_requermientos, 7, "0", STR_PAD_LEFT);
+                if (($orden->estado != null && $orden->estado == 'S') || $orden->estado == null) {
+                    $id = 'C-' . str_pad($orden->idorden_requermientos, 7, "0", STR_PAD_LEFT);
 
-                $estado = 'Solicitado <span style="background-color: red;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+                    $estado = 'Solicitado <span style="background-color: red;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
 
-                if ($orden->enproceso != null) {
-                    $estado = 'En proceso <span style="background-color: orange;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
-                }
-                if ($orden->finalizado != null) {
-                    $estado = 'Finalizado <span style="background-color: green;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
-                }
+                    if ($orden->enproceso != null) {
+                        $estado = 'En proceso <span style="background-color: orange;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+                    }
+                    if ($orden->finalizado != null) {
+                        $estado = 'Finalizado <span style="background-color: green;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+                    }
 
-                $taux = new \DateTime(date('Y-m-d'));
-                $taux->setTime($orden->tiempo, 0, 0);
+                    $taux = new \DateTime(date('Y-m-d'));
+                    $taux->setTime($orden->tiempo, 0, 0);
 
-                $diff = new Carbon($orden->enproceso);
-                $diff = $diff->diffInHours($orden->finalizado);
-                $tdiff = new \DateTime(date('Y-m-d'));
-                $tdiff->setTime($diff, 0, 0);
+                    $diff = new Carbon($orden->enproceso);
+                    $diff = $diff->diffInHours($orden->finalizado);
+                    $tdiff = new \DateTime(date('Y-m-d'));
+                    $tdiff->setTime($diff, 0, 0);
 
-                $tbody .= "<tr>
+                    $tbody .= "<tr>
                     <th scope=\"row\"><a href=\"#\" onclick=\"modalAsignarOrdenDeTrabajo(" . $orden->idorden_requermientos . ", '" . $id . "', '" . $orden->entidad . "')\">" . $id . "</a></th>
                     <td>" . mb_strimwidth(strtoupper($orden->subarea), '0', '15', '...') . "</td>
                     <td>" . $orden->problema . "</td>
@@ -152,6 +155,7 @@ dd($ordenes);
                     <td>" . date_format($tdiff, 'H:i') . "</td>
                     <td>" . $estado . "</td>
                 </tr>";
+                }
             }
             return $tbody;
         }
