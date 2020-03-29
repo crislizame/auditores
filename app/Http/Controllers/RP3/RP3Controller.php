@@ -56,7 +56,7 @@ class RP3Controller extends Controller
                 ->where('entidades.nombre', 'RP3')
                 ->where('orden_trabajos.estado','U')
                 ->get();
-
+dd($ordenes);
             $tbody = "";
             foreach ($ordenes as $orden) {
                 $id = 'C-' . str_pad($orden->idorden_requermientos, 7, "0", STR_PAD_LEFT);
