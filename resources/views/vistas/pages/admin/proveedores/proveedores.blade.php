@@ -58,43 +58,43 @@
                         </div>
                         <div class="col-6">
                             <div class="form-group col-md-12">
-                                <label for="aud_nombre">Razón social</label>
-                                <input class="form-control" name="aud_nombre" type="text">
+                                <label>Razón social</label>
+                                <input class="form-control" name="nombre" type="text">
                             </div>
                             <div class="form-group col-md-12">
-                                <label for="aud_apellidos">Ruc/Cédula</label>
-                                <input class="form-control" name="aud_cedula" type="text">
+                                <label>Ruc/Cédula</label>
+                                <input class="form-control" name="cedula" type="text">
                             </div>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="aud_cedula">Telefono</label>
-                            <input class="form-control" name="aud_telefono" type="text">
+                            <label>Telefono</label>
+                            <input class="form-control" name="telefono" type="text">
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="aud_correo">Correo</label>
-                            <input class="form-control" name="aud_correo" type="text">
+                            <label>Correo</label>
+                            <input class="form-control" name="correo" type="text">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-12">
-                            <label for="aud_direccion">Dirección</label>
-                            <input class="form-control" name="aud_direccion" type="text">
+                            <label>Dirección</label>
+                            <input class="form-control" name="direccion" type="text">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="aud_cuentabanco">Banco</label>
-                            <input class="form-control" name="aud_cuentabanco" type="text">
+                            <label>Banco</label>
+                            <input class="form-control" name="cuentabanco" type="text">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="aud_cuentanumero">Cuenta Número</label>
-                            <input class="form-control" name="aud_cuentanumero" type="text">
+                            <label>Cuenta Número</label>
+                            <input class="form-control" name="cuentanumero" type="text">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="aud_cuentatipo">Cuenta Tipo</label>
-                            <select class="form-control" id="aud_cuentatipo" name="aud_cuentatipo">
+                            <label>Cuenta Tipo</label>
+                            <select class="form-control" name="cuentatipo">
                                 <option value="ahorro"> AHORRO</option>
                                 <option value="corriente"> CORRIENTE</option>
                             </select>
@@ -131,11 +131,10 @@
         cargar();
     });
 
-$('#guardarProveedor').click(function() {
+    $('#guardarProveedor').click(function() {
         $.ajax({
             url: "{{ url('proveedores/listas/ajax/guardarProveedores') }}",
             method: "post",
-            //dataType: 'text',
             data: $('#formCrearProveedor').serialize()
         }).done(function(data) {
             $('.agregarProveedor').modal('hide');

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Calificacion;
+use App\Proveedor;
 
 class ProveedoresController extends Controller
 {
@@ -53,6 +54,17 @@ class ProveedoresController extends Controller
 
     public function guardar(Request $request)
     {
-        return $request->all();
+        $proveedor = new Proveedor();
+        $proveedor->nombre = $request->nombre;
+        $proveedor->ruc_cedula = $request->cedula;
+        $proveedor->telefono = $request->telefono;
+        $proveedor->correo = $request->correo;
+        $proveedor->direccion = $request->direccion;
+        $proveedor->banco = $request->cuentabanco;
+        $proveedor->cuenta = $request->cuentanumero;
+        $proveedor->tipodecuenta = $request->cuentatipo;
+        $proveedor->save();
+
+        return response()->json(['status' => 'Ok']);
     }
 }
