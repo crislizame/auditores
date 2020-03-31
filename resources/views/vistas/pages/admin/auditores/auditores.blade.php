@@ -15,7 +15,7 @@
         <div class="col-lg-12 mt-3">
             <div class="card">
                 <div class="card-body">
-                    {{--<h5 class="card-title"><button data-toggle="modal" data-target=".addComisionistaModal" class="btn btn-primary"><i class="fa fa-plus"></i> Agregar Comisionistas</button></h5>--}}
+                    <h5 class="card-title"><button data-toggle="modal" data-target=".addComisionistaModal" class="btn btn-primary"><i class="fa fa-plus"></i> Agregar Comisionistas</button></h5>
                     <table class="table" id="list_auditores">
                         <thead>
                             <tr class="bg-primary text-white">
