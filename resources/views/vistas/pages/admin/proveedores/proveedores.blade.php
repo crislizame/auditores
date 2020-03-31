@@ -36,7 +36,7 @@
 </div>
 
 <div class="modal fade agregarProveedor" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header bg-primary">
                 <h5 class="modal-title text-white">Crear Proveedor</h5>
@@ -102,7 +102,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="reset" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <button type="button" class="btn btn-primary" id="guardarProveedor">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -131,8 +131,8 @@
         cargar();
     });
 
-    $('#formCrearProveedor').submit(function() {
-        var formdata = $(this).serializeArray();
+$('#guardarProveedor').click(function() {
+        var formdata = $('#formCrearProveedor').serialize();
         $.ajax({
             url: "{{ url('proveedores/listas/ajax/guardarProveedores') }}",
             method: "post",
