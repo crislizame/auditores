@@ -132,20 +132,16 @@
     });
 
 $('#guardarProveedor').click(function() {
-        var formdata = $('#formCrearProveedor').serialize();
         $.ajax({
             url: "{{ url('proveedores/listas/ajax/guardarProveedores') }}",
             method: "post",
             //dataType: 'text',
-            data: {
-                datos: formdata,
-                _token: "{{csrf_token()}}"
-            }
+            data: $('#formCrearProveedor').serialize()
         }).done(function(data) {
             $('.agregarProveedor').modal('hide');
             noti = Lobibox.notify('success', {
                 pauseDelayOnHover: true,
-                title: "¡Guardardo!",
+                title: "¡Guardado!",
                 continueDelayOnInactiveTab: false,
                 position: 'top right',
                 icon: 'fa fa-check-circle',
