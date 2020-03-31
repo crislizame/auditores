@@ -53,6 +53,6 @@ class ProveedoresController extends Controller
 
     public function guardar(Request $request)
     {
-        //
+        return $request->all();
     }
 }
