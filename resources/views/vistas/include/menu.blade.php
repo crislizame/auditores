@@ -35,7 +35,11 @@
                 <i class="icon-user"></i> <span>Auditores</span>
             </a>
         </li>
-
+        <li @if(strpos (url()->current(), 'proveedores')!==false) class="active" @endif>
+            <a href="{{ url('proveedores') }}" class="waves-effect">
+                <i class="icon-user"></i> <span>Proveedores</span>
+            </a>
+        </li>
         <li @if(strpos (url()->current(), 'indicadores')!==false) class="active" @endif>
             <a href="{{route('indicadores')}}?cat=auditoria" class="waves-effect">
                 <i class="icon-pie-chart"></i> <span>Indicadores</span>

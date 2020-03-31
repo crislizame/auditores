@@ -53,7 +53,7 @@
         });
 
         $.ajax({
-            url: "{{url('mantenimiento/proveedores/cargar')}}",
+            url: "{{url('proveedores/listas/ajax/mostrarProveedores')}}",
             method: "post",
             dataType: 'text',
             data: {
@@ -79,7 +79,7 @@
                 "lengthMenu": [
                     [25, 50, 100, -1],
                     [25, 50, 100, "Todos"]
-                ],
+                ]/*,
                 "columns": [{
                         "width": "10%"
                     },
@@ -98,7 +98,7 @@
                     {
                         "width": "10%"
                     }
-                ]
+                ]*/
             });
         });
     });
