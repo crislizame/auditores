@@ -3,7 +3,7 @@
 @section('styles')
     <style>
         .pds-lista-item:hover{
-            background: #e3e3e3;
+        background: #e3e3e3;
         }
     </style>
 @endsection
@@ -12,10 +12,10 @@
 
     <div class="container-fluid h-100 ">
         <div class="row h-100"> <!-- Start Row principal -->
-        @php
-            $activar = array("activar"=>array("","active",""));
-        @endphp
-        @include("vistas.submenu.agenda.submenu",$activar)
+@php
+    $activar = array("activar"=>array("","active",""));
+@endphp
+@include("vistas.submenu.agenda.submenu",$activar)
         <!--Start Dashboard Content-->
             <div class="row h-100 col-lg-10">
                 <div class="col-lg-12 h-50 m-0 p-3" style="padding-bottom: 0!important"><!-- Start PDS -->
@@ -81,9 +81,9 @@
 
                     <div class="row p-1">
                         <div class="col-lg-12">
-                            <h6 class="text-center font-weight-bold pdsedit_actual"></h6>
+            <h6 class="text-center font-weight-bold pdsedit_actual"></h6>
                         </div>
-                    </div>
+                        </div>
                     <h5 class="titulos text-center">A: </h5>
 
                     <div class="row p-1 pb-3">
@@ -96,9 +96,9 @@
                                 @endforelse
                             </select>
                         </div>
-                    </div>
+                        </div>
 
-                    <button class="btn btn-primary btn-editarelpds w-100">Editar</button>
+                        <button class="btn btn-primary btn-editarelpds w-100">Editar</button>
                 </div>
             </div>
         </div>
@@ -118,9 +118,9 @@
 
                     <div class="row p-1">
                         <div class="col-lg-12">
-                            <h6 class="text-center font-weight-bold auditedit_actual"></h6>
+            <h6 class="text-center font-weight-bold auditedit_actual"></h6>
                         </div>
-                    </div>
+                        </div>
                     <h5 class="titulos text-center">A: </h5>
 
                     <div class="row p-1 pb-3">
@@ -133,9 +133,9 @@
                                 @endforelse
                             </select>
                         </div>
-                    </div>
+                        </div>
 
-                    <button class="btn btn-primary btn-editarauditor w-100">Editar</button>
+                        <button class="btn btn-primary btn-editarauditor w-100">Editar</button>
                 </div>
             </div>
         </div>
@@ -171,7 +171,7 @@
                         });
                     }
                 }).done(function (done) {
-                    noti.remove();
+noti.remove();
                     Lobibox.notify('success', {
                         pauseDelayOnHover: true,
                         title:"¡Editado!",
@@ -195,7 +195,7 @@
                     dataType:'text',
                     data: {'id':idd,idagenda:idagenda,nid:nid,'_token':"{{csrf_token()}}"},
                     beforeSend: function( ) {
-                        noti = Lobibox.notify('info', {
+                      noti = Lobibox.notify('info', {
                             pauseDelayOnHover: true,
                             title:"¡Editando!",
                             continueDelayOnInactiveTab: false,
@@ -205,7 +205,7 @@
                         });
                     }
                 }).done(function (done) {
-                    noti.remove();
+noti.remove();
                     Lobibox.notify('success', {
                         pauseDelayOnHover: true,
                         title:"¡Editado!",
@@ -221,7 +221,7 @@
             $('.btn-delagenda').click(function () {
                 var dataid = $(this).attr('data-id');
                 var agendadel = $(this);
-                var noti;
+var noti;
                 if(dataid !== 0){
                     //[reguintar si desea elminar
                     swal({
@@ -248,7 +248,7 @@
                                 dataType:'text',
                                 data: {'id':dataid,'_token':"{{csrf_token()}}"},
                                 beforeSend: function( ) {
-                                    noti =  Lobibox.notify('info', {
+                                  noti =  Lobibox.notify('info', {
                                         pauseDelayOnHover: true,
                                         title:"¡Eliminando!",
                                         continueDelayOnInactiveTab: false,
@@ -258,7 +258,7 @@
                                     });
                                 }
                             }).done(function (done) {
-                                noti.remove();
+noti.remove();
                                 Lobibox.notify('success', {
                                     pauseDelayOnHover: true,
                                     title:"¡Eliminado!",
@@ -280,88 +280,88 @@
             cargarcalendario();
             function eliminaralll(idagenda){
 
-                $('.btn-eliminarall').click(function() {
-                    var idd = $(this).attr('data-id');
-                    $.ajax({
-                        url: "{{route('agenda/ver/ajax/eliminarpdsdeagenda')}}",
-                        method: "post",
-                        dataType: 'text',
-                        data: {'id': idd, '_token': "{{csrf_token()}}"},
-                        beforeSend: function () {
-                            noti = Lobibox.notify('info', {
-                                pauseDelayOnHover: true,
-                                title: "¡Eliminando!",
-                                continueDelayOnInactiveTab: false,
-                                position: 'top right',
-                                icon: 'fa fa-check-circle',
-                                msg: 'Por Favor Espere'
-                            });
-                        }
-                    }).done(function (done) {
-                        noti.remove();
-                        Lobibox.notify('success', {
+           $('.btn-eliminarall').click(function() {
+               var idd = $(this).attr('data-id');
+                $.ajax({
+                    url: "{{route('agenda/ver/ajax/eliminarpdsdeagenda')}}",
+                    method: "post",
+                    dataType: 'text',
+                    data: {'id': idd, '_token': "{{csrf_token()}}"},
+                    beforeSend: function () {
+                        noti = Lobibox.notify('info', {
                             pauseDelayOnHover: true,
-                            title: "¡Eliminado!",
+                            title: "¡Eliminando!",
                             continueDelayOnInactiveTab: false,
                             position: 'top right',
                             icon: 'fa fa-check-circle',
-                            msg: ' Eliminado'
+                            msg: 'Por Favor Espere'
                         });
-                        cargarpdsaudit(idagenda);
-                        $('.modal-editpds').modal("hide");
+                    }
+                }).done(function (done) {
+                    noti.remove();
+                    Lobibox.notify('success', {
+                        pauseDelayOnHover: true,
+                        title: "¡Eliminado!",
+                        continueDelayOnInactiveTab: false,
+                        position: 'top right',
+                        icon: 'fa fa-check-circle',
+                        msg: ' Eliminado'
                     });
+                    cargarpdsaudit(idagenda);
+                    $('.modal-editpds').modal("hide");
                 });
+            });
             }
 
             function cargarpdsaudit(dataid){
 
-                {{--                $.ajax({--}}
-                {{--                    url: "{{route('agenda/ver/ajax/cargarpdsxfecha')}}",--}}
-                {{--                    method:"post",--}}
-                {{--                    dataType:'text',--}}
-                {{--                    data: {'id':dataid,'_token':"{{csrf_token()}}"},--}}
-                {{--                    beforeSend: function( ) {--}}
-                {{--                        $('.pdslistarajax').html(" <li class=\"nav-item active audititem\">\n" +--}}
-                {{--                            "                                        <span class=\"nav-link \" href=\"#\">Cargando ... <span class=\"check-or-not\"><i class=\"fa fa-check-circle text-white float-right p-1 \"></i></span></span>\n" +--}}
-                {{--                            "                                    </li>");--}}
-                {{--                    }--}}
-                {{--                }).done(function (done) {--}}
-                {{--                    $('.pdslistarajax').html(done);--}}
-                {{--                    $('.btn-editarpds').click(function () {--}}
-                {{--                        var idd = $(this).attr('data-id');--}}
-                {{--                        var idagenda = $(this).attr('data-agenda');--}}
-                {{--                        var nombrespds = $(this).attr('data-nombre');--}}
-                {{--                        $('.modal-editpds').modal("show");--}}
-                {{--                        $('.pdsedit_actual').html(nombrespds);--}}
-                {{--                        $('.btn-editarelpds').attr('data-agenda',idagenda);--}}
-                {{--                        $('.btn-editarelpds').attr('data-id',idd);--}}
-                {{--                    });--}}
-                {{--                    $('.btn-delpds').click(function () {--}}
-                {{--                        var idd = $(this).attr('data-id');--}}
-                {{--                        var idagenda = $(this).attr('data-agenda');--}}
-                {{--                        var noti;--}}
-                {{--                        swal({--}}
-                {{--                            title: "¿Estas seguro de ELIMINAR el PDS?",--}}
-                {{--                            icon: "warning",--}}
-                {{--                            buttons: {--}}
-                {{--                                cancel: {--}}
-                {{--                                    text:"NO",--}}
-                {{--                                    className:"btn-danger shadow-danger",--}}
-                {{--                                    visible: true,--}}
-                {{--                                    closeModal: true,--}}
-                {{--                                },--}}
-                {{--                                willsuccess: "Eliminar"--}}
+{{--                $.ajax({--}}
+{{--                    url: "{{route('agenda/ver/ajax/cargarpdsxfecha')}}",--}}
+{{--                    method:"post",--}}
+{{--                    dataType:'text',--}}
+{{--                    data: {'id':dataid,'_token':"{{csrf_token()}}"},--}}
+{{--                    beforeSend: function( ) {--}}
+{{--                        $('.pdslistarajax').html(" <li class=\"nav-item active audititem\">\n" +--}}
+{{--                            "                                        <span class=\"nav-link \" href=\"#\">Cargando ... <span class=\"check-or-not\"><i class=\"fa fa-check-circle text-white float-right p-1 \"></i></span></span>\n" +--}}
+{{--                            "                                    </li>");--}}
+{{--                    }--}}
+{{--                }).done(function (done) {--}}
+{{--                    $('.pdslistarajax').html(done);--}}
+{{--                    $('.btn-editarpds').click(function () {--}}
+{{--                        var idd = $(this).attr('data-id');--}}
+{{--                        var idagenda = $(this).attr('data-agenda');--}}
+{{--                        var nombrespds = $(this).attr('data-nombre');--}}
+{{--                        $('.modal-editpds').modal("show");--}}
+{{--                        $('.pdsedit_actual').html(nombrespds);--}}
+{{--                        $('.btn-editarelpds').attr('data-agenda',idagenda);--}}
+{{--                        $('.btn-editarelpds').attr('data-id',idd);--}}
+{{--                    });--}}
+{{--                    $('.btn-delpds').click(function () {--}}
+{{--                        var idd = $(this).attr('data-id');--}}
+{{--                        var idagenda = $(this).attr('data-agenda');--}}
+{{--                        var noti;--}}
+{{--                        swal({--}}
+{{--                            title: "¿Estas seguro de ELIMINAR el PDS?",--}}
+{{--                            icon: "warning",--}}
+{{--                            buttons: {--}}
+{{--                                cancel: {--}}
+{{--                                    text:"NO",--}}
+{{--                                    className:"btn-danger shadow-danger",--}}
+{{--                                    visible: true,--}}
+{{--                                    closeModal: true,--}}
+{{--                                },--}}
+{{--                                willsuccess: "Eliminar"--}}
 
 
-                {{--                            },--}}
-                {{--                            dangerMode: false,--}}
-                {{--                        }).then((willsuccess) => {--}}
-                {{--                            if (willsuccess) {--}}
+{{--                            },--}}
+{{--                            dangerMode: false,--}}
+{{--                        }).then((willsuccess) => {--}}
+{{--                            if (willsuccess) {--}}
 
-                {{--                            }--}}
-                {{--                        });--}}
-                {{--                    });--}}
-                {{--                });--}}
+{{--                            }--}}
+{{--                        });--}}
+{{--                    });--}}
+{{--                });--}}
                 $.ajax({
                     url: "{{route('agenda/ver/ajax/cargarauditxfecha')}}",
                     method:"post",
@@ -373,7 +373,7 @@
                     }
                 }).done(function (done) {
                     $('.tablatodos').html(done);
-                    eliminaralll(dataid);
+    eliminaralll(dataid);
 
                 });
             }

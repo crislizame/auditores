@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Auditore;
 use App\Auditoria_reporte;
 use App\Encaudit;
 use App\Encauditdata;
@@ -10,6 +11,7 @@ use App\Encauditvalue;
 use App\Pdsperfile;
 use App\Pdsperfiles_attachment;
 use App\Pdsperfiles_permiso;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -50,6 +52,9 @@ class PerfilApiController extends Controller
                 $pds_id = $request->post('pds_id');
                 $agenda_id = $request->post('agenda_id');
                 $auditor_tipo = $request->post('tipo_auditor');
+                $tipo_aud = (new Auditore())->where('id',$auditor_id)->value('auditor_tipo');
+
+
                 $reportes_count = (new Auditoria_reporte())->where(['pds_id'=>$pds_id,'agenda_id'=>$agenda_id,'auditor_id'=>$auditor_id,'tipo'=>$auditor_tipo])->count();
                 $reportes = new Auditoria_reporte();
 
@@ -57,7 +62,7 @@ class PerfilApiController extends Controller
                     $reportes->pds_id = $pds_id;
                     $reportes->agenda_id = $agenda_id;
                     $reportes->auditor_id = $auditor_id;
-                    $reportes->tipo = $auditor_tipo;
+                    $reportes->tipo = $tipo_aud;
                     $reportes->pds_editado = "true";
                     $reportes->save();
                 }else{
@@ -67,7 +72,7 @@ class PerfilApiController extends Controller
                     $reportes->pds_id = $pds_id;
                     $reportes->agenda_id = $agenda_id;
                     $reportes->auditor_id = $auditor_id;
-                    $reportes->tipo = $auditor_tipo;
+                    $reportes->tipo = $tipo_aud;
                     $reportes->pds_editado = "true";
                     $reportes->save();
                 }
@@ -114,6 +119,7 @@ class PerfilApiController extends Controller
                     $permisos->auditor_id = $auditor_id;
                     $permisos->save();
                 }
+                $pds_name = $request->post('pds_name');
                 $pds_cod = $request->post('pds_cod');
                 $pds_sventas = $request->post('pds_sventas');
                 $pds_recaudo = $request->post('pds_recaudo');
@@ -123,16 +129,20 @@ class PerfilApiController extends Controller
                 $pds_arrinicio = $request->post('pds_arrinicio');
                 $pds_arrfin = $request->post('pds_arrfin');
                 $pds_fapertura = $request->post('pds_fapertura');
-                $pds_lvapertura = $request->post('pds_lvapertura');
-                $pds_lvcierre = $request->post('pds_lvcierre');
-                $pds_sapertura = $request->post('pds_sapertura');
-                $pds_scierre = $request->post('pds_scierre');
-                $pds_dapertura = $request->post('pds_dapertura');
-                $pds_dcierre = $request->post('pds_dcierre');
+                $pds_lvapertura =  Carbon::parse($request->post('pds_lvapertura'))->format("H:i");
+                $pds_lvcierre =  Carbon::parse($request->post('pds_lvcierre'))->format("H:i");
+                $pds_sapertura =  Carbon::parse($request->post('pds_sapertura'))->format("H:i");
+                $pds_scierre =  Carbon::parse($request->post('pds_scierre'))->format("H:i");
+                $pds_dapertura =  Carbon::parse($request->post('pds_dapertura'))->format("H:i");
+                $pds_dcierre =  Carbon::parse($request->post('pds_dcierre'))->format("H:i");
+                $pds_telef = $request->post('pds_telef');
+
+
 
                 $pdsperfiles = new Pdsperfile();
                 $pdsperfiles->exists = true;
                 $pdsperfiles->id = $pds_id;
+                $pdsperfiles->pds_name = $pds_name;
                 $pdsperfiles->pds_cod = $pds_cod;
                 $pdsperfiles->pds_sventas = $pds_sventas;
                 $pdsperfiles->pds_recaudo = $pds_recaudo;
@@ -147,6 +157,7 @@ class PerfilApiController extends Controller
                 $pdsperfiles->pds_sapertura = $pds_sapertura;
                 $pdsperfiles->pds_scierre = $pds_scierre;
                 $pdsperfiles->pds_dapertura = $pds_dapertura;
+                $pdsperfiles->pds_telef = $pds_telef;
                 $pdsperfiles->pds_dcierre = $pds_dcierre;
                 $pdsperfiles->save();
 
@@ -168,15 +179,15 @@ class PerfilApiController extends Controller
         $permisos_count = (new Pdsperfiles_permiso())->where('pds_id',$id)->count();
         if($permisos_count == 0){
             //$permisos = (new Pdsperfiles_permiso())->where('pds_id',$id)->first();
-            $pds->bsenal="false";
-            $pds->bextintores="false";
-            $pds->msuelo="false";
-            $pds->msalud="false";
-            $pds->mpatente="false";
-            $pds->mtasa="false";
-            $pds->mpermisoanterior="false";
-            $pds->lpermiso="false";
-            $pds->lotros="false";
+            $pds->bsenal=(string)false;
+            $pds->bextintores=(string)false;
+            $pds->msuelo=(string)false;
+            $pds->msalud=(string)false;
+            $pds->mpatente=(string)false;
+            $pds->mtasa=(string)false;
+            $pds->mpermisoanterior=(string)false;
+            $pds->lpermiso=(string)false;
+            $pds->lotros=(string)false;
         }else{
             $permisos = (new Pdsperfiles_permiso())->where('pds_id',$id)->first();
             $pds->bsenal=$permisos->bsenal;

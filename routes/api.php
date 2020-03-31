@@ -13,9 +13,19 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
+
+//Comisionista
+Route::resource('v1/comuser', 'API\Comisionista\UserController');
+Route::resource('v1/menus', 'API\Comisionista\MenuController');
+Route::resource('v1/ordenreq', 'API\Comisionista\OrdenRequerimientoController');
+Route::resource('v1/pushcom', 'API\Comisionista\PushComController');
+Route::resource('v1/reporte', 'API\Comisionista\ReportesController');
+Route::resource('v1/calificaciones', 'API\Comisionista\CalificacionesController');
+
+//Auditores
 Route::resource('v1/arqueocaja', 'API\ArqueoCajaController');
 Route::resource('v1/comisionistas', 'API\ComisionistasApiController');
 Route::resource('v1/com_api', 'API\ComisionistasApiController2');

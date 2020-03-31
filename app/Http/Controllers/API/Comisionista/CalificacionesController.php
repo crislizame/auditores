@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\API\Comisionista;
 
-use App\Auditore;
-use App\Auditores_attachment;
-use App\User;
+use App\Calificacione;
+use App\Orden_Requerimiento;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class UserLoginController extends Controller
+class CalificacionesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -38,25 +37,22 @@ class UserLoginController extends Controller
      */
     public function store(Request $request)
     {
-        $cedula = $request->post('user');
-        $password =$request->post('pass');
-        $result = array('result'=>false,'data'=>'');
-        $count = (new Auditore())->where('aud_cedula',$cedula)->count();
-        if ($count > 0){
+        $id_orden_trabajo = $request->post("id_orden_trabajo");
+        $id_user_calificador = $request->post("id_user_calificador");
+        $calificacion = $request->post("calificacion");
+        (new Orden_Requerimiento())->where("idorden_requermientos",$id_orden_trabajo)->update(["isencuestado"=>1]);
 
-            $user = (new Auditore())->where('aud_cedula',$cedula)->first();
-            $aud_attach_id = (new Auditores_attachment())->where('auditor_id',$user->id)->value('attachments_id');
-            $user->img_id = (string)$aud_attach_id;
-            if (password_verify($password,$user->password)){
-                unset($user->deleted_at);
-                $result['result'] = true;
-                $result['data'] = json_encode($user);
-                $result['data']= str_replace("null",'"-"',$result['data']);
-            }
+        $calificacionx = new Calificacione();
+        $calificacionx->id_orden_trabajo = $id_orden_trabajo;
+        $calificacionx->id_user_calificador = $id_user_calificador;
+        $calificacionx->calificacion = $calificacion;
+        $calificacionx->save();
 
-        }
-        $ress[] = $result;
-        return \Response::json($ress);
+        $res[] = array(
+            "result"=>true
+        );
+
+        return response()->json($res,200,[], JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -67,7 +63,13 @@ class UserLoginController extends Controller
      */
     public function show($id)
     {
-        //
+        $reportes = (new Orden_Requerimiento())->where(["comisionista_id"=>$id,"noti"=>"1"])
+            ->count();
+        $res[] = array(
+            "result"=>$reportes
+        );
+        return response()->json($res,200,[], JSON_UNESCAPED_UNICODE);
+
     }
 
     /**

@@ -106,7 +106,7 @@ class EncuestasAuditoriasVController extends Controller
                        // $image = (new Encauditdata())->where(['agenda_id'=>$agenda_id,'encauditvalues_id'=>$th->idencauditvalues,'pds_id'=>$idpds])->value('image');
                         $res[] = array('nombre' => $th->nombre_val,
                             'id' => $th->idencauditvalues,
-                            'categoria'=>'0s','value'=>$value==null?"0":$value,'observa'=>$observa==null?"":$observa);
+                            'categoria'=>'0s','value'=>$value==null?"0":(string)$value,'observa'=>$observa==null?"":$observa);
                     }
 
                 }
@@ -114,12 +114,13 @@ class EncuestasAuditoriasVController extends Controller
                 break;
             case "s":
                 $countreporte = (new Auditoria_reporte())->where(['agenda_id'=>$request->post('agenda_id'),
-                    'pds_id'=>$request->post('idpds')])->count();
+                    'pds_id'=>$request->post('idpds'),'auditor_id'=>$auditor_id])->count();
                 if($countreporte == 0 ){
                     $reporte = (new Auditoria_reporte());
                     $reporte->pds_id = $request->post('idpds');
                     $reporte->agenda_id = $request->post('agenda_id');
                     $reporte->auditor_id = $auditor_id;
+
                     $reporte->tipo = (new Auditore())->where('id',$auditor_id)->value('auditor_tipo');
                     $reporte->save();
                 }
@@ -136,6 +137,9 @@ class EncuestasAuditoriasVController extends Controller
                     $saveForm->carita = $request->post('carita');
                     //$saveForm->image = base64_decode($request->post('imagen'));
                     $saveForm->observa = $request->post('observa');
+                    $saveForm->pds_id = $request->post('idpds');
+                    $saveForm->agenda_id = $request->post('agenda_id');
+
                     $saveForm->auditor_id =$auditor_id;
                      $saveForm->save();
                      $idx =$idform;

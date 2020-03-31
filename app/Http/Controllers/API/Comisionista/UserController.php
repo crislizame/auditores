@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers\API\Comisionista;
 
+use App\Attachment;
 use App\Comisionista;
+use App\Comisionistas_attachment;
+use App\Oreque_attachment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -39,17 +42,43 @@ class UserController extends Controller
     {
         $tipo = $request->post("tipo");
         switch ($tipo){
+            case "img":
+                $image = $request->post("image");
+                $com_id = $request->post("com_id");
+                $attach = new Attachment();
+                $attach->file = base64_decode($image);
+                $attach->save();
+                $count = (new Comisionistas_attachment())->where("comisionista_id",$com_id)->count();
+                if ($count === 0){
+                    $oreqx = new Comisionistas_attachment();
+                    $oreqx->attachments_id = $attach->idattachments;
+                    $oreqx->comisionista_id = $com_id;
+                    $oreqx->save();
+                }else{
+                   (new Comisionistas_attachment())->where("comisionista_id",$com_id)->update(["attachments_id"=>$attach->idattachments]);
+
+                }
+
+                $res = array(
+                    "result"=>$attach->idattachments
+                );
+                return response()->json($res,200,[], JSON_UNESCAPED_UNICODE);
+                break;
             case "c":
                 $comcon = (new Comisionista())->where(["cedula"=>$request->cedula])->count();
                 if($comcon > 0){
 
                     $com = (new Comisionista())->where(["cedula"=>$request->cedula])->first();
+
+                    $img = (new Comisionistas_attachment())->where(["comisionista_id"=>$com->id])->get();
                     if (password_verify($request->pass,$com->password)){
 
 
-
+                    $com->img= $img ;
                     $user = $com;
+
                     $success['user'] = $user;
+                    $success['password'] = $request->pass;
                     $success['status'] = 'success';
                     $success['msg'] = 'Bienvenido '.$user->nombres.'!';
                     $success['token'] =  $user->password;

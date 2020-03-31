@@ -1,14 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\API\Comisionista;
 
-use App\Auditore;
-use App\Auditores_attachment;
-use App\User;
+use App\Area;
+use App\Calificacione;
+use App\Orden_Requerimiento;
+use App\Orden_trabajo;
+use App\Problema;
+use App\Subarea;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class UserLoginController extends Controller
+class ReportesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -38,25 +42,8 @@ class UserLoginController extends Controller
      */
     public function store(Request $request)
     {
-        $cedula = $request->post('user');
-        $password =$request->post('pass');
-        $result = array('result'=>false,'data'=>'');
-        $count = (new Auditore())->where('aud_cedula',$cedula)->count();
-        if ($count > 0){
 
-            $user = (new Auditore())->where('aud_cedula',$cedula)->first();
-            $aud_attach_id = (new Auditores_attachment())->where('auditor_id',$user->id)->value('attachments_id');
-            $user->img_id = (string)$aud_attach_id;
-            if (password_verify($password,$user->password)){
-                unset($user->deleted_at);
-                $result['result'] = true;
-                $result['data'] = json_encode($user);
-                $result['data']= str_replace("null",'"-"',$result['data']);
-            }
 
-        }
-        $ress[] = $result;
-        return \Response::json($ress);
     }
 
     /**
@@ -67,7 +54,28 @@ class UserLoginController extends Controller
      */
     public function show($id)
     {
-        //
+        $reporte = (new Orden_Requerimiento())->where("idorden_requermientos",$id)
+            ->first();
+        (new Orden_Requerimiento())->where("idorden_requermientos",$id)->update(["noti"=>0]);
+        $res = array(
+
+        );
+        $orden = (new Orden_trabajo())->where("orden_requermiento_id",$reporte->idorden_requermientos)->first();
+        $calificacion = (new Calificacione())->where("id_orden_trabajo",$reporte->idorden_requermientos)->first();
+        $problema = (new Problema())->where("id",$reporte->problema_id)->first();
+        $subarea = (new Subarea())->where("idsubareas",$problema->subarea_id)->first();
+        $reporte->area = (new Area())->where("idareas",$subarea->area_id)->value("nombre");
+        $reporte->subarea = $subarea->nombre;
+        $reporte->problema = $problema->nombre;
+        $reporte->fecha = Carbon::parse($reporte->solicitado)->toDateString();
+        $reporte->nreporte = "C ".str_pad($reporte->idorden_requermientos, 7, "0", STR_PAD_LEFT);
+        $res[] = array(
+            "reporte"=>$reporte,
+            "orden"=>$orden,
+            "calificacion"=>$calificacion
+        );
+
+        return response()->json($res,200,[], JSON_UNESCAPED_UNICODE);
     }
 
     /**
