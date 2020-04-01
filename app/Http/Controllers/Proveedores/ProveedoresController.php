@@ -41,7 +41,7 @@ class ProveedoresController extends Controller
             }
 
             $tbody .= "<tr>
-                        <th scope=\"row\">" . strtoupper($proveedor->nombre) . "</th>
+                        <th scope=\"row\"><a href=\"verProveedor(".$proveedor->id.")\">" . strtoupper($proveedor->nombre) . "</a></th>
                         <td>" . strtoupper($proveedor->ruc_cedula) . "</td>
                         <td>" . strtoupper($proveedor->direccion) . "</td>
                         <td>" . strtoupper($proveedor->telefono) . "</td>
@@ -63,6 +63,27 @@ class ProveedoresController extends Controller
         $proveedor->banco = $request->cuentabanco;
         $proveedor->cuenta = $request->cuentanumero;
         $proveedor->tipodecuenta = $request->cuentatipo;
+        $proveedor->save();
+
+        return response()->json(['status' => 'Ok']);
+    }
+
+    public function ver(Request $request)
+    {
+        return Proveedor::find($request->id);
+    }
+
+    public function modificar(Request $request)
+    {
+        $proveedor = Proveedor::find($request->id_edit);
+        $proveedor->nombre = $request->nombre_edit;
+        $proveedor->ruc_cedula = $request->cedula_edit;
+        $proveedor->telefono = $request->telefono_edit;
+        $proveedor->correo = $request->correo_edit;
+        $proveedor->direccion = $request->direccion_edit;
+        $proveedor->banco = $request->cuentabanco_edit;
+        $proveedor->cuenta = $request->cuentanumero_edit;
+        $proveedor->tipodecuenta = $request->cuentatipo_edit;
         $proveedor->save();
 
         return response()->json(['status' => 'Ok']);

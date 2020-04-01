@@ -54,7 +54,9 @@ Route::middleware(['auth'])->group(function () {
     // Proveedores
     Route::get('proveedores', 'Proveedores\ProveedoresController@index');
     Route::post('proveedores/listas/ajax/mostrarProveedores', 'Proveedores\ProveedoresController@mostrar');
+    Route::post('proveedores/listas/ajax/verProveedores', 'Proveedores\ProveedoresController@ver');
     Route::post('proveedores/listas/ajax/guardarProveedores', 'Proveedores\ProveedoresController@guardar');
+    Route::post('proveedores/listas/ajax/editarProveedores', 'Proveedores\ProveedoresController@modificar');
     // Proveedores
 
     // Mantenimiento
