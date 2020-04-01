@@ -5,7 +5,7 @@
     <div class="row ">
         <div class="col-lg-12 mt-3">
             <div class="card">
-                <div class="card-body row">
+                <div class="card-body">
 
                     <form id="formeditComisionistas" method="post">
                         <div class="row">
@@ -19,21 +19,21 @@
                                 <img class="img-thumbnail" src="https://devtemporal92.grupolizame.com/person.jpg">
                             </div>
                             <div class="col-6">
-                                <div class="form-group col-md-12">
+                                <div class="form-group">
                                     <label>Nombre completo</label>
                                     <input class="form-control" name="nombre" type="text" value="{{$user->name}}">
                                 </div>
-                                <div class="form-group col-md-12">
+                                <div class="form-group">
                                     <label>Cédula</label>
                                     <input class="form-control" name="cedula" type="text" value="@if($user->cedula!=null){{$user->cedula}}@endif">
+                                </div>
+                                <div class="form-group">
+                                    <label>Contraseña de App</label>
+                                    <input class="form-control" name="claveapp" type="password">
                                 </div>
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label>Contraseña de App</label>
-                                <input class="form-control" name="claveapp" type="password">
-                            </div>
                             <div class="form-group col-md-6">
                                 <label>Dirección</label>
                                 <input class="form-control" name="direccion" type="text" value="@if($user->direccion!=null){{$user->direccion}}@endif">
