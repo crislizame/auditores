@@ -20,7 +20,7 @@
             </a>
         </li>
         <li @if(strpos (url()->current(), 'comisionista/areas')!==false) class="active" @endif>
-            <a href="{{route('comisionista/areas')}}" class="waves-effect">
+            <a href="{{ url('comisionista/areas') }}" class="waves-effect">
                 <i class="icon-people"></i> <span>Areas de Comisionistas</span>
             </a>
         </li>

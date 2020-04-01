@@ -52,7 +52,7 @@ Route::middleware(['auth'])->group(function () {
     // Encuestas de Auditorias
 
     // Areas de Comisionista
-    Route::get('comisionista/areas', 'PDS\PDSController@index')->name('pds');
+    Route::get('comisionista/areas', 'Admin\AreasComisionistaController@index');
     // Areas de Comisionista
 
     // Comisionistas
