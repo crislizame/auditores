@@ -24,7 +24,7 @@
                 <i class="icon-people"></i> <span>Areas de Comisionistas</span>
             </a>
         </li>
-        <li @if(strpos (url()->current(), 'comisionista')!==false) class="active" @endif>
+        <li @if(strpos (url()->current(), 'comisionista/listas')!==false) class="active" @endif>
             <a href="{{route('comisionista/listas')}}" class="waves-effect">
                 <i class="icon-people"></i> <span>Comisionistas</span>
             </a>
