@@ -284,7 +284,10 @@
         $.ajax({
             url: "{{ url('proveedores/listas/ajax/verProveedores') }}",
             method: "post",
-            data: id
+            data: {
+                '_token': "{{csrf_token()}}",
+                'id': id
+            }
         }).done(function(data) {
             $('[name="nombre_edit"]').val(data.nombre);
             $('[name="cedula_edit"]').val(data.ruc_cedula);
