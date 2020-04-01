@@ -59,6 +59,11 @@ Route::middleware(['auth'])->group(function () {
     Route::post('proveedores/listas/ajax/editarProveedores', 'Proveedores\ProveedoresController@modificar');
     // Proveedores
 
+    // Perfil admin
+    Route::get('perfil', 'admin\PerfilController@index');
+    Route::post('perfil/modificar', 'admin\PerfilController@modificar');
+    // Perfil admin
+
     // Mantenimiento
     Route::prefix('mantenimiento')->group(function () {
         Route::get('problemas', 'Mantenimiento\MantenimientoController@problemas')->name('problemas');

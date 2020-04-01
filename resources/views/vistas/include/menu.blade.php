@@ -45,6 +45,11 @@
                 <i class="icon-pie-chart"></i> <span>Indicadores</span>
             </a>
         </li>
+        <li @if(strpos (url()->current(), 'perfil')!==false) class="active" @endif>
+            <a href="{{ url('perfil') }}" class="waves-effect">
+                <i class="icon-pie-chart"></i> <span>Perfil</span>
+            </a>
+        </li>
     </ul>
 </div>
 <!--End sidebar-wrapper-->
