@@ -6,9 +6,11 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Calificacion;
+use App\Mantenimiento_user;
 use App\Proveedor;
 use Carbon\Carbon;
 use App\User;
+use Illuminate\Support\Facades\Hash;
 
 class PerfilController extends Controller
 {
@@ -43,5 +45,20 @@ class PerfilController extends Controller
         $cumple = $cumplido >= $nocumplido ? '1 (Dentro del rango)' : '0 (Fuera del rango)';
 
         return view('vistas.pages.admin.perfil.perfil')->with('user', $user)->with('calificacion', $calificacion)->with('cumple', $cumple);
+    }
+
+    public function modificar(Request $request){
+        $user = Auth::user();
+        $user->name = $request->nombre;
+        $user->email = $request->correo;
+        $user->password = Hash::make($request->clave);
+        $user->save();
+
+        $flight = Mantenimiento_user::firstOrCreate(
+            ['cedula' => $request->cedula],
+            ['direccion' => $request->direccion]
+        );
+        
+        return response()->json(['status' => 'Ok']);
     }
 }
