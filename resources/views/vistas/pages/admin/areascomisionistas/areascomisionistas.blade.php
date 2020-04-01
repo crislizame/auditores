@@ -44,8 +44,6 @@
         </div>
     </div>
 </div>
-@endsection
-@section('scripts')
 <script>
     function buscarSubAreas(item){
         console.log(item);
