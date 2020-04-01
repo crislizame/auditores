@@ -22,34 +22,68 @@ Route::any('agenda/getimages', 'Agenda\AgendaController@getimages')->name('agend
 Route::get('imagen/{id}', 'Agenda\AgendaController@imagen');
 
 Route::middleware(['auth'])->group(function () {
-    //--Rutas Menu
-    //----Agenda
+
+    // Agenda
     Route::get('agenda/crear-agenda', 'Agenda\AgendaController@crearagenda')->name('agenda/crear-agenda');
     Route::get('agenda/ver-agenda', 'Agenda\AgendaController@veragenda')->name('agenda/ver-agenda');
     Route::get('agenda/reportes', 'Agenda\AgendaController@reportes')->name('agenda/reportes');
     Route::get('agenda/reportes-item', 'Agenda\AgendaController@reportesitem')->name('agenda/reportes-item');
-    //----Comisionista
+    //---------Ajax Crear Agenda---------------//
+    Route::post('agenda/crear/ajax/cargarpds', 'Agenda\AgendaController@cargarpds')->name('agenda/crear/ajax/cargarpds');
+    Route::any('agenda/crear/ajax/cargarpdsnombres', 'Agenda\AgendaController@cargarpdsnombres')->name('agenda/crear/ajax/cargarpdsnombres');
+    Route::post('agenda/crear/ajax/cargarauditores', 'Agenda\AgendaController@cargarauditores')->name('agenda/crear/ajax/cargarauditores');
+    Route::post('agenda/crear/ajax/saveagenda', 'Agenda\AgendaController@saveagenda')->name('agenda/crear/ajax/saveagenda');
+    Route::post('agenda/crear/ajax/cargarpdslista', 'Agenda\AgendaController@cargarpdslista')->name('agenda/crear/ajax/cargarpdslista');
+    Route::post('agenda/crear/ajax/cargarauditlista', 'Agenda\AgendaController@cargarauditlista')->name('agenda/crear/ajax/cargarauditlista');
+    Route::post('agenda/crear/ajax/npds', 'Agenda\AgendaController@npds')->name('agenda/crear/ajax/npds');
+    //---------Ajax Ver Agenda---------------//
+    Route::post('agenda/ver/ajax/cargarpdsxfecha', 'Agenda\AgendaController@cargarpdsxfecha')->name('agenda/ver/ajax/cargarpdsxfecha');
+    Route::post('agenda/ver/ajax/cargarauditxfecha', 'Agenda\AgendaController@cargarauditxfecha')->name('agenda/ver/ajax/cargarauditxfecha');
+    Route::post('agenda/ver/ajax/cargarfechas', 'Agenda\AgendaController@cargarfechas')->name('agenda/ver/ajax/cargarfechas');
+    Route::post('agenda/ver/ajax/eliminaragenda', 'Agenda\AgendaController@eliminaragenda')->name('agenda/ver/ajax/eliminaragenda');
+    Route::post('agenda/ver/ajax/editarpdsdeagenda', 'Agenda\AgendaController@editarpdsdeagenda')->name('agenda/ver/ajax/editarpdsdeagenda');
+    Route::post('agenda/ver/ajax/editarauditdeagenda', 'Agenda\AgendaController@editarauditdeagenda')->name('agenda/ver/ajax/editarauditdeagenda');
+    Route::post('agenda/ver/ajax/eliminarpdsdeagenda', 'Agenda\AgendaController@eliminarpdsdeagenda')->name('agenda/ver/ajax/eliminarpdsdeagenda');
+    Route::post('agenda/ver/ajax/eliminarauditordeagenda', 'Agenda\AgendaController@eliminarauditordeagenda')->name('agenda/ver/ajax/eliminarauditordeagenda');
+    // Agenda
+    
+    // Encuestas de Auditorias
+    Route::get('encaudit', 'Admin\EcnAuditoriasController@index')->name('encaudit');
+    // Encuestas de Auditorias
+
+    // Areas de Comisionista
+    Route::get('comisionista/areas', 'PDS\PDSController@index')->name('pds');
+    // Areas de Comisionista
+
+    // Comisionistas
     Route::get('comisionista/listas', 'Admin\ComisionistasController@listas')->name('comisionista/listas');
     Route::get('comisionista', 'Admin\ComisionistasController@obtenertodos')->name('comisionista');
-    //----EncuestasAuditorias
-    Route::get('encaudit', 'Admin\EcnAuditoriasController@index')->name('encaudit');
+    //----------Ajax Cargar Ciudad-----------//
+    Route::post('comisionista/listas/ajax/ciudadpds', 'Admin\ComisionistasController@ciudadpds')->name('comisionista/listas/ajax/ciudadpds');
+    Route::post('comisionista/listas/ajax/cargarcomisionistas', 'Admin\ComisionistasController@cargarcomisionistas')->name('comisionista/listas/ajax/cargarcomisionistas');
+    Route::post('comisionista/listas/ajax/mostrarComisionistas', 'Admin\ComisionistasController@mostrarComisionistas')->name('comisionista/listas/ajax/mostrarComisionistas');
+    Route::post('comisionista/listas/ajax/editarComisionistas', 'Admin\ComisionistasController@editarComisionistas')->name('comisionista/listas/ajax/editarComisionistas');
+    Route::post('comisionista/listas/ajax/guardarComisionistas', 'Admin\ComisionistasController@guardarComisionistas')->name('comisionista/listas/ajax/guardarComisionistas');
+    Route::post('comisionista/listas/ajax/eliminarComisionistas', 'Admin\ComisionistasController@eliminarComisionistas')->name('comisionista/listas/ajax/eliminarComisionistas');
+    // Comisionistas
 
-    //edit cris
-    //----PDS
+    // Pds
     Route::get('pds', 'PDS\PDSController@index')->name('pds');
     Route::post('pds/listas/ajax/mostrarpds', 'PDS\PDSController@mostrarpds')->name('pds/listas/ajax/mostrarpds');
     Route::post('pds/listas/ajax/cargarpds', 'PDS\PDSController@cargarpds')->name('cargarpds');
     Route::post('pds/listas/ajax/guardarPDS', 'PDS\PDSController@guardarPDS')->name('pds/listas/ajax/guardarPDS');
     Route::post('pds/listas/ajax/editarPDS', 'PDS\PDSController@editarPDS')->name('pds/listas/ajax/editarPDS');
     Route::post('pds/listas/ajax/eliminarPDS', 'PDS\PDSController@eliminarPDS')->name('pds/listas/ajax/eliminarPDS');
-    //----Auditores
+    // Pds
+
+    // Auditores
     Route::get('auditores', 'Auditores\AuditoresController@index')->name('auditores');
     Route::post('auditores/listas/ajax/cargarauditores', 'Auditores\AuditoresController@cargarauditores')->name('cargarauditores');
     Route::post('auditor/listas/ajax/guardarAuditor', 'Auditores\AuditoresController@guardarAuditores')->name('auditor/listas/ajax/guardarAuditor');
     Route::post('auditor/listas/ajax/eliminarAuditor', 'Auditores\AuditoresController@eliminarAuditores')->name('auditor/listas/ajax/eliminarAuditor');
     Route::post('auditor/listas/ajax/mostrarAuditor', 'Auditores\AuditoresController@mostrarAuditores')->name('auditor/listas/ajax/mostrarAuditor');
     Route::post('auditor/listas/ajax/editarAuditor', 'Auditores\AuditoresController@editarAuditores')->name('auditor/listas/ajax/editarAuditor');
-    //editcrisfin
+    // Auditores
 
     // Proveedores
     Route::get('proveedores', 'Proveedores\ProveedoresController@index');
@@ -112,7 +146,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('perfil', 'RP3\RP3Controller@perfil');
     });
     // RP3
-    
+
     // LottoGame
     Route::prefix('lottogame')->group(function () {
         Route::get('problemas', 'LottoGame\LottoGameController@problemas')->name('problemas');
@@ -138,28 +172,4 @@ Route::middleware(['auth'])->group(function () {
     //----Indicadores
     Route::any('indicadores', 'Admin\IndicadoresController@index')->name('indicadores');
     //--Rutas Ajax
-    //---------Ajax Crear Agenda---------------//
-    Route::post('agenda/crear/ajax/cargarpds', 'Agenda\AgendaController@cargarpds')->name('agenda/crear/ajax/cargarpds');
-    Route::any('agenda/crear/ajax/cargarpdsnombres', 'Agenda\AgendaController@cargarpdsnombres')->name('agenda/crear/ajax/cargarpdsnombres');
-    Route::post('agenda/crear/ajax/cargarauditores', 'Agenda\AgendaController@cargarauditores')->name('agenda/crear/ajax/cargarauditores');
-    Route::post('agenda/crear/ajax/saveagenda', 'Agenda\AgendaController@saveagenda')->name('agenda/crear/ajax/saveagenda');
-    Route::post('agenda/crear/ajax/cargarpdslista', 'Agenda\AgendaController@cargarpdslista')->name('agenda/crear/ajax/cargarpdslista');
-    Route::post('agenda/crear/ajax/cargarauditlista', 'Agenda\AgendaController@cargarauditlista')->name('agenda/crear/ajax/cargarauditlista');
-    Route::post('agenda/crear/ajax/npds', 'Agenda\AgendaController@npds')->name('agenda/crear/ajax/npds');
-    //---------Ajax Ver Agenda---------------//
-    Route::post('agenda/ver/ajax/cargarpdsxfecha', 'Agenda\AgendaController@cargarpdsxfecha')->name('agenda/ver/ajax/cargarpdsxfecha');
-    Route::post('agenda/ver/ajax/cargarauditxfecha', 'Agenda\AgendaController@cargarauditxfecha')->name('agenda/ver/ajax/cargarauditxfecha');
-    Route::post('agenda/ver/ajax/cargarfechas', 'Agenda\AgendaController@cargarfechas')->name('agenda/ver/ajax/cargarfechas');
-    Route::post('agenda/ver/ajax/eliminaragenda', 'Agenda\AgendaController@eliminaragenda')->name('agenda/ver/ajax/eliminaragenda');
-    Route::post('agenda/ver/ajax/editarpdsdeagenda', 'Agenda\AgendaController@editarpdsdeagenda')->name('agenda/ver/ajax/editarpdsdeagenda');
-    Route::post('agenda/ver/ajax/editarauditdeagenda', 'Agenda\AgendaController@editarauditdeagenda')->name('agenda/ver/ajax/editarauditdeagenda');
-    Route::post('agenda/ver/ajax/eliminarpdsdeagenda', 'Agenda\AgendaController@eliminarpdsdeagenda')->name('agenda/ver/ajax/eliminarpdsdeagenda');
-    Route::post('agenda/ver/ajax/eliminarauditordeagenda', 'Agenda\AgendaController@eliminarauditordeagenda')->name('agenda/ver/ajax/eliminarauditordeagenda');
-    //----------Ajax Cargar Ciudad-----------//
-    Route::post('comisionista/listas/ajax/ciudadpds', 'Admin\ComisionistasController@ciudadpds')->name('comisionista/listas/ajax/ciudadpds');
-    Route::post('comisionista/listas/ajax/cargarcomisionistas', 'Admin\ComisionistasController@cargarcomisionistas')->name('comisionista/listas/ajax/cargarcomisionistas');
-    Route::post('comisionista/listas/ajax/mostrarComisionistas', 'Admin\ComisionistasController@mostrarComisionistas')->name('comisionista/listas/ajax/mostrarComisionistas');
-    Route::post('comisionista/listas/ajax/editarComisionistas', 'Admin\ComisionistasController@editarComisionistas')->name('comisionista/listas/ajax/editarComisionistas');
-    Route::post('comisionista/listas/ajax/guardarComisionistas', 'Admin\ComisionistasController@guardarComisionistas')->name('comisionista/listas/ajax/guardarComisionistas');
-    Route::post('comisionista/listas/ajax/eliminarComisionistas', 'Admin\ComisionistasController@eliminarComisionistas')->name('comisionista/listas/ajax/eliminarComisionistas');
 });

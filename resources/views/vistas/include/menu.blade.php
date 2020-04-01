@@ -19,12 +19,16 @@
                 <i class="icon-list"></i> <span>Encuestas de Auditoría</span>
             </a>
         </li>
+        <li @if(strpos (url()->current(), 'comisionista/areas')!==false) class="active" @endif>
+            <a href="{{route('comisionista/areas')}}" class="waves-effect">
+                <i class="icon-people"></i> <span>Areas de Comisionistas</span>
+            </a>
+        </li>
         <li @if(strpos (url()->current(), 'comisionista')!==false) class="active" @endif>
             <a href="{{route('comisionista/listas')}}" class="waves-effect">
                 <i class="icon-people"></i> <span>Comisionistas</span>
             </a>
         </li>
-
         <li @if(strpos (url()->current(), 'pds')!==false) class="active" @endif>
             <a href="{{route('pds')}}" class="waves-effect">
                 <i class="icon-home"></i> <span>PDS</span>

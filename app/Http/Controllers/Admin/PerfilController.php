@@ -29,8 +29,7 @@ class PerfilController extends Controller
 
         $flight = Mantenimiento_user::firstOrCreate(
             ['user_id' => $user->id],
-            ['cedula' => $request->cedula],
-            ['direccion' => $request->direccion]
+            ['cedula' => $request->cedula, 'direccion' => $request->direccion]
         );
 
         return redirect('perfil');
