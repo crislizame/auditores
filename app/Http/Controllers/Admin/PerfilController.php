@@ -42,6 +42,6 @@ class PerfilController extends Controller
 
         $cumple = $cumplido >= $nocumplido ? '1 (Dentro del rango)' : '0 (Fuera del rango)';
 
-        return view('vistas.pages.admin.perfil')->with('user', $user)->with('calificacion', $calificacion)->with('cumple', $cumple);
+        return view('vistas.pages.admin.perfil.perfil')->with('user', $user)->with('calificacion', $calificacion)->with('cumple', $cumple);
     }
 }
