@@ -46,7 +46,13 @@
 </div>
 <script>
     function buscarSubAreas(item){
-        console.log(item);
+        @php
+        $control=1;
+        @endphp
+        @for($areas as $area)
+        $('#l-{{ $control++ }}').removeClass('active');
+        @endfor
+        $(item).addClass('active');
     }
 </script>
 @endsection
