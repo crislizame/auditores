@@ -31,23 +31,21 @@
                                     <label>Contraseña de App</label>
                                     <input class="form-control" name="claveapp" type="password">
                                 </div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label>Dirección</label>
-                                <input class="form-control" name="direccion" type="text" value="@if($user->direccion!=null){{$user->direccion}}@endif">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label>Correo</label>
-                                <input class="form-control" name="correo" type="text" value="$user->email">
+                                <div class="form-group">
+                                    <label>Dirección</label>
+                                    <input class="form-control" name="direccion" type="text" value="@if($user->direccion!=null){{$user->direccion}}@endif">
+                                </div>
+                                <div class="form-group">
+                                    <label>Correo</label>
+                                    <input class="form-control" name="correo" type="text" value="{{ $user->email }}">
+                                </div>
                             </div>
                         </div>
                     </form>
 
                 </div>
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button type="submit" class="btn btn-primary float-right">Guardar</button>
                 </div>
             </div>
         </div>
