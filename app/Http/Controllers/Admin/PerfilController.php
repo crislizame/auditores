@@ -58,7 +58,7 @@ class PerfilController extends Controller
             ['cedula' => $request->cedula],
             ['direccion' => $request->direccion]
         );
-        
-        return response()->json(['status' => 'Ok']);
+
+        return redirect('perfil');
     }
 }
