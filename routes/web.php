@@ -60,8 +60,8 @@ Route::middleware(['auth'])->group(function () {
     // Proveedores
 
     // Perfil admin
-    Route::get('perfil', 'admin\PerfilController@index');
-    Route::post('perfil/modificar', 'admin\PerfilController@modificar');
+    Route::get('perfil', 'Admin\PerfilController@index');
+    Route::post('perfil/modificar', 'Admin\PerfilController@modificar');
     // Perfil admin
 
     // Mantenimiento
