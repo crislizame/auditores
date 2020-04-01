@@ -49,9 +49,9 @@
         @php
         $control=1;
         @endphp
-        @for($areas as $area)
+        @foreach($areas as $area)
         $('#l-{{ $control++ }}').removeClass('active');
-        @endfor
+        @endforeach
         $(item).addClass('active');
     }
 </script>
