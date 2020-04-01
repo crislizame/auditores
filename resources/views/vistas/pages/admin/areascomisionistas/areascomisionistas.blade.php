@@ -10,9 +10,12 @@
                 <div class="card">
                     <div class="card-body">
                         <ul class="nav  subm flex-column">
+                        @php
+                        $control=1;
+                        @endphp
                             @foreach($areas as $area)
                             <li class="nav-item subm-item">
-                                <a class="nav-link subm-a p-0" href="#">{{ $area->nombre }}</a>
+                                <a id="l-{{ $control++ }}" class="nav-link subm-a p-5" href="#" onclick="buscarSubAreas(this)">{{ $area->nombre }}</a>
                             </li>
                             @endforeach
                         </ul>
@@ -41,4 +44,11 @@
         </div>
     </div>
 </div>
+@endsection
+@section('scripts')
+<script>
+    function buscarSubAreas(item){
+        console.log(item);
+    }
+</script>
 @endsection
