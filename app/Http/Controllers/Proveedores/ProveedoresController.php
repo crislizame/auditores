@@ -41,7 +41,7 @@ class ProveedoresController extends Controller
             }
 
             $tbody .= "<tr>
-                        <th scope=\"row\"><a href=\"verProveedor(".$proveedor->idproveedores.")\">" . strtoupper($proveedor->nombre) . "</a></th>
+                        <th scope=\"row\"><a href=\"#\" onclick=\"verProveedor(".$proveedor->idproveedores.")\">" . strtoupper($proveedor->nombre) . "</a></th>
                         <td>" . strtoupper($proveedor->ruc_cedula) . "</td>
                         <td>" . strtoupper($proveedor->direccion) . "</td>
                         <td>" . strtoupper($proveedor->telefono) . "</td>
