@@ -21,7 +21,7 @@ class AreasComisionistaController extends Controller
         $control = 1;
         $text = '<ul class="nav subm flex-column">';
         foreach($subareas as $subarea){
-            $text .= '<li class="nav-item subm-item"><a id="ls-{{ $control++ }}" class="nav-link subm-a p-5" href="#" onclick="buscarProblemas(this)" data="{{ $subarea->idsubareas }}">{{ $subarea->nombre }}</a></li>';
+            $text .= '<li class="nav-item subm-item"><a id="ls-{{ $control++ }}" class="nav-link subm-a p-5" href="#" onclick="buscarProblemas(this)" data="'.$subarea->idsubareas.'">'.$subarea->nombre.'</a></li>';
         }
         $text .= '</ul>';
 
