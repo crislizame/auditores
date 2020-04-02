@@ -15,16 +15,17 @@ class AreasComisionistaController extends Controller
         return view('vistas.pages.admin.areascomisionistas.areascomisionistas')->with('areas', $areas);
     }
 
-    public function subareas(Request $request){
-        $subareas = Subarea::where('area_id',$request->id)->get();
-        
+    public function subareas(Request $request)
+    {
+        $subareas = Subarea::where('area_id', $request->id)->get();
+
         $control = 1;
         $text = '<ul class="nav subm flex-column">';
-        foreach($subareas as $subarea){
-            $text .= '<li class="nav-item subm-item"><a id="ls-{{ $control++ }}" class="nav-link subm-a p-5" href="#" onclick="buscarProblemas(this)" data="'.$subarea->idsubareas.'">'.$subarea->nombre.'</a></li>';
+        foreach ($subareas as $subarea) {
+            $text .= '<li class="nav-item subm-item"><a id="ls-{{ $control++ }}" class="nav-linkk subm-a p-2 ml-2 row" href="#" onclick="buscarProblemas(this)" data="' . $subarea->idsubareas . '"><div class="col-6 d-flex"><span class="align-self-center">' . $subarea->nombre . '</span></div><div class="col-6"><img class="img-fluid" src="' . $subarea->url . '"></div></a></li>';
         }
         $text .= '</ul>';
 
-        return $text;    
+        return $text;
     }
 }
