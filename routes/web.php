@@ -53,6 +53,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Areas de Comisionista
     Route::get('comisionista/areas', 'Admin\AreasComisionistaController@index');
+    Route::post('comisionista/subareas', 'Admin\AreasComisionistaController@subareas');
     // Areas de Comisionista
 
     // Comisionistas
