@@ -16,7 +16,7 @@ class AreasComisionistaController extends Controller
     }
 
     public function subareas(Request $request){
-        $subareas = Subarea::where('area_id',$request->id);
+        $subareas = Subarea::where('area_id',$request->id)->get();
         
         $control = 1;
         $text = '<ul class="nav subm flex-column">';
