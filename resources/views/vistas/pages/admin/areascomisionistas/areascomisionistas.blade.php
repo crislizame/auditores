@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container-fluid ">
-    <div class="row">
+    <div class="row mt-2">
         <div class="col-6 row">
             <div class="col-6">
                 <span class="titulos text-info bold">Areas</span>
@@ -36,9 +36,13 @@
     </div>
 </div>
 <script>
+    $(document).ready(function(){
+        $("#areas a").first().click();
+    });
+
     function buscarSubAreas(item) {
         $('#areas a').each(function() {
-            $( this ).removeClass( 'active' );
+            $(this).removeClass('active');
         });
         $(item).addClass('active');
 
@@ -61,12 +65,13 @@
             }
         }).done(function(done) {
             $('#subareas').html(done);
+            $("#subareas a").first().click();
         });
     }
 
     function buscarProblemas(item) {
         $('#subareas a').each(function() {
-            $( this ).removeClass( 'active' );
+            $(this).removeClass('active');
         });
         $(item).addClass('active');
 
