@@ -8,7 +8,7 @@
                 <span class="titulos text-info bold">Areas</span>
                 <div class="card">
                     <div class="card-body">
-                        <ul class="nav subm flex-column" data-toggle="buttons">
+                        <ul class="nav subm flex-column" data-toggle="buttons" id="areas">
                             @foreach($areas as $area)
                             <li class="nav-item subm-item" data-toggle="button" aria-pressed="false">
                                 <a class="nav-link subm-a p-5" href="#" onclick="buscarSubAreas(this)" data="{{ $area->idareas }}">{{ $area->nombre }}</a>
@@ -39,12 +39,9 @@
 </div>
 <script>
     function buscarSubAreas(item) {
-        @php
-        $control = 1;
-        @endphp
-        @foreach($areas as $area)
-        $('#l').removeClass('active');
-        @endforeach
+        $('#areas a').each(function() {
+            $( this ).removeClass( 'active' );
+        });
         $(item).addClass('active');
 
         $.ajax({
