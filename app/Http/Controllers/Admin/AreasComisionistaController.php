@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use App\Problema;
 use App\Subarea;
 use App\Area;
@@ -32,21 +33,16 @@ class AreasComisionistaController extends Controller
 
     public function problemas(Request $request)
     {
-        $control = 0;
         $text = '<div class="row">';
 
-        $datos = Problema::where('subarea_id', $request->id)->chunk(3, function ($problemas) {
-            foreach ($problemas as $problema) {
+        $data = DB::select("SELECT * FROM problemas WHERE subarea_id = ".$request->id);
+        $chunked = array_chunk($data, 3);
+
+        foreach ($chunked as $chunk) {
+            foreach($chunk as $problema){
                 $text .= '<div class="col-4 table-active p-3">'.$problema->nombre.'</div>';
             }
-        });
-/*
-        $datos_problemas = array_chunk($problemas, 3);
-        for ($row = 0; $row < count($datos_problemas); $row++) {
-            for($i = 0;$i < $datos_problemas[$row];$i++){
-                $text .= '<div class="col-4 table-active p-3">'.$datos_problemas[$row][$i].'</div>';
-            }
-        }*/
+        }
         $text .= '</div>';
         return $text;
     }
