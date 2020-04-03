@@ -28,4 +28,21 @@ class AreasComisionistaController extends Controller
 
         return $text;
     }
+
+    public function problemas(Request $request)
+    {
+        $problemas = Problema::where('subarea_id', $request->id)->get();
+
+        $control = 0;
+        $text = '<div class="row">';
+
+        $datos_problemas = array_chunk($problemas, 3);
+        for ($row = 0; $row < count($datos_problemas); $row++) {
+            for($i = 0;$i < $datos_problemas[$row];$i++){
+                $text .= '<div class="col-4 table-active p-3">'.$datos_problemas[$row][$i].'</div>';
+            }
+        }
+        $text .= '</div>';
+        return $text;
+    }
 }

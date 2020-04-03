@@ -46,7 +46,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('agenda/ver/ajax/eliminarpdsdeagenda', 'Agenda\AgendaController@eliminarpdsdeagenda')->name('agenda/ver/ajax/eliminarpdsdeagenda');
     Route::post('agenda/ver/ajax/eliminarauditordeagenda', 'Agenda\AgendaController@eliminarauditordeagenda')->name('agenda/ver/ajax/eliminarauditordeagenda');
     // Agenda
-    
+
     // Encuestas de Auditorias
     Route::get('encaudit', 'Admin\EcnAuditoriasController@index')->name('encaudit');
     // Encuestas de Auditorias
@@ -54,6 +54,7 @@ Route::middleware(['auth'])->group(function () {
     // Areas de Comisionista
     Route::get('comisionista/areas', 'Admin\AreasComisionistaController@index');
     Route::post('comisionista/subareas', 'Admin\AreasComisionistaController@subareas');
+    Route::post('comisionista/problemas', 'Admin\AreasComisionistaController@problemas');
     // Areas de Comisionista
 
     // Comisionistas
