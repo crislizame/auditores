@@ -5,7 +5,6 @@
     <div class="row">
         <div class="col-6 row">
             <div class="col-6">
-
                 <span class="titulos text-info bold">Areas</span>
                 <div class="card">
                     <div class="card-body">
@@ -15,22 +14,19 @@
                             @endphp
                             @foreach($areas as $area)
                             <li class="nav-item subm-item">
-                                <a id="l-{{ $control++ }}" class="nav-link subm-a p-5" href="#" onclick="buscarSubAreas(this)" data="{{ $area->idareas }}">{{ $area->nombre }}</a>
+                                <a id="l" class="nav-link subm-a p-5" href="#" onclick="buscarSubAreas(this)" data="{{ $area->idareas }}">{{ $area->nombre }}</a>
                             </li>
                             @endforeach
                         </ul>
                     </div>
                 </div>
-
             </div>
             <div class="col-6">
-
                 <span class="titulos text-info bold">SubAreas</span>
                 <div class="card">
                     <div class="card-body" id="subareas">
                     </div>
                 </div>
-
             </div>
         </div>
         <div class="col-6">
@@ -45,7 +41,43 @@
     </div>
 </div>
 <script>
+    $(document).ready(function(){
+        $('#l').click();
+    });
+
     function buscarSubAreas(item) {
+        @php
+        $control = 1;
+        @endphp
+        @foreach($areas as $area)
+        $('#l').removeClass('active');
+        @endforeach
+        $(item).addClass('active');
+
+        $.ajax({
+            url: "{{ url('comisionista/subareas') }}",
+            method: "post",
+            data: {
+                '_token': "{{csrf_token()}}",
+                'id': $(item).attr('data')
+            },
+            beforeSend: function() {
+                swal({
+                    title: "Cargando Subareas",
+                    icon: "info",
+                    buttons: false,
+                    timer: 2000,
+                    closeOnClickOutside: false,
+                    closeOnEsc: false
+                });
+            }
+        }).done(function(done) {
+            $('#subareas').html(done);
+            $('#ls-1').click();
+        });
+    }
+
+    buscarProblemas(item){
         @php
         $control = 1;
         @endphp
@@ -73,6 +105,7 @@
             }
         }).done(function(done) {
             $('#subareas').html(done);
+            $('#ls-1').click();
         });
     }
 </script>
