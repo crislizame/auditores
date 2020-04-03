@@ -20,9 +20,9 @@ class AreasComisionistaController extends Controller
         $subareas = Subarea::where('area_id', $request->id)->get();
 
         $control = 1;
-        $text = '<ul class="nav subm flex-column">';
+        $text = '<ul class="nav subm flex-column" data-toggle="buttons">';
         foreach ($subareas as $subarea) {
-            $text .= '<li class="nav-item subm-item"><a id="ls-{{ $control++ }}" class="nav-linkk subm-a p-2 ml-2 row" href="#" onclick="buscarProblemas(this)" data="' . $subarea->idsubareas . '"><div class="col-6 d-flex"><span class="align-self-center">' . $subarea->nombre . '</span></div><div class="col-6"><img class="img-fluid" src="' . $subarea->url . '"></div></a></li>';
+            $text .= '<li class="nav-item subm-item" data-toggle="button" aria-pressed="false"><a class="nav-linkk subm-a p-2 ml-2 row" href="#" onclick="buscarProblemas(this)" data="' . $subarea->idsubareas . '"><div class="col-6 d-flex"><span class="align-self-center">' . $subarea->nombre . '</span></div><div class="col-6"><img class="img-fluid" src="' . $subarea->url . '"></div></a></li>';
         }
         $text .= '</ul>';
 
