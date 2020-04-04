@@ -18,7 +18,7 @@ class PermisosController extends Controller
 
     public function buscarPermisos(Request $request)
     {
-        $pds_permisos = DB::table('permisospds')->where('id_pds', $request->id)->crossJoin('permisos', 'permisospds.id_permiso', 'permisos.id')->orderBy('permisos.id', 'asc')->get();
+        $pds_permisos = DB::table('permisos')->where('id_pds', $request->id)->leftJoin('permisospds', 'permisospds.id_permiso', 'permisos.id')->orderBy('permisos.id', 'asc')->get();
         dd($pds_permisos);
         /*
         @foreach($pds_permisos as $row)
