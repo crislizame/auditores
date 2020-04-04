@@ -13,15 +13,81 @@ class PermisosController extends Controller
     public function permisos(Request $request)
     {
         $pds = DB::table('pdsperfiles')->orderBy('id', 'asc')->get();
-        $pds_permisos = null;
-        $find_pds = (isset($request->pds) ? $request->pds : null);
-        if ($find_pds != null) {
-            $pds_permisos = DB::table('permisos')->where('id_pds', $find_pds)->orderBy('id', 'asc')->get();
-        } else {
-            $pds_id = DB::table('pdsperfiles')->orderBy('id', 'asc')->first()->id;
-            $pds_permisos = DB::table('permisos')->where('id_pds', $pds_id)->orderBy('id', 'asc')->get();
-        }
-        return view('vistas.pages.permisos.permisos')->with('pds', $pds)->with('pds_permisos', $pds_permisos);
+        return view('vistas.pages.permisos.permisos')->with('pds', $pds);
+    }
+
+    public function buscarPermisos(Request $request)
+    {
+        $pds_permisos = DB::table('permisospds')->where('id_pds', $request->id)->rightJoin('permisos', 'permisospds.id_permiso', 'permisos.id')->orderBy('permisos.id', 'asc')->get();
+        dd($pds_permisos);
+        /*
+        @foreach($pds_permisos as $row)
+                            <div class="row mt-3">
+                                <div class="col-9">
+
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <h4 class="text-uppercase">{{ $row->nombre }}</h4>
+                                        </div>
+                                        <div class="col-2">
+                                            <h4>Si</h2>
+                                        </div>
+                                        <div class="col-2">
+                                            <h4>No</h4>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <h5>Estatus</h5>
+                                        </div>
+                                        <div class="col-2">
+                                            <input class="form-check-input" type="radio" name="aplica" id="aplica_si" value="1" style="left: 30%; opacity: 1;" @if($row->aplica==1) checked @endif>
+                                        </div>
+                                        <div class="col-2">
+                                            <input class="form-check-input" type="radio" name="aplica" id="aplica_no" value="0" style="left: 30%; opacity: 1;" @if($row->aplica==0) checked @endif>
+                                        </div>
+                                    </div>
+
+                                    <div class="row my-2">
+                                        <div class="col-7">
+                                            <h5 class="titulos mt-2">Fecha de expedición</h5>
+                                        </div>
+                                        <div class="col-5">
+                                            <input type="date" class="form-control" placeholder="00-00-0000" value="{{ $row->expedicion }}">
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row my-2">
+                                        <div class="col-7">
+                                            <h5 class="titulos mt-2">Fecha de caducidad</h5>
+                                        </div>
+                                        <div class="col-5">
+                                            <input type="date" class="form-control" placeholder="00-00-0000" value="{{ $row->caducidad }}">
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row my-2">
+                                        <div class="col-7">
+                                            <h5 class="titulos mt-2">Conteo regresivo</h5>
+                                        </div>
+                                        <div class="col-5">
+                                            @php
+                                            $tiempo_restante = 0;
+                                            if( date('Y-m-d') < $row->caducidad ){
+                                                $tiempo_restante = \Carbon\Carbon::parse($row->caducidad)->diffInDays(\Carbon\Carbon::now());
+                                            }
+                                            @endphp
+                                            <h4 class="mt-1">{{ $tiempo_restante }}</h4>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                </div>
+                                <div class="col-3">
+                                </div>
+                            </div>
+                            @endforeach
+        */
     }
 
     public function perfil()
