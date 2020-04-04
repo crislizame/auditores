@@ -47,7 +47,7 @@
 <div class="modal fade" id="marea" style="display: none;" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header bg-primery">
+            <div class="modal-header bg-primary">
                 <h5 class="modal-title text-white"><i class="fa fa-plus"></i> Agregar Área</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
@@ -71,7 +71,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i> Cancelar</button>
-                    <button type="button" class="btn btn-primary"><i class="fa fa-check-square-o"></i> Agregar</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-check-square-o"></i> Agregar</button>
                 </div>
             </form>
         </div>
@@ -81,7 +81,7 @@
 <div class="modal fade" id="msubarea" style="display: none;" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header bg-primery">
+            <div class="modal-header bg-primary">
                 <h5 class="modal-title text-white"><i class="fa fa-plus"></i> Agregar Subárea</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
@@ -105,7 +105,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i> Cancelar</button>
-                    <button type="button" class="btn btn-primary"><i class="fa fa-check-square-o"></i> Agregar</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-check-square-o"></i> Agregar</button>
                 </div>
             </form>
         </div>
@@ -115,7 +115,7 @@
 <div class="modal fade" id="mproblema" style="display: none;" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header bg-primery">
+            <div class="modal-header bg-primary">
                 <h5 class="modal-title text-white"><i class="fa fa-plus"></i> Agregar Problema</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
@@ -144,7 +144,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i> Cancelar</button>
-                    <button type="button" class="btn btn-primary"><i class="fa fa-check-square-o"></i> Agregar</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-check-square-o"></i> Agregar</button>
                 </div>
             </form>
         </div>

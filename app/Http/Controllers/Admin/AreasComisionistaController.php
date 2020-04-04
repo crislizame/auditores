@@ -48,7 +48,11 @@ class AreasComisionistaController extends Controller
 
     public function agregarArea(Request $request)
     {
-        return $request->all();
+        $area = new Area();
+        $area->entidad_id = $request->entidad;
+        $area->nombre = $request->area;
+        $area->save();
+        return redirect('comisionista/areas');
     }
 
     public function agregarSubarea(Request $request)
