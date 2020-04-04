@@ -35,26 +35,39 @@ class AreasComisionistaController extends Controller
     public function problemas(Request $request)
     {
         $text = '<div class="row">';
-        $data = DB::select("SELECT * FROM problemas WHERE subarea_id = ".$request->id);
+        $data = DB::select("SELECT * FROM problemas WHERE subarea_id = " . $request->id);
         $chunked = array_chunk($data, 3);
         foreach ($chunked as $chunk) {
-            foreach($chunk as $problema){
-                $text .= '<div class="col-4 table-active p-3">'.$problema->nombre.'</div>';
+            foreach ($chunk as $problema) {
+                $text .= '<div class="col-4 table-active p-3">' . $problema->nombre . '</div>';
             }
         }
         $text .= '</div>';
         return $text;
     }
 
-    public function agregarArea(Request $request){
+    public function agregarArea(Request $request)
+    {
         return $request->all();
     }
 
-    public function agregarSubarea(Request $request){
+    public function agregarSubarea(Request $request)
+    {
         return $request->all();
     }
 
-    public function agregarProblema(Request $request){
+    public function buscarSubareas(Request $request)
+    {
+        $opciones = '';
+        $subareas = Subarea::where('area_id', $request->id)->get();
+        foreach ($subareas as $subarea) {
+            $opciones .= '<option value="'.$subarea->idsubareas.'">'.$subarea->nombre.'</option>';
+        }
+        return $opciones;
+    }
+
+    public function agregarProblema(Request $request)
+    {
         return $request->all();
     }
 }

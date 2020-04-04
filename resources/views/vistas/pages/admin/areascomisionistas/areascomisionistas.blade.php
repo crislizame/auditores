@@ -47,8 +47,8 @@
 <div class="modal fade" id="marea" style="display: none;" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title"><i class="fa fa-plus"></i> Agregar Área</h5>
+            <div class="modal-header bg-primery">
+                <h5 class="modal-title text-white"><i class="fa fa-plus"></i> Agregar Área</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
@@ -81,8 +81,8 @@
 <div class="modal fade" id="msubarea" style="display: none;" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title"><i class="fa fa-plus"></i> Agregar Subárea</h5>
+            <div class="modal-header bg-primery">
+                <h5 class="modal-title text-white"><i class="fa fa-plus"></i> Agregar Subárea</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
@@ -115,8 +115,8 @@
 <div class="modal fade" id="mproblema" style="display: none;" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title"><i class="fa fa-plus"></i> Agregar Problema</h5>
+            <div class="modal-header bg-primery">
+                <h5 class="modal-title text-white"><i class="fa fa-plus"></i> Agregar Problema</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
@@ -125,11 +125,16 @@
                 @csrf
                 <div class="modal-body">
                     <div class="form-group">
-                        <label class="mx-auto">Seleccione la subárea</label>
-                        <select name="area" class="form-control">
-                            @foreach($subareas as $subarea)
-                            <option value="{{ $subarea->idsubareas }}">{{ $subarea->nombre }}</option>
+                        <label class="mx-auto">Seleccione el área</label>
+                        <select name="areasubareas" class="form-control" onchange="buscarAreasSubareas()">
+                            @foreach($areas as $area)
+                            <option value="{{ $area->idareas }}">{{ $area->nombre }}</option>
                             @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="mx-auto">Seleccione la subárea</label>
+                        <select name="subareasareas" class="form-control" disabled>
                         </select>
                     </div>
                     <div class="form-group">
@@ -149,6 +154,7 @@
 <script>
     $(document).ready(function() {
         $("#areas a").first().click();
+        $('[name="areassubareas"]').html(done);
     });
 
     function buscarSubAreas(item) {
@@ -205,6 +211,30 @@
             }
         }).done(function(done) {
             $('#problemas').html(done);
+        });
+    }
+
+    function buscarAreasSubareas() {
+        $.ajax({
+            url: "{{ url('comisionista/subareas/buscar') }}",
+            method: "post",
+            data: {
+                '_token': "{{csrf_token()}}",
+                'id': $('[name="areasubareas"]').val()
+            },
+            beforeSend: function() {
+                swal({
+                    title: "Cargando Subareas",
+                    icon: "info",
+                    buttons: false,
+                    timer: 2000,
+                    closeOnClickOutside: false,
+                    closeOnEsc: false
+                });
+            }
+        }).done(function(done) {
+            $('[name="subareasareas"]').html(done);
+            $('[name="subareasareas"]').removeAttr('disabled');
         });
     }
 </script>

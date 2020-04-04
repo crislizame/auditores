@@ -56,6 +56,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('comisionista/areas/agregar', 'Admin\AreasComisionistaController@agregarArea');
     Route::post('comisionista/subareas', 'Admin\AreasComisionistaController@subareas');
     Route::post('comisionista/subareas/agregar', 'Admin\AreasComisionistaController@agregarSubarea');
+    Route::post('comisionista/subareas/buscar', 'Admin\AreasComisionistaController@buscarSubareas');
     Route::post('comisionista/problemas', 'Admin\AreasComisionistaController@problemas');
     Route::post('comisionista/problemas/agregar', 'Admin\AreasComisionistaController@agregarProblema');
     // Areas de Comisionista
