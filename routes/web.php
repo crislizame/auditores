@@ -171,7 +171,7 @@ Route::middleware(['auth'])->group(function () {
     // Permisos
     Route::prefix('permisos')->group(function () {
         Route::get('permisos', 'Permisos\PermisosController@permisos');
-        Route::post('permisos/buscar', 'Permisos\PermisosController@buscarPermisos');
+        Route::post('buscar', 'Permisos\PermisosController@buscarPermisos');
         Route::get('perfil', 'Permisos\PermisosController@perfil');
     });
     // Permisos
