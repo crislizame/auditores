@@ -79,6 +79,7 @@ class AreasComisionistaController extends Controller
         $problema = new Problema();
         $problema->subarea_id = $request->subareasareas;
         $problema->nombre = $request->problema;
+        $problema->tiempo = $request->tiempo;
         $problema->save();
         return redirect('comisionista/areas');
     }

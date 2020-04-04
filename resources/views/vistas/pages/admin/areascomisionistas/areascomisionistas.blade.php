@@ -66,7 +66,7 @@
                     </div>
                     <div class="form-group">
                         <label class="mx-auto">Nombre de nueva area</label>
-                        <input type="text" name="area" class="form-control">
+                        <input type="text" name="area" class="form-control" required>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -100,7 +100,7 @@
                     </div>
                     <div class="form-group">
                         <label class="mx-auto">Nombre de nueva subárea</label>
-                        <input type="text" name="subarea" class="form-control">
+                        <input type="text" name="subarea" class="form-control" required>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -139,7 +139,11 @@
                     </div>
                     <div class="form-group">
                         <label class="mx-auto">Nombre del nuevo problema</label>
-                        <input type="text" name="problema" class="form-control">
+                        <input type="text" name="problema" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="mx-auto">Tiempo de solución en horas</label>
+                        <input type="number" name="tiempo" class="form-control" required>
                     </div>
                 </div>
                 <div class="modal-footer">
