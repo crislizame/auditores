@@ -57,7 +57,11 @@ class AreasComisionistaController extends Controller
 
     public function agregarSubarea(Request $request)
     {
-        return $request->all();
+        $subarea = new Subarea();
+        $subarea->area_id = $request->area;
+        $subarea->nombre = $request->subarea;
+        $subarea->save();
+        return redirect('comisionista/areas');
     }
 
     public function buscarSubareas(Request $request)
