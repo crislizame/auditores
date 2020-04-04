@@ -17,7 +17,7 @@ class AreasComisionistaController extends Controller
         $entidades = Entidad::all();
         $areas = Area::all();
         $subareas = Subarea::all();
-        return view('vistas.pages.admin.areascomisionistas.areascomisionistas')->with('entidades', $entidades)->with('areas', $areas);
+        return view('vistas.pages.admin.areascomisionistas.areascomisionistas')->with('entidades', $entidades)->with('areas', $areas)->with('subareas', $subareas);
     }
 
     public function subareas(Request $request)
