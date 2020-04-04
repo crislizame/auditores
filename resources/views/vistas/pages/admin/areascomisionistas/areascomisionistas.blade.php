@@ -154,7 +154,7 @@
 <script>
     $(document).ready(function() {
         $("#areas a").first().click();
-        $('[name="areassubareas"]').html(done);
+        buscarAreasSubareas();
     });
 
     function buscarSubAreas(item) {

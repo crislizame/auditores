@@ -76,6 +76,10 @@ class AreasComisionistaController extends Controller
 
     public function agregarProblema(Request $request)
     {
-        return $request->all();
+        $problema = new Problema();
+        $problema->subarea_id = $request->subareasareas;
+        $problema->nombre = $request->problema;
+        $problema->save();
+        return redirect('comisionista/areas');
     }
 }
