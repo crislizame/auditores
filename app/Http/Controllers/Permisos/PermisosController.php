@@ -37,7 +37,7 @@ class PermisosController extends Controller
             */
 
             $tiempo_restante = 0;
-            if($permiso!=null){}{
+            if($permiso!=null){
                 if( date('Y-m-d') < $permiso->caducidad ){
                     $tiempo_restante = Carbon::parse($permiso->caducidad)->diffInDays(\Carbon\Carbon::now());
                 }                
