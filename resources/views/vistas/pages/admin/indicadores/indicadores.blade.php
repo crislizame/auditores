@@ -114,6 +114,18 @@
                             <span class="w-100 selglobal text-danger pointer"> Borrar filtros escala</span>
                         </div>
                         <div class="row pt-2 pb-3 pr-4 pl-4">
+                            <label for="sel-date">Analizar por Provincia</label>
+                            <select name="provincia" class="form-control form-control-sm p-0" id="provincia" style="height: 23px;">
+                                <option selected value="0">Sin filtro</option>
+                                @php
+                                $provincias = (new \App\Pdsperfile())->groupBy('pds_provincia')->orderBy('pds_provincia','asc')->get();
+                                @endphp
+                                @foreach($provincias as $provincia)
+                                <option value="{{$provincia->pds_provincia}}">{{$provincia->pds_provincia}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="row pt-2 pb-3 pr-4 pl-4">
                             <label for="sel-date">Analizar por Ciudad</label>
                             <select name="ciudad" class="form-control form-control-sm p-0" id="ciudad" style="height: 23px;">
                                 <option selected value="0">Sin filtro</option>
