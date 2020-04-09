@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use App\Permisospds;
 use App\User;
 
 class PermisosController extends Controller
@@ -27,17 +28,22 @@ class PermisosController extends Controller
 
         if ($pds_permisos->bsenal == 'true') {
 
+            $permiso = Permisospds::where('id_pds', $request->id)->first();
+            dd($permiso);
+            /*
             $permiso = DB::table('permisospds')
             ->where('id_pds', $request->id)
             ->first();
+            */
 
             $tiempo_restante = 0;
-            if($permiso->caducidad!=null){}{
+            if($permiso!=null){}{
                 if( date('Y-m-d') < $permiso->caducidad ){
                     $tiempo_restante = Carbon::parse($permiso->caducidad)->diffInDays(\Carbon\Carbon::now());
                 }                
+            }else{
+                
             }
-
 
             $html .= '<div class="row mt-3">
             <form method="post" action="'.url('permisos/guardar').'">
