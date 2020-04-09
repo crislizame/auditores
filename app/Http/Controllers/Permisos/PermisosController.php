@@ -32,9 +32,12 @@ class PermisosController extends Controller
             ->first();
 
             $tiempo_restante = 0;
-            if( date('Y-m-d') < $permiso->caducidad ){
-                $tiempo_restante = Carbon::parse($permiso->caducidad)->diffInDays(\Carbon\Carbon::now());
+            if($permiso->caducidad!=null){}{
+                if( date('Y-m-d') < $permiso->caducidad ){
+                    $tiempo_restante = Carbon::parse($permiso->caducidad)->diffInDays(\Carbon\Carbon::now());
+                }                
             }
+
 
             $html .= '<div class="row mt-3">
             <form method="post" action="'.url('permisos/guardar').'">
