@@ -27,7 +27,7 @@ class PermisosController extends Controller
 
         if ($pds_permisos->bsenal == 'true') {
 
-            $permiso = DB::table('pdspermisos')
+            $permiso = DB::table('permisospds')
             ->where('id_pds', $request->id)
             ->first();
 
