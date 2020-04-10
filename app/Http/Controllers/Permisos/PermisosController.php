@@ -47,12 +47,12 @@ class PermisosController extends Controller
             }
 
             $html .= '<form method="post" action="' . url('permisos/guardar') . '">
-            <input type="hidden" name="permiso" value="'.$permiso->id.'">
+            <input type="hidden" name="permiso" value="' . $permiso->id . '">
             <div class="row mt-3">
             <div class="col-9">
                 <div class="row">
                     <div class="col-8">
-                        <h4 class="text-uppercase">'.$permiso->nombre.'</h4>
+                        <h4 class="text-uppercase">' . $permiso->nombre . '</h4>
                     </div>
                     <div class="col-2">
                         <h4>Si</h2>
@@ -101,7 +101,7 @@ class PermisosController extends Controller
                 <hr>
             </div>
             <div class="col-3">
-                <img class="img-thumbnail" src="{{url(\'/imagen/'.$bsenal_attachment.'\')}}">
+                <img class="img-thumbnail" src="' . url('/imagen/' . $bsenal_attachment) . '">
             </div>
         </div>
         </form>';
