@@ -29,24 +29,21 @@ class PermisosController extends Controller
         if ($pds_permisos->bsenal == 'true') {
 
             $permiso = Permisospds::where('id_pds', $request->id)->first();
-            dd($permiso);
-            /*
-            $permiso = DB::table('permisospds')
-            ->where('id_pds', $request->id)
-            ->first();
-            */
 
-            $tiempo_restante = 0;
-            if($permiso!=null){
-                if( date('Y-m-d') < $permiso->caducidad ){
-                    $tiempo_restante = Carbon::parse($permiso->caducidad)->diffInDays(\Carbon\Carbon::now());
-                }                
-            }else{
-                
+            $bsenal_tiempo = 0;
+            $bsenal_expedicion = '';
+            $bsenal_caducidad = '';
+
+            if ($permiso != null) {
+                if (date('Y-m-d') < $permiso->caducidad) {
+                    $bsenal_tiempo = Carbon::parse($permiso->caducidad)->diffInDays(\Carbon\Carbon::now());
+                }
+                $bsenal_expedicion = $permiso->expedicion;
+                $bsenal_caducidad = $permiso->caducidad;
             }
 
             $html .= '<div class="row mt-3">
-            <form method="post" action="'.url('permisos/guardar').'">
+            <form method="post" action="' . url('permisos/guardar') . '">
             <div class="col-9">
                 <div class="row">
                     <div class="col-8">
@@ -70,13 +67,12 @@ class PermisosController extends Controller
                         <input class="form-check-input" type="radio" name="aplica" id="aplica_no" value="0" style="left: 30%; opacity: 1;" @if($row->aplica==0) @endif>
                     </div>
                 </div>
-
                 <div class="row my-2">
                     <div class="col-7">
                         <h5 class="titulos mt-2">Fecha de expedición</h5>
                     </div>
                     <div class="col-5">
-                        <input type="date" class="form-control" placeholder="00-00-0000" value="'.($permiso->expedicion!=null?$permiso->expedicion:'').'">
+                        <input type="date" class="form-control" placeholder="00-00-0000" value="' . $bsenal_expedicion . '">
                     </div>
                 </div>
                 <hr>
@@ -85,7 +81,7 @@ class PermisosController extends Controller
                         <h5 class="titulos mt-2">Fecha de caducidad</h5>
                     </div>
                     <div class="col-5">
-                        <input type="date" class="form-control" placeholder="00-00-0000" value="'.($permiso->caducidad!=null?$permiso->caducidad:'').'">
+                        <input type="date" class="form-control" placeholder="00-00-0000" value="' . $bsenal_caducidad . '">
                     </div>
                 </div>
                 <hr>
@@ -94,7 +90,7 @@ class PermisosController extends Controller
                         <h5 class="titulos mt-2">Conteo regresivo</h5>
                     </div>
                     <div class="col-5">
-                        <h4 class="mt-1">'.$tiempo_restante.'</h4>
+                        <h4 class="mt-1">' . $bsenal_tiempo . '</h4>
                     </div>
                 </div>
                 <hr>
@@ -103,7 +99,6 @@ class PermisosController extends Controller
             </div>
             </form>
         </div>';
-
         }
         return $html;
     }
