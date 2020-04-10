@@ -77,7 +77,7 @@ class PermisosController extends Controller
                         <h5 class="titulos mt-2">Fecha de expedición</h5>
                     </div>
                     <div class="col-5">
-                        <input type="date" class="form-control" placeholder="00-00-0000" value="' . $bsenal_expedicion . '">
+                        <input name="fexp" type="date" class="form-control" placeholder="00-00-0000" value="' . $bsenal_expedicion . '">
                     </div>
                 </div>
                 <hr>
@@ -86,7 +86,7 @@ class PermisosController extends Controller
                         <h5 class="titulos mt-2">Fecha de caducidad</h5>
                     </div>
                     <div class="col-5">
-                        <input type="date" class="form-control" placeholder="00-00-0000" value="' . $bsenal_caducidad . '">
+                        <input name="fcad" type="date" class="form-control" placeholder="00-00-0000" value="' . $bsenal_caducidad . '">
                     </div>
                 </div>
                 <hr>
@@ -101,7 +101,7 @@ class PermisosController extends Controller
                 <hr>
             </div>
             <div class="col-3">
-                <img class="img-thumbnail" src="' . url('/imagen/' . $bsenal_attachment) . '">
+                <img class="img-thumbnail" src="' . url('/imagen/' . $bsenal_attachment) . '" onclick="modalImagen(this.src, "' . $permiso->nombre . '")">
             </div>
         </div>
         <div class="row mt-3">

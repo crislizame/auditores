@@ -63,6 +63,22 @@
     </div>
 </div>
 
+<div class="modal fade modal-va" tabindex="-1" role="dialog" aria-labelledby="modal-va" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h4 class="modal-title text-white" id="pt"></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body p-2">
+                <img class="img-responsive" id="pi">
+            </div>
+        </div>
+    </div>
+</div>
+
 @endsection
 @section('script')
 <script>
@@ -87,6 +103,12 @@
                 }
             }
         }
+    }
+
+    function modalImagen(url, tipo) {
+        $('#pt').html(tipo);
+        $('#pi').attr('src', url);
+        $('.modal-va').modal('show');
     }
 
     function buscarPermisos(id) {
