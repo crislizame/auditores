@@ -42,8 +42,8 @@ class PermisosController extends Controller
                 $bsenal_caducidad = $permiso->caducidad;
             }
 
-            $html .= '<div class="row mt-3">
-            <form method="post" action="' . url('permisos/guardar') . '">
+            $html .= '<form method="post" action="' . url('permisos/guardar') . '">
+            <div class="row mt-3">
             <div class="col-9">
                 <div class="row">
                     <div class="col-8">
@@ -97,8 +97,8 @@ class PermisosController extends Controller
             </div>
             <div class="col-3">
             </div>
-            </form>
-        </div>';
+        </div>
+        </form>';
         }
         return $html;
     }
