@@ -104,6 +104,13 @@ class PermisosController extends Controller
                 <img class="img-thumbnail" src="' . url('/imagen/' . $bsenal_attachment) . '">
             </div>
         </div>
+        <div class="row mt-3">
+        <div class="col-9">
+        </div>
+        <div class="col-3">
+        <button type="submit" class="btn btn-primary float-right">Guardar</button>
+        </div>
+        </div>
         </form>';
         }
         return $html;
