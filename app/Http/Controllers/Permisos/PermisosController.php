@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Permisospds;
+use App\Permiso;
 use App\User;
 
 class PermisosController extends Controller
@@ -28,26 +29,28 @@ class PermisosController extends Controller
 
         if ($pds_permisos->bsenal == 'true') {
 
-            $permiso = Permisospds::where('id_pds', $request->id)->first();
+            $permisopds = Permisospds::where('id_pds', $request->id)->first();
+            $permiso = Permiso::where('nombre', 'Señalética')->first();
 
             $bsenal_tiempo = 0;
             $bsenal_expedicion = '';
             $bsenal_caducidad = '';
 
-            if ($permiso != null) {
-                if (date('Y-m-d') < $permiso->caducidad) {
-                    $bsenal_tiempo = Carbon::parse($permiso->caducidad)->diffInDays(\Carbon\Carbon::now());
+            if ($permisopds != null) {
+                if (date('Y-m-d') < $permisopds->caducidad) {
+                    $bsenal_tiempo = Carbon::parse($permisopds->caducidad)->diffInDays(\Carbon\Carbon::now());
                 }
-                $bsenal_expedicion = $permiso->expedicion;
-                $bsenal_caducidad = $permiso->caducidad;
+                $bsenal_expedicion = $permisopds->expedicion;
+                $bsenal_caducidad = $permisopds->caducidad;
             }
 
             $html .= '<form method="post" action="' . url('permisos/guardar') . '">
+            <input type="hidden" name="permiso" value="'.$permiso->id.'">
             <div class="row mt-3">
             <div class="col-9">
                 <div class="row">
                     <div class="col-8">
-                        <h4 class="text-uppercase">Señalética</h4>
+                        <h4 class="text-uppercase">'.$permiso->nombre.'</h4>
                     </div>
                     <div class="col-2">
                         <h4>Si</h2>
@@ -61,10 +64,10 @@ class PermisosController extends Controller
                         <h5>Estatus</h5>
                     </div>
                     <div class="col-2">
-                        <input class="form-check-input" type="radio" name="aplica" id="aplica_si" value="1" style="left: 30%; opacity: 1;" @if($row->aplica==1) checked @endif>
+                        <input class="form-check-input" type="radio" name="aplica" id="aplica_si" value="1" style="left: 30%; opacity: 1;" checked>
                     </div>
                     <div class="col-2">
-                        <input class="form-check-input" type="radio" name="aplica" id="aplica_no" value="0" style="left: 30%; opacity: 1;" @if($row->aplica==0) @endif>
+                        <input class="form-check-input" type="radio" name="aplica" id="aplica_no" value="0" style="left: 30%; opacity: 1;">
                     </div>
                 </div>
                 <div class="row my-2">
