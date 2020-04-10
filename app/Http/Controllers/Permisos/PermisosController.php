@@ -35,6 +35,7 @@ class PermisosController extends Controller
             $bsenal_tiempo = 0;
             $bsenal_expedicion = '';
             $bsenal_caducidad = '';
+            $bsenal_attachment = '';
 
             if ($permisopds != null) {
                 if (date('Y-m-d') < $permisopds->caducidad) {
@@ -99,6 +100,7 @@ class PermisosController extends Controller
                 <hr>
             </div>
             <div class="col-3">
+                <img class="img-thumbnail" src="{{url(\'/imagen/\' . '.$bsenal_attachment.')}}">
             </div>
         </div>
         </form>';
