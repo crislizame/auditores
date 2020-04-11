@@ -73,7 +73,7 @@
                 </button>
             </div>
             <div class="modal-body p-2">
-                <img class="img-responsive" id="pi">
+                <img class="img-thumbnail" id="pi">
             </div>
         </div>
     </div>

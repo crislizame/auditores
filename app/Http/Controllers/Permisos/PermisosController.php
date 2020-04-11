@@ -101,15 +101,23 @@ class PermisosController extends Controller
                 <hr>
             </div>
             <div class="col-3">
-                <img class="img-thumbnail" src="' . url('/imagen/' . $bsenal_attachment) . '" onclick="modalImagen(this.src, \'' . $permiso->nombre . '\')">
+                <div class="col-2">
+                </div>                
+                <div class="col-8"
+                    <img class="img-thumbnail" src="' . url('/imagen/' . $bsenal_attachment) . '" onclick="modalImagen(this.src, \'' . $permiso->nombre . '\')">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input">
+                        <label class="custom-file-label">Buscar archivo</label>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row mt-3">
-        <div class="col-9">
-        </div>
-        <div class="col-3">
-        <button type="submit" class="btn btn-primary float-right">Guardar</button>
-        </div>
+            <div class="col-9">
+            </div>
+            <div class="col-3">
+                <button type="submit" class="btn btn-primary float-right">Guardar</button>
+            </div>
         </div>
         </form>';
         }
