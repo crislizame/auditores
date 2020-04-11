@@ -115,7 +115,7 @@ class PermisosController extends Controller
                 <div class="col-8 mx-auto">
                     <img class="img-thumbnail" src="' . $p_imagen . '" onclick="modalImagen(this.src, \'' . $permiso->nombre . '\')">
                 </div>
-                <div class="custom-file my-5">
+                <div class="custom-file my-4">
                     <input type="file" name="archivo" class="custom-file-input" lang="es" id="file-' . $permiso->id . '">
                     <label class="custom-file-label">Buscar archivo</label>
                 </div>
@@ -219,7 +219,7 @@ class PermisosController extends Controller
                 <div class="col-8 mx-auto">
                     <img class="img-thumbnail" src="' . $p_imagen . '" onclick="modalImagen(this.src, \'' . $permiso->nombre . '\')">
                 </div>
-                <div class="custom-file my-5">
+                <div class="custom-file my-4">
                     <input type="file" name="archivo" class="custom-file-input" lang="es" id="file-' . $permiso->id . '">
                     <label class="custom-file-label">Buscar archivo</label>
                 </div>
@@ -323,7 +323,7 @@ class PermisosController extends Controller
                 <div class="col-8 mx-auto">
                     <img class="img-thumbnail" src="' . $p_imagen . '" onclick="modalImagen(this.src, \'' . $permiso->nombre . '\')">
                 </div>
-                <div class="custom-file my-5">
+                <div class="custom-file my-4">
                     <input type="file" name="archivo" class="custom-file-input" lang="es" id="file-' . $permiso->id . '">
                     <label class="custom-file-label">Buscar archivo</label>
                 </div>
@@ -427,7 +427,7 @@ class PermisosController extends Controller
                 <div class="col-8 mx-auto">
                     <img class="img-thumbnail" src="' . $p_imagen . '" onclick="modalImagen(this.src, \'' . $permiso->nombre . '\')">
                 </div>
-                <div class="custom-file my-5">
+                <div class="custom-file my-4">
                     <input type="file" name="archivo" class="custom-file-input" lang="es" id="file-' . $permiso->id . '">
                     <label class="custom-file-label">Buscar archivo</label>
                 </div>
@@ -531,7 +531,7 @@ class PermisosController extends Controller
                 <div class="col-8 mx-auto">
                     <img class="img-thumbnail" src="' . $p_imagen . '" onclick="modalImagen(this.src, \'' . $permiso->nombre . '\')">
                 </div>
-                <div class="custom-file my-5">
+                <div class="custom-file my-4">
                     <input type="file" name="archivo" class="custom-file-input" lang="es" id="file-' . $permiso->id . '">
                     <label class="custom-file-label">Buscar archivo</label>
                 </div>
@@ -635,7 +635,7 @@ class PermisosController extends Controller
                 <div class="col-8 mx-auto">
                     <img class="img-thumbnail" src="' . $p_imagen . '" onclick="modalImagen(this.src, \'' . $permiso->nombre . '\')">
                 </div>
-                <div class="custom-file my-5">
+                <div class="custom-file my-4">
                     <input type="file" name="archivo" class="custom-file-input" lang="es" id="file-' . $permiso->id . '">
                     <label class="custom-file-label">Buscar archivo</label>
                 </div>
@@ -739,7 +739,7 @@ class PermisosController extends Controller
                 <div class="col-8 mx-auto">
                     <img class="img-thumbnail" src="' . $p_imagen . '" onclick="modalImagen(this.src, \'' . $permiso->nombre . '\')">
                 </div>
-                <div class="custom-file my-5">
+                <div class="custom-file my-4">
                     <input type="file" name="archivo" class="custom-file-input" lang="es" id="file-' . $permiso->id . '">
                     <label class="custom-file-label">Buscar archivo</label>
                 </div>
