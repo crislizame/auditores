@@ -103,7 +103,7 @@ class PermisosController extends Controller
             <div class="col-3">
                 <div class="col-2">
                 </div>                
-                <div class="col-8"
+                <div class="col-8">
                     <img class="img-thumbnail" src="' . url('/imagen/' . $bsenal_attachment) . '" onclick="modalImagen(this.src, \'' . $permiso->nombre . '\')">
                     <div class="custom-file">
                         <input type="file" name="archivo" class="custom-file-input">
