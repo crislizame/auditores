@@ -117,7 +117,12 @@ class PermisosController extends Controller
                 <button type="submit" class="btn btn-primary float-right">Guardar</button>
             </div>
         </div>
-        </form>';
+        </form>
+        <script>
+          $custom-file-text: (
+            es: "Elegir"
+          );
+        </script>';
         }
         return $html;
     }
