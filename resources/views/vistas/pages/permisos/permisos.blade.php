@@ -53,7 +53,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="row mt-3">
+                    <div class="row mt-3 mx-0">
                         <div class="col-12" id="detalles">
                         </div>
                     </div>
