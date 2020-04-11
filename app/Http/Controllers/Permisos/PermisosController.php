@@ -101,7 +101,7 @@ class PermisosController extends Controller
                 <hr>
             </div>
             <div class="col-3">
-                <img class="img-thumbnail" src="' . url('/imagen/' . $bsenal_attachment) . '" onclick="modalImagen(this.src, "' . $permiso->nombre . '")">
+                <img class="img-thumbnail" src="' . url('/imagen/' . $bsenal_attachment) . '" onclick="modalImagen(this.src, \'' . $permiso->nombre . '\')">
             </div>
         </div>
         <div class="row mt-3">
