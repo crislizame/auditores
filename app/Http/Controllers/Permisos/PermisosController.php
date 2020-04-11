@@ -115,16 +115,10 @@ class PermisosController extends Controller
                 <div class="col-8 mx-auto">
                     <img class="img-thumbnail" src="' . $p_imagen . '" onclick="modalImagen(this.src, \'' . $permiso->nombre . '\')">
                 </div>
-                <div class="custom-file mt-3">
+                <div class="custom-file my-5">
                     <input type="file" name="archivo" class="custom-file-input" lang="es" id="file-' . $permiso->id . '">
                     <label class="custom-file-label">Buscar archivo</label>
                 </div>
-            </div>
-        </div>
-        <div class="row mt-4">
-            <div class="col-9">
-            </div>
-            <div class="col-3">
                 <button type="submit" class="btn btn-primary float-right">Guardar</button>
             </div>
         </div>
@@ -225,16 +219,10 @@ class PermisosController extends Controller
                 <div class="col-8 mx-auto">
                     <img class="img-thumbnail" src="' . $p_imagen . '" onclick="modalImagen(this.src, \'' . $permiso->nombre . '\')">
                 </div>
-                <div class="custom-file mt-3">
+                <div class="custom-file my-5">
                     <input type="file" name="archivo" class="custom-file-input" lang="es" id="file-' . $permiso->id . '">
                     <label class="custom-file-label">Buscar archivo</label>
                 </div>
-            </div>
-        </div>
-        <div class="row mt-4">
-            <div class="col-9">
-            </div>
-            <div class="col-3">
                 <button type="submit" class="btn btn-primary float-right">Guardar</button>
             </div>
         </div>
@@ -335,16 +323,10 @@ class PermisosController extends Controller
                 <div class="col-8 mx-auto">
                     <img class="img-thumbnail" src="' . $p_imagen . '" onclick="modalImagen(this.src, \'' . $permiso->nombre . '\')">
                 </div>
-                <div class="custom-file mt-3">
+                <div class="custom-file my-5">
                     <input type="file" name="archivo" class="custom-file-input" lang="es" id="file-' . $permiso->id . '">
                     <label class="custom-file-label">Buscar archivo</label>
                 </div>
-            </div>
-        </div>
-        <div class="row mt-4">
-            <div class="col-9">
-            </div>
-            <div class="col-3">
                 <button type="submit" class="btn btn-primary float-right">Guardar</button>
             </div>
         </div>
@@ -445,16 +427,10 @@ class PermisosController extends Controller
                 <div class="col-8 mx-auto">
                     <img class="img-thumbnail" src="' . $p_imagen . '" onclick="modalImagen(this.src, \'' . $permiso->nombre . '\')">
                 </div>
-                <div class="custom-file mt-3">
+                <div class="custom-file my-5">
                     <input type="file" name="archivo" class="custom-file-input" lang="es" id="file-' . $permiso->id . '">
                     <label class="custom-file-label">Buscar archivo</label>
                 </div>
-            </div>
-        </div>
-        <div class="row mt-4">
-            <div class="col-9">
-            </div>
-            <div class="col-3">
                 <button type="submit" class="btn btn-primary float-right">Guardar</button>
             </div>
         </div>
@@ -555,16 +531,10 @@ class PermisosController extends Controller
                 <div class="col-8 mx-auto">
                     <img class="img-thumbnail" src="' . $p_imagen . '" onclick="modalImagen(this.src, \'' . $permiso->nombre . '\')">
                 </div>
-                <div class="custom-file mt-3">
+                <div class="custom-file my-5">
                     <input type="file" name="archivo" class="custom-file-input" lang="es" id="file-' . $permiso->id . '">
                     <label class="custom-file-label">Buscar archivo</label>
                 </div>
-            </div>
-        </div>
-        <div class="row mt-4">
-            <div class="col-9">
-            </div>
-            <div class="col-3">
                 <button type="submit" class="btn btn-primary float-right">Guardar</button>
             </div>
         </div>
@@ -665,16 +635,10 @@ class PermisosController extends Controller
                 <div class="col-8 mx-auto">
                     <img class="img-thumbnail" src="' . $p_imagen . '" onclick="modalImagen(this.src, \'' . $permiso->nombre . '\')">
                 </div>
-                <div class="custom-file mt-3">
+                <div class="custom-file my-5">
                     <input type="file" name="archivo" class="custom-file-input" lang="es" id="file-' . $permiso->id . '">
                     <label class="custom-file-label">Buscar archivo</label>
                 </div>
-            </div>
-        </div>
-        <div class="row mt-4">
-            <div class="col-9">
-            </div>
-            <div class="col-3">
                 <button type="submit" class="btn btn-primary float-right">Guardar</button>
             </div>
         </div>
@@ -775,16 +739,10 @@ class PermisosController extends Controller
                 <div class="col-8 mx-auto">
                     <img class="img-thumbnail" src="' . $p_imagen . '" onclick="modalImagen(this.src, \'' . $permiso->nombre . '\')">
                 </div>
-                <div class="custom-file mt-3">
+                <div class="custom-file my-5">
                     <input type="file" name="archivo" class="custom-file-input" lang="es" id="file-' . $permiso->id . '">
                     <label class="custom-file-label">Buscar archivo</label>
                 </div>
-            </div>
-        </div>
-        <div class="row mt-4">
-            <div class="col-9">
-            </div>
-            <div class="col-3">
                 <button type="submit" class="btn btn-primary float-right">Guardar</button>
             </div>
         </div>
