@@ -110,7 +110,7 @@ class PermisosController extends Controller
                 </div>
             </div>
         </div>
-        <div class="row mt-3">
+        <div class="row mt-4">
             <div class="col-9">
             </div>
             <div class="col-3">
@@ -119,9 +119,10 @@ class PermisosController extends Controller
         </div>
         </form>
         <script>
-          $custom-file-text: (
-            es: "Elegir"
-          );
+          $(".custom-file-input").on("change", function() {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+          });
         </script>';
         }
         return $html;
