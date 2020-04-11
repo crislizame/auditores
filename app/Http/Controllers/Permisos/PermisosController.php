@@ -128,6 +128,7 @@ class PermisosController extends Controller
                 <button type="submit" class="btn btn-primary float-right">Guardar</button>
             </div>
         </div>
+        <hr class="mb-5">
         </form>
         <script>
           $("#file-' . $permiso->id . '").on("change", function() {
@@ -237,6 +238,7 @@ class PermisosController extends Controller
                 <button type="submit" class="btn btn-primary float-right">Guardar</button>
             </div>
         </div>
+        <hr class="mb-5">
         </form>
         <script>
           $("#file-' . $permiso->id . '").on("change", function() {
@@ -346,6 +348,7 @@ class PermisosController extends Controller
                 <button type="submit" class="btn btn-primary float-right">Guardar</button>
             </div>
         </div>
+        <hr class="mb-5">
         </form>
         <script>
           $("#file-' . $permiso->id . '").on("change", function() {
@@ -455,6 +458,7 @@ class PermisosController extends Controller
                 <button type="submit" class="btn btn-primary float-right">Guardar</button>
             </div>
         </div>
+        <hr class="mb-5">
         </form>
         <script>
           $("#file-' . $permiso->id . '").on("change", function() {
@@ -564,6 +568,7 @@ class PermisosController extends Controller
                 <button type="submit" class="btn btn-primary float-right">Guardar</button>
             </div>
         </div>
+        <hr class="mb-5">
         </form>
         <script>
           $("#file-' . $permiso->id . '").on("change", function() {
@@ -673,6 +678,7 @@ class PermisosController extends Controller
                 <button type="submit" class="btn btn-primary float-right">Guardar</button>
             </div>
         </div>
+        <hr class="mb-5">
         </form>
         <script>
           $("#file-' . $permiso->id . '").on("change", function() {
@@ -782,6 +788,7 @@ class PermisosController extends Controller
                 <button type="submit" class="btn btn-primary float-right">Guardar</button>
             </div>
         </div>
+        <hr class="mb-5">
         </form>
         <script>
           $("#file-' . $permiso->id . '").on("change", function() {
