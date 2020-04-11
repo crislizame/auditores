@@ -46,7 +46,7 @@ class PermisosController extends Controller
                 $bsenal_attachment = $permisopds->id_attachment;
             }
 
-            $html .= '<form method="post" action="' . url('permisos/guardar') . '">' . csrf_field() . '
+            $html .= '<form method="post" action="' . url('permisos/guardar') . '" enctype="multipart/form-data">' . csrf_field() . '
             <input type="hidden" name="permiso" value="' . $permiso->id . '">
             <div class="row mt-3">
             <div class="col-9">
