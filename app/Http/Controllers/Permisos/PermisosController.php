@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Permisos;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
+use Illuminate\Http\Request;
 use App\Permisospds;
+use App\Attachment;
+use Carbon\Carbon;
 use App\Permiso;
 use App\User;
 
@@ -32,6 +33,7 @@ class PermisosController extends Controller
             $permisopds = Permisospds::where('id_pds', $request->id)->first();
             $permiso = Permiso::where('nombre', 'Señalética')->first();
 
+            $bsenal_permisopds = 0;
             $bsenal_tiempo = 0;
             $bsenal_expedicion = '';
             $bsenal_caducidad = '';
@@ -41,13 +43,16 @@ class PermisosController extends Controller
                 if (date('Y-m-d') < $permisopds->caducidad) {
                     $bsenal_tiempo = Carbon::parse($permisopds->caducidad)->diffInDays(\Carbon\Carbon::now());
                 }
+                $bsenal_permisopds = $permisopds->id;
                 $bsenal_expedicion = $permisopds->expedicion;
                 $bsenal_caducidad = $permisopds->caducidad;
                 $bsenal_attachment = $permisopds->id_attachment;
             }
 
             $html .= '<form method="post" action="' . url('permisos/guardar') . '" enctype="multipart/form-data">' . csrf_field() . '
+            <input type="hidden" name="pds" value="' . $request->id . '">
             <input type="hidden" name="permiso" value="' . $permiso->id . '">
+            <input type="hidden" name="permisopds" value="' . $bsenal_permisopds . '">
             <div class="row mt-3">
             <div class="col-9">
                 <div class="row">
@@ -130,7 +135,21 @@ class PermisosController extends Controller
 
     public function guardarPermisos(Request $request)
     {
-        return $request->all();
+        $cimagen = new Attachment();
+        $cimagen->file = file_get_contents($request->file('archivo')->getRealPath());
+        $cimagen->user_id = Auth::user()->id;
+        $cimagen->save();
+
+        $permisopds = $request->permisopds != 0 ? Permisospds::find($request->permisopds) : new Permisospds();
+        $permisopds->id_pds = $request->pds;
+        $permisopds->id_permiso = $request->permiso;
+        $permisopds->id_attachment = $cimagen->idattachments;
+        $permisopds->aplica = $request->aplica;
+        $permisopds->expedicion = $request->fexp;
+        $permisopds->caducidad = $request->fcad;
+        $permisopds->save();
+
+        return redirect('permisos/permisos');
     }
 
     public function perfil()
