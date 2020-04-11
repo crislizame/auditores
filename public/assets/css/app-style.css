@@ -6354,3 +6354,7 @@ ul .datosvertical {
         max-width: 1400px;
     }
 }
+
+.custom-file-label::after {
+    content: "Elegir";
+}
