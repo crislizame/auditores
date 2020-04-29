@@ -820,7 +820,7 @@
 
                         $(document).ready(function(){
                             //$('.indicadoresgrafE').prepend(Ec_);
-                            console.log(Ec_);
+                            //console.log(Ec_);
                         });
                     </script>
                 </div>
