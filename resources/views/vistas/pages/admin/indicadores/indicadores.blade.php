@@ -13,7 +13,6 @@
         z-index: 998;
         /*z-index: 1080;*/
     }
-
     .pepe {
         margin-top: 20%;
         height: 50%;
@@ -21,25 +20,19 @@
         margin-left: 35%;
         text-align: center;
     }
-
     .pds-lista-item:hover {
         background: #e3e3e3;
     }
-
     .lmhorizontal2 li a {}
-
     .lmhorizontal2 li a:hover {
         color: white;
     }
-
     .lmhorizontal2 li:hover a {
         color: white;
     }
-
     .lmhorizontal2 li.active a {
         color: white;
     }
-
     .lmhorizontal2 li.active:hover a:hover {
         color: white;
     }
@@ -225,7 +218,6 @@
                             $mes2fin = \Carbon\Carbon::now()->subMonths(2)->lastOfMonth()->toDateTimeString();
                             $mes3inicio = \Carbon\Carbon::now()->subMonths(3)->firstOfMonth()->toDateTimeString();
                             $mes3fin = \Carbon\Carbon::now()->subMonths(3)->lastOfMonth()->toDateTimeString();
-
                             if($pds_id != "%"){
                                 $carita = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('created_at', [$datainicio, $datafin])->where('pds_id','like',"$pds_id");
                                 $caritac = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('created_at', [$datainicio, $datafin])->where('pds_id','like',"$pds_id");
@@ -248,7 +240,6 @@
                                 $carita2c = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('encauditdatas.created_at', [$mes2inicio, $mes2fin])->join('pdsperfiles', 'pdsperfiles.id', '=', 'encauditdatas.pds_id');
                                 $carita3 = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('encauditdatas.created_at', [$mes3inicio, $mes3fin])->join('pdsperfiles', 'pdsperfiles.id', '=', 'encauditdatas.pds_id');
                                 $carita3c = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('encauditdatas.created_at', [$mes3inicio, $mes3fin])->join('pdsperfiles', 'pdsperfiles.id', '=', 'encauditdatas.pds_id');
-
                                 if($ciudad != "sc"){
                                     $carita = $carita->where('pdsperfiles.pds_ciudad',$ciudad);
                                     $caritac = $carita->where('pdsperfiles.pds_ciudad',$ciudad);
@@ -261,7 +252,6 @@
                                     $carita3 = $carita->where('pdsperfiles.pds_ciudad',$ciudad);
                                     $carita3c = $carita->where('pdsperfiles.pds_ciudad',$ciudad);
                                 }
-
                                 if($provincia != "sp"){
                                     $carita = $carita->where('pdsperfiles.pds_provincia',$provincia);
                                     $caritac = $carita->where('pdsperfiles.pds_provincia',$provincia);
@@ -275,7 +265,6 @@
                                     $carita3c = $carita->where('pdsperfiles.pds_provincia',$provincia);
                                 }
                             }
-
                             $carita = $carita->value('carita');
                             $caritac = $caritac->count();
                             $carita0 = $carita0->value('carita');
@@ -286,7 +275,6 @@
                             $carita2c = $carita2c->count();
                             $carita3 = $carita3->value('carita');
                             $carita3c = $carita3c->count();
-
                             $c += $carita == null?"0":$carita;
                             $c0 += $carita0 == null?"0":$carita0;
                             $c1 += $carita1 == null?"0":$carita1;
@@ -297,7 +285,6 @@
                             $c1c += $carita1c == null?"0":$carita1c;
                             $c2c += $carita2c == null?"0":$carita2c;
                             $c3c += $carita3c == null?"0":$carita3c;
-
                             $cc = $cc == "0"?"1":$cc;
                             $c0c = $c0c == "0"?"1":$c0c;
                             $c1c = $c1c == "0"?"1":$c1c;
@@ -308,7 +295,6 @@
                             $carita1res = number_format((($c1/($c1c))*10)*2);
                             $carita2res = number_format((($c2/($c2c))*10)*2);
                             $carita3res = number_format((($c3/($c3c))*10)*2);
-
                             @endphp
 
                         <li class="nav-item">
@@ -407,7 +393,6 @@
                             $mes2fin = \Carbon\Carbon::now()->subMonths(2)->lastOfMonth()->toDateTimeString();
                             $mes3inicio = \Carbon\Carbon::now()->subMonths(3)->firstOfMonth()->toDateTimeString();
                             $mes3fin = \Carbon\Carbon::now()->subMonths(3)->lastOfMonth()->toDateTimeString();
-
                             if($pds_id != "%"){
                                 $carita = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('created_at', [$datainicio, $datafin])->where('pds_id','like',"$pds_id");
                                 $caritac = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('created_at', [$datainicio, $datafin])->where('pds_id','like',"$pds_id");
@@ -430,7 +415,6 @@
                                 $carita2c = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('encauditdatas.created_at', [$mes2inicio, $mes2fin])->join('pdsperfiles', 'pdsperfiles.id', '=', 'encauditdatas.pds_id');
                                 $carita3 = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('encauditdatas.created_at', [$mes3inicio, $mes3fin])->join('pdsperfiles', 'pdsperfiles.id', '=', 'encauditdatas.pds_id');
                                 $carita3c = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('encauditdatas.created_at', [$mes3inicio, $mes3fin])->join('pdsperfiles', 'pdsperfiles.id', '=', 'encauditdatas.pds_id');
-
                                 if($ciudad != "sc"){
                                     $carita = $carita->where('pdsperfiles.pds_ciudad',$ciudad);
                                     $caritac = $carita->where('pdsperfiles.pds_ciudad',$ciudad);
@@ -443,7 +427,6 @@
                                     $carita3 = $carita->where('pdsperfiles.pds_ciudad',$ciudad);
                                     $carita3c = $carita->where('pdsperfiles.pds_ciudad',$ciudad);
                                 }
-
                                 if($provincia != "sp"){
                                     $carita = $carita->where('pdsperfiles.pds_provincia',$provincia);
                                     $caritac = $carita->where('pdsperfiles.pds_provincia',$provincia);
@@ -457,7 +440,6 @@
                                     $carita3c = $carita->where('pdsperfiles.pds_provincia',$provincia);
                                 }
                             }
-
                             $carita = $carita->value('carita');
                             $caritac = $caritac->count();
                             $carita0 = $carita0->value('carita');
@@ -468,7 +450,6 @@
                             $carita2c = $carita2c->count();
                             $carita3 = $carita3->value('carita');
                             $carita3c = $carita3c->count();
-
                             $c += $carita == null?"0":$carita;
                             $c0 += $carita0 == null?"0":$carita0;
                             $c1 += $carita1 == null?"0":$carita1;
@@ -479,7 +460,6 @@
                             $c1c += $carita1c == null?"0":$carita1c;
                             $c2c += $carita2c == null?"0":$carita2c;
                             $c3c += $carita3c == null?"0":$carita3c;
-
                         $cc = $cc == "0"?"1":$cc;
                         $c0c = $c0c == "0"?"1":$c0c;
                         $c1c = $c1c == "0"?"1":$c1c;
@@ -490,7 +470,6 @@
                         $carita1res = number_format((($c1/($c1c))*10)*2);
                         $carita2res = number_format((($c2/($c2c))*10)*2);
                         $carita3res = number_format((($c3/($c3c))*10)*2);
-
                         @endphp
                         <li class="nav-item">
                             <div class="w-100">
@@ -645,20 +624,13 @@
             <div class="row">
                 <span class="col pr-4 fechasel titulos w-50 font-weight-bold">Estado</span>
             </div>
-            <div class="row mb-2">
+            <div class="row data-estado mb-2">
                 <div class="col-12 " {{--style="height: 546px!important;overflow: scroll;overflow-x: hidden;"--}}>
                     @php
                     $datosverticales = (new \App\Encaudit())->where('categoria',"estado")->get();
-
-                    $porcentaje = 0; 
-                    $porcentaje0 = 0; 
-                    $porcentaje1 = 0; 
-                    $porcentaje2 = 0; 
-                    $porcentaje3 = 0; 
-
                     @endphp
 
-                    <ul class="indicadoresgrafE nav">
+                    <ul class="indicadoresgraf nav">
                     @forelse($datosverticales as $dv)
 
                         @php
@@ -668,7 +640,6 @@
                         $porcentaje_encaudit1 = 0; 
                         $porcentaje_encaudit2 = 0; 
                         $porcentaje_encaudit3 = 0; 
-
                         $mes0letra = \Carbon\Carbon::now()->isoFormat('MMM');
                         $mes1letra = \Carbon\Carbon::now()->subMonths(1)->isoFormat('MMM');
                         $mes2letra = \Carbon\Carbon::now()->subMonths(2)->isoFormat('MMM');
@@ -696,7 +667,6 @@
                             $mes2fin = \Carbon\Carbon::now()->subMonths(2)->lastOfMonth()->toDateTimeString();
                             $mes3inicio = \Carbon\Carbon::now()->subMonths(3)->firstOfMonth()->toDateTimeString();
                             $mes3fin = \Carbon\Carbon::now()->subMonths(3)->lastOfMonth()->toDateTimeString();
-
                             if($pds_id != "%"){
                                 $carita = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('created_at', [$datainicio, $datafin])->where('pds_id','like',"$pds_id");
                                 $caritac = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('created_at', [$datainicio, $datafin])->where('pds_id','like',"$pds_id");
@@ -719,7 +689,6 @@
                                 $carita2c = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('encauditdatas.created_at', [$mes2inicio, $mes2fin])->join('pdsperfiles', 'pdsperfiles.id', '=', 'encauditdatas.pds_id');
                                 $carita3 = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('encauditdatas.created_at', [$mes3inicio, $mes3fin])->join('pdsperfiles', 'pdsperfiles.id', '=', 'encauditdatas.pds_id');
                                 $carita3c = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('encauditdatas.created_at', [$mes3inicio, $mes3fin])->join('pdsperfiles', 'pdsperfiles.id', '=', 'encauditdatas.pds_id');
-
                                 if($ciudad != "sc"){
                                     $carita = $carita->where('pdsperfiles.pds_ciudad',$ciudad);
                                     $caritac = $carita->where('pdsperfiles.pds_ciudad',$ciudad);
@@ -732,7 +701,6 @@
                                     $carita3 = $carita->where('pdsperfiles.pds_ciudad',$ciudad);
                                     $carita3c = $carita->where('pdsperfiles.pds_ciudad',$ciudad);
                                 }
-
                                 if($provincia != "sp"){
                                     $carita = $carita->where('pdsperfiles.pds_provincia',$provincia);
                                     $caritac = $carita->where('pdsperfiles.pds_provincia',$provincia);
@@ -746,7 +714,6 @@
                                     $carita3c = $carita->where('pdsperfiles.pds_provincia',$provincia);
                                 }
                             }
-
                             $carita = $carita->value('carita');
                             $caritac = $caritac->count();
                             $carita0 = $carita0->value('carita');
@@ -757,7 +724,6 @@
                             $carita2c = $carita2c->count();
                             $carita3 = $carita3->value('carita');
                             $carita3c = $carita3c->count();
-
                             $c += $carita == null?"0":$carita;
                             $c0 += $carita0 == null?"0":$carita0;
                             $c1 += $carita1 == null?"0":$carita1;
@@ -768,7 +734,6 @@
                             $c1c += $carita1c == null?"0":$carita1c;
                             $c2c += $carita2c == null?"0":$carita2c;
                             $c3c += $carita3c == null?"0":$carita3c;
-
                             $cc = $cc == "0"?"1":$cc;
                             $c0c = $c0c == "0"?"1":$c0c;
                             $c1c = $c1c == "0"?"1":$c1c;
@@ -779,7 +744,6 @@
                             $carita1res = number_format((($c1/($c1c))*10)*2);
                             $carita2res = number_format((($c2/($c2c))*10)*2);
                             $carita3res = number_format((($c3/($c3c))*10)*2);
-
                             $porcentaje_encaudit += $caritares; 
                             $porcentaje_encaudit0 += $carita0res; 
                             $porcentaje_encaudit1 += $carita1res; 
@@ -834,30 +798,8 @@
                                 </div>
                             </div>
                         </li>
-
-                        @php
-                            $porcentaje += $porcentaje_encaudit / count($datosverticales);
-                            $porcentaje0 += $porcentaje_encaudit0 / count($datosverticales);
-                            $porcentaje1 += $porcentaje_encaudit1 / count($datosverticales);
-                            $porcentaje2 += $porcentaje_encaudit2 / count($datosverticales);
-                            $porcentaje3 += $porcentaje_encaudit3 / count($datosverticales);
-                        @endphp
                     @empty
                     @endforelse
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> parent of af89484... ok
-                    <script>
-                        $(document).ready(function(){
-                            //$('.indicadoresgrafE').prepend('<li class="nav-item"><div class="w-100"><div class=" text-center"><span class="titulos">Estado</span><hr></div><div class="text-center"><input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{$porcentaje!=0?$porcentaje/count($datosverticales):0}}"></div><div class="text-center"><canvas class="lineChartE" height="100%"></canvas><script>$(document).ready(function() {var ctx = $(".lineChartE");ctx.css("display", "initial!important");var chartOptions = {legend: {display: false,position: "top",labels: {boxWidth: 80,fontColor: "black"}}}; var myChart = new Chart(ctx, {type: "line",options: chartOptions,data: {labels: ["{{$mes3letra}}", "{{$mes2letra}}", "{{$mes1letra}}", "{{$mes0letra}}"],datasets: [{label: "",data: [{{$porcentaje3!=0?$porcentaje3/count($datosverticales):0}}, {{$porcentaje2!=0?$porcentaje2/count($datosverticales):0}}, {{$porcentaje1!=0?$porcentaje1/count($datosverticales):0}}, {{$porcentaje0!=0?$porcentaje0/count($datosverticales):0}}],backgroundColor: "transparent",borderColor: "#004e92",borderWidth: 2}]}});});</script></div></div></li>');
-                        });
-                    </script>
-<<<<<<< HEAD
->>>>>>> parent of 2e101ef... ok
-=======
->>>>>>> parent of af89484... ok
                     </ul>
                 </div>
             </div>
@@ -865,34 +807,13 @@
             <div class="row">
                 <span class="col pr-4 fechasel titulos w-50 font-weight-bold">Proceso</span>
             </div>
-<<<<<<< HEAD
-            <div class="row">
-
-=======
             <div class="row data-procesos">
-<<<<<<< HEAD
-<<<<<<< HEAD
-                <div class="col-12 " {{--style="height: 546px!important;overflow: scroll;overflow-x: hidden;"--}}>
-                @php
-=======
             <div class="col-12 " {{--style="height: 546px!important;overflow: scroll;overflow-x: hidden;"--}}>
                     @php
->>>>>>> parent of e0a3d1a... ok
-=======
-                <div class="col-12 " {{--style="height: 546px!important;overflow: scroll;overflow-x: hidden;"--}}>
-                @php
->>>>>>> parent of 2e101ef... ok
-                    $datosverticales = (new \App\Encaudit())->where('categoria',"proceso")->get();
-
-                    $porcentaje = 0; 
-                    $porcentaje0 = 0; 
-                    $porcentaje1 = 0; 
-                    $porcentaje2 = 0; 
-                    $porcentaje3 = 0; 
-
+                    $datosverticales = (new \App\Encaudit())->where('categoria',"procesos")->get();
                     @endphp
 
-                    <ul class="indicadoresgrafP nav">
+                    <ul class="indicadoresgraf nav">
                     @forelse($datosverticales as $dv)
 
                         @php
@@ -902,7 +823,6 @@
                         $porcentaje_encaudit1 = 0; 
                         $porcentaje_encaudit2 = 0; 
                         $porcentaje_encaudit3 = 0; 
-
                         $mes0letra = \Carbon\Carbon::now()->isoFormat('MMM');
                         $mes1letra = \Carbon\Carbon::now()->subMonths(1)->isoFormat('MMM');
                         $mes2letra = \Carbon\Carbon::now()->subMonths(2)->isoFormat('MMM');
@@ -930,7 +850,6 @@
                             $mes2fin = \Carbon\Carbon::now()->subMonths(2)->lastOfMonth()->toDateTimeString();
                             $mes3inicio = \Carbon\Carbon::now()->subMonths(3)->firstOfMonth()->toDateTimeString();
                             $mes3fin = \Carbon\Carbon::now()->subMonths(3)->lastOfMonth()->toDateTimeString();
-
                             if($pds_id != "%"){
                                 $carita = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('created_at', [$datainicio, $datafin])->where('pds_id','like',"$pds_id");
                                 $caritac = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('created_at', [$datainicio, $datafin])->where('pds_id','like',"$pds_id");
@@ -953,7 +872,6 @@
                                 $carita2c = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('encauditdatas.created_at', [$mes2inicio, $mes2fin])->join('pdsperfiles', 'pdsperfiles.id', '=', 'encauditdatas.pds_id');
                                 $carita3 = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('encauditdatas.created_at', [$mes3inicio, $mes3fin])->join('pdsperfiles', 'pdsperfiles.id', '=', 'encauditdatas.pds_id');
                                 $carita3c = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('encauditdatas.created_at', [$mes3inicio, $mes3fin])->join('pdsperfiles', 'pdsperfiles.id', '=', 'encauditdatas.pds_id');
-
                                 if($ciudad != "sc"){
                                     $carita = $carita->where('pdsperfiles.pds_ciudad',$ciudad);
                                     $caritac = $carita->where('pdsperfiles.pds_ciudad',$ciudad);
@@ -966,7 +884,6 @@
                                     $carita3 = $carita->where('pdsperfiles.pds_ciudad',$ciudad);
                                     $carita3c = $carita->where('pdsperfiles.pds_ciudad',$ciudad);
                                 }
-
                                 if($provincia != "sp"){
                                     $carita = $carita->where('pdsperfiles.pds_provincia',$provincia);
                                     $caritac = $carita->where('pdsperfiles.pds_provincia',$provincia);
@@ -980,7 +897,6 @@
                                     $carita3c = $carita->where('pdsperfiles.pds_provincia',$provincia);
                                 }
                             }
-
                             $carita = $carita->value('carita');
                             $caritac = $caritac->count();
                             $carita0 = $carita0->value('carita');
@@ -991,7 +907,6 @@
                             $carita2c = $carita2c->count();
                             $carita3 = $carita3->value('carita');
                             $carita3c = $carita3c->count();
-
                             $c += $carita == null?"0":$carita;
                             $c0 += $carita0 == null?"0":$carita0;
                             $c1 += $carita1 == null?"0":$carita1;
@@ -1002,7 +917,6 @@
                             $c1c += $carita1c == null?"0":$carita1c;
                             $c2c += $carita2c == null?"0":$carita2c;
                             $c3c += $carita3c == null?"0":$carita3c;
-
                             $cc = $cc == "0"?"1":$cc;
                             $c0c = $c0c == "0"?"1":$c0c;
                             $c1c = $c1c == "0"?"1":$c1c;
@@ -1013,7 +927,6 @@
                             $carita1res = number_format((($c1/($c1c))*10)*2);
                             $carita2res = number_format((($c2/($c2c))*10)*2);
                             $carita3res = number_format((($c3/($c3c))*10)*2);
-
                             $porcentaje_encaudit += $caritares; 
                             $porcentaje_encaudit0 += $carita0res; 
                             $porcentaje_encaudit1 += $carita1res; 
@@ -1068,33 +981,11 @@
                                 </div>
                             </div>
                         </li>
-
-                        @php
-                            $porcentaje += $porcentaje_encaudit / count($datosverticales);
-                            $porcentaje0 += $porcentaje_encaudit0 / count($datosverticales);
-                            $porcentaje1 += $porcentaje_encaudit1 / count($datosverticales);
-                            $porcentaje2 += $porcentaje_encaudit2 / count($datosverticales);
-                            $porcentaje3 += $porcentaje_encaudit3 / count($datosverticales);
-                        @endphp
                     @empty
                     @endforelse
-                    <script>
-                        $(document).ready(function(){
-                            //$('.indicadoresgrafP').prepend('<li class="nav-item"><div class="w-100"><div class=" text-center"><span class="titulos">Proceso</span><hr></div><div class="text-center"><input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{$porcentaje!=0?$porcentaje/count($datosverticales):0}}"></div><div class="text-center"><canvas class="lineChartE" height="100%"></canvas><script>$(document).ready(function() {var ctx = $(".lineChartE");ctx.css("display", "initial!important");var chartOptions = {legend: {display: false,position: "top",labels: {boxWidth: 80,fontColor: "black"}}}; var myChart = new Chart(ctx, {type: "line",options: chartOptions,data: {labels: ["{{$mes3letra}}", "{{$mes2letra}}", "{{$mes1letra}}", "{{$mes0letra}}"],datasets: [{label: "",data: [{{$porcentaje3!=0?$porcentaje3/count($datosverticales):0}}, {{$porcentaje2!=0?$porcentaje2/count($datosverticales):0}}, {{$porcentaje1!=0?$porcentaje1/count($datosverticales):0}}, {{$porcentaje0!=0?$porcentaje0/count($datosverticales):0}}],backgroundColor: "transparent",borderColor: "#004e92",borderWidth: 2}]}});});</script></div></div></li>');
-                        });
-                    </script>
                     </ul>
                 </div>
-<<<<<<< HEAD
->>>>>>> parent of 2e101ef... ok
             </div>
-=======
-            </div>
-<<<<<<< HEAD
---}}
->>>>>>> parent of 631bc70... ok
-=======
->>>>>>> parent of e0a3d1a... ok
         </div>
     </div>
     @endif
@@ -1161,7 +1052,6 @@
                 allowClear: false
             });
         @endif
-
         @if(request('cat') == "comisionistas")
             $(".knob").knob({
                 'readOnly': true,
