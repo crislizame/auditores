@@ -628,6 +628,12 @@
                 <div class="col-12 " {{--style="height: 546px!important;overflow: scroll;overflow-x: hidden;"--}}>
                     @php
                     $datosverticales = (new \App\Encaudit())->where('categoria',"estado")->get();
+
+                    $porcentaje = 0; 
+                    $porcentaje0 = 0; 
+                    $porcentaje1 = 0; 
+                    $porcentaje2 = 0; 
+                    $porcentaje3 = 0;
                     @endphp
 
                     <ul class="indicadoresgraf nav">
@@ -798,6 +804,14 @@
                                 </div>
                             </div>
                         </li>
+
+                        @php
+                            $porcentaje += $porcentaje_encaudit / count($datosverticales);
+                            $porcentaje0 += $porcentaje_encaudit0 / count($datosverticales);
+                            $porcentaje1 += $porcentaje_encaudit1 / count($datosverticales);
+                            $porcentaje2 += $porcentaje_encaudit2 / count($datosverticales);
+                            $porcentaje3 += $porcentaje_encaudit3 / count($datosverticales);
+                        @endphp
                     @empty
                     @endforelse
                     </ul>
