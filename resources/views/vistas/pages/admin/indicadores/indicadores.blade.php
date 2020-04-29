@@ -649,9 +649,9 @@
                     @endphp
                     <h5 class="titulos-grandes text-center">{{$cambio}}</h5>
 
+                    <ul class="indicadoresgraf nav">
                     @forelse($datosverticales as $dv)
 
-                    <ul class="indicadoresgraf nav">
                         @php
                         $thc = (new \App\Encauditvalue())->where('encaudit_id',$dv->idencaudit)->get();
                         $porcentaje_encaudit = 0; 
@@ -825,10 +825,9 @@
                                 </div>
                             </div>
                         </li>
-                    </ul>
-
                     @empty
                     @endforelse
+                    </ul>
                 </div>
             </div>
             <div class="row data-procesos">
@@ -841,9 +840,9 @@
                     @endphp
                     <h5 class="titulos-grandes text-center">{{$cambio}}</h5>
 
+                    <ul class="indicadoresgraf nav">
                     @forelse($datosverticales as $dv)
 
-                    <ul class="indicadoresgraf nav">
                         @php
                         $thc = (new \App\Encauditvalue())->where('encaudit_id',$dv->idencaudit)->get();
                         $porcentaje_encaudit = 0; 
@@ -1017,12 +1016,10 @@
                                 </div>
                             </div>
                         </li>
-                    </ul>
-
                     @empty
                     @endforelse
+                    </ul>
                 </div>
-
             </div>
         </div>
     </div>
