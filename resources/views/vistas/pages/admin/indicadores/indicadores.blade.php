@@ -189,11 +189,11 @@
                         <span class="pr-4 fechasel titulos w-50 text-right">{{ucfirst($datainicioletra)}} {!! $datafinletra !!}</span>
                     </div>
                     @php
-                    $datosverticales = (new \App\Encaudit())->where('categoria',"estado")->get();
+                        $datosverticales = (new \App\Encaudit())->where('categoria',"estado")->get();
                     @endphp
 
                     @forelse($datosverticales as $dv)
-
+<script>console.log({{var_dump($dv)}});</script>
                     <h5 class="titulos-grandes text-center">{{$dv->nombre_estado}}</h5>
 
                     <ul class="indicadoresgraf nav">
