@@ -638,16 +638,18 @@
         }
         @endphp
         <div class="col-lg-9 mt-0">
-
-            <div class="row data-estado">
+            <div class="row">
+                <span class="col pr-4 fechasel titulos w-50 text-right font-weight-bold">{{ucfirst($datainicioletra)}} {!! $datafinletra !!}</span>
+            </div>
+            <h5 class="titulos-grandes text-center">{{$cambio}}</h5>
+            <div class="row">
+                <span class="col pr-4 fechasel titulos w-50 font-weight-bold">Estado</span>
+            </div>
+            <div class="row data-estado mb-2">
                 <div class="col-12 " {{--style="height: 546px!important;overflow: scroll;overflow-x: hidden;"--}}>
-                    <div class="row">
-                        <span class="pr-4 fechasel titulos w-50 text-right">{{ucfirst($datainicioletra)}} {!! $datafinletra !!}</span>
-                    </div>
                     @php
                     $datosverticales = (new \App\Encaudit())->where('categoria',"estado")->get();
                     @endphp
-                    <h5 class="titulos-grandes text-center">{{$cambio}}</h5>
 
                     <ul class="indicadoresgraf nav">
                     @forelse($datosverticales as $dv)
@@ -830,15 +832,15 @@
                     </ul>
                 </div>
             </div>
+
+            <div class="row">
+                <span class="col pr-4 fechasel titulos w-50 font-weight-bold">Proceso</span>
+            </div>
             <div class="row data-procesos">
             <div class="col-12 " {{--style="height: 546px!important;overflow: scroll;overflow-x: hidden;"--}}>
-                    <div class="row">
-                        <span class="pr-4 fechasel titulos w-50 text-right">{{ucfirst($datainicioletra)}} {!! $datafinletra !!}</span>
-                    </div>
                     @php
                     $datosverticales = (new \App\Encaudit())->where('categoria',"procesos")->get();
                     @endphp
-                    <h5 class="titulos-grandes text-center">{{$cambio}}</h5>
 
                     <ul class="indicadoresgraf nav">
                     @forelse($datosverticales as $dv)
