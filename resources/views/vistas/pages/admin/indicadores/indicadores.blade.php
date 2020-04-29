@@ -1069,8 +1069,13 @@
                     </script>
                     </ul>
                 </div>
+<<<<<<< HEAD
 >>>>>>> parent of 2e101ef... ok
             </div>
+=======
+            </div>
+--}}
+>>>>>>> parent of 631bc70... ok
         </div>
     </div>
     @endif
