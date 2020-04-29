@@ -636,7 +636,7 @@
                     $porcentaje3 = 0;
                     @endphp
 
-                    <ul class="indicadoresgraf nav">
+                    <ul class="indicadoresgrafE nav">
                     @forelse($datosverticales as $dv)
 
                         @php
@@ -815,6 +815,14 @@
                     @empty
                     @endforelse
                     </ul>
+                    <script>
+                    var Ec_ = '<li class="nav-item"><div class="w-100"><div class=" text-center"><span class="titulos">Estado</span><hr></div><div class="text-center"><input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{$porcentaje!=0?$porcentaje/count($datosverticales):0}}"></div><div class="text-center"><canvas class="lineChartE" height="100%"></canvas></div></div></li>';
+
+                        $(document).ready(function(){
+                            //$('.indicadoresgrafE').prepend(Ec_);
+                            console.log(Ec_);
+                        });
+                    </script>
                 </div>
             </div>
 
