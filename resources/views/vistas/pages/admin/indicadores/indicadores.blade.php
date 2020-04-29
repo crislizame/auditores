@@ -769,7 +769,7 @@
                                     <hr>
                                 </div>
                                 <div class="text-center">
-                                    <input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{$porcentaje_encaudit/count($datosverticales)}}">
+                                    <input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{$porcentaje_encaudit/count($thc)}}">
                                 </div>
                                 <div class="text-center">
                                     <canvas class="lineChart{{$dv->idencaudit}}" height="100%"></canvas>
@@ -794,7 +794,7 @@
                                                     labels: ['{{$mes3letra}}', '{{$mes2letra}}', '{{$mes1letra}}', '{{$mes0letra}}'],
                                                     datasets: [{
                                                         label: '',
-                                                        data: [{{$porcentaje_encaudit3/count($datosverticales)}}, {{$porcentaje_encaudit2/count($datosverticales)}}, {{$porcentaje_encaudit1/count($datosverticales)}}, {{$porcentaje_encaudit0/count($datosverticales)}}],
+                                                        data: [{{$porcentaje_encaudit3/count($thc)}}, {{$porcentaje_encaudit2/count($thc)}}, {{$porcentaje_encaudit1/count($thc)}}, {{$porcentaje_encaudit0/count($thc)}}],
                                                         backgroundColor: "transparent",
                                                         borderColor: "#004e92",
                                                         borderWidth: 2
@@ -808,11 +808,11 @@
                         </li>
 
                         @php
-                            $porcentajeE += $porcentaje_encaudit / count($datosverticales);
-                            $porcentajeE0 += $porcentaje_encaudit0 / count($datosverticales);
-                            $porcentajeE1 += $porcentaje_encaudit1 / count($datosverticales);
-                            $porcentajeE2 += $porcentaje_encaudit2 / count($datosverticales);
-                            $porcentajeE3 += $porcentaje_encaudit3 / count($datosverticales);
+                            $porcentajeE += $porcentaje_encaudit / count($thc);
+                            $porcentajeE0 += $porcentaje_encaudit0 / count($thc);
+                            $porcentajeE1 += $porcentaje_encaudit1 / count($thc);
+                            $porcentajeE2 += $porcentaje_encaudit2 / count($thc);
+                            $porcentajeE3 += $porcentaje_encaudit3 / count($thc);
                         @endphp
                     @empty
                     @endforelse
