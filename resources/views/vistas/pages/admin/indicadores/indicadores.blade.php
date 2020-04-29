@@ -791,10 +791,10 @@
                                     <input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{$porcentaje_encaudit/count($datosverticales)}}">
                                 </div>
                                 <div class="text-center">
-                                    <canvas class="lineChart{{$thc->idencaudit}}" height="100%"></canvas>
+                                    <canvas class="lineChart{{$dv->idencaudit}}" height="100%"></canvas>
                                     <script>
                                         $(document).ready(function() {
-                                            var ctx = $('.lineChart{{$thc->idencaudit}}');
+                                            var ctx = $('.lineChart{{$dv->idencaudit}}');
                                             ctx.css('display', 'initial!important');
                                             var chartOptions = {
                                                 legend: {
@@ -983,10 +983,10 @@
                                     <input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{$porcentaje_encaudit/count($datosverticales)}}">
                                 </div>
                                 <div class="text-center">
-                                    <canvas class="lineChart{{$thc->idencaudit}}" height="100%"></canvas>
+                                    <canvas class="lineChart{{$dv->idencaudit}}" height="100%"></canvas>
                                     <script>
                                         $(document).ready(function() {
-                                            var ctx = $('.lineChart{{$thc->idencaudit}}');
+                                            var ctx = $('.lineChart{{$dv->idencaudit}}');
                                             ctx.css('display', 'initial!important');
                                             var chartOptions = {
                                                 legend: {
