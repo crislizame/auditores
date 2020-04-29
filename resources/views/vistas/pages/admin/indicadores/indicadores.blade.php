@@ -629,6 +629,8 @@
                     @php
                     $datosverticales = (new \App\Encaudit())->where('categoria',"estado")->get();
 
+                    $totaldatosverticalesE = count($datosverticales);
+
                     $porcentajeE = 0; 
                     $porcentajeE0 = 0; 
                     $porcentajeE1 = 0; 
@@ -1069,9 +1071,7 @@
             });
         @endif
         @if(request('cat') == "comisionistas")
-        console.log({{$porcentajeE}});
-        console.log({{$porcentajeE!=0?$porcentajeE/count($datosverticales):0}});
-            var Ec_ = '<li class="nav-item"><div class="w-100"><div class=" text-center"><span class="titulos">Estado</span><hr></div><div class="text-center"><input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{$porcentajeE!=0?$porcentajeE/count($datosverticales):0}}"></div><div class="text-center"><canvas class="lineChartE" height="100%"></canvas></div></div></li>';
+            var Ec_ = '<li class="nav-item"><div class="w-100"><div class=" text-center"><span class="titulos">Estado</span><hr></div><div class="text-center"><input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{$porcentajeE!=0?$porcentajeE/$totaldatosverticalesE:0}}"></div><div class="text-center"><canvas class="lineChartE" height="100%"></canvas></div></div></li>';
             $('.lista-estado').prepend(Ec_);
             var ctx = $('.lineChartE');
             ctx.css('display', 'initial!important');
@@ -1092,7 +1092,7 @@
                     labels: ['{{$mes3letra}}', '{{$mes2letra}}', '{{$mes1letra}}', '{{$mes0letra}}'],
                     datasets: [{
                         label: '',
-                        data: [{{$porcentajeE3!=0?$porcentajeE3/count($datosverticales):0}}, {{$porcentajeE2!=0?$porcentajeE2/count($datosverticales):0}}, {{$porcentajeE1!=0?$porcentajeE1/count($datosverticales):0}}, {{$porcentajeE0!=0?$porcentajeE0/count($datosverticales):0}}],
+                        data: [{{$porcentajeE3!=0?$porcentajeE3/$totaldatosverticalesE):0}}, {{$porcentajeE2!=0?$porcentajeE2/$totaldatosverticalesE:0}}, {{$porcentajeE1!=0?$porcentajeE1/$totaldatosverticalesE:0}}, {{$porcentajeE0!=0?$porcentajeE0/$totaldatosverticalesE:0}}],
                         backgroundColor: "transparent",
                         borderColor: "#004e92",
                         borderWidth: 2
