@@ -828,10 +828,24 @@
             <div class="row data-procesos">
             <div class="col-12 " {{--style="height: 546px!important;overflow: scroll;overflow-x: hidden;"--}}>
                     @php
-                    $datosverticales = (new \App\Encaudit())->where('categoria',"procesos")->get();
+                    $datosverticales = (new \App\Encaudit())->where('categoria',"proceso")->get();
+
+                    $totaldatosverticalesP = count($datosverticales);
+
+                    $porcentajeP = 0; 
+                    $porcentajeP0 = 0; 
+                    $porcentajeP1 = 0; 
+                    $porcentajeP2 = 0; 
+                    $porcentajeP3 = 0;
+                    
+                    $mes0letra = \Carbon\Carbon::now()->isoFormat('MMM');
+                    $mes1letra = \Carbon\Carbon::now()->subMonths(1)->isoFormat('MMM');
+                    $mes2letra = \Carbon\Carbon::now()->subMonths(2)->isoFormat('MMM');
+                    $mes3letra = \Carbon\Carbon::now()->subMonths(3)->isoFormat('MMM');
+                        
                     @endphp
 
-                    <ul class="indicadoresgraf nav">
+                    <ul class="indicadoresgraf nav lista-proceso">
                     @forelse($datosverticales as $dv)
 
                         @php
@@ -840,11 +854,7 @@
                         $porcentaje_encaudit0 = 0; 
                         $porcentaje_encaudit1 = 0; 
                         $porcentaje_encaudit2 = 0; 
-                        $porcentaje_encaudit3 = 0; 
-                        $mes0letra = \Carbon\Carbon::now()->isoFormat('MMM');
-                        $mes1letra = \Carbon\Carbon::now()->subMonths(1)->isoFormat('MMM');
-                        $mes2letra = \Carbon\Carbon::now()->subMonths(2)->isoFormat('MMM');
-                        $mes3letra = \Carbon\Carbon::now()->subMonths(3)->isoFormat('MMM');
+                        $porcentaje_encaudit3 = 0;
                         @endphp
 
                         @forelse($thc as $tc)
@@ -962,7 +972,7 @@
                                     <hr>
                                 </div>
                                 <div class="text-center">
-                                    <input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{$porcentaje_encaudit/count($datosverticales)}}">
+                                    <input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{$porcentaje_encaudit/count($thc)}}">
                                 </div>
                                 <div class="text-center">
                                     <canvas class="lineChart{{$dv->idencaudit}}" height="100%"></canvas>
@@ -987,7 +997,7 @@
                                                     labels: ['{{$mes3letra}}', '{{$mes2letra}}', '{{$mes1letra}}', '{{$mes0letra}}'],
                                                     datasets: [{
                                                         label: '',
-                                                        data: [{{$porcentaje_encaudit3/count($datosverticales)}}, {{$porcentaje_encaudit2/count($datosverticales)}}, {{$porcentaje_encaudit1/count($datosverticales)}}, {{$porcentaje_encaudit0/count($datosverticales)}}],
+                                                        data: [{{$porcentaje_encaudit3/count($thc)}}, {{$porcentaje_encaudit2/count($thc)}}, {{$porcentaje_encaudit1/count($thc)}}, {{$porcentaje_encaudit0/count($thc)}}],
                                                         backgroundColor: "transparent",
                                                         borderColor: "#004e92",
                                                         borderWidth: 2
@@ -999,6 +1009,14 @@
                                 </div>
                             </div>
                         </li>
+
+                        @php
+                            $porcentajeP += $porcentaje_encaudit / count($thc);
+                            $porcentajeP0 += $porcentaje_encaudit0 / count($thc);
+                            $porcentajeP1 += $porcentaje_encaudit1 / count($thc);
+                            $porcentajeP2 += $porcentaje_encaudit2 / count($thc);
+                            $porcentajeP3 += $porcentaje_encaudit3 / count($thc);
+                        @endphp
                     @empty
                     @endforelse
                     </ul>
@@ -1093,6 +1111,35 @@
                     datasets: [{
                         label: '',
                         data: [{{$porcentajeE3!=0?$porcentajeE3/$totaldatosverticalesE:0}}, {{$porcentajeE2!=0?$porcentajeE2/$totaldatosverticalesE:0}}, {{$porcentajeE1!=0?$porcentajeE1/$totaldatosverticalesE:0}}, {{$porcentajeE0!=0?$porcentajeE0/$totaldatosverticalesE:0}}],
+                        backgroundColor: "transparent",
+                        borderColor: "#004e92",
+                        borderWidth: 2
+                    }]
+                }
+            });
+
+            var Pc_ = '<li class="nav-item"><div class="w-100"><div class=" text-center"><span class="titulos">Proceso</span><hr></div><div class="text-center"><input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{$porcentajeP!=0?$porcentajeP/$totaldatosverticalesP:0}}"></div><div class="text-center"><canvas class="lineChartP" height="100%"></canvas></div></div></li>';
+            $('.lista-proceso').prepend(Pc_);
+            var ctx = $('.lineChartP');
+            ctx.css('display', 'initial!important');
+            var chartOptions = {
+                legend: {
+                    display: false,
+                    position: 'top',
+                    labels: {
+                        boxWidth: 80,
+                        fontColor: 'black'
+                    }
+                }
+            };
+            var myChart = new Chart(ctx, {
+                type: 'line',
+                options: chartOptions,
+                data: {
+                    labels: ['{{$mes3letra}}', '{{$mes2letra}}', '{{$mes1letra}}', '{{$mes0letra}}'],
+                    datasets: [{
+                        label: '',
+                        data: [{{$porcentajeP3!=0?$porcentajeP3/$totaldatosverticalesP:0}}, {{$porcentajeP2!=0?$porcentajeP2/$totaldatosverticalesP:0}}, {{$porcentajeP1!=0?$porcentajeP1/$totaldatosverticalesP:0}}, {{$porcentajeP0!=0?$porcentajeP0/$totaldatosverticalesP:0}}],
                         backgroundColor: "transparent",
                         borderColor: "#004e92",
                         borderWidth: 2
