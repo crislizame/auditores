@@ -193,8 +193,8 @@
                     @endphp
 
                     @forelse($datosverticales as $dv)
-<script>console.log({{var_dump($dv)}});</script>
-                    <h5 class="titulos-grandes text-center">{{$dv->nombre_estado}}</h5>
+                    <script>console.log('{{var_dump($dv)}}');</script>
+                    <h5 class="titulos-grandes text-center"></h5>
 
                     <ul class="indicadoresgraf nav">
                         @php
@@ -376,7 +376,7 @@
 
                     @forelse($datosverticales as $dv)
 
-                    <h5 class="titulos-grandes text-center">{{$dv->nombre_estado}}</h5>
+                    <h5 class="titulos-grandes text-center"></h5>
 
                     <ul class="indicadoresgraf nav">
                         @php
