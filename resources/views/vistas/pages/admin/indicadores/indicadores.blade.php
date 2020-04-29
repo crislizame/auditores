@@ -629,11 +629,11 @@
                     @php
                     $datosverticales = (new \App\Encaudit())->where('categoria',"estado")->get();
 
-                    $porcentaje = 0; 
-                    $porcentaje0 = 0; 
-                    $porcentaje1 = 0; 
-                    $porcentaje2 = 0; 
-                    $porcentaje3 = 0;
+                    $porcentajeE = 0; 
+                    $porcentajeE0 = 0; 
+                    $porcentajeE1 = 0; 
+                    $porcentajeE2 = 0; 
+                    $porcentajeE3 = 0;
                     @endphp
 
                     <ul class="indicadoresgrafE nav">
@@ -806,23 +806,15 @@
                         </li>
 
                         @php
-                            $porcentaje += $porcentaje_encaudit / count($datosverticales);
-                            $porcentaje0 += $porcentaje_encaudit0 / count($datosverticales);
-                            $porcentaje1 += $porcentaje_encaudit1 / count($datosverticales);
-                            $porcentaje2 += $porcentaje_encaudit2 / count($datosverticales);
-                            $porcentaje3 += $porcentaje_encaudit3 / count($datosverticales);
+                            $porcentajeE += $porcentaje_encaudit / count($datosverticales);
+                            $porcentajeE0 += $porcentaje_encaudit0 / count($datosverticales);
+                            $porcentajeE1 += $porcentaje_encaudit1 / count($datosverticales);
+                            $porcentajeE2 += $porcentaje_encaudit2 / count($datosverticales);
+                            $porcentajeE3 += $porcentaje_encaudit3 / count($datosverticales);
                         @endphp
                     @empty
                     @endforelse
                     </ul>
-                    <script>
-                    var Ec_ = '<li class="nav-item"><div class="w-100"><div class=" text-center"><span class="titulos">Estado</span><hr></div><div class="text-center"><input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{$porcentaje!=0?$porcentaje/count($datosverticales):0}}"></div><div class="text-center"><canvas class="lineChartE" height="100%"></canvas></div></div></li>';
-
-                        $(document).ready(function(){
-                            //$('.indicadoresgrafE').prepend(Ec_);
-                            //console.log(Ec_);
-                        });
-                    </script>
                 </div>
             </div>
 
@@ -1075,6 +1067,10 @@
             });
         @endif
         @if(request('cat') == "comisionistas")
+
+            var Ec_ = '<li class="nav-item"><div class="w-100"><div class=" text-center"><span class="titulos">Estado</span><hr></div><div class="text-center"><input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{$porcentajeE!=0?$porcentajeE/count($datosverticales):0}}"></div><div class="text-center"><canvas class="lineChartE" height="100%"></canvas></div></div></li>';
+            console.log(Ec_);
+
             $(".knob").knob({
                 'readOnly': true,
                 'rotation': "anticlockwise",
