@@ -1092,7 +1092,7 @@
                     labels: ['{{$mes3letra}}', '{{$mes2letra}}', '{{$mes1letra}}', '{{$mes0letra}}'],
                     datasets: [{
                         label: '',
-                        data: [{{$porcentajeE3!=0?$porcentajeE3/$totaldatosverticalesE):0}}, {{$porcentajeE2!=0?$porcentajeE2/$totaldatosverticalesE:0}}, {{$porcentajeE1!=0?$porcentajeE1/$totaldatosverticalesE:0}}, {{$porcentajeE0!=0?$porcentajeE0/$totaldatosverticalesE:0}}],
+                        data: [{{$porcentajeE3!=0?$porcentajeE3/$totaldatosverticalesE:0}}, {{$porcentajeE2!=0?$porcentajeE2/$totaldatosverticalesE:0}}, {{$porcentajeE1!=0?$porcentajeE1/$totaldatosverticalesE:0}}, {{$porcentajeE0!=0?$porcentajeE0/$totaldatosverticalesE:0}}],
                         backgroundColor: "transparent",
                         borderColor: "#004e92",
                         borderWidth: 2
