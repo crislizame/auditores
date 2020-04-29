@@ -649,9 +649,16 @@
                 <div class="col-12 " {{--style="height: 546px!important;overflow: scroll;overflow-x: hidden;"--}}>
                     @php
                     $datosverticales = (new \App\Encaudit())->where('categoria',"estado")->get();
+
+                    $porcentaje = 0; 
+                    $porcentaje0 = 0; 
+                    $porcentaje1 = 0; 
+                    $porcentaje2 = 0; 
+                    $porcentaje3 = 0; 
+
                     @endphp
 
-                    <ul class="indicadoresgraf nav">
+                    <ul class="indicadoresgrafE nav">
                     @forelse($datosverticales as $dv)
 
                         @php
@@ -827,8 +834,21 @@
                                 </div>
                             </div>
                         </li>
+
+                        @php
+                            $porcentaje += $porcentaje_encaudit / count($datosverticales);
+                            $porcentaje0 += $porcentaje_encaudit0 / count($datosverticales);
+                            $porcentaje1 += $porcentaje_encaudit1 / count($datosverticales);
+                            $porcentaje2 += $porcentaje_encaudit2 / count($datosverticales);
+                            $porcentaje3 += $porcentaje_encaudit3 / count($datosverticales);
+                        @endphp
                     @empty
                     @endforelse
+                    <script>
+                        $(document).ready(function(){
+                            $('.indicadoresgrafE').prepend('<li class="nav-item"><div class="w-100"><div class=" text-center"><span class="titulos">Estado</span><hr></div><div class="text-center"><input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{$porcentaje/count($datosverticales)}}"></div><div class="text-center"><canvas class="lineChartE" height="100%"></canvas><script>$(document).ready(function() {var ctx = $(".lineChartE");ctx.css("display", "initial!important");var chartOptions = {legend: {display: false,position: "top",labels: {boxWidth: 80,fontColor: "black"}}}; var myChart = new Chart(ctx, {type: "line",options: chartOptions,data: {labels: ["{{$mes3letra}}", "{{$mes2letra}}", "{{$mes1letra}}", "{{$mes0letra}}"],datasets: [{label: "",data: [{{$porcentaje3/count($datosverticales)}}, {{$porcentaje2/count($datosverticales)}}, {{$porcentaje1/count($datosverticales)}}, {{$porcentaje0/count($datosverticales)}}],backgroundColor: "transparent",borderColor: "#004e92",borderWidth: 2}]}});});</script></div></div></li>');
+                        });
+                    </script>
                     </ul>
                 </div>
             </div>
@@ -837,12 +857,19 @@
                 <span class="col pr-4 fechasel titulos w-50 font-weight-bold">Proceso</span>
             </div>
             <div class="row data-procesos">
-            <div class="col-12 " {{--style="height: 546px!important;overflow: scroll;overflow-x: hidden;"--}}>
-                    @php
-                    $datosverticales = (new \App\Encaudit())->where('categoria',"procesos")->get();
+                <div class="col-12 " {{--style="height: 546px!important;overflow: scroll;overflow-x: hidden;"--}}>
+                @php
+                    $datosverticales = (new \App\Encaudit())->where('categoria',"proceso")->get();
+
+                    $porcentaje = 0; 
+                    $porcentaje0 = 0; 
+                    $porcentaje1 = 0; 
+                    $porcentaje2 = 0; 
+                    $porcentaje3 = 0; 
+
                     @endphp
 
-                    <ul class="indicadoresgraf nav">
+                    <ul class="indicadoresgrafP nav">
                     @forelse($datosverticales as $dv)
 
                         @php
@@ -1018,8 +1045,21 @@
                                 </div>
                             </div>
                         </li>
+
+                        @php
+                            $porcentaje += $porcentaje_encaudit / count($datosverticales);
+                            $porcentaje0 += $porcentaje_encaudit0 / count($datosverticales);
+                            $porcentaje1 += $porcentaje_encaudit1 / count($datosverticales);
+                            $porcentaje2 += $porcentaje_encaudit2 / count($datosverticales);
+                            $porcentaje3 += $porcentaje_encaudit3 / count($datosverticales);
+                        @endphp
                     @empty
                     @endforelse
+                    <script>
+                        $(document).ready(function(){
+                            $('.indicadoresgrafP').prepend('<li class="nav-item"><div class="w-100"><div class=" text-center"><span class="titulos">Proceso</span><hr></div><div class="text-center"><input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{$porcentaje/count($datosverticales)}}"></div><div class="text-center"><canvas class="lineChartP" height="100%"></canvas><script>$(document).ready(function() {var ctx = $(".lineChartP");ctx.css("display", "initial!important");var chartOptions = {legend: {display: false,position: "top",labels: {boxWidth: 80,fontColor: "black"}}}; var myChart = new Chart(ctx, {type: "line",options: chartOptions,data: {labels: ["{{$mes3letra}}", "{{$mes2letra}}", "{{$mes1letra}}", "{{$mes0letra}}"],datasets: [{label: "",data: [{{$porcentaje3/count($datosverticales)}}, {{$porcentaje2/count($datosverticales)}}, {{$porcentaje1/count($datosverticales)}}, {{$porcentaje0/count($datosverticales)}}],backgroundColor: "transparent",borderColor: "#004e92",borderWidth: 2}]}});});</script></div></div></li>');
+                        });
+                    </script>
                     </ul>
                 </div>
             </div>
