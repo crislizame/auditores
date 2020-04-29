@@ -844,11 +844,6 @@
                         @endphp
                     @empty
                     @endforelse
-                    <script>
-                        $(document).ready(function(){
-                            //$('.indicadoresgrafE').prepend('<li class="nav-item"><div class="w-100"><div class=" text-center"><span class="titulos">Estado</span><hr></div><div class="text-center"><input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{$porcentaje!=0?$porcentaje/count($datosverticales):0}}"></div><div class="text-center"><canvas class="lineChartE" height="100%"></canvas><script>$(document).ready(function() {var ctx = $(".lineChartE");ctx.css("display", "initial!important");var chartOptions = {legend: {display: false,position: "top",labels: {boxWidth: 80,fontColor: "black"}}}; var myChart = new Chart(ctx, {type: "line",options: chartOptions,data: {labels: ["{{$mes3letra}}", "{{$mes2letra}}", "{{$mes1letra}}", "{{$mes0letra}}"],datasets: [{label: "",data: [{{$porcentaje3!=0?$porcentaje3/count($datosverticales):0}}, {{$porcentaje2!=0?$porcentaje2/count($datosverticales):0}}, {{$porcentaje1!=0?$porcentaje1/count($datosverticales):0}}, {{$porcentaje0!=0?$porcentaje0/count($datosverticales):0}}],backgroundColor: "transparent",borderColor: "#004e92",borderWidth: 2}]}});});</script></div></div></li>');
-                        });
-                    </script>
                     </ul>
                 </div>
             </div>
