@@ -634,9 +634,15 @@
                     $porcentajeE1 = 0; 
                     $porcentajeE2 = 0; 
                     $porcentajeE3 = 0;
+                    
+                    $mes0letra = \Carbon\Carbon::now()->isoFormat('MMM');
+                    $mes1letra = \Carbon\Carbon::now()->subMonths(1)->isoFormat('MMM');
+                    $mes2letra = \Carbon\Carbon::now()->subMonths(2)->isoFormat('MMM');
+                    $mes3letra = \Carbon\Carbon::now()->subMonths(3)->isoFormat('MMM');
+                        
                     @endphp
 
-                    <ul class="indicadoresgrafE nav">
+                    <ul class="indicadoresgraf nav lista-estado">
                     @forelse($datosverticales as $dv)
 
                         @php
@@ -645,11 +651,7 @@
                         $porcentaje_encaudit0 = 0; 
                         $porcentaje_encaudit1 = 0; 
                         $porcentaje_encaudit2 = 0; 
-                        $porcentaje_encaudit3 = 0; 
-                        $mes0letra = \Carbon\Carbon::now()->isoFormat('MMM');
-                        $mes1letra = \Carbon\Carbon::now()->subMonths(1)->isoFormat('MMM');
-                        $mes2letra = \Carbon\Carbon::now()->subMonths(2)->isoFormat('MMM');
-                        $mes3letra = \Carbon\Carbon::now()->subMonths(3)->isoFormat('MMM');
+                        $porcentaje_encaudit3 = 0;
                         @endphp
 
                         @forelse($thc as $tc)
@@ -750,11 +752,11 @@
                             $carita1res = number_format((($c1/($c1c))*10)*2);
                             $carita2res = number_format((($c2/($c2c))*10)*2);
                             $carita3res = number_format((($c3/($c3c))*10)*2);
-                            $porcentaje_encaudit += $caritares; 
-                            $porcentaje_encaudit0 += $carita0res; 
-                            $porcentaje_encaudit1 += $carita1res; 
-                            $porcentaje_encaudit2 += $carita2res; 
-                            $porcentaje_encaudit3 += $carita3res; 
+                            $porcentaje_encauditE += $caritares; 
+                            $porcentaje_encaudit0E += $carita0res; 
+                            $porcentaje_encaudit1E += $carita1res; 
+                            $porcentaje_encaudit2E += $carita2res; 
+                            $porcentaje_encaudit3E += $carita3res; 
                             @endphp
 
                         @empty
@@ -767,7 +769,7 @@
                                     <hr>
                                 </div>
                                 <div class="text-center">
-                                    <input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{$porcentaje_encaudit/count($datosverticales)}}">
+                                    <input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{$porcentaje_encauditE/count($datosverticales)}}">
                                 </div>
                                 <div class="text-center">
                                     <canvas class="lineChart{{$dv->idencaudit}}" height="100%"></canvas>
@@ -792,7 +794,7 @@
                                                     labels: ['{{$mes3letra}}', '{{$mes2letra}}', '{{$mes1letra}}', '{{$mes0letra}}'],
                                                     datasets: [{
                                                         label: '',
-                                                        data: [{{$porcentaje_encaudit3/count($datosverticales)}}, {{$porcentaje_encaudit2/count($datosverticales)}}, {{$porcentaje_encaudit1/count($datosverticales)}}, {{$porcentaje_encaudit0/count($datosverticales)}}],
+                                                        data: [{{$porcentaje_encaudit3E/count($datosverticales)}}, {{$porcentaje_encaudit2E/count($datosverticales)}}, {{$porcentaje_encaudit1E/count($datosverticales)}}, {{$porcentaje_encaudit0E/count($datosverticales)}}],
                                                         backgroundColor: "transparent",
                                                         borderColor: "#004e92",
                                                         borderWidth: 2
@@ -1069,7 +1071,33 @@
         @if(request('cat') == "comisionistas")
 
             var Ec_ = '<li class="nav-item"><div class="w-100"><div class=" text-center"><span class="titulos">Estado</span><hr></div><div class="text-center"><input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{$porcentajeE!=0?$porcentajeE/count($datosverticales):0}}"></div><div class="text-center"><canvas class="lineChartE" height="100%"></canvas></div></div></li>';
-            console.log(Ec_);
+            $('.lista-estado').prepend(Ec_);
+            var ctx = $('.lineChartE');
+            ctx.css('display', 'initial!important');
+            var chartOptions = {
+                legend: {
+                    display: false,
+                    position: 'top',
+                    labels: {
+                        boxWidth: 80,
+                        fontColor: 'black'
+                    }
+                }
+            };
+            var myChart = new Chart(ctx, {
+                type: 'line',
+                options: chartOptions,
+                data: {
+                    labels: ['{{$mes3letra}}', '{{$mes2letra}}', '{{$mes1letra}}', '{{$mes0letra}}'],
+                    datasets: [{
+                        label: '',
+                        data: [{{$porcentajeE3!=0?$porcentajeE3/count($datosverticales):0}}, {{$porcentajeE2!=0?$porcentajeE2/count($datosverticales):0}}, {{$porcentajeE1!=0?$porcentajeE1/count($datosverticales):0}}, {{$porcentajeE0!=0?$porcentajeE0/count($datosverticales):0}}],
+                        backgroundColor: "transparent",
+                        borderColor: "#004e92",
+                        borderWidth: 2
+                    }]
+                }
+            });
 
             $(".knob").knob({
                 'readOnly': true,
