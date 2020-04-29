@@ -752,11 +752,11 @@
                             $carita1res = number_format((($c1/($c1c))*10)*2);
                             $carita2res = number_format((($c2/($c2c))*10)*2);
                             $carita3res = number_format((($c3/($c3c))*10)*2);
-                            $porcentaje_encauditE += $caritares; 
-                            $porcentaje_encaudit0E += $carita0res; 
-                            $porcentaje_encaudit1E += $carita1res; 
-                            $porcentaje_encaudit2E += $carita2res; 
-                            $porcentaje_encaudit3E += $carita3res; 
+                            $porcentaje_encaudit += $caritares; 
+                            $porcentaje_encaudit0 += $carita0res; 
+                            $porcentaje_encaudit1 += $carita1res; 
+                            $porcentaje_encaudit2 += $carita2res; 
+                            $porcentaje_encaudit3 += $carita3res; 
                             @endphp
 
                         @empty
@@ -769,7 +769,7 @@
                                     <hr>
                                 </div>
                                 <div class="text-center">
-                                    <input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{$porcentaje_encauditE/count($datosverticales)}}">
+                                    <input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{$porcentaje_encaudit/count($datosverticales)}}">
                                 </div>
                                 <div class="text-center">
                                     <canvas class="lineChart{{$dv->idencaudit}}" height="100%"></canvas>
@@ -794,7 +794,7 @@
                                                     labels: ['{{$mes3letra}}', '{{$mes2letra}}', '{{$mes1letra}}', '{{$mes0letra}}'],
                                                     datasets: [{
                                                         label: '',
-                                                        data: [{{$porcentaje_encaudit3E/count($datosverticales)}}, {{$porcentaje_encaudit2E/count($datosverticales)}}, {{$porcentaje_encaudit1E/count($datosverticales)}}, {{$porcentaje_encaudit0E/count($datosverticales)}}],
+                                                        data: [{{$porcentaje_encaudit3/count($datosverticales)}}, {{$porcentaje_encaudit2/count($datosverticales)}}, {{$porcentaje_encaudit1/count($datosverticales)}}, {{$porcentaje_encaudit0/count($datosverticales)}}],
                                                         backgroundColor: "transparent",
                                                         borderColor: "#004e92",
                                                         borderWidth: 2
