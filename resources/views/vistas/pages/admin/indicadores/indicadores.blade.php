@@ -1159,7 +1159,7 @@ foreach($ordenes as $orden){
     $tiempoPF += \Carbon\Carbon::parse($orden->enproceso)->diffInMinutes($orden->finalizado);
 }
 
-$tiempo = Carbon::createFromDate(2020, 1, 1);
+$tiempo = \Carbon\Carbon::createFromDate(2020, 1, 1);
 
 $tSP = $tiempo->addMinutes($tiempoSP);
 $tPF = $tiempo->addMinutes($tiempoPF);
