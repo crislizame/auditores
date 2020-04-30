@@ -1169,21 +1169,16 @@
             <div class="col py-2 mb-4" style="background: white;">
                 <div class="col-md-6 offset-md-3 text-center">
     
-                    <div class="calificacion mx-auto"></div>
                         @php
-
                         $ordenes = (new \App\Orden_Requerimiento())->select('solicitado','enproceso','finalizado','calificacion')
-
                         ->join('orden_trabajos','orden_requermientos.idorden_requermientos','orden_trabajos.orden_requermiento_id')
                         ->join('calificaciones','orden_trabajos.idorden_trabajos','calificaciones.id_orden_trabajo')
-
                         ->join('problemas','orden_requermientos.problema_id','problemas.id')
                         ->join('subareas','problemas.subarea_id','subareas.idsubareas')
                         ->join('areas','subareas.area_id','areas.idareas')
                         ->join('entidades','areas.entidad_id','entidades.identidad')
                         ->where('entidades.nombre','Mantenimiento')
                         ->whereBetween('solicitado', [$datainicio, $datafin]);
-
                         if($pds_id != "%"){
                             $ordenes = $ordenes->where("pds_id",$pds_id);
                         } else {
@@ -1195,18 +1190,13 @@
                             }
                         }
                         $ordenes = $ordenes->get();
-
                         $calificaciones = 0;
-
                         foreach($ordenes as $orden){
                             $calificaciones += $orden->calificacion;
                         }
-
-
-
-
-                            $porcentaje = 0;
-                            /*switch($calificaciones/count($ordenes)){
+                        $porcentaje = 0;
+                        if(count($ordenes)>0){
+                            switch($calificaciones/count($ordenes)){
                                 case 1:
                                     $porcentaje = 0;
                                 break;
@@ -1222,9 +1212,20 @@
                                 case 5:
                                     $porcentaje = 100;
                                 break;
-                            }*/
+                            }
+                        }
                         @endphp
-                    <label class="col-form-label col"><b>{{ count($ordenes)>0?$calificaciones/count($ordenes):0 }}%</b></label>
+                    <div class="calificacion mx-auto"></div>
+                    <label class="col-form-label col"><b>{{ $porcentaje }}%</b></label>
+                    <style>
+                        .calificacion {
+                            width: 80px;
+                            height: 80px;
+                            background-repeat: no-repeat;
+                            background-position: center;
+                            background-image:url("{{url('/img/cara')}}{{ count($ordenes)>0?$calificaciones/count($ordenes):0 }}.jpg");
+                        }
+                    </style>
 
                 </div>
             </div>
