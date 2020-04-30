@@ -1224,7 +1224,7 @@
                                 break;
                             }*/
                         @endphp
-                    <label class="col-form-label col"><b>{{ $calificaciones/count($ordenes) }}%</b></label>
+                    <label class="col-form-label col"><b>{{ count($ordenes)>0?$calificaciones/count($ordenes):0 }}%</b></label>
 
                 </div>
             </div>
