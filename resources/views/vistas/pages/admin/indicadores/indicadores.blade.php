@@ -1167,7 +1167,7 @@
             </div>
             <h5 class="titulos-grandes text-center">Encuesta a Comisionista</h5>
             <div class="col py-2 mb-4" style="background: white;">
-                <div class="col-md-6 offset-md-3 text-center">
+                <div class="row col-md-3 offset-md-4 text-center p-0">
     
                         @php
                         $ordenes = (new \App\Orden_Requerimiento())->select('solicitado','enproceso','finalizado','calificacion')
@@ -1215,8 +1215,9 @@
                             }
                         }
                         @endphp
-                    <div class="calificacion mx-auto"></div>
-                    <label class="col-form-label col"><b>{{ $porcentaje }}%</b></label>
+                    <div class="col-6 p-0"><div class="calificacion mx-auto"></div></div>
+                    <div class="col-6 p-0 my-auto"><h2 class="text-primary"><b>{{ $porcentaje }}%</b></h2></div>
+
                     <style>
                         .calificacion {
                             width: 80px;
