@@ -1124,8 +1124,8 @@
             <div class="row">
                 <span class="col pr-4 fechasel titulos w-50 font-weight-bold">Estado</span>
             </div>
-            <div class="row">
-                <div class="col-md-6 offset-md-3 text-center" style="background: white;">
+            <div class="row" style="background: white;">
+                <div class="col-md-6 offset-md-3 text-center">
                     <div class="row mt-2 mb-1">
                         <div class="col-md-6 text-primary">Solicitado - Proceso</div>
                         <div class="col-md-6 text-primary">Proceso - Cerrado</div>
@@ -1159,9 +1159,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <span class="col pr-4 fechasel titulos w-50 font-weight-bold">Encuesta a Comisionista</span>
-            </div>
+            <h5 class="titulos-grandes text-center">Encuesta a Comisionista</h5>
 
 
 
