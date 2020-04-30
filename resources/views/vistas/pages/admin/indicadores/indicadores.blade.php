@@ -1124,7 +1124,7 @@
             <div class="row">
                 <span class="col pr-4 fechasel titulos w-50 font-weight-bold">Estado</span>
             </div>
-            <div class="row" style="background: white;">
+            <div class="col py-2 mb-4" style="background: white;">
                 <div class="col-md-6 offset-md-3 text-center">
                     <div class="row mt-2 mb-1">
                         <div class="col-md-6 text-primary">Solicitado - Proceso</div>
@@ -1133,7 +1133,13 @@
                     <hr class="mb-2">
                     <div class="row mb-1">
                         @php
-                            $ordenes = (new \App\Orden_Requerimiento())->select('solicitado','enproceso','finalizado')->whereBetween('solicitado', [$datainicio, $datafin]);
+                            $ordenes = (new \App\Orden_Requerimiento())->select('solicitado','enproceso','finalizado')
+                            ->join('problemas','orden_requermientos.problema_id','problemas.id')
+                            ->join('subareas','problemas.subarea_id','subareas.idsubareas')
+                            ->join('areas','subareas.area_id','areas.idareas')
+                            ->join('entidades','areas.entidad_id','entidades.identidad')
+                            ->where('entidades.nombre','Mantenimiento')
+                            ->whereBetween('solicitado', [$datainicio, $datafin]);
                             if($pds_id != "%"){
                                 $ordenes = $ordenes->where("pds_id",$pds_id);
                             } else {
@@ -1160,6 +1166,68 @@
                 </div>
             </div>
             <h5 class="titulos-grandes text-center">Encuesta a Comisionista</h5>
+            <div class="col py-2 mb-4" style="background: white;">
+                <div class="col-md-6 offset-md-3 text-center">
+    
+                    <div class="calificacion mx-auto"></div>
+                        @php
+
+                        $ordenes = (new \App\Orden_Requerimiento())->select('solicitado','enproceso','finalizado','calificacion')
+
+                        ->join('orden_trabajos','orden_requermientos.idorden_requermientos','orden_trabajos.orden_requermiento_id')
+                        ->join('calificaciones','orden_trabajos.idorden_trabajos','calificaciones.id_orden_trabajo')
+
+                        ->join('problemas','orden_requermientos.problema_id','problemas.id')
+                        ->join('subareas','problemas.subarea_id','subareas.idsubareas')
+                        ->join('areas','subareas.area_id','areas.idareas')
+                        ->join('entidades','areas.entidad_id','entidades.identidad')
+                        ->where('entidades.nombre','Mantenimiento')
+                        ->whereBetween('solicitado', [$datainicio, $datafin]);
+
+                        if($pds_id != "%"){
+                            $ordenes = $ordenes->where("pds_id",$pds_id);
+                        } else {
+                            if($ciudad != "sc"){
+                                $ordenes = $ordenes->join('pdsperfiles','orden_requerimientos.pds_id', 'pdsperfiles.id')->where("pds_ciudad",$ciudad);
+                            }
+                            if($provincia != "sp"){
+                                $ordenes = $ordenes->join('pdsperfiles','orden_requerimientos.pds_id', 'pdsperfiles.id')->where("pds_provincia",$provincia);
+                            }
+                        }
+                        $ordenes = $ordenes->get();
+
+                        $calificaciones = 0;
+
+                        foreach($ordenes as $orden){
+                            $calificaciones += $orden->calificacion;
+                        }
+
+
+
+
+                            $porcentaje = 0;
+                            /*switch($calificaciones/count($ordenes)){
+                                case 1:
+                                    $porcentaje = 0;
+                                break;
+                                case 2:
+                                    $porcentaje = 25;
+                                break;
+                                case 3:
+                                    $porcentaje = 50;
+                                break;
+                                case 4:
+                                    $porcentaje = 75;
+                                break;
+                                case 5:
+                                    $porcentaje = 100;
+                                break;
+                            }*/
+                        @endphp
+                    <label class="col-form-label col"><b>{{ $calificaciones/count($ordenes) }}%</b></label>
+
+                </div>
+            </div>
 
 
 
