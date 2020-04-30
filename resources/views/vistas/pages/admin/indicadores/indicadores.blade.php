@@ -1031,7 +1031,7 @@
         <div class="col-lg-3 mt-0">
             <span class="titulos text-info bold">Filtrar</span>
             <div class="card pb-3 m-0">
-                <form action="{{route('indicadores')}}?cat=comisionistas" method="post">
+                <form action="{{route('indicadores')}}?cat=mantenimiento" method="post">
                     {{csrf_field()}}
                     <div class="card-body pt-1">
                         <div class="row align-content-center text-center">
@@ -1124,7 +1124,7 @@
             <div class="row">
                 <span class="col pr-4 fechasel titulos w-50 font-weight-bold">Estado</span>
             </div>
-            <div class="row">
+            <div class="row" style="background: white;">
                 <div class="col-md-6 offset-md-3 text-center">
                     <div class="row mt-2 mb-1">
                         <div class="col-md-6 text-primary">Solicitado - Proceso</div>
