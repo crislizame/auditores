@@ -1230,6 +1230,7 @@ foreach($ordenes as $orden){
                 allowClear: false
             });
         @endif
+
         @if(request('cat') == "comisionistas")
             var Ec_ = '<li class="nav-item"><div class="w-100"><div class=" text-center"><span class="titulos">Estado</span><hr></div><div class="text-center"><input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{$porcentajeE!=0?$porcentajeE/$totaldatosverticalesE:0}}"></div><div class="text-center"><canvas class="lineChartE" height="100%"></canvas></div></div></li>';
             $('.lista-estado').prepend(Ec_);
@@ -1289,6 +1290,40 @@ foreach($ordenes as $orden){
                 }
             });
 
+            $(".knob").knob({
+                'readOnly': true,
+                'rotation': "anticlockwise",
+            });
+            $('.loadingc').addClass('hidden');
+            $('.selglobal').click(function() {
+                $('#pdssel').val(0).trigger('change');
+                $('#ciudad').val(0).trigger('change');
+            });
+            $('#pdssel').on('select2:select', function(e) {
+                $('#ciudad').val(0).trigger('change');
+            });
+            $('#ciudad').on('select2:select', function(e) {
+                $('#pdssel').val(0).trigger('change');
+            });
+            $('#provincia').on('select2:select', function(e) {
+                $('#ciudad').val(0).trigger('change');
+                $('#pdssel').val(0).trigger('change');
+            });
+            $('#pdssel').select2({
+                placeholder: "Seleccione un PDS",
+                allowClear: false
+            });
+            $('#ciudad').select2({
+                placeholder: "Seleccione una Ciudad",
+                allowClear: false
+            });
+            $('#provincia').select2({
+                placeholder: "Seleccione una Provincia",
+                allowClear: false
+            });
+        @endif
+
+        @if(request('cat') == "mantenimiento")
             $(".knob").knob({
                 'readOnly': true,
                 'rotation': "anticlockwise",
