@@ -1151,14 +1151,22 @@ if($pds_id != "%"){
 
 $ordenes = $ordenes->get();
 
-foreach($ordenes as $orden){
+$tiempoSP = 0;
+$tiempoPF = 0;
 
+foreach($ordenes as $orden){
+    $tiempoSP += \Carbon\Carbon::parse($orden->solicitado)->diffInMinutes($orden->enproceso);
+    $tiempoPF += \Carbon\Carbon::parse($orden->enproceso)->diffInMinutes($orden->finalizado);
 }
 
+$tiempo = Carbon::createFromDate(2020, 1, 1);
+
+$tSP = $tiempo->addMinutes($tiempoSP);
+$tPF = $tiempo->addMinutes($tiempoPF);
 
 @endphp
-                        <div class="col-md-6 border py-5"><h2 class="my-5 text-primary">00:00</h2></div>
-                        <div class="col-md-6 border py-5"><h2 class="my-5 text-primary">00:00</h2></div>
+                        <div class="col-md-6 border py-5"><h2 class="my-5 text-primary">{{$tSP->format('H:i')}}</h2></div>
+                        <div class="col-md-6 border py-5"><h2 class="my-5 text-primary">{{$tPF->format('H:i')}}</h2></div>
 
 
                     </div>
