@@ -1026,6 +1026,121 @@
     </div>
     @endif
 
+    @if(request('cat') == "mantenimiento")
+    <div class="row h-100">
+        <div class="col-lg-3 mt-0">
+            <span class="titulos text-info bold">Filtrar</span>
+            <div class="card pb-3 m-0">
+                <form action="{{route('indicadores')}}?cat=comisionistas" method="post">
+                    {{csrf_field()}}
+                    <div class="card-body pt-1">
+                        <div class="row align-content-center text-center">
+                            <span class=" pr-4 pl-4 w-100"><i class="fa text-center fa-sliders pointer"></i> Seleccionar rango de fecha:</span>
+                            </span>
+                        </div>
+                        <div class="row pt-2 pr-4 pl-4">
+                            <label for="sel-dateinicio">Inicio (o único día)</label>
+                            <input type="date" name="sel-dateinicio" id="sel-dateinicio" class="form-control " value="{{(new \Carbon\Carbon())::now()->format('Y-m-d')}}">
+                        </div>
+                        <div class="row pt-2 pb-3 pr-4 pl-4">
+                            <label for="sel-datefin">Fin (si es único día dejar en blanco)</label>
+                            <input type="date" name="sel-datefin" id="sel-datefin" class="form-control ">
+                        </div>
+                        <hr class="pb-2">
+                        <div class="row align-content-center text-center">
+                            <span class=" pr-4 pl-4 w-100"><i class="fa text-center fa-sliders "></i> Seleccionar escala:</span>
+                            </span>
+                        </div>
+                        <input type="hidden" class="tipoescala" name="tipoescala">
+                        <div class="row pt-2 pr-4 pl-4 text-center">
+                            <span class="w-100 selglobal text-danger pointer"> Borrar filtros escala</span>
+                        </div>
+                        <div class="row pt-2 pb-3 pr-4 pl-4">
+                            <label for="sel-date">Analizar por Provincia</label>
+                            <select name="provincia" class="form-control form-control-sm p-0" id="provincia" style="height: 23px;">
+                                <option selected value="0">Sin filtro</option>
+                                @php
+                                $provincias = (new \App\Pdsperfile())->groupBy('pds_provincia')->orderBy('pds_provincia','asc')->get();
+                                @endphp
+                                @foreach($provincias as $provincia)
+                                <option value="{{$provincia->pds_provincia}}">{{$provincia->pds_provincia}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="row pt-2 pb-3 pr-4 pl-4">
+                            <label for="sel-date">Analizar por Ciudad</label>
+                            <select name="ciudad" class="form-control form-control-sm p-0" id="ciudad" style="height: 23px;">
+                                <option selected value="0">Sin filtro</option>
+                                @php
+                                $ciudades = (new \App\Pdsperfile())->groupBy('pds_ciudad')->orderBy('pds_ciudad','asc')->get();
+                                @endphp
+                                @foreach($ciudades as $ciudad)
+                                <option value="{{$ciudad->pds_ciudad}}">{{$ciudad->pds_ciudad}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="row pt-2 pb-3 pr-4 pl-4">
+                            <label for="pdssel">Analizar por PDS</label>
+                            <select name="pdssel" class="form-control form-control-sm p-0 " id="pdssel" style="height: 23px;">
+                                <option value="0"> Sin filtro</option>
+
+                                @php
+                                $ciudades = (new \App\Pdsperfile())->orderBy('pds_ciudad','asc')->get();
+                                @endphp
+                                @foreach($ciudades as $ciudad)
+                                <option value="{{$ciudad->id}}">{{$ciudad->pds_name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="row pt-1 m-0 w-100">
+                            <button type="submit" class="btn w-100 btn-primary">Generar</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+        @php
+        $datainicio = request()->has('sel-dateinicio')? \Carbon\Carbon::parse(request()->post('sel-dateinicio'))->toDateTimeString() : \Carbon\Carbon::now()->toDateTimeString() ;
+        $datainicioletra = request()->has('sel-dateinicio')? \Carbon\Carbon::parse(request()->post('sel-dateinicio'))->isoFormat('dddd, D \d\e\ MMMM \d\e\l YYYY') : \Carbon\Carbon::now()->isoFormat('dddd, D \d\e\ MMMM \d\e\l YYYY') ;
+        $datafin = request()->has('sel-datefin')? \Carbon\Carbon::parse(request()->post('sel-datefin'))->toDateTimeString() : \Carbon\Carbon::now()->addDays(1)->toDateTimeString() ;
+        $datafinletra = request()->post('sel-datefin') != null ? "<br>".ucfirst(\Carbon\Carbon::parse(request()->post('sel-datefin'))->isoFormat('dddd, D \d\e\ MMMM \d\e\l YYYY')): "" ;
+        $pds_id = ((request()->post('pdssel') != "0") and (request()->post('pdssel') != null)) || (request()->has('pdssel') and request()->post('pdssel') != "0") ? request()->post('pdssel') : "%" ;
+        $global = request()->post('global') == "on"? request()->post('global') : "off" ;
+        $ciudad = ((request()->post('ciudad') != "0") and (request()->post('ciudad') != null)) || (request()->has('ciudad') and request()->post('ciudad') != "0")? request()->post('ciudad') : "sc" ;
+        $provincia = ((request()->post('provincia') != "0") and (request()->post('provincia') != null)) || (request()->has('provincia') and request()->post('provincia') != "0")? request()->post('provincia') : "sp" ;
+        $cambio = "Global";
+        if($ciudad != "sc"){
+            $cambio = ucfirst($ciudad);
+        }else if($pds_id != "%"){
+            $cambio = (new \App\Pdsperfile())->where('id',$pds_id)->value('pds_name');
+        }
+        @endphp
+        <div class="col-lg-9 mt-0">
+            <div class="row">
+                <span class="col pr-4 fechasel titulos w-50 text-right font-weight-bold">{{ucfirst($datainicioletra)}} {!! $datafinletra !!}</span>
+            </div>
+            <h5 class="titulos-grandes text-center">Tiempo</h5>
+            <div class="row">
+                <span class="col pr-4 fechasel titulos w-50 font-weight-bold">Estado</span>
+            </div>
+            <div class="row">
+                <div class="col-md-6 offset-med-6 text-center">
+                    <div class="row mb-1">
+                        <div class="col-md-6">Solicitado - Proceso</div>
+                        <div class="col-md-6">Proceso - Cerrado</div>
+                    </div>
+                    <hr class="mb-1">
+                    <div class="row mb-1">
+                        <div class="col-md-6"><h2>00:00</h2></div>
+                        <div class="col-md-6"><h2>00:00</h2></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    @endif
 
 </div>
 
