@@ -1159,10 +1159,8 @@ foreach($ordenes as $orden){
     $tiempoPF += \Carbon\Carbon::parse($orden->enproceso)->diffInMinutes($orden->finalizado);
 }
 
-$tiempo = \Carbon\Carbon::createFromDate(2020, 1, 1);
-
-$tSP = $tiempo->addMinutes($tiempoSP);
-$tPF = $tiempo->addMinutes($tiempoPF);
+$tSP = \Carbon\Carbon::createFromDate(2020, 1, 1)->addMinutes($tiempoSP/count($ordenes));
+$tPF = \Carbon\Carbon::createFromDate(2020, 1, 1)->addMinutes($tiempoPF/count($ordenes));
 
 @endphp
                         <div class="col-md-6 border py-5"><h2 class="my-5 text-primary">{{$tSP->format('H:i')}}</h2></div>
