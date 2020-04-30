@@ -1215,8 +1215,8 @@
                             }
                         }
                         @endphp
-                    <div class="col-6 p-0"><div class="calificacion mx-auto"></div></div>
-                    <div class="col-6 p-0 my-auto"><h2 class="text-primary"><b>{{ $porcentaje }}%</b></h2></div>
+                    <div class="col-6 p-0 mx-auto"><div class="calificacion mx-auto"></div></div>
+                    <div class="col-6 p-0 my-auto mx-auto"><h2 class="text-primary"><b>{{ $porcentaje }}%</b></h2></div>
 
                     <style>
                         .calificacion {
