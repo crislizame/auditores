@@ -1257,6 +1257,9 @@
                     @forelse($ordenes as $orden)
                         @php
                             $ordenes0 = count(\Illuminate\Support\Facades\DB::select("SELECT count(*) as problemas FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = 'Mantenimiento' AND subareas.nombre = '$orden->subarea' AND solicitado BETWEEN '$mesactualinicio' AND '$mesactualfin'"));
+                            $ordenes1 = count(\Illuminate\Support\Facades\DB::select("SELECT count(*) as problemas FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = 'Mantenimiento' AND subareas.nombre = '$orden->subarea' AND solicitado BETWEEN '$mes1inicio' AND '$mes1fin'"));
+                            $ordenes2 = count(\Illuminate\Support\Facades\DB::select("SELECT count(*) as problemas FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = 'Mantenimiento' AND subareas.nombre = '$orden->subarea' AND solicitado BETWEEN '$mes2inicio' AND '$mes2fin'"));
+                            $ordenes3 = count(\Illuminate\Support\Facades\DB::select("SELECT count(*) as problemas FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = 'Mantenimiento' AND subareas.nombre = '$orden->subarea' AND solicitado BETWEEN '$mes3inicio' AND '$mes3fin'"));
                         @endphp
                         <li class="nav-item">
                             <div class="w-100">
@@ -1290,7 +1293,7 @@
                                                     labels: ['{{$mes3letra}}', '{{$mes2letra}}', '{{$mes1letra}}', '{{$mes0letra}}'],
                                                     datasets: [{
                                                         label: '',
-                                                        data: [0,0,0, {{$ordenes0}}],
+                                                        data: [{{$ordenes3}}, {{$ordenes2}}, {{$ordenes1}}, {{$ordenes0}}],
                                                         backgroundColor: "transparent",
                                                         borderColor: "#004e92",
                                                         borderWidth: 2
