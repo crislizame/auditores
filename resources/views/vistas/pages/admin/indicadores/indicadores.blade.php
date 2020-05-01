@@ -1248,27 +1248,30 @@
                         $mes3inicio = \Carbon\Carbon::now()->subMonths(3)->firstOfMonth()->toDateTimeString();
                         $mes3fin = \Carbon\Carbon::now()->subMonths(3)->lastOfMonth()->toDateTimeString();
 
-                        $ordenes = \Illuminate\Support\Facades\DB::select("SELECT DISTINCT(subareas.nombre) FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = 'Mantenimiento' AND solicitado BETWEEN '$datainicio' AND '$datafin'");
+                        $ordenes = \Illuminate\Support\Facades\DB::select("SELECT subareas.nombre as subarea, count(*) as problemas FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = 'Mantenimiento' AND solicitado BETWEEN '$datainicio' AND '$datafin' GROUP BY subareas.nombre");
 
                         $ordenes = collect($ordenes)->toArray();
                     @endphp
 
                     <ul class="indicadoresgraf nav lista-estado">
                     @forelse($ordenes as $orden)
+                        @php
+                            $ordenes0 = count(\Illuminate\Support\Facades\DB::select("SELECT count(*) as problemas FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = 'Mantenimiento' AND subareas.nombre = '$orden->subarea' AND solicitado BETWEEN '$mesactualinicio' AND '$mesactualfin'"));
+                        @endphp
                         <li class="nav-item">
                             <div class="w-100">
                                 <div class=" text-center">
-                                    <span class="titulos">{{$orden->nombre}}</span>
+                                    <span class="titulos">{{$orden->subarea}}</span>
                                     <hr>
                                 </div>
                                 <div class="text-center">
-                                    <input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="0">
+                                    <input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{ $orden->problemas }}">
                                 </div>
                                 <div class="text-center">
-                                    <canvas class="lineChart{{$orden->nombre}}" height="100%"></canvas>
+                                    <canvas class="lineChart{{$orden->subarea}}" height="100%"></canvas>
                                     <script>
                                         $(document).ready(function() {
-                                            var ctx = $('.lineChart{{$orden->nombre}}');
+                                            var ctx = $('.lineChart{{$orden->subarea}}');
                                             ctx.css('display', 'initial!important');
                                             var chartOptions = {
                                                 legend: {
@@ -1287,7 +1290,7 @@
                                                     labels: ['{{$mes3letra}}', '{{$mes2letra}}', '{{$mes1letra}}', '{{$mes0letra}}'],
                                                     datasets: [{
                                                         label: '',
-                                                        data: [0,0,0,0],
+                                                        data: [0,0,0, {{$ordenes0}}],
                                                         backgroundColor: "transparent",
                                                         borderColor: "#004e92",
                                                         borderWidth: 2
