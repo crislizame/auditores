@@ -1165,6 +1165,7 @@
                     </div>
                 </div>
             </div>
+
             <h5 class="titulos-grandes text-center">Encuesta a Comisionista</h5>
             <div class="col py-2 mb-4" style="background: white;">
                 <div class="row col-md-3 offset-md-4 text-center p-0">
@@ -1217,7 +1218,6 @@
                         @endphp
                     <div class="col-6 p-0 mx-auto"><div class="calificacion mx-auto"></div></div>
                     <div class="col-6 p-0 my-auto mx-auto"><h2 class="text-primary"><b>{{ $porcentaje }}%</b></h2></div>
-
                     <style>
                         .calificacion {
                             width: 80px;
@@ -1227,7 +1227,81 @@
                             background-image:url("{{url('/img/cara')}}{{ count($ordenes)>0?$calificaciones/count($ordenes):0 }}.jpg");
                         }
                     </style>
+                </div>
+            </div>
 
+            <h5 class="titulos-grandes text-center">Resultado de reporteria</h5>
+            <div class="row data-estado mb-2">
+                <div class="col-12 " {{--style="height: 546px!important;overflow: scroll;overflow-x: hidden;"--}}>
+                    @php
+                        $mes0letra = \Carbon\Carbon::now()->isoFormat('MMM');
+                        $mes1letra = \Carbon\Carbon::now()->subMonths(1)->isoFormat('MMM');
+                        $mes2letra = \Carbon\Carbon::now()->subMonths(2)->isoFormat('MMM');
+                        $mes3letra = \Carbon\Carbon::now()->subMonths(3)->isoFormat('MMM');
+
+                        $mesactualinicio = \Carbon\Carbon::now()->firstOfMonth()->toDateTimeString();
+                        $mesactualfin = \Carbon\Carbon::now()->lastOfMonth()->toDateTimeString();
+                        $mes1inicio = \Carbon\Carbon::now()->subMonths(1)->firstOfMonth()->toDateTimeString();
+                        $mes1fin = \Carbon\Carbon::now()->subMonths(1)->lastOfMonth()->toDateTimeString();
+                        $mes2inicio = \Carbon\Carbon::now()->subMonths(2)->firstOfMonth()->toDateTimeString();
+                        $mes2fin = \Carbon\Carbon::now()->subMonths(2)->lastOfMonth()->toDateTimeString();
+                        $mes3inicio = \Carbon\Carbon::now()->subMonths(3)->firstOfMonth()->toDateTimeString();
+                        $mes3fin = \Carbon\Carbon::now()->subMonths(3)->lastOfMonth()->toDateTimeString();
+
+                        $ordenes = \Illuminate\Support\Facades\DB::select("SELECT DISTINCT(subareas.nombre) FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = 'Mantenimiento' AND solicitado BETWEEN $datainicio AND $datafin");
+
+                        $ordenes = collect($ordenes)->toArray();
+                    @endphp
+
+                    <ul class="indicadoresgraf nav lista-estado">
+                    @forelse($ordenes as $orden)
+                        <li class="nav-item">
+                            <div class="w-100">
+                                <div class=" text-center">
+                                    <span class="titulos">{{$orden->nombre}}</span>
+                                    <hr>
+                                </div>
+                                <div class="text-center">
+                                    <input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="0">
+                                </div>
+                                <div class="text-center">
+                                    <canvas class="lineChart{{$orden->nombre}}" height="100%"></canvas>
+                                    <script>
+                                        $(document).ready(function() {
+                                            var ctx = $('.lineChart{{$orden->nombre}}');
+                                            ctx.css('display', 'initial!important');
+                                            var chartOptions = {
+                                                legend: {
+                                                    display: false,
+                                                    position: 'top',
+                                                    labels: {
+                                                        boxWidth: 80,
+                                                        fontColor: 'black'
+                                                    }
+                                                }
+                                            };
+                                            var myChart = new Chart(ctx, {
+                                                type: 'line',
+                                                options: chartOptions,
+                                                data: {
+                                                    labels: ['{{$mes3letra}}', '{{$mes2letra}}', '{{$mes1letra}}', '{{$mes0letra}}'],
+                                                    datasets: [{
+                                                        label: '',
+                                                        data: [0,0,0,0],
+                                                        backgroundColor: "transparent",
+                                                        borderColor: "#004e92",
+                                                        borderWidth: 2
+                                                    }]
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                </div>
+                            </div>
+                        </li>
+                    @empty
+                    @endforelse
+                    </ul>
                 </div>
             </div>
 
