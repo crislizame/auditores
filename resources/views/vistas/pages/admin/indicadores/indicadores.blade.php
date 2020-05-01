@@ -1248,7 +1248,7 @@
                         $mes3inicio = \Carbon\Carbon::now()->subMonths(3)->firstOfMonth()->toDateTimeString();
                         $mes3fin = \Carbon\Carbon::now()->subMonths(3)->lastOfMonth()->toDateTimeString();
 
-                        $ordenes = \Illuminate\Support\Facades\DB::select("SELECT DISTINCT(subareas.nombre) FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = 'Mantenimiento' AND solicitado BETWEEN $datainicio AND $datafin");
+                        $ordenes = \Illuminate\Support\Facades\DB::select("SELECT DISTINCT(subareas.nombre) FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = 'Mantenimiento' AND solicitado BETWEEN '$datainicio' AND '$datafin'");
 
                         $ordenes = collect($ordenes)->toArray();
                     @endphp
