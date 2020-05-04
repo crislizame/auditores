@@ -1901,7 +1901,7 @@
                                     <canvas class="lineChartP" height="100%"></canvas>
                                     <script>
                                         $(document).ready(function() {
-                                            var ctx = $('.lineChartP}}');
+                                            var ctx = $('.lineChartP');
                                             ctx.css('display', 'initial!important');
                                             var chartOptions = {
                                                 legend: {
