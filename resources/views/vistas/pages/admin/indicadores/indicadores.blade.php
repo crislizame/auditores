@@ -1779,12 +1779,6 @@
                         $ordenesF2 = count(\Illuminate\Support\Facades\DB::select("SELECT count(*) as problemas FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND finalizado != null AND solicitado BETWEEN '$mes2inicio' AND '$mes2fin'"));
                         $ordenesF3 = count(\Illuminate\Support\Facades\DB::select("SELECT count(*) as problemas FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND finalizado != null AND solicitado BETWEEN '$mes3inicio' AND '$mes3fin'"));
 
-                        $ordenesP = porcentaje( $ordenesS, $ordenesF );
-                        $ordenesP0 = porcentaje( $ordenesS0, $ordenesF0 );
-                        $ordenesP1 = porcentaje( $ordenesS1, $ordenesF1 );
-                        $ordenesP2 = porcentaje( $ordenesS2, $ordenesF2 );
-                        $ordenesP3 = porcentaje( $ordenesS3, $ordenesF3 );
-
                         function porcentaje( $a, $b ){
                             if( $a > $b ){
                                 return $a / $b * 100;
@@ -1794,6 +1788,12 @@
                                 return 0;
                             }
                         }
+
+                        $ordenesP = porcentaje( $ordenesS, $ordenesF );
+                        $ordenesP0 = porcentaje( $ordenesS0, $ordenesF0 );
+                        $ordenesP1 = porcentaje( $ordenesS1, $ordenesF1 );
+                        $ordenesP2 = porcentaje( $ordenesS2, $ordenesF2 );
+                        $ordenesP3 = porcentaje( $ordenesS3, $ordenesF3 );
                     @endphp
 
                     <ul class="indicadoresgraf nav lista-estado">
