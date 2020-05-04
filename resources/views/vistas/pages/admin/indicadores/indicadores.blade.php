@@ -2095,7 +2095,7 @@
             });
         @endif
 
-        @if(request('cat') == "mantenimiento" || request('cat') == "soporte")
+        @if(request('cat') == "mantenimiento" || request('cat') == "soporte" || request('cat') == "rp3")
             $(".knob").knob({
                 'readOnly': true,
                 'rotation': "anticlockwise",
