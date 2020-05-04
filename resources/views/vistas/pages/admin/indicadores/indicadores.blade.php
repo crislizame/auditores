@@ -1808,10 +1808,10 @@
                                     <input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{ $ordenesS }}">
                                 </div>
                                 <div class="text-center">
-                                    <canvas class="lineChart{{$orden->subarea}}" height="100%"></canvas>
+                                    <canvas class="lineChartS" height="100%"></canvas>
                                     <script>
                                         $(document).ready(function() {
-                                            var ctx = $('.lineChart{{$orden->subarea}}');
+                                            var ctx = $('.lineChartS');
                                             ctx.css('display', 'initial!important');
                                             var chartOptions = {
                                                 legend: {
@@ -1853,10 +1853,10 @@
                                     <input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{ $ordenesF }}">
                                 </div>
                                 <div class="text-center">
-                                    <canvas class="lineChart{{$orden->subarea}}" height="100%"></canvas>
+                                    <canvas class="lineChartF" height="100%"></canvas>
                                     <script>
                                         $(document).ready(function() {
-                                            var ctx = $('.lineChart{{$orden->subarea}}');
+                                            var ctx = $('.lineChartF');
                                             ctx.css('display', 'initial!important');
                                             var chartOptions = {
                                                 legend: {
@@ -1898,10 +1898,10 @@
                                     <input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{ $ordenesP }}">
                                 </div>
                                 <div class="text-center">
-                                    <canvas class="lineChart{{$orden->subarea}}" height="100%"></canvas>
+                                    <canvas class="lineChartP" height="100%"></canvas>
                                     <script>
                                         $(document).ready(function() {
-                                            var ctx = $('.lineChart{{$orden->subarea}}');
+                                            var ctx = $('.lineChartP}}');
                                             ctx.css('display', 'initial!important');
                                             var chartOptions = {
                                                 legend: {
