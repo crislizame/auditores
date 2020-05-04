@@ -1938,7 +1938,7 @@
                 </div>
             </div>
 
-            <h5 class="titulos-grandes text-center">Auditorias</h5>
+            <h5 class="titulos-grandes text-center tauditorias">Auditorias</h5>
             <div class="row data-estado mb-2">
                 <div class="col-12 " {{--style="height: 546px!important;overflow: scroll;overflow-x: hidden;"--}}>
                     @php
@@ -1958,12 +1958,13 @@
 
                         $ordenes = \Illuminate\Support\Facades\DB::select("SELECT subareas.nombre as subarea, count(*) as problemas FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND solicitado BETWEEN '$datainicio' AND '$datafin' GROUP BY subareas.nombre");
 
-                        //$ordenes = collect($ordenes)->toArray();
+                        $tproblemas = 0;
                     @endphp
 
                     <ul class="indicadoresgraf nav lista-estado">
                     @forelse($ordenes as $orden)
                         @php
+                            $tproblemas += $orden->problemas;
                             $ordenes0 = count(\Illuminate\Support\Facades\DB::select("SELECT count(*) as problemas FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND subareas.nombre = '$orden->subarea' AND solicitado BETWEEN '$mesactualinicio' AND '$mesactualfin'"));
                             $ordenes1 = count(\Illuminate\Support\Facades\DB::select("SELECT count(*) as problemas FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND subareas.nombre = '$orden->subarea' AND solicitado BETWEEN '$mes1inicio' AND '$mes1fin'"));
                             $ordenes2 = count(\Illuminate\Support\Facades\DB::select("SELECT count(*) as problemas FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND subareas.nombre = '$orden->subarea' AND solicitado BETWEEN '$mes2inicio' AND '$mes2fin'"));
@@ -2211,6 +2212,10 @@
                 placeholder: "Seleccione una Provincia",
                 allowClear: false
             });
+        @endif
+
+        @if(request('cat') == "rp3")
+            $('.tauditorias').html('Auditorias {{ $tproblemas }}');
         @endif
     });
 </script>
