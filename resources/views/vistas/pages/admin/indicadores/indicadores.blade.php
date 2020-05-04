@@ -1606,6 +1606,341 @@
     </div>
     @endif
 
+    @if(request('cat') == "rp3")
+    @php
+        $category = 'RP3';
+    @endphp
+    <div class="row h-100">
+        <div class="col-lg-3 mt-0">
+            <span class="titulos text-info bold">Filtrar</span>
+            <div class="card pb-3 m-0">
+                <form action="{{route('indicadores')}}?cat=rp3" method="post">
+                    {{csrf_field()}}
+                    <div class="card-body pt-1">
+                        <div class="row align-content-center text-center">
+                            <span class=" pr-4 pl-4 w-100"><i class="fa text-center fa-sliders pointer"></i> Seleccionar rango de fecha:</span>
+                            </span>
+                        </div>
+                        <div class="row pt-2 pr-4 pl-4">
+                            <label for="sel-dateinicio">Inicio (o único día)</label>
+                            <input type="date" name="sel-dateinicio" id="sel-dateinicio" class="form-control " value="{{(new \Carbon\Carbon())::now()->format('Y-m-d')}}">
+                        </div>
+                        <div class="row pt-2 pb-3 pr-4 pl-4">
+                            <label for="sel-datefin">Fin (si es único día dejar en blanco)</label>
+                            <input type="date" name="sel-datefin" id="sel-datefin" class="form-control ">
+                        </div>
+                        <hr class="pb-2">
+                        <div class="row align-content-center text-center">
+                            <span class=" pr-4 pl-4 w-100"><i class="fa text-center fa-sliders "></i> Seleccionar escala:</span>
+                            </span>
+                        </div>
+                        <input type="hidden" class="tipoescala" name="tipoescala">
+                        <div class="row pt-2 pr-4 pl-4 text-center">
+                            <span class="w-100 selglobal text-danger pointer"> Borrar filtros escala</span>
+                        </div>
+                        <div class="row pt-2 pb-3 pr-4 pl-4">
+                            <label for="sel-date">Analizar por Provincia</label>
+                            <select name="provincia" class="form-control form-control-sm p-0" id="provincia" style="height: 23px;">
+                                <option selected value="0">Sin filtro</option>
+                                @php
+                                $provincias = (new \App\Pdsperfile())->groupBy('pds_provincia')->orderBy('pds_provincia','asc')->get();
+                                @endphp
+                                @foreach($provincias as $provincia)
+                                <option value="{{$provincia->pds_provincia}}">{{$provincia->pds_provincia}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="row pt-2 pb-3 pr-4 pl-4">
+                            <label for="sel-date">Analizar por Ciudad</label>
+                            <select name="ciudad" class="form-control form-control-sm p-0" id="ciudad" style="height: 23px;">
+                                <option selected value="0">Sin filtro</option>
+                                @php
+                                $ciudades = (new \App\Pdsperfile())->groupBy('pds_ciudad')->orderBy('pds_ciudad','asc')->get();
+                                @endphp
+                                @foreach($ciudades as $ciudad)
+                                <option value="{{$ciudad->pds_ciudad}}">{{$ciudad->pds_ciudad}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="row pt-2 pb-3 pr-4 pl-4">
+                            <label for="pdssel">Analizar por PDS</label>
+                            <select name="pdssel" class="form-control form-control-sm p-0 " id="pdssel" style="height: 23px;">
+                                <option value="0"> Sin filtro</option>
+
+                                @php
+                                $ciudades = (new \App\Pdsperfile())->orderBy('pds_ciudad','asc')->get();
+                                @endphp
+                                @foreach($ciudades as $ciudad)
+                                <option value="{{$ciudad->id}}">{{$ciudad->pds_name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="row pt-1 m-0 w-100">
+                            <button type="submit" class="btn w-100 btn-primary">Generar</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+        @php
+        $datainicio = request()->has('sel-dateinicio')? \Carbon\Carbon::parse(request()->post('sel-dateinicio'))->toDateTimeString() : \Carbon\Carbon::now()->toDateTimeString() ;
+        $datainicioletra = request()->has('sel-dateinicio')? \Carbon\Carbon::parse(request()->post('sel-dateinicio'))->isoFormat('dddd, D \d\e\ MMMM \d\e\l YYYY') : \Carbon\Carbon::now()->isoFormat('dddd, D \d\e\ MMMM \d\e\l YYYY') ;
+        $datafin = request()->has('sel-datefin')? \Carbon\Carbon::parse(request()->post('sel-datefin'))->toDateTimeString() : \Carbon\Carbon::now()->addDays(1)->toDateTimeString() ;
+        $datafinletra = request()->post('sel-datefin') != null ? "<br>".ucfirst(\Carbon\Carbon::parse(request()->post('sel-datefin'))->isoFormat('dddd, D \d\e\ MMMM \d\e\l YYYY')): "" ;
+        $pds_id = ((request()->post('pdssel') != "0") and (request()->post('pdssel') != null)) || (request()->has('pdssel') and request()->post('pdssel') != "0") ? request()->post('pdssel') : "%" ;
+        $global = request()->post('global') == "on"? request()->post('global') : "off" ;
+        $ciudad = ((request()->post('ciudad') != "0") and (request()->post('ciudad') != null)) || (request()->has('ciudad') and request()->post('ciudad') != "0")? request()->post('ciudad') : "sc" ;
+        $provincia = ((request()->post('provincia') != "0") and (request()->post('provincia') != null)) || (request()->has('provincia') and request()->post('provincia') != "0")? request()->post('provincia') : "sp" ;
+        $cambio = "Global";
+        if($ciudad != "sc"){
+            $cambio = ucfirst($ciudad);
+        }else if($pds_id != "%"){
+            $cambio = (new \App\Pdsperfile())->where('id',$pds_id)->value('pds_name');
+        }
+        @endphp
+        <div class="col-lg-9 mt-0">
+            <div class="row">
+                <span class="col pr-4 fechasel titulos w-50 text-right font-weight-bold">{{ucfirst($datainicioletra)}} {!! $datafinletra !!}</span>
+            </div>
+            <h5 class="titulos-grandes text-center">Tiempo</h5>
+            <div class="row">
+                <span class="col pr-4 fechasel titulos w-50 font-weight-bold">Estado</span>
+            </div>
+            <div class="col py-2 mb-4" style="background: white;">
+                <div class="col-md-6 offset-md-3 text-center">
+                    <div class="row mt-2 mb-1">
+                        <div class="col-md-6 text-primary">Solicitado - Proceso</div>
+                        <div class="col-md-6 text-primary">Proceso - Cerrado</div>
+                    </div>
+                    <hr class="mb-2">
+                    <div class="row mb-1">
+                        @php
+                            $ordenes = (new \App\Orden_Requerimiento())->select('solicitado','enproceso','finalizado')
+                            ->join('problemas','orden_requermientos.problema_id','problemas.id')
+                            ->join('subareas','problemas.subarea_id','subareas.idsubareas')
+                            ->join('areas','subareas.area_id','areas.idareas')
+                            ->join('entidades','areas.entidad_id','entidades.identidad')
+                            ->where('entidades.nombre', $category)
+                            ->whereBetween('solicitado', [$datainicio, $datafin]);
+                            if($pds_id != "%"){
+                                $ordenes = $ordenes->where("pds_id",$pds_id);
+                            } else {
+                                if($ciudad != "sc"){
+                                    $ordenes = $ordenes->join('pdsperfiles','orden_requerimientos.pds_id', 'pdsperfiles.id')->where("pds_ciudad",$ciudad);
+                                }
+                                if($provincia != "sp"){
+                                    $ordenes = $ordenes->join('pdsperfiles','orden_requerimientos.pds_id', 'pdsperfiles.id')->where("pds_provincia",$provincia);
+                                }
+                            }
+                            $ordenes = $ordenes->get();
+                            $tiempoSP = 0;
+                            $tiempoPF = 0;
+                            foreach($ordenes as $orden){
+                                $tiempoSP += \Carbon\Carbon::parse($orden->solicitado)->diffInMinutes($orden->enproceso);
+                                $tiempoPF += \Carbon\Carbon::parse($orden->enproceso)->diffInMinutes($orden->finalizado);
+                            }
+                            $tSP = count($ordenes)>0?\Carbon\Carbon::create(2000, 1, 1, 0, 0, 0)->addMinutes($tiempoSP/count($ordenes)):\Carbon\Carbon::create(2000, 1, 1, 0, 0, 0);
+                            $tPF = count($ordenes)>0?\Carbon\Carbon::create(2000, 1, 1, 0, 0, 0)->addMinutes($tiempoPF/count($ordenes)):\Carbon\Carbon::create(2000, 1, 1, 0, 0, 0);
+                        @endphp
+                        <div class="col-md-6 border py-5"><h2 class="my-5 text-primary">{{$tSP->format('H:i')}}</h2></div>
+                        <div class="col-md-6 border py-5"><h2 class="my-5 text-primary">{{$tPF->format('H:i')}}</h2></div>
+                    </div>
+                </div>
+            </div>
+
+            <h5 class="titulos-grandes text-center">Resultado de reporteria</h5>
+            <div class="row data-estado mb-2">
+                <div class="col-12 " {{--style="height: 546px!important;overflow: scroll;overflow-x: hidden;"--}}>
+                    @php
+                        $mes0letra = \Carbon\Carbon::now()->isoFormat('MMM');
+                        $mes1letra = \Carbon\Carbon::now()->subMonths(1)->isoFormat('MMM');
+                        $mes2letra = \Carbon\Carbon::now()->subMonths(2)->isoFormat('MMM');
+                        $mes3letra = \Carbon\Carbon::now()->subMonths(3)->isoFormat('MMM');
+
+                        $mesactualinicio = \Carbon\Carbon::now()->firstOfMonth()->toDateTimeString();
+                        $mesactualfin = \Carbon\Carbon::now()->lastOfMonth()->toDateTimeString();
+                        $mes1inicio = \Carbon\Carbon::now()->subMonths(1)->firstOfMonth()->toDateTimeString();
+                        $mes1fin = \Carbon\Carbon::now()->subMonths(1)->lastOfMonth()->toDateTimeString();
+                        $mes2inicio = \Carbon\Carbon::now()->subMonths(2)->firstOfMonth()->toDateTimeString();
+                        $mes2fin = \Carbon\Carbon::now()->subMonths(2)->lastOfMonth()->toDateTimeString();
+                        $mes3inicio = \Carbon\Carbon::now()->subMonths(3)->firstOfMonth()->toDateTimeString();
+                        $mes3fin = \Carbon\Carbon::now()->subMonths(3)->lastOfMonth()->toDateTimeString();
+
+                        $ordenesS = \Illuminate\Support\Facades\DB::select("SELECT count(*) as problemas FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND solicitado BETWEEN '$datainicio' AND '$datafin'");
+                        $ordenesS0 = count(\Illuminate\Support\Facades\DB::select("SELECT count(*) as problemas FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND solicitado BETWEEN '$mesactualinicio' AND '$mesactualfin'"));
+                        $ordenesS1 = count(\Illuminate\Support\Facades\DB::select("SELECT count(*) as problemas FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND solicitado BETWEEN '$mes1inicio' AND '$mes1fin'"));
+                        $ordenesS2 = count(\Illuminate\Support\Facades\DB::select("SELECT count(*) as problemas FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND solicitado BETWEEN '$mes2inicio' AND '$mes2fin'"));
+                        $ordenesS3 = count(\Illuminate\Support\Facades\DB::select("SELECT count(*) as problemas FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND solicitado BETWEEN '$mes3inicio' AND '$mes3fin'"));
+
+                        $ordenesF = \Illuminate\Support\Facades\DB::select("SELECT count(*) as problemas FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND finalizado != null AND solicitado BETWEEN '$datainicio' AND '$datafin'");
+                        $ordenesF0 = count(\Illuminate\Support\Facades\DB::select("SELECT count(*) as problemas FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND finalizado != null AND solicitado BETWEEN '$mesactualinicio' AND '$mesactualfin'"));
+                        $ordenesF1 = count(\Illuminate\Support\Facades\DB::select("SELECT count(*) as problemas FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND finalizado != null AND solicitado BETWEEN '$mes1inicio' AND '$mes1fin'"));
+                        $ordenesF2 = count(\Illuminate\Support\Facades\DB::select("SELECT count(*) as problemas FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND finalizado != null AND solicitado BETWEEN '$mes2inicio' AND '$mes2fin'"));
+                        $ordenesF3 = count(\Illuminate\Support\Facades\DB::select("SELECT count(*) as problemas FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND finalizado != null AND solicitado BETWEEN '$mes3inicio' AND '$mes3fin'"));
+
+                        $ordenesP = porcentaje( $ordenesS, $ordenesF );
+                        $ordenesP0 = porcentaje( $ordenesS0, $ordenesF0 );
+                        $ordenesP1 = porcentaje( $ordenesS1, $ordenesF1 );
+                        $ordenesP2 = porcentaje( $ordenesS2, $ordenesF2 );
+                        $ordenesP3 = porcentaje( $ordenesS3, $ordenesF3 );
+
+                        function porcentaje( $a, $b ){
+                            if( $a > $b ){
+                                return $a / $b * 100;
+                            } else if( $b > $a ){
+                                return $b / $a * 100;
+                            } else {
+                                return 0;
+                            }
+                        }
+                    @endphp
+
+                    <ul class="indicadoresgraf nav lista-estado">
+                    
+                        <li class="nav-item">
+                            <div class="w-100">
+                                <div class=" text-center">
+                                    <span class="titulos">N. de ordenes de requerimiento ingresadas</span>
+                                    <hr>
+                                </div>
+                                <div class="text-center">
+                                    <input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{ $ordenesS }}">
+                                </div>
+                                <div class="text-center">
+                                    <canvas class="lineChart{{$orden->subarea}}" height="100%"></canvas>
+                                    <script>
+                                        $(document).ready(function() {
+                                            var ctx = $('.lineChart{{$orden->subarea}}');
+                                            ctx.css('display', 'initial!important');
+                                            var chartOptions = {
+                                                legend: {
+                                                    display: false,
+                                                    position: 'top',
+                                                    labels: {
+                                                        boxWidth: 80,
+                                                        fontColor: 'black'
+                                                    }
+                                                }
+                                            };
+                                            var myChart = new Chart(ctx, {
+                                                type: 'line',
+                                                options: chartOptions,
+                                                data: {
+                                                    labels: ['{{$mes3letra}}', '{{$mes2letra}}', '{{$mes1letra}}', '{{$mes0letra}}'],
+                                                    datasets: [{
+                                                        label: '',
+                                                        data: [{{$ordenesS3}}, {{$ordenesS2}}, {{$ordenesS1}}, {{$ordenesS0}}],
+                                                        backgroundColor: "transparent",
+                                                        borderColor: "#004e92",
+                                                        borderWidth: 2
+                                                    }]
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="nav-item">
+                            <div class="w-100">
+                                <div class=" text-center">
+                                    <span class="titulos">N. de ordenes de requerimiento solucionadas</span>
+                                    <hr>
+                                </div>
+                                <div class="text-center">
+                                    <input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{ $ordenesF }}">
+                                </div>
+                                <div class="text-center">
+                                    <canvas class="lineChart{{$orden->subarea}}" height="100%"></canvas>
+                                    <script>
+                                        $(document).ready(function() {
+                                            var ctx = $('.lineChart{{$orden->subarea}}');
+                                            ctx.css('display', 'initial!important');
+                                            var chartOptions = {
+                                                legend: {
+                                                    display: false,
+                                                    position: 'top',
+                                                    labels: {
+                                                        boxWidth: 80,
+                                                        fontColor: 'black'
+                                                    }
+                                                }
+                                            };
+                                            var myChart = new Chart(ctx, {
+                                                type: 'line',
+                                                options: chartOptions,
+                                                data: {
+                                                    labels: ['{{$mes3letra}}', '{{$mes2letra}}', '{{$mes1letra}}', '{{$mes0letra}}'],
+                                                    datasets: [{
+                                                        label: '',
+                                                        data: [{{$ordenesF3}}, {{$ordenesF2}}, {{$ordenesF1}}, {{$ordenesF0}}],
+                                                        backgroundColor: "transparent",
+                                                        borderColor: "#004e92",
+                                                        borderWidth: 2
+                                                    }]
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                </div>
+                            </div>
+                        </li>
+                    
+                        <li class="nav-item">
+                            <div class="w-100">
+                                <div class=" text-center">
+                                    <span class="titulos">Porcentaje de Solucionadas VS Ingresadas</span>
+                                    <hr>
+                                </div>
+                                <div class="text-center">
+                                    <input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{ $ordenesP }}">
+                                </div>
+                                <div class="text-center">
+                                    <canvas class="lineChart{{$orden->subarea}}" height="100%"></canvas>
+                                    <script>
+                                        $(document).ready(function() {
+                                            var ctx = $('.lineChart{{$orden->subarea}}');
+                                            ctx.css('display', 'initial!important');
+                                            var chartOptions = {
+                                                legend: {
+                                                    display: false,
+                                                    position: 'top',
+                                                    labels: {
+                                                        boxWidth: 80,
+                                                        fontColor: 'black'
+                                                    }
+                                                }
+                                            };
+                                            var myChart = new Chart(ctx, {
+                                                type: 'line',
+                                                options: chartOptions,
+                                                data: {
+                                                    labels: ['{{$mes3letra}}', '{{$mes2letra}}', '{{$mes1letra}}', '{{$mes0letra}}'],
+                                                    datasets: [{
+                                                        label: '',
+                                                        data: [{{$ordenesP3}}, {{$ordenesP2}}, {{$ordenesP1}}, {{$ordenesP0}}],
+                                                        backgroundColor: "transparent",
+                                                        borderColor: "#004e92",
+                                                        borderWidth: 2
+                                                    }]
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                </div>
+                            </div>
+                        </li>
+                    
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
+
 </div>
 
 
