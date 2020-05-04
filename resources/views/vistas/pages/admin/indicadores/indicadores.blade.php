@@ -1937,6 +1937,90 @@
 
                 </div>
             </div>
+
+            <h5 class="titulos-grandes text-center">Auditorias</h5>
+            <div class="row data-estado mb-2">
+                <div class="col-12 " {{--style="height: 546px!important;overflow: scroll;overflow-x: hidden;"--}}>
+                    @php
+                        $mes0letra = \Carbon\Carbon::now()->isoFormat('MMM');
+                        $mes1letra = \Carbon\Carbon::now()->subMonths(1)->isoFormat('MMM');
+                        $mes2letra = \Carbon\Carbon::now()->subMonths(2)->isoFormat('MMM');
+                        $mes3letra = \Carbon\Carbon::now()->subMonths(3)->isoFormat('MMM');
+
+                        $mesactualinicio = \Carbon\Carbon::now()->firstOfMonth()->toDateTimeString();
+                        $mesactualfin = \Carbon\Carbon::now()->lastOfMonth()->toDateTimeString();
+                        $mes1inicio = \Carbon\Carbon::now()->subMonths(1)->firstOfMonth()->toDateTimeString();
+                        $mes1fin = \Carbon\Carbon::now()->subMonths(1)->lastOfMonth()->toDateTimeString();
+                        $mes2inicio = \Carbon\Carbon::now()->subMonths(2)->firstOfMonth()->toDateTimeString();
+                        $mes2fin = \Carbon\Carbon::now()->subMonths(2)->lastOfMonth()->toDateTimeString();
+                        $mes3inicio = \Carbon\Carbon::now()->subMonths(3)->firstOfMonth()->toDateTimeString();
+                        $mes3fin = \Carbon\Carbon::now()->subMonths(3)->lastOfMonth()->toDateTimeString();
+
+                        $ordenes = \Illuminate\Support\Facades\DB::select("SELECT subareas.nombre as subarea, count(*) as problemas FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND solicitado BETWEEN '$datainicio' AND '$datafin' GROUP BY subareas.nombre");
+
+                        //$ordenes = collect($ordenes)->toArray();
+                    @endphp
+
+                    <ul class="indicadoresgraf nav lista-estado">
+                    @forelse($ordenes as $orden)
+                        @php
+                            $ordenes0 = count(\Illuminate\Support\Facades\DB::select("SELECT count(*) as problemas FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND subareas.nombre = '$orden->subarea' AND solicitado BETWEEN '$mesactualinicio' AND '$mesactualfin'"));
+                            $ordenes1 = count(\Illuminate\Support\Facades\DB::select("SELECT count(*) as problemas FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND subareas.nombre = '$orden->subarea' AND solicitado BETWEEN '$mes1inicio' AND '$mes1fin'"));
+                            $ordenes2 = count(\Illuminate\Support\Facades\DB::select("SELECT count(*) as problemas FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND subareas.nombre = '$orden->subarea' AND solicitado BETWEEN '$mes2inicio' AND '$mes2fin'"));
+                            $ordenes3 = count(\Illuminate\Support\Facades\DB::select("SELECT count(*) as problemas FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND subareas.nombre = '$orden->subarea' AND solicitado BETWEEN '$mes3inicio' AND '$mes3fin'"));
+                        @endphp
+                        <li class="nav-item">
+                            <div class="w-100">
+                                <div class=" text-center">
+                                    <span class="titulos">{{$orden->subarea}}</span>
+                                    <hr>
+                                </div>
+                                <div class="text-center">
+                                    <input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{ $orden->problemas }}">
+                                </div>
+                                <div class="text-center">
+                                    <canvas class="lineChart{{$orden->subarea}}" height="100%"></canvas>
+                                    <script>
+                                        $(document).ready(function() {
+                                            var ctx = $('.lineChart{{$orden->subarea}}');
+                                            ctx.css('display', 'initial!important');
+                                            var chartOptions = {
+                                                legend: {
+                                                    display: false,
+                                                    position: 'top',
+                                                    labels: {
+                                                        boxWidth: 80,
+                                                        fontColor: 'black'
+                                                    }
+                                                }
+                                            };
+                                            var myChart = new Chart(ctx, {
+                                                type: 'line',
+                                                options: chartOptions,
+                                                data: {
+                                                    labels: ['{{$mes3letra}}', '{{$mes2letra}}', '{{$mes1letra}}', '{{$mes0letra}}'],
+                                                    datasets: [{
+                                                        label: '',
+                                                        data: [{{$ordenes3}}, {{$ordenes2}}, {{$ordenes1}}, {{$ordenes0}}],
+                                                        backgroundColor: "transparent",
+                                                        borderColor: "#004e92",
+                                                        borderWidth: 2
+                                                    }]
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                </div>
+                            </div>
+                        </li>
+                    @empty
+                    @endforelse
+                    </ul>
+                </div>
+            </div>
+
+
+
         </div>
     </div>
     @endif
