@@ -40,13 +40,13 @@ class CalificacionesController extends Controller
     {
         $id_orden_trabajo = $request->post("id_orden_trabajo");
         $id_user_calificador = $request->post("id_user_calificador");
-        $calificacion = $request->post("calificacion");
+        $calificacion = $request->post("calificacion") == 0 ? 1 : $request->post("calificacion");
         (new Orden_Requerimiento())->where("idorden_requermientos",$id_orden_trabajo)->update(["isencuestado"=>1]);
 
         $calificacionx = new Calificacione();
         $calificacionx->id_user_calificador = $id_user_calificador;
         $calificacionx->tipo = 'C';
-        $calificacionx->id_orden_trabajo = (new Orden_trabajo())->where("orden_requermiento_id",$id_orden_trabajo)->idorden_trabajos;
+        $calificacionx->id_orden_trabajo = Orden_trabajo::where("orden_requermiento_id",$id_orden_trabajo)->first()->idorden_trabajos;
         $calificacionx->calificacion = $calificacion;
         $calificacionx->save();
 
