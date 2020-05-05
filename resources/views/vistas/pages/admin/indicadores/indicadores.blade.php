@@ -2484,8 +2484,8 @@
             </div>
 
             <h5 class="titulos-grandes text-center tauditorias">Auditorias</h5>
-            <div class="row data-estado mb-2">
-                <div class="col-12 " {{--style="height: 546px!important;overflow: scroll;overflow-x: hidden;"--}}>
+            <div class="data-estado mb-2">
+                <div class="col-12 py-4" style="background:white;">
                     @php
                         $mes0letra = \Carbon\Carbon::now()->isoFormat('MMM');
                         $mes1letra = \Carbon\Carbon::now()->subMonths(1)->isoFormat('MMM');
