@@ -2502,7 +2502,7 @@
                         $mes3fin = \Carbon\Carbon::now()->subMonths(3)->lastOfMonth()->toDateTimeString();
 
                         $subareas = \Illuminate\Support\Facades\DB::select("SELECT subareas.nombre as subarea, count(*) as problemas FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND solicitado BETWEEN '$datainicio' AND '$datafin' GROUP BY subareas.nombre");
-
+                        $control = 0;
                     @endphp
 
                     @forelse($subareas as $subarea)
@@ -2534,10 +2534,10 @@
                                     <input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{ $problema->problemas }}">
                                 </div>
                                 <div class="text-center">
-                                    <canvas class="lineChart{{$problema->problema}}" height="100%"></canvas>
+                                    <canvas class="lineChart{{$control}}" height="100%"></canvas>
                                     <script>
                                         $(document).ready(function() {
-                                            var ctx = $('.lineChart{{$problema->problema}}');
+                                            var ctx = $('.lineChart{{$control++}}');
                                             ctx.css('display', 'initial!important');
                                             var chartOptions = {
                                                 legend: {
