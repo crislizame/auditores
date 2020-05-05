@@ -2020,7 +2020,131 @@
                 </div>
             </div>
 
+            <h5 class="titulos-grandes text-center">Encuestas</h5>
+            <div class="col py-2 mb-4" style="background: white;">
+                @php
+                $ordenesC = (new \App\Orden_Requerimiento())->select('solicitado','enproceso','finalizado','calificacion')
+                ->join('orden_trabajos','orden_requermientos.idorden_requermientos','orden_trabajos.orden_requermiento_id')
+                ->join('calificaciones','orden_trabajos.idorden_trabajos','calificaciones.id_orden_trabajo')
+                ->join('problemas','orden_requermientos.problema_id','problemas.id')
+                ->join('subareas','problemas.subarea_id','subareas.idsubareas')
+                ->join('areas','subareas.area_id','areas.idareas')
+                ->join('entidades','areas.entidad_id','entidades.identidad')
+                ->where('entidades.nombre',$category)
+                ->where('calificaciones.tipo','C')
+                ->whereBetween('solicitado', [$datainicio, $datafin]);
+                if($pds_id != "%"){
+                    $ordenesC = $ordenesC->where("pds_id",$pds_id);
+                } else {
+                    if($ciudad != "sc"){
+                        $ordenesC = $ordenesC->join('pdsperfiles','orden_requerimientos.pds_id', 'pdsperfiles.id')->where("pds_ciudad",$ciudad);
+                    }
+                    if($provincia != "sp"){
+                        $ordenesC = $ordenesC->join('pdsperfiles','orden_requerimientos.pds_id', 'pdsperfiles.id')->where("pds_provincia",$provincia);
+                    }
+                }
+                $ordenesC = $ordenesC->get();
+                $calificacionesC = 0;
+                foreach($ordenesC as $orden){
+                    $calificacionesC += $orden->calificacion;
+                }
+                $porcentajeC = 0;
+                if(count($ordenesC)>0){
+                    switch($calificacionesC/count($ordenesC)){
+                        case 1:
+                            $porcentajeC = 0;
+                        break;
+                        case 2:
+                            $porcentajeC = 25;
+                        break;
+                        case 3:
+                            $porcentajeC = 50;
+                        break;
+                        case 4:
+                            $porcentajeC = 75;
+                        break;
+                        case 5:
+                            $porcentajeC = 100;
+                        break;
+                    }
+                }
+                
+                $ordenesS = (new \App\Orden_Requerimiento())->select('solicitado','enproceso','finalizado','calificacion')
+                ->join('orden_trabajos','orden_requermientos.idorden_requermientos','orden_trabajos.orden_requermiento_id')
+                ->join('calificaciones','orden_trabajos.idorden_trabajos','calificaciones.id_orden_trabajo')
+                ->join('problemas','orden_requermientos.problema_id','problemas.id')
+                ->join('subareas','problemas.subarea_id','subareas.idsubareas')
+                ->join('areas','subareas.area_id','areas.idareas')
+                ->join('entidades','areas.entidad_id','entidades.identidad')
+                ->where('entidades.nombre',$category)
+                ->where('calificaciones.tipo','S')
+                ->whereBetween('solicitado', [$datainicio, $datafin]);
+                if($pds_id != "%"){
+                    $ordenesS = $ordenesS->where("pds_id",$pds_id);
+                } else {
+                    if($ciudad != "sc"){
+                        $ordenesS = $ordenesS->join('pdsperfiles','orden_requerimientos.pds_id', 'pdsperfiles.id')->where("pds_ciudad",$ciudad);
+                    }
+                    if($provincia != "sp"){
+                        $ordenesS = $ordenesS->join('pdsperfiles','orden_requerimientos.pds_id', 'pdsperfiles.id')->where("pds_provincia",$provincia);
+                    }
+                }
+                $ordenesS = $ordenesS->get();
+                $calificacionesS = 0;
+                foreach($ordenesS as $orden){
+                    $calificacionesS += $orden->calificacion;
+                }
+                $porcentajeS = 0;
+                if(count($ordenesS)>0){
+                    switch($calificacionesS/count($ordenesS)){
+                        case 1:
+                            $porcentajeS = 0;
+                        break;
+                        case 2:
+                            $porcentajeS = 25;
+                        break;
+                        case 3:
+                            $porcentajeS = 50;
+                        break;
+                        case 4:
+                            $porcentajeS = 75;
+                        break;
+                        case 5:
+                            $porcentajeS = 100;
+                        break;
+                    }
+                }
+                @endphp
+                <div class="row col-md-6 text-center p-0">    
+                    <div class="col p-0 my-auto mx-auto"><h2 class="text-primary"><b>Comisionista</b></h2></div>
+                    <div class="col p-0 mx-auto"><div class="calificacionC mx-auto"></div></div>
+                    <div class="col p-0 my-auto mx-auto"><h2 class="text-primary"><b>{{ $porcentajeC }}%</b></h2></div>
+                    <style>
+                        .calificacionC {
+                            width: 80px;
+                            height: 80px;
+                            background-repeat: no-repeat;
+                            background-position: center;
+                            background-image:url("{{url('/img/cara')}}{{ count($ordenesC)>0?$calificacionesC/count($ordenesC):0 }}.jpg");
+                        }
+                    </style>
+                </div>
+                <div class="row col-md-6 text-center p-0">    
+                    <div class="col p-0 my-auto mx-auto"><h2 class="text-primary"><b>Soporte</b></h2></div>
+                    <div class="col p-0 mx-auto"><div class="calificacionS mx-auto"></div></div>
+                    <div class="col p-0 my-auto mx-auto"><h2 class="text-primary"><b>{{ $porcentajeS }}%</b></h2></div>
+                    <style>
+                        .calificacionS {
+                            width: 80px;
+                            height: 80px;
+                            background-repeat: no-repeat;
+                            background-position: center;
+                            background-image:url("{{url('/img/cara')}}{{ count($ordenesS)>0?$calificacionesS/count($ordenesS):0 }}.jpg");
+                        }
+                    </style>
+                </div>
 
+            </div>
 
         </div>
     </div>

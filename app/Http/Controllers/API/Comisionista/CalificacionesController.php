@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\Comisionista;
 
 use App\Calificacione;
 use App\Orden_Requerimiento;
+use App\Orden_trabajo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -43,8 +44,9 @@ class CalificacionesController extends Controller
         (new Orden_Requerimiento())->where("idorden_requermientos",$id_orden_trabajo)->update(["isencuestado"=>1]);
 
         $calificacionx = new Calificacione();
-        $calificacionx->id_orden_trabajo = $id_orden_trabajo;
         $calificacionx->id_user_calificador = $id_user_calificador;
+        $calificacionx->tipo = 'C';
+        $calificacionx->id_orden_trabajo = (new Orden_trabajo())->where("orden_requermiento_id",$id_orden_trabajo)->idorden_trabajos;
         $calificacionx->calificacion = $calificacion;
         $calificacionx->save();
 

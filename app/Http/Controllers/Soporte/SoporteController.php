@@ -426,6 +426,7 @@ class SoporteController extends Controller
         $calificacion->id_user_calificador = Auth::user()->id;
         $calificacion->id_orden_trabajo = $request->orden;
         $calificacion->calificacion = ($request->precio + $request->disponibilidad + $request->rapidez + $request->calidad + $request->garantia) / 5;
+        $calificacion->tipo = 'S';
         $calificacion->save();
 
         return redirect('soporte/ordenes')->with('cat', 'loteria');
