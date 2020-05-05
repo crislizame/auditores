@@ -2817,9 +2817,10 @@
         @endif
 
         @if(request('cat') == "lottogame")
-            @foreach($subareas as $subarea)
+            @forelse($subareas as $subarea)
                 $('.t{{$subarea->subarea}}').html('{{$subarea->subarea}} {{$subarea->problemas}}');
-            @endforeach
+            @empty
+            @endforelse
         @endif
 
         $(".knob").knob({
