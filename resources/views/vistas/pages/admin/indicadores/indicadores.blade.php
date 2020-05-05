@@ -2115,11 +2115,12 @@
                     }
                 }
                 @endphp
-                <div class="row col-md-6 text-center p-0">    
-                    <div class="col p-0 my-auto mx-auto"><h2 class="text-primary"><b>Comisionista</b></h2></div>
-                    <div class="col p-0 mx-auto"><div class="calificacionC mx-auto"></div></div>
-                    <div class="col p-0 my-auto mx-auto"><h2 class="text-primary"><b>{{ $porcentajeC }}%</b></h2></div>
-                    <style>
+                <div class="row">
+                    <div class="row col-md-6 text-center px-5">    
+                        <h2 class="text-primary px-3 mt-3 ml-3"><b>Comisionista</b></h2>
+                        <div class="calificacionC"></div>
+                        <h2 class="text-primary pull-left px-3 mt-3"><b>{{ $porcentajeC }}%</b></h2>
+                        <style>
                         .calificacionC {
                             width: 80px;
                             height: 80px;
@@ -2127,13 +2128,15 @@
                             background-position: center;
                             background-image:url("{{url('/img/cara')}}{{ count($ordenesC)>0?$calificacionesC/count($ordenesC):0 }}.jpg");
                         }
-                    </style>
+                        </style>
+                    </div>
                 </div>
-                <div class="row col-md-6 text-center p-0">    
-                    <div class="col p-0 my-auto mx-auto"><h2 class="text-primary"><b>Soporte</b></h2></div>
-                    <div class="col p-0 mx-auto"><div class="calificacionS mx-auto"></div></div>
-                    <div class="col p-0 my-auto mx-auto"><h2 class="text-primary"><b>{{ $porcentajeS }}%</b></h2></div>
-                    <style>
+                <div class="row">
+                    <div class="row col-md-6 text-center px-5">    
+                        <h2 class="text-primary px-3 mt-3 ml-3"><b>Soporte</b></h2>
+                        <div class="calificacionC"></div>
+                        <h2 class="text-primary pull-left px-3 mt-3"><b>{{ $porcentajeS }}%</b></h2>
+                        <style>
                         .calificacionS {
                             width: 80px;
                             height: 80px;
@@ -2141,9 +2144,9 @@
                             background-position: center;
                             background-image:url("{{url('/img/cara')}}{{ count($ordenesS)>0?$calificacionesS/count($ordenesS):0 }}.jpg");
                         }
-                    </style>
+                        </style>
+                    </div>
                 </div>
-
             </div>
 
         </div>
