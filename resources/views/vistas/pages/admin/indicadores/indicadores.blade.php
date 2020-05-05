@@ -2518,7 +2518,7 @@
                             $problemas = \Illuminate\Support\Facades\DB::select("SELECT problemas.nombre as problema, count(*) as problemas FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND subareas.nombre = '$subarea->subarea' AND solicitado BETWEEN '$datainicio' AND '$datafin' GROUP BY problemas.nombre");
                         @endphp
                         @forelse($problemas as $problema)
-                        @php
+                            @php
                                 $problemas0 = count(\Illuminate\Support\Facades\DB::select("SELECT count(*) as problemas FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND problemas.nombre = '$problema->problema' AND subareas.nombre = '$subarea->subarea' AND solicitado BETWEEN '$mesactualinicio' AND '$mesactualfin'"));
                                 $problemas1 = count(\Illuminate\Support\Facades\DB::select("SELECT count(*) as problemas FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND problemas.nombre = '$problema->problema' AND subareas.nombre = '$subarea->subarea' AND solicitado BETWEEN '$mes1inicio' AND '$mes1fin'"));
                                 $problemas2 = count(\Illuminate\Support\Facades\DB::select("SELECT count(*) as problemas FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND problemas.nombre = '$problema->problema' AND subareas.nombre = '$subarea->subarea' AND solicitado BETWEEN '$mes2inicio' AND '$mes2fin'"));
@@ -2556,7 +2556,7 @@
                                                     labels: ['{{$mes3letra}}', '{{$mes2letra}}', '{{$mes1letra}}', '{{$mes0letra}}'],
                                                     datasets: [{
                                                         label: '',
-                                                        data: [{{$problemas3}}, {{$problemas}}, {{$problemas}}, {{$problemas0}}],
+                                                        data: [{{$problemas3}}, {{$problemas2}}, {{$problemas1}}, {{$problemas0}}],
                                                         backgroundColor: "transparent",
                                                         borderColor: "#004e92",
                                                         borderWidth: 2
