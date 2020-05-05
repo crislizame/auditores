@@ -2507,7 +2507,7 @@
 
                     @forelse($subareas as $subarea)
                     <div class="row">
-                        <span class="titulos text-center font-weight-bold col t{{$subarea->subarea}}">{{$subarea->subarea}}</span>
+                        <span class="titulos text-center font-weight-bold col t{{str_replace(' ', '_', $subarea->subarea)}}">{{$subarea->subarea}}</span>
                     </div>                    
                     <hr>
                     <ul class="indicadoresgraf nav">
@@ -2818,7 +2818,7 @@
 
         @if(request('cat') == "lottogame")
             @forelse($subareas as $subarea)
-                $('.t{{$subarea->subarea}}').html('{{$subarea->subarea}} {{$subarea->problemas}}');
+                $('.t{{str_replace(' ', '_', $subarea->subarea)}}').html('{{$subarea->subarea}} {{$subarea->problemas}}');
             @empty
             @endforelse
         @endif
