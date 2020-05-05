@@ -2130,8 +2130,6 @@
                         }
                         </style>
                     </div>
-                </div>
-                <div class="row">
                     <div class="row col-md-6 text-center px-5">    
                         <h2 class="text-primary px-3 mt-3 ml-3"><b>Soporte</b></h2>
                         <div class="calificacionC"></div>
