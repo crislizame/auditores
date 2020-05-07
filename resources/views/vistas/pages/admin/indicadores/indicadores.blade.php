@@ -2821,7 +2821,7 @@
 
             <h5 class="titulos-grandes text-center tauditorias">Número de ordenes de requerimiento</h5>
             <div class="row">
-                <span class="titulos text-center font-weight-bold col tareas">Areas</span>
+                <h4 class="titulos text-center font-weight-bold col tareas">Areas</h4>
             </div>                    
             <div class="data-estado mb-2">
                 <div class="col-12 py-4" style="background:white;">
@@ -2899,6 +2899,38 @@
                         @empty
                         @endforelse
                     </ul>                        
+                </div>
+            </div>
+
+            <div class="row">
+                <h4 class="titulos text-center font-weight-bold col tareas">SubAreas</h4>
+            </div>                    
+            <div class="data-estado mb-2">
+                <div class="col-12 py-4" style="background:white;">
+                    @php
+                        $mes0letra = \Carbon\Carbon::now()->isoFormat('MMM');
+                        $mes1letra = \Carbon\Carbon::now()->subMonths(1)->isoFormat('MMM');
+                        $mes2letra = \Carbon\Carbon::now()->subMonths(2)->isoFormat('MMM');
+                        $mes3letra = \Carbon\Carbon::now()->subMonths(3)->isoFormat('MMM');
+
+                        $mesactualinicio = \Carbon\Carbon::now()->firstOfMonth()->toDateTimeString();
+                        $mesactualfin = \Carbon\Carbon::now()->lastOfMonth()->toDateTimeString();
+                        $mes1inicio = \Carbon\Carbon::now()->subMonths(1)->firstOfMonth()->toDateTimeString();
+                        $mes1fin = \Carbon\Carbon::now()->subMonths(1)->lastOfMonth()->toDateTimeString();
+                        $mes2inicio = \Carbon\Carbon::now()->subMonths(2)->firstOfMonth()->toDateTimeString();
+                        $mes2fin = \Carbon\Carbon::now()->subMonths(2)->lastOfMonth()->toDateTimeString();
+                        $mes3inicio = \Carbon\Carbon::now()->subMonths(3)->firstOfMonth()->toDateTimeString();
+                        $mes3fin = \Carbon\Carbon::now()->subMonths(3)->lastOfMonth()->toDateTimeString();
+
+                        $areas = \Illuminate\Support\Facades\DB::select("SELECT areas.nombre as area, count(*) as problemas FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE solicitado BETWEEN '$datainicio' AND '$datafin' GROUP BY areas.nombre");
+                        $control = 0;
+                    @endphp
+                    @forelse($areas as $area)
+                    <h5 class="titulos-grandes text-center tauditorias">{{ $area->area }}</h5>
+                    <ul class="indicadoresgraf nav">
+                    </ul>
+                    @empty
+                    @endforelse    
                 </div>
             </div>
 
