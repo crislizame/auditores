@@ -2934,63 +2934,57 @@
                             @endphp
                             @forelse($problemas as $problema)
                                 @php
-                                    $problemas0 = count(\Illuminate\Support\Facades\DB::select("SELECT count(*) as problemas FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE areas.nombre = '$area->area' AND subareas.nombre = '$problema->subarea' AND solicitado BETWEEN '$mesactualinicio' AND '$mesactualfin'"));
-                                    $problemas1 = count(\Illuminate\Support\Facades\DB::select("SELECT count(*) as problemas FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE areas.nombre = '$area->area' AND subareas.nombre = '$problema->subarea' AND solicitado BETWEEN '$mes1inicio' AND '$mes1fin'"));
-                                    $problemas2 = count(\Illuminate\Support\Facades\DB::select("SELECT count(*) as problemas FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE areas.nombre = '$area->area' AND subareas.nombre = '$problema->subarea' AND solicitado BETWEEN '$mes2inicio' AND '$mes2fin'"));
-                                    $problemas3 = count(\Illuminate\Support\Facades\DB::select("SELECT count(*) as problemas FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE areas.nombre = '$area->area' AND subareas.nombre = '$problema->subarea' AND solicitado BETWEEN '$mes3inicio' AND '$mes3fin'"));
+                                    $problemas0 = count(\Illuminate\Support\Facades\DB::select("SELECT * FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE areas.nombre = '$area->area' AND subareas.nombre = '$problema->subarea' AND solicitado BETWEEN '$mesactualinicio' AND '$mesactualfin'"));
+                                    $problemas1 = count(\Illuminate\Support\Facades\DB::select("SELECT * as problemas FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE areas.nombre = '$area->area' AND subareas.nombre = '$problema->subarea' AND solicitado BETWEEN '$mes1inicio' AND '$mes1fin'"));
+                                    $problemas2 = count(\Illuminate\Support\Facades\DB::select("SELECT * as problemas FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE areas.nombre = '$area->area' AND subareas.nombre = '$problema->subarea' AND solicitado BETWEEN '$mes2inicio' AND '$mes2fin'"));
+                                    $problemas3 = count(\Illuminate\Support\Facades\DB::select("SELECT * as problemas FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE areas.nombre = '$area->area' AND subareas.nombre = '$problema->subarea' AND solicitado BETWEEN '$mes3inicio' AND '$mes3fin'"));
                                 @endphp
-                        <li class="nav-item">
-                            <div class="w-100">
-                                <div class=" text-center">
-                                    <span class="titulos">{{$problema->subarea}}</span>
-                                    <hr>
-                                </div>
-                                <div class="text-center">
-                                    <input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{ $problema->problemas }}">
-                                </div>
-                                <div class="text-center">
-                                    <canvas class="lineChartSubareas{{$control}}" height="100%"></canvas>
-                                    <script>
-                                        $(document).ready(function() {
-                                            var ctx = $('.lineChartSubareas{{$control++}}');
-                                            ctx.css('display', 'initial!important');
-                                            var chartOptions = {
-                                                legend: {
-                                                    display: false,
-                                                    position: 'top',
-                                                    labels: {
-                                                        boxWidth: 80,
-                                                        fontColor: 'black'
+                            <li class="nav-item">
+                                <div class="w-100">
+                                    <div class=" text-center">
+                                        <span class="titulos">{{$problema->subarea}}</span>
+                                        <hr>
+                                    </div>
+                                    <div class="text-center">
+                                        <input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{ $problema->problemas }}">
+                                    </div>
+                                    <div class="text-center">
+                                        <canvas class="lineChartSubareas{{$control}}" height="100%"></canvas>
+                                        <script>
+                                            $(document).ready(function() {
+                                                var ctx = $('.lineChartSubareas{{$control++}}');
+                                                ctx.css('display', 'initial!important');
+                                                var chartOptions = {
+                                                    legend: {
+                                                        display: false,
+                                                        position: 'top',
+                                                        labels: {
+                                                            boxWidth: 80,
+                                                            fontColor: 'black'
+                                                        }
                                                     }
-                                                }
-                                            };
-                                            var myChart = new Chart(ctx, {
-                                                type: 'line',
-                                                options: chartOptions,
-                                                data: {
-                                                    labels: ['{{$mes3letra}}', '{{$mes2letra}}', '{{$mes1letra}}', '{{$mes0letra}}'],
-                                                    datasets: [{
-                                                        label: '',
-                                                        data: [{{$problemas3}}, {{$problemas2}}, {{$problemas1}}, {{$problemas0}}],
-                                                        backgroundColor: "transparent",
-                                                        borderColor: "#004e92",
-                                                        borderWidth: 2
-                                                    }]
-                                                }
+                                                };
+                                                var myChart = new Chart(ctx, {
+                                                    type: 'line',
+                                                    options: chartOptions,
+                                                    data: {
+                                                        labels: ['{{$mes3letra}}', '{{$mes2letra}}', '{{$mes1letra}}', '{{$mes0letra}}'],
+                                                        datasets: [{
+                                                            label: '',
+                                                            data: [{{$problemas3}}, {{$problemas2}}, {{$problemas1}}, {{$problemas0}}],
+                                                            backgroundColor: "transparent",
+                                                            borderColor: "#004e92",
+                                                            borderWidth: 2
+                                                        }]
+                                                    }
+                                                });
                                             });
-                                        });
-                                    </script>
+                                        </script>
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-                        @empty
-                        @endforelse
-
-
-
-
-
-
+                            </li>
+                            @empty
+                            @endforelse
                         </ul>
                         @empty
                         @endforelse    
