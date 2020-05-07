@@ -23,9 +23,6 @@
     .pds-lista-item:hover {
         background: #e3e3e3;
     }
-    .lmhorizontal2{
-        grid-template-columns: repeat(7, 1fr);
-    }
     .lmhorizontal2 li a {}
     .lmhorizontal2 li a:hover {
         color: white;
@@ -55,7 +52,7 @@
     </div>
     <div class="row mt-1">
         <div class="col-12">
-            <ul class="nav lmhorizontal2">
+            <ul class="nav lmhorizontal2" style="grid-template-columns: repeat(7, 1fr)">
                 <a href="{{route('indicadores')}}?cat=auditoria">
                     <li class="nav-item @if(request('cat') == "auditoria") active @endif">Auditoria</li>
                 </a>
@@ -2927,7 +2924,7 @@
                             $mes3fin = \Carbon\Carbon::now()->subMonths(3)->lastOfMonth()->toDateTimeString();
 
                             $areas = \Illuminate\Support\Facades\DB::select("SELECT areas.nombre as area, count(*) as problemas FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE solicitado BETWEEN '$datainicio' AND '$datafin' GROUP BY areas.nombre");
-                            $controlSubareas = 0;
+                            $control = 0;
                         @endphp
                         @forelse($areas as $area)
                         <h5 class="titulos-grandes text-center tauditorias">{{ $area->area }} - {{ $area->problemas }}</h5>
@@ -2952,10 +2949,10 @@
                                     <input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{ $problema->problemas }}">
                                 </div>
                                 <div class="text-center">
-                                    <canvas class="lineChart{{$controlSubareas}}" height="100%"></canvas>
+                                    <canvas class="lineChartSubareas{{$control}}" height="100%"></canvas>
                                     <script>
                                         $(document).ready(function() {
-                                            var ctx = $('.lineChart{{$controlSubareas++}}');
+                                            var ctx = $('.lineChartSubareas{{$control++}}');
                                             ctx.css('display', 'initial!important');
                                             var chartOptions = {
                                                 legend: {
