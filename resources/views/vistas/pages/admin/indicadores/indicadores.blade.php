@@ -2337,11 +2337,11 @@
                             }
                         }
 
-                        $ordenesP = $ordenesS != 0 || $ordenesF != 0 ? porcentaje( $ordenesS, $ordenesF ) : 0;
-                        $ordenesP0 = $ordenesS0 != 0 || $ordenesF0 != 0 ? porcentaje( $ordenesS0, $ordenesF0 ) : 0;
-                        $ordenesP1 = $ordenesS1 != 0 || $ordenesF1 != 0 ? porcentaje( $ordenesS1, $ordenesF1 ) : 0;
-                        $ordenesP2 = $ordenesS2 != 0 || $ordenesF2 != 0 ? porcentaje( $ordenesS2, $ordenesF2 ) : 0;
-                        $ordenesP3 = $ordenesS3 != 0 || $ordenesF3 != 0 ? porcentaje( $ordenesS3, $ordenesF3 ) : 0;
+                        $ordenesP = $ordenesS != 0 && $ordenesF != 0 ? porcentaje( $ordenesS, $ordenesF ) : 0;
+                        $ordenesP0 = $ordenesS0 != 0 && $ordenesF0 != 0 ? porcentaje( $ordenesS0, $ordenesF0 ) : 0;
+                        $ordenesP1 = $ordenesS1 != 0 && $ordenesF1 != 0 ? porcentaje( $ordenesS1, $ordenesF1 ) : 0;
+                        $ordenesP2 = $ordenesS2 != 0 && $ordenesF2 != 0 ? porcentaje( $ordenesS2, $ordenesF2 ) : 0;
+                        $ordenesP3 = $ordenesS3 != 0 && $ordenesF3 != 0 ? porcentaje( $ordenesS3, $ordenesF3 ) : 0;
                     @endphp
 
                     <ul class="indicadoresgraf nav lista-estado">
