@@ -2974,7 +2974,7 @@
                 </div>
             </div>
 
-            <h5 class="titulos-grandes text-center tauditorias">Auditorias</h5>
+            <h5 class="titulos-grandes text-center tauditorias">Requerimientos por problema (Dispositivo)</h5>
             <div class="data-estado mb-2">
                 <div class="col-12 py-4" style="background:white;">
                     @php
