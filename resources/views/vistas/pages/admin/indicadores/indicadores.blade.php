@@ -2337,11 +2337,11 @@
                             }
                         }
 
-                        $ordenesP = porcentaje( $ordenesS, $ordenesF );
-                        $ordenesP0 = porcentaje( $ordenesS0, $ordenesF0 );
-                        $ordenesP1 = porcentaje( $ordenesS1, $ordenesF1 );
-                        $ordenesP2 = porcentaje( $ordenesS2, $ordenesF2 );
-                        $ordenesP3 = porcentaje( $ordenesS3, $ordenesF3 );
+                        $ordenesP = $ordenesS != 0 || $ordenesF != 0 ? porcentaje( $ordenesS, $ordenesF ) : 0;
+                        $ordenesP0 = $ordenesS0 != 0 || $ordenesF0 != 0 ? porcentaje( $ordenesS0, $ordenesF0 ) : 0;
+                        $ordenesP1 = $ordenesS1 != 0 || $ordenesF1 != 0 ? porcentaje( $ordenesS1, $ordenesF1 ) : 0;
+                        $ordenesP2 = $ordenesS2 != 0 || $ordenesF2 != 0 ? porcentaje( $ordenesS2, $ordenesF2 ) : 0;
+                        $ordenesP3 = $ordenesS3 != 0 || $ordenesF3 != 0 ? porcentaje( $ordenesS3, $ordenesF3 ) : 0;
                     @endphp
 
                     <ul class="indicadoresgraf nav lista-estado">
@@ -2832,8 +2832,8 @@
                             @php
                                 $problemas0 = count(\Illuminate\Support\Facades\DB::select("SELECT * FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE areas.nombre = '$area->area' AND solicitado BETWEEN '$mesactualinicio' AND '$mesactualfin'"));
                                 $problemas1 = count(\Illuminate\Support\Facades\DB::select("SELECT * FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE areas.nombre = '$area->area' AND solicitado BETWEEN '$mes1inicio' AND '$mes1fin'"));
-                                $problemas2 = count(\Illuminate\Support\Facades\DB::select("SELECT * as problemas FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE areas.nombre = '$area->area' AND solicitado BETWEEN '$mes2inicio' AND '$mes2fin'"));
-                                $problemas3 = count(\Illuminate\Support\Facades\DB::select("SELECT * as problemas FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE areas.nombre = '$area->area' AND solicitado BETWEEN '$mes3inicio' AND '$mes3fin'"));
+                                $problemas2 = count(\Illuminate\Support\Facades\DB::select("SELECT * FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE areas.nombre = '$area->area' AND solicitado BETWEEN '$mes2inicio' AND '$mes2fin'"));
+                                $problemas3 = count(\Illuminate\Support\Facades\DB::select("SELECT * FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE areas.nombre = '$area->area' AND solicitado BETWEEN '$mes3inicio' AND '$mes3fin'"));
                             @endphp
                         <li class="nav-item">
                             <div class="w-100">
