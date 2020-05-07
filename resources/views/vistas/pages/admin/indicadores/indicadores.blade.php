@@ -3022,10 +3022,10 @@
                                     <input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{ $problema->problemas }}">
                                 </div>
                                 <div class="text-center">
-                                    <canvas class="lineChart{{$control}}" height="100%"></canvas>
+                                    <canvas class="lineChartDisp{{$control}}" height="100%"></canvas>
                                     <script>
                                         $(document).ready(function() {
-                                            var ctx = $('.lineChart{{$control++}}');
+                                            var ctx = $('.lineChartDisp{{$control++}}');
                                             ctx.css('display', 'initial!important');
                                             var chartOptions = {
                                                 legend: {
