@@ -69,7 +69,7 @@
                         </div>
                     </div><!-- End PDS -->
                     <span class="titulos text-info bold">Asignar Fecha</span>
-                    <div class="card pdsgencards">
+                    <div class="card pdsgencards2">
                         <div class="card-body p-1">
                             <div class="row">
                                 <div class="col-lg-12">

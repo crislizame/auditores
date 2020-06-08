@@ -5873,8 +5873,9 @@ input[type="color"] {
 .auditmenuflow {
     width: 100%;
     transition: all 0.3s ease;
-    max-height: 180px;
+    max-height: 29vh;
     overflow-x: auto;
+    margin-top: 1rem;
 }
 
 .audititem {
@@ -6336,9 +6337,11 @@ ul .datosvertical {
     }
 
     .pdsgencards {
-        height: 41.6vh;
-        min-height: 41.6vh;
-        max-height: 41.6vh;
+        height: 41vh;
+    }
+
+    .pdsgencards2 {
+        height: 33vh;
     }
     
     .titulos-procentaje{
