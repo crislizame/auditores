@@ -19,7 +19,7 @@
                         <table class="table" id="list_pds">
                             <thead>
                             <tr class="bg-primary text-white">
-                                <th scope="col">ID</th>
+                                <th scope="col">CE</th>
                                 <th>Punto de Suerte</th>
                                 <th>Provincia</th>
                                 <th>Ciudad</th>
@@ -59,7 +59,7 @@
                                 <input class="form-control" id="pds_name" name="pds_name" type="text">
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="pds_cod">Código de establecimiento ID</label>
+                                <label for="pds_cod">Código de establecimiento</label>
                                 <input class="form-control" id="pds_cod" name="pds_cod" type="text">
                             </div>
 
@@ -306,7 +306,7 @@
                                     <input class="form-control" id="pds_name2" name="pds_name" type="text">
                                 </div>
                                 <div class="form-group col-md-12">
-                                    <label for="pds_cod">Código de establecimiento ID</label>
+                                    <label for="pds_cod">Código de establecimiento</label>
                                     <input class="form-control" id="pds_cod2" name="pds_cod" type="text">
                                 </div>
                             </div>

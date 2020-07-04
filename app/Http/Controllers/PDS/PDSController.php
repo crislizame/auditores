@@ -28,7 +28,7 @@ class PDSController extends Controller
         $td = "";
         foreach ($datos_pds as $pds) {
             $td .= "<tr>
-                        <th scope=\"row\">" . $pds->id . "</th>
+                        <th scope=\"row\">" . $pds->pds_cod . "</th>
                         <td width='30%'>" . strtoupper($pds->pds_name) . "</td>
                         <td >" . strtoupper($pds->pds_provincia). "</td>
                         <td>" . strtoupper($pds->pds_ciudad). "</td>
