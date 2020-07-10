@@ -19,7 +19,7 @@
                         <table class="table" id="list_pds">
                             <thead>
                             <tr class="bg-primary text-white">
-                                <th scope="col">CE</th>
+                                <th scope="col">ID</th>
                                 <th>Punto de Suerte</th>
                                 <th>Provincia</th>
                                 <th>Ciudad</th>
