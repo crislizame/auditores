@@ -307,7 +307,7 @@
                                     <hr>
                                 </div>
                                 <div class="text-center">
-                                    <input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{$caritares}}">
+                                    <input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{ $caritares != null && $caritares > -1 ? $caritares : 0 }}">
                                 </div>
                                 <div class="text-center">
                                     <canvas class="lineChart{{$tc->idencauditvalues}}" height="100%"></canvas>
@@ -332,7 +332,12 @@
                                                     labels: ['{{$mes3letra}}', '{{$mes2letra}}', '{{$mes1letra}}', '{{$mes0letra}}'],
                                                     datasets: [{
                                                         label: '',
-                                                        data: [{{$carita3res}}, {{$carita2res}}, {{$carita1res}}, {{$carita0res}}],
+                                                        data: [
+                                                            {{ $carita3res != null && $carita3res > -1 ? $carita3res : 0 }},
+                                                            {{ $carita2res != null && $carita2res > -1 ? $carita2res : 0}},
+                                                            {{ $carita1res != null && $carita1res > -1 ? $carita1res : 0}},
+                                                            {{ $carita0res != null && $carita0res > -1 ? $carita0res : 0}}
+                                                        ],
                                                         backgroundColor: "transparent",
                                                         borderColor: "#004e92",
                                                         borderWidth: 2
@@ -481,7 +486,7 @@
                                     <hr>
                                 </div>
                                 <div class="text-center">
-                                    <input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{$caritares}}">
+                                    <input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{ $caritares != null && $caritares > -1 ? $caritares : 0 }}">
                                 </div>
                                 <div class="text-center">
                                     <canvas class="lineChart{{$tc->idencauditvalues}}" height="100%"></canvas>
@@ -506,7 +511,12 @@
                                                     labels: ['{{$mes3letra}}', '{{$mes2letra}}', '{{$mes1letra}}', '{{$mes0letra}}'],
                                                     datasets: [{
                                                         label: '',
-                                                        data: [{{$carita3res}}, {{$carita2res}}, {{$carita1res}}, {{$carita0res}}],
+                                                        data: [
+                                                            {{ $carita3res != null && $carita3res > -1 ? $carita3res : 0 }},
+                                                            {{ $carita2res != null && $carita2res > -1 ? $carita2res : 0}},
+                                                            {{ $carita1res != null && $carita1res > -1 ? $carita1res : 0}},
+                                                            {{ $carita0res != null && $carita0res > -1 ? $carita0res : 0}}
+                                                        ],
                                                         backgroundColor: "transparent",
                                                         borderColor: "#004e92",
                                                         borderWidth: 2
