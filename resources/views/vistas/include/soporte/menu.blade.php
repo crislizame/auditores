@@ -1,7 +1,7 @@
 <div id="sidebar-wrapper" class="gradient-forest-ligth text-white" data-simplebar="" data-simplebar-auto-hide="true">
     <div class="brand-logo   text-center">
         <a href="index.html">
-            <img src="https://via.placeholder.com/200x100" width="90px" class="" alt="user avatar">
+            <img src="{{ asset('img/logo.png') }}" width="90px" class="" alt="user avatar">
         </a>
     </div>
     <ul class="sidebar-menu do-nicescrol">
@@ -12,7 +12,7 @@
         </li>
         <li @if(strpos (url()->current(), 'ordenes')!==false) class="active" @endif>
             <a href="{{url('soporte/ordenes')}}?cat=loteria" class="waves-effect">
-                <i class="icon-list"></i> <span>Registro de ordenes</span>
+                <i class="icon-list"></i> <span>Registro de órdenes</span>
             </a>
         </li>
         <li @if(strpos (url()->current(), 'perfil')!==false) class="active" @endif>

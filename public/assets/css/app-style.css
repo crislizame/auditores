@@ -465,7 +465,7 @@ hr {
 
 .brand-logo {
     width: 100%;
-    height: 80px;
+    height: 110px;
     background-image: url("../images/fondito.png");
     background-repeat: no-repeat, no-repeat;
     background-position: left;
@@ -5753,7 +5753,7 @@ input[type="color"] {
 
 .subm {
     width: 100%;
-    height: 25%;
+    height: 120px;
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     grid-auto-rows: minmax(100%, 100%);
@@ -5773,6 +5773,11 @@ input[type="color"] {
     text-align: center;
     /*white-space: nowrap;*/
     cursor: pointer;
+}
+
+.subm-a div img{
+    width: 100px;
+    height: 100px;
 }
 
 .subm-a:before {

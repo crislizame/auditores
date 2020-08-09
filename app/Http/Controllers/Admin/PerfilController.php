@@ -11,6 +11,7 @@ use App\Proveedor;
 use Carbon\Carbon;
 use App\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class PerfilController extends Controller
 {
@@ -25,6 +26,12 @@ class PerfilController extends Controller
         $user->name = $request->nombre;
         $user->email = $request->correo;
         $user->password = Hash::make($request->clave);
+
+        if (!empty($request->profileImg)) {
+            $profileImg = 'perfiles/' . time() . "." . $request->file('profileImg')->clientExtension();
+            Storage::disk('local')->put($profileImg, file_get_contents($request->profileImg));
+            $user->avatar = $profileImg;
+        }
         $user->save();
 
         $flight = Mantenimiento_user::firstOrCreate(
@@ -33,5 +40,10 @@ class PerfilController extends Controller
         );
 
         return redirect('perfil');
+    }
+
+    public function getImage($type, $image)
+    {
+        return Storage::disk('local')->get($type . "/" . $image);
     }
 }

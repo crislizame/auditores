@@ -9,6 +9,7 @@ use App\Problema;
 use App\Subarea;
 use App\Entidad;
 use App\Area;
+use Illuminate\Support\Facades\Redirect;
 
 class AreasComisionistaController extends Controller
 {
@@ -39,11 +40,29 @@ class AreasComisionistaController extends Controller
         $chunked = array_chunk($data, 3);
         foreach ($chunked as $chunk) {
             foreach ($chunk as $problema) {
-                $text .= '<div class="col-4 table-active p-3">' . $problema->nombre . '</div>';
+                $text .= '<div class="col-4 table-active p-3" onclick="mostrarProblema(' . $problema->id . ')">' . $problema->nombre . '</div>';
             }
         }
         $text .= '</div>';
         return $text;
+    }
+
+    public function problema(Request $request)
+    {
+         return Problema::where('id', $request->id)
+         ->select('problemas.subarea_id', 'subareas.area_id', 'problemas.nombre', 'problemas.tiempo')
+         ->join('subareas', 'problemas.subarea_id', 'subareas.idsubareas')
+         ->get();
+    }
+
+    public function modificarProblema(Request $request)
+    {
+        $problema = Problema::find($request->editid);
+        $problema->subarea_id = $request->editsubareasareas;
+        $problema->nombre = $request->editproblema;
+        $problema->tiempo = $request->edittiempo;
+        $problema->save();
+        return Redirect::to('comisionista/areas');
     }
 
     public function agregarArea(Request $request)

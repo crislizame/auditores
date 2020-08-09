@@ -11,6 +11,8 @@ use App\Attachment;
 use Carbon\Carbon;
 use App\Permiso;
 use App\User;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 
 class PermisosController extends Controller
 {
@@ -782,5 +784,17 @@ class PermisosController extends Controller
     {
         $user = User::where('id', Auth::user()->id)->leftJoin('mantenimiento_users', 'users.id', 'mantenimiento_users.user_id')->first();
         return view('vistas.pages.permisos.perfil')->with('user', $user);
+    }
+
+    public function cambiarFotoPerfil(Request $request){
+        $user = Auth::user();
+        if (!empty($request->profileImg)) {
+            $profileImg = 'perfiles/' . time() . "." . $request->file('profileImg')->clientExtension();
+            Storage::disk('local')->put($profileImg, file_get_contents($request->profileImg));
+            $user->avatar = $profileImg;
+        }
+        $user->save();
+
+        return Redirect::to('soporte/perfil');
     }
 }

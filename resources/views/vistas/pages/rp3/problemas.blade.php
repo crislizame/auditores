@@ -301,6 +301,15 @@
                                 <div class="col-6" id="gv" style="display: none;">
                                     <label>Garantía <i class="fa fa-eye"></i><a href="#" id="gvl"> Ver</a></label>
                                 </div>
+                                
+                                <div class="col-6">
+                                    <img class="img-thumbnail" id="pvc" style="display: none;">
+                                </div>
+
+                                <div class="col-6">
+                                    <img class="img-thumbnail" id="pvg" style="display: none;">
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -329,7 +338,7 @@
                 </button>
             </div>
             <div class="modal-body p-2">
-                <img class="img-responsive" id="vai">
+                <img class="img-thumbnail" id="vai">
             </div>
         </div>
     </div>
@@ -542,6 +551,9 @@
                         $('#cc').hide();
                         $('#cv').show();
                         $('#cvl').attr('onclick', 'modalImagenTrabajo("{{url("/imagen")}}/' + ok.attachment_id + '", "Cotización")');
+
+                        $("#pvc").attr('src', '{{url("/imagen")}}/'+ok.attachment_id);
+                        $("#pvc").show();
                     } else {
                         $('#cc').show();
                         $('#cv').hide();
@@ -562,6 +574,9 @@
                         $('#gc').hide();
                         $('#gv').show();
                         $('#gvl').attr('onclick', 'modalImagenTrabajo("{{url("/imagen")}}/' + ok.attachment_id + '", "Garantía")');
+                        
+                        $("#pvg").attr('src', '{{url("/imagen")}}/'+ok.attachment_id);
+                        $("#pvg").show();
                     } else {
                         $('#gc').show();
                         $('#gv').hide();

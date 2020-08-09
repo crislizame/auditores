@@ -2,7 +2,7 @@
 <div id="sidebar-wrapper" class="gradient-forest-ligth text-white" data-simplebar="" data-simplebar-auto-hide="true">
     <div class="brand-logo   text-center">
         <a href="index.html">
-            <img src="https://via.placeholder.com/200x100" width="90px" class="" alt="user avatar">
+            <img src="{{ asset('img/logo.png') }}" width="90px" class="" alt="user avatar">
 
             {{--            <img src="{{asset("assets/images/user_icon.png")}}" class="logo-icon m-0" alt="logo icon">--}}
             {{--            <h5 class="logo-text text-white">AD<span class="text-info">MIN</span></h5>--}}

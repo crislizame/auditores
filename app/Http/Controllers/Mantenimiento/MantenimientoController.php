@@ -15,6 +15,8 @@ use App\Calificacion;
 use App\Attachment;
 use App\Proveedor;
 use App\User;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 
 class MantenimientoController extends Controller
 {
@@ -454,6 +456,18 @@ class MantenimientoController extends Controller
         $cumple = $cumplido >= $nocumplido ? '1 (Dentro del rango)' : '0 (Fuera del rango)';
 
         return view('vistas.pages.mantenimiento.perfil')->with('user', $user)->with('calificacion', $calificacion)->with('cumple', $cumple);
+    }
+
+    public function cambiarFotoPerfil(Request $request){
+        $user = Auth::user();
+        if (!empty($request->profileImg)) {
+            $profileImg = 'perfiles/' . time() . "." . $request->file('profileImg')->clientExtension();
+            Storage::disk('local')->put($profileImg, file_get_contents($request->profileImg));
+            $user->avatar = $profileImg;
+        }
+        $user->save();
+
+        return Redirect::to('mantenimiento/perfil');
     }
 
     public function finalizarOrdenDeRequerimiento(Request $request)

@@ -29,7 +29,7 @@
             <div class="card-content p-2">
                 <div class="text-center">
 {{--                    <img src="{{asset("assets/images/a.png")}}" class="w-50" >--}}
-                    <img src="https://via.placeholder.com/200x100" class="w-50" >
+                    <img src="{{ asset('img/logo.png') }}" class="w-50" >
                 </div>
 
 

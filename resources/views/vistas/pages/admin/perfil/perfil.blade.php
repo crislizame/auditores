@@ -5,7 +5,7 @@
     <div class="row ">
         <div class="col-lg-12 mt-3">
             <div class="card">
-                <form action="{{ url('perfil/modificar') }}" method="post">
+                <form action="{{ url('perfil/modificar') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
                         <div class="row">
@@ -16,8 +16,28 @@
                         </div>
                         <div class="form-row">
                             <div class="col-6 text-center">
-                                <img class="img-thumbnail" src="https://devtemporal92.grupolizame.com/person.jpg">
+                                <label class="pt-2" for="profileImg">
+                                    <img id="previewImg" src="@if($user->avatar != "users/default.png"){{ url('perfil') . '/'. $user->avatar }}@else{{'https://devtemporal92.grupolizame.com/person.jpg'}}@endif" class="img-thumbnail" alt=""/>
+                                    <input type="file" id="profileImg" name="profileImg" style="display: none">
+                                </label>
+                                <script>
+                                    $("#profileImg").change(function () {
+                                        var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
+                                        if (regex.test($(this).val().toLowerCase())) {
+                                            if (typeof (FileReader) != "undefined") {
+                                                var reader = new FileReader();
+                                                reader.onload = function (e) {
+                                                    $("#previewImg").attr("src", e.target.result);
+                                                }
+                                                reader.readAsDataURL($(this)[0].files[0]);
+                                            }
+                                        } else {
+                                            alert("Solo se permiten archivos de imágenes!");
+                                        }
+                                    });
+                                </script>
                             </div>
+
                             <div class="col-6">
                                 <div class="form-group">
                                     <label>Nombre completo</label>

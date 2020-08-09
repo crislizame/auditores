@@ -58,6 +58,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('comisionista/subareas/agregar', 'Admin\AreasComisionistaController@agregarSubarea');
     Route::post('comisionista/subareas/buscar', 'Admin\AreasComisionistaController@buscarSubareas');
     Route::post('comisionista/problemas', 'Admin\AreasComisionistaController@problemas');
+    Route::post('comisionista/problema', 'Admin\AreasComisionistaController@problema');
+    Route::post('comisionista/problema/modificar', 'Admin\AreasComisionistaController@modificarProblema');
     Route::post('comisionista/problemas/agregar', 'Admin\AreasComisionistaController@agregarProblema');
     // Areas de Comisionista
 
@@ -101,6 +103,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Perfil admin
     Route::get('perfil', 'Admin\PerfilController@index');
+    Route::get('perfil/{type}/{image}', 'Admin\PerfilController@getImage');
     Route::post('perfil/modificar', 'Admin\PerfilController@modificar');
     // Perfil admin
 
@@ -119,6 +122,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('proveedores', 'Mantenimiento\MantenimientoController@proveedores');
         Route::post('proveedores/cargar', 'Mantenimiento\MantenimientoController@cargarProveedores');
         Route::get('perfil', 'Mantenimiento\MantenimientoController@perfil');
+        Route::post('perfil', 'Mantenimiento\MantenimientoController@cambiarFotoPerfil');
     });
     // Mantenimiento
 
@@ -135,6 +139,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('ordenes/cargar', 'Soporte\SoporteController@cargarOrdenes');
         Route::post('ordenes/calificar', 'Soporte\SoporteController@calificar');
         Route::get('perfil', 'Soporte\SoporteController@perfil');
+        Route::post('perfil', 'Soporte\SoporteController@cambiarFotoPerfil');
     });
     // Soporte
 
@@ -150,6 +155,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('ordenes', 'RP3\RP3Controller@ordenes');
         Route::post('ordenes/cargar', 'RP3\RP3Controller@cargarOrdenes');
         Route::get('perfil', 'RP3\RP3Controller@perfil');
+        Route::post('perfil', 'RP3\RP3Controller@cambiarFotoPerfil');
     });
     // RP3
 
@@ -165,6 +171,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('ordenes', 'LottoGame\LottoGameController@ordenes');
         Route::post('ordenes/cargar', 'LottoGame\LottoGameController@cargarOrdenes');
         Route::get('perfil', 'LottoGame\LottoGameController@perfil');
+        Route::post('perfil', 'LottoGame\LottoGameController@cambiarFotoPerfil');
     });
     // LottoGame
 
@@ -174,6 +181,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('buscar', 'Permisos\PermisosController@buscarPermisos');
         Route::post('guardar', 'Permisos\PermisosController@guardarPermisos');
         Route::get('perfil', 'Permisos\PermisosController@perfil');
+        Route::post('perfil', 'Permisos\PermisosController@cambiarFotoPerfil');
     });
     // Permisos
 

@@ -53,18 +53,13 @@
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="col-6">
-                            <img style="max-height: 200px" id="img_editar" class="img-fluid p-2" src="https://devtemporal92.grupolizame.com/person.jpg" width="90%" height="200px">
+                        <div class="form-group col-md-6">
+                            <label>Razón social</label>
+                            <input class="form-control" name="nombre" type="text">
                         </div>
-                        <div class="col-6">
-                            <div class="form-group col-md-12">
-                                <label>Razón social</label>
-                                <input class="form-control" name="nombre" type="text">
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label>Ruc/Cédula</label>
-                                <input class="form-control" name="cedula" type="text">
-                            </div>
+                        <div class="form-group col-md-6">
+                            <label>Ruc/Cédula</label>
+                            <input class="form-control" name="cedula" type="text">
                         </div>
                     </div>
                     <div class="form-row">

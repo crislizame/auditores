@@ -186,10 +186,14 @@
                     </div>
                     @php
                         $datosverticales = (new \App\Encaudit())->where('categoria',"estado")->get();
+                        $promGlobalE = 0;
                     @endphp
 
                     @forelse($datosverticales as $dv)
-                    <h5 class="titulos-grandes text-center">{{$dv->nombre_estado}}</h5>
+                    @php
+                    $tgsum=0;
+                    @endphp
+                    <h5 class="titulos-grandes text-center tg-{{$dv->idencaudit}}">{{$dv->nombre_estado}}</h5>
 
                     <ul class="indicadoresgraf nav">
                         @php
@@ -298,22 +302,24 @@
                             $carita1res = number_format((($c1/($c1c))*10)*2);
                             $carita2res = number_format((($c2/($c2c))*10)*2);
                             $carita3res = number_format((($c3/($c3c))*10)*2);
+
+                            $tgsum += $caritares != null && $caritares > -1 ? $caritares : 0;
                             @endphp
 
                         <li class="nav-item">
                             <div class="w-100">
-                                <div class=" text-center">
+                                <div class="text-center">
                                     <span class="titulos">{{$tc->nombre_val}}</span>
                                     <hr>
                                 </div>
-                                <div class="text-center">
+                                <div class="text-center" style="min-width: 170px; min-height: 170px;">
                                     <input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{ $caritares != null && $caritares > -1 ? $caritares : 0 }}">
                                 </div>
                                 <div class="text-center">
-                                    <canvas class="lineChart{{$tc->idencauditvalues}}" height="100%"></canvas>
+                                    <canvas class="lineChartp{{$tc->idencauditvalues}}" height="100%"></canvas>
                                     <script>
                                         $(document).ready(function() {
-                                            var ctx = $('.lineChart{{$tc->idencauditvalues}}');
+                                            var ctx = $('.lineChartp{{$tc->idencauditvalues}}');
                                             ctx.css('display', 'initial!important');
                                             var chartOptions = {
                                                 legend: {
@@ -351,10 +357,26 @@
                         </li>
                         @empty
                         @endforelse
+
+                        <script>
+                            $(document).ready(function(){
+                                $('.tg-{{$dv->idencaudit}}').html("{{$dv->nombre_estado}} {{ number_format($tgsum/count($thc)) }}%");
+
+                                @php
+                                    $promGlobalE += number_format($tgsum/count($thc));
+                                @endphp
+                            });
+                        </script>
                     </ul>
 
                     @empty
                     @endforelse
+
+                    <script>
+                        $(document).ready(function(){
+                            $('[data-val="estado"]').html("Estado {{ number_format($promGlobalE / count($datosverticales)) }}%");
+                        });
+                    </script>
                 </div>
             </div>
             <div class="row data-procesos">
@@ -364,16 +386,19 @@
                         <span class="pr-4 fechasel titulos w-50 text-right">{{ucfirst($datainicioletra)}} {!! $datafinletra !!}</span>
                     </div>
                     @php
-                    $datosverticales = (new \App\Encaudit())->where('categoria',"procesos")->get();
+                        $datosverticales = (new \App\Encaudit())->where('categoria',"procesos")->get();
+                        $promGlobalP = 0;
                     @endphp
 
                     @forelse($datosverticales as $dv)
-
-                    <h5 class="titulos-grandes text-center">{{$dv->nombre_estado}}</h5>
+                    @php
+                    $tgsum=0;
+                    @endphp
+                    <h5 class="titulos-grandes text-center tg-{{$dv->idencaudit}}">{{$dv->nombre_estado}}</h5>
 
                     <ul class="indicadoresgraf nav">
                         @php
-                            $thc = (new \App\Encauditvalue())->where('encaudit_id',$dv->idencaudit)->get();
+                        $thc = (new \App\Encauditvalue())->where('encaudit_id',$dv->idencaudit)->get();
                         @endphp
 
                         @forelse($thc as $tc)
@@ -468,31 +493,34 @@
                             $c1c += $carita1c == null?"0":$carita1c;
                             $c2c += $carita2c == null?"0":$carita2c;
                             $c3c += $carita3c == null?"0":$carita3c;
-                        $cc = $cc == "0"?"1":$cc;
-                        $c0c = $c0c == "0"?"1":$c0c;
-                        $c1c = $c1c == "0"?"1":$c1c;
-                        $c2c = $c2c == "0"?"1":$c2c;
-                        $c3c = $c3c == "0"?"1":$c3c;
-                        $caritares = number_format((($c/($cc))*10)*2);
-                        $carita0res = number_format((($c0/($c0c))*10)*2);
-                        $carita1res = number_format((($c1/($c1c))*10)*2);
-                        $carita2res = number_format((($c2/($c2c))*10)*2);
-                        $carita3res = number_format((($c3/($c3c))*10)*2);
-                        @endphp
+                            $cc = $cc == "0"?"1":$cc;
+                            $c0c = $c0c == "0"?"1":$c0c;
+                            $c1c = $c1c == "0"?"1":$c1c;
+                            $c2c = $c2c == "0"?"1":$c2c;
+                            $c3c = $c3c == "0"?"1":$c3c;
+                            $caritares = number_format((($c/($cc))*10)*2);
+                            $carita0res = number_format((($c0/($c0c))*10)*2);
+                            $carita1res = number_format((($c1/($c1c))*10)*2);
+                            $carita2res = number_format((($c2/($c2c))*10)*2);
+                            $carita3res = number_format((($c3/($c3c))*10)*2);
+
+                            $tgsum += $caritares != null && $caritares > -1 ? $caritares : 0;
+                            @endphp
+
                         <li class="nav-item">
                             <div class="w-100">
-                                <div class=" text-center">
+                                <div class="text-center">
                                     <span class="titulos">{{$tc->nombre_val}}</span>
                                     <hr>
                                 </div>
-                                <div class="text-center">
+                                <div class="text-center" style="min-width: 170px; min-height: 170px;">
                                     <input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{ $caritares != null && $caritares > -1 ? $caritares : 0 }}">
                                 </div>
                                 <div class="text-center">
-                                    <canvas class="lineChart{{$tc->idencauditvalues}}" height="100%"></canvas>
+                                    <canvas class="lineChartp{{$tc->idencauditvalues}}" height="100%"></canvas>
                                     <script>
                                         $(document).ready(function() {
-                                            var ctx = $('.lineChart{{$tc->idencauditvalues}}');
+                                            var ctx = $('.lineChartp{{$tc->idencauditvalues}}');
                                             ctx.css('display', 'initial!important');
                                             var chartOptions = {
                                                 legend: {
@@ -530,9 +558,26 @@
                         </li>
                         @empty
                         @endforelse
+
+                        <script>
+                            $(document).ready(function(){
+                                $('.tg-{{$dv->idencaudit}}').html("{{$dv->nombre_estado}} {{ number_format( $tgsum/count($thc) ) }}%");
+
+                                @php
+                                    $promGlobalP += number_format( $tgsum/count($thc) );
+                                @endphp
+                            });
+                        </script>
                     </ul>
+
                     @empty
                     @endforelse
+
+                    <script>
+                        $(document).ready(function(){
+                            $('[data-val="procesos"]').html("Procesos {{ number_format($promGlobalP / count($datosverticales)) }}%");
+                        });
+                    </script>
                 </div>
             </div>
         </div>
@@ -610,7 +655,6 @@
                         </div>
                     </div>
                 </form>
-
             </div>
         </div>
         @php
@@ -635,26 +679,28 @@
             </div>
             <h5 class="titulos-grandes text-center">{{$cambio}}</h5>
             <div class="row">
-                <span class="col pr-4 fechasel titulos w-50 font-weight-bold">Estado</span>
+                <div class="col-12">
+                    <h5 class="col titulos-grandes text-center" id="GEstado">Estado</h5>
+                </div>
             </div>
             <div class="row data-estado mb-2">
-                <div class="col-12 " {{--style="height: 546px!important;overflow: scroll;overflow-x: hidden;"--}}>
+                <div class="col-12">
                     @php
                     $datosverticales = (new \App\Encaudit())->where('categoria',"estado")->get();
 
                     $totaldatosverticalesE = count($datosverticales);
 
-                    $porcentajeE = 0; 
-                    $porcentajeE0 = 0; 
-                    $porcentajeE1 = 0; 
-                    $porcentajeE2 = 0; 
+                    $porcentajeE = 0;
+                    $porcentajeE0 = 0;
+                    $porcentajeE1 = 0;
+                    $porcentajeE2 = 0;
                     $porcentajeE3 = 0;
-                    
+
                     $mes0letra = \Carbon\Carbon::now()->isoFormat('MMM');
                     $mes1letra = \Carbon\Carbon::now()->subMonths(1)->isoFormat('MMM');
                     $mes2letra = \Carbon\Carbon::now()->subMonths(2)->isoFormat('MMM');
                     $mes3letra = \Carbon\Carbon::now()->subMonths(3)->isoFormat('MMM');
-                        
+
                     @endphp
 
                     <ul class="indicadoresgraf nav lista-estado">
@@ -662,10 +708,10 @@
 
                         @php
                         $thc = (new \App\Encauditvalue())->where('encaudit_id',$dv->idencaudit)->get();
-                        $porcentaje_encaudit = 0; 
-                        $porcentaje_encaudit0 = 0; 
-                        $porcentaje_encaudit1 = 0; 
-                        $porcentaje_encaudit2 = 0; 
+                        $porcentaje_encaudit = 0;
+                        $porcentaje_encaudit0 = 0;
+                        $porcentaje_encaudit1 = 0;
+                        $porcentaje_encaudit2 = 0;
                         $porcentaje_encaudit3 = 0;
                         @endphp
 
@@ -767,11 +813,11 @@
                             $carita1res = number_format((($c1/($c1c))*10)*2);
                             $carita2res = number_format((($c2/($c2c))*10)*2);
                             $carita3res = number_format((($c3/($c3c))*10)*2);
-                            $porcentaje_encaudit += $caritares; 
-                            $porcentaje_encaudit0 += $carita0res; 
-                            $porcentaje_encaudit1 += $carita1res; 
-                            $porcentaje_encaudit2 += $carita2res; 
-                            $porcentaje_encaudit3 += $carita3res; 
+                            $porcentaje_encaudit += $caritares;
+                            $porcentaje_encaudit0 += $carita0res;
+                            $porcentaje_encaudit1 += $carita1res;
+                            $porcentaje_encaudit2 += $carita2res;
+                            $porcentaje_encaudit3 += $carita3res;
                             @endphp
 
                         @empty
@@ -784,7 +830,7 @@
                                     <hr>
                                 </div>
                                 <div class="text-center">
-                                    <input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{$porcentaje_encaudit/count($thc)}}">
+                                    <input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{number_format($porcentaje_encaudit/count($thc), 2)}}">
                                 </div>
                                 <div class="text-center">
                                     <canvas class="lineChart{{$dv->idencaudit}}" height="100%"></canvas>
@@ -809,7 +855,11 @@
                                                     labels: ['{{$mes3letra}}', '{{$mes2letra}}', '{{$mes1letra}}', '{{$mes0letra}}'],
                                                     datasets: [{
                                                         label: '',
-                                                        data: [{{$porcentaje_encaudit3/count($thc)}}, {{$porcentaje_encaudit2/count($thc)}}, {{$porcentaje_encaudit1/count($thc)}}, {{$porcentaje_encaudit0/count($thc)}}],
+                                                        data: [
+                                                            {{number_format($porcentaje_encaudit3/count($thc), 2)}}, 
+                                                            {{number_format($porcentaje_encaudit2/count($thc), 2)}}, 
+                                                            {{number_format($porcentaje_encaudit1/count($thc), 2)}}, 
+                                                            {{number_format($porcentaje_encaudit0/count($thc), 2)}}],
                                                         backgroundColor: "transparent",
                                                         borderColor: "#004e92",
                                                         borderWidth: 2
@@ -832,30 +882,35 @@
                     @empty
                     @endforelse
                     </ul>
+                    <script>
+                        $(document).ready(function(){
+                            $('#GEstado').html("Estado {{$porcentajeE!=0?number_format($porcentajeE/$totaldatosverticalesE, 2):0}}%")
+                        });
+                    </script>
                 </div>
             </div>
 
             <div class="row">
-                <span class="col pr-4 fechasel titulos w-50 font-weight-bold">Proceso</span>
+                <h5 class="col titulos-grandes text-center" id="GProceso">Proceso</h5>
             </div>
             <div class="row data-procesos">
-            <div class="col-12 " {{--style="height: 546px!important;overflow: scroll;overflow-x: hidden;"--}}>
+            <div class="col-12">
                     @php
-                    $datosverticales = (new \App\Encaudit())->where('categoria',"proceso")->get();
+                    $datosverticales = (new \App\Encaudit())->where('categoria',"procesos")->get();
 
                     $totaldatosverticalesP = count($datosverticales);
 
-                    $porcentajeP = 0; 
-                    $porcentajeP0 = 0; 
-                    $porcentajeP1 = 0; 
-                    $porcentajeP2 = 0; 
+                    $porcentajeP = 0;
+                    $porcentajeP0 = 0;
+                    $porcentajeP1 = 0;
+                    $porcentajeP2 = 0;
                     $porcentajeP3 = 0;
-                    
+
                     $mes0letra = \Carbon\Carbon::now()->isoFormat('MMM');
                     $mes1letra = \Carbon\Carbon::now()->subMonths(1)->isoFormat('MMM');
                     $mes2letra = \Carbon\Carbon::now()->subMonths(2)->isoFormat('MMM');
                     $mes3letra = \Carbon\Carbon::now()->subMonths(3)->isoFormat('MMM');
-                        
+
                     @endphp
 
                     <ul class="indicadoresgraf nav lista-proceso">
@@ -863,10 +918,10 @@
 
                         @php
                         $thc = (new \App\Encauditvalue())->where('encaudit_id',$dv->idencaudit)->get();
-                        $porcentaje_encaudit = 0; 
-                        $porcentaje_encaudit0 = 0; 
-                        $porcentaje_encaudit1 = 0; 
-                        $porcentaje_encaudit2 = 0; 
+                        $porcentaje_encaudit = 0;
+                        $porcentaje_encaudit0 = 0;
+                        $porcentaje_encaudit1 = 0;
+                        $porcentaje_encaudit2 = 0;
                         $porcentaje_encaudit3 = 0;
                         @endphp
 
@@ -968,11 +1023,11 @@
                             $carita1res = number_format((($c1/($c1c))*10)*2);
                             $carita2res = number_format((($c2/($c2c))*10)*2);
                             $carita3res = number_format((($c3/($c3c))*10)*2);
-                            $porcentaje_encaudit += $caritares; 
-                            $porcentaje_encaudit0 += $carita0res; 
-                            $porcentaje_encaudit1 += $carita1res; 
-                            $porcentaje_encaudit2 += $carita2res; 
-                            $porcentaje_encaudit3 += $carita3res; 
+                            $porcentaje_encaudit += $caritares;
+                            $porcentaje_encaudit0 += $carita0res;
+                            $porcentaje_encaudit1 += $carita1res;
+                            $porcentaje_encaudit2 += $carita2res;
+                            $porcentaje_encaudit3 += $carita3res;
                             @endphp
 
                         @empty
@@ -985,7 +1040,7 @@
                                     <hr>
                                 </div>
                                 <div class="text-center">
-                                    <input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{$porcentaje_encaudit/count($thc)}}">
+                                    <input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{number_format($porcentaje_encaudit/count($thc), 2)}}">
                                 </div>
                                 <div class="text-center">
                                     <canvas class="lineChart{{$dv->idencaudit}}" height="100%"></canvas>
@@ -1010,7 +1065,11 @@
                                                     labels: ['{{$mes3letra}}', '{{$mes2letra}}', '{{$mes1letra}}', '{{$mes0letra}}'],
                                                     datasets: [{
                                                         label: '',
-                                                        data: [{{$porcentaje_encaudit3/count($thc)}}, {{$porcentaje_encaudit2/count($thc)}}, {{$porcentaje_encaudit1/count($thc)}}, {{$porcentaje_encaudit0/count($thc)}}],
+                                                        data: [
+                                                            {{number_format($porcentaje_encaudit3/count($thc), 2)}}, 
+                                                            {{number_format($porcentaje_encaudit2/count($thc), 2)}}, 
+                                                            {{number_format($porcentaje_encaudit1/count($thc), 2)}}, 
+                                                            {{number_format($porcentaje_encaudit0/count($thc), 2)}}],
                                                         backgroundColor: "transparent",
                                                         borderColor: "#004e92",
                                                         borderWidth: 2
@@ -1033,6 +1092,11 @@
                     @empty
                     @endforelse
                     </ul>
+                    <script>
+                        $(document).ready(function(){
+                            $('#GProceso').html("Proceso {{$porcentajeP!=0?number_format($porcentajeP/$totaldatosverticalesP, 2):0}}%")
+                        });
+                    </script>
                 </div>
             </div>
         </div>
@@ -1184,7 +1248,7 @@
 
             <h5 class="titulos-grandes text-center">Encuesta a Comisionista</h5>
             <div class="col py-2 mb-4" style="background: white;">
-                <div class="row col-md-3 offset-md-4 text-center p-0">    
+                <div class="row col-md-3 offset-md-4 text-center p-0">
                         @php
                         $ordenes = (new \App\Orden_Requerimiento())->select('solicitado','enproceso','finalizado','calificacion')
                         ->join('orden_trabajos','orden_requermientos.idorden_requermientos','orden_trabajos.orden_requermiento_id')
@@ -1263,31 +1327,51 @@
                         $mes3inicio = \Carbon\Carbon::now()->subMonths(3)->firstOfMonth()->toDateTimeString();
                         $mes3fin = \Carbon\Carbon::now()->subMonths(3)->lastOfMonth()->toDateTimeString();
 
-                        $ordenes = \Illuminate\Support\Facades\DB::select("SELECT subareas.nombre as subarea, count(*) as problemas FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND solicitado BETWEEN '$datainicio' AND '$datafin' GROUP BY subareas.nombre");
+                        $ordenesS = count(\Illuminate\Support\Facades\DB::select("SELECT * FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND solicitado BETWEEN '$datainicio' AND '$datafin'"));
+                        $ordenesS0 = count(\Illuminate\Support\Facades\DB::select("SELECT * FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND solicitado BETWEEN '$mesactualinicio' AND '$mesactualfin'"));
+                        $ordenesS1 = count(\Illuminate\Support\Facades\DB::select("SELECT * FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND solicitado BETWEEN '$mes1inicio' AND '$mes1fin'"));
+                        $ordenesS2 = count(\Illuminate\Support\Facades\DB::select("SELECT * FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND solicitado BETWEEN '$mes2inicio' AND '$mes2fin'"));
+                        $ordenesS3 = count(\Illuminate\Support\Facades\DB::select("SELECT * FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND solicitado BETWEEN '$mes3inicio' AND '$mes3fin'"));
+
+                        $ordenesF = count(\Illuminate\Support\Facades\DB::select("SELECT * FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND finalizado != null AND solicitado BETWEEN '$datainicio' AND '$datafin'"));
+                        $ordenesF0 = count(\Illuminate\Support\Facades\DB::select("SELECT * FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND finalizado != null AND solicitado BETWEEN '$mesactualinicio' AND '$mesactualfin'"));
+                        $ordenesF1 = count(\Illuminate\Support\Facades\DB::select("SELECT * FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND finalizado != null AND solicitado BETWEEN '$mes1inicio' AND '$mes1fin'"));
+                        $ordenesF2 = count(\Illuminate\Support\Facades\DB::select("SELECT * FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND finalizado != null AND solicitado BETWEEN '$mes2inicio' AND '$mes2fin'"));
+                        $ordenesF3 = count(\Illuminate\Support\Facades\DB::select("SELECT * FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND finalizado != null AND solicitado BETWEEN '$mes3inicio' AND '$mes3fin'"));
+
+                        function porcentaje( $a, $b ){
+                            if( $a > $b ){
+                                return $a / $b * 100;
+                            } else if( $b > $a ){
+                                return $b / $a * 100;
+                            } else {
+                                return 0;
+                            }
+                        }
+
+                        $ordenesP = $ordenesS != 0 && $ordenesF != 0 ? porcentaje( $ordenesS, $ordenesF ) : 0;
+                        $ordenesP0 = $ordenesS0 != 0 && $ordenesF0 != 0 ? porcentaje( $ordenesS0, $ordenesF0 ) : 0;
+                        $ordenesP1 = $ordenesS1 != 0 && $ordenesF1 != 0 ? porcentaje( $ordenesS1, $ordenesF1 ) : 0;
+                        $ordenesP2 = $ordenesS2 != 0 && $ordenesF2 != 0 ? porcentaje( $ordenesS2, $ordenesF2 ) : 0;
+                        $ordenesP3 = $ordenesS3 != 0 && $ordenesF3 != 0 ? porcentaje( $ordenesS3, $ordenesF3 ) : 0;
                     @endphp
 
                     <ul class="indicadoresgraf nav lista-estado">
-                    @forelse($ordenes as $orden)
-                        @php
-                            $ordenes0 = count(\Illuminate\Support\Facades\DB::select("SELECT * FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND subareas.nombre = '$orden->subarea' AND solicitado BETWEEN '$mesactualinicio' AND '$mesactualfin'"));
-                            $ordenes1 = count(\Illuminate\Support\Facades\DB::select("SELECT * FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND subareas.nombre = '$orden->subarea' AND solicitado BETWEEN '$mes1inicio' AND '$mes1fin'"));
-                            $ordenes2 = count(\Illuminate\Support\Facades\DB::select("SELECT * FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND subareas.nombre = '$orden->subarea' AND solicitado BETWEEN '$mes2inicio' AND '$mes2fin'"));
-                            $ordenes3 = count(\Illuminate\Support\Facades\DB::select("SELECT * FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND subareas.nombre = '$orden->subarea' AND solicitado BETWEEN '$mes3inicio' AND '$mes3fin'"));
-                        @endphp
+
                         <li class="nav-item">
                             <div class="w-100">
                                 <div class=" text-center">
-                                    <span class="titulos">{{$orden->subarea}}</span>
+                                    <span class="titulos">N. de ordenes de requerimiento ingresadas</span>
                                     <hr>
                                 </div>
                                 <div class="text-center">
-                                    <input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{ $orden->problemas }}">
+                                    <input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{ $ordenesS }}">
                                 </div>
                                 <div class="text-center">
-                                    <canvas class="lineChart{{$orden->subarea}}" height="100%"></canvas>
+                                    <canvas class="lineChartS" height="100%"></canvas>
                                     <script>
                                         $(document).ready(function() {
-                                            var ctx = $('.lineChart{{$orden->subarea}}');
+                                            var ctx = $('.lineChartS');
                                             ctx.css('display', 'initial!important');
                                             var chartOptions = {
                                                 legend: {
@@ -1306,7 +1390,7 @@
                                                     labels: ['{{$mes3letra}}', '{{$mes2letra}}', '{{$mes1letra}}', '{{$mes0letra}}'],
                                                     datasets: [{
                                                         label: '',
-                                                        data: [{{$ordenes3}}, {{$ordenes2}}, {{$ordenes1}}, {{$ordenes0}}],
+                                                        data: [{{$ordenesS3}}, {{$ordenesS2}}, {{$ordenesS1}}, {{$ordenesS0}}],
                                                         backgroundColor: "transparent",
                                                         borderColor: "#004e92",
                                                         borderWidth: 2
@@ -1318,11 +1402,102 @@
                                 </div>
                             </div>
                         </li>
-                    @empty
-                    @endforelse
+
+                        <li class="nav-item">
+                            <div class="w-100">
+                                <div class=" text-center">
+                                    <span class="titulos">N. de ordenes de requerimiento solucionadas</span>
+                                    <hr>
+                                </div>
+                                <div class="text-center">
+                                    <input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{ $ordenesF }}">
+                                </div>
+                                <div class="text-center">
+                                    <canvas class="lineChartF" height="100%"></canvas>
+                                    <script>
+                                        $(document).ready(function() {
+                                            var ctx = $('.lineChartF');
+                                            ctx.css('display', 'initial!important');
+                                            var chartOptions = {
+                                                legend: {
+                                                    display: false,
+                                                    position: 'top',
+                                                    labels: {
+                                                        boxWidth: 80,
+                                                        fontColor: 'black'
+                                                    }
+                                                }
+                                            };
+                                            var myChart = new Chart(ctx, {
+                                                type: 'line',
+                                                options: chartOptions,
+                                                data: {
+                                                    labels: ['{{$mes3letra}}', '{{$mes2letra}}', '{{$mes1letra}}', '{{$mes0letra}}'],
+                                                    datasets: [{
+                                                        label: '',
+                                                        data: [{{$ordenesF3}}, {{$ordenesF2}}, {{$ordenesF1}}, {{$ordenesF0}}],
+                                                        backgroundColor: "transparent",
+                                                        borderColor: "#004e92",
+                                                        borderWidth: 2
+                                                    }]
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="nav-item">
+                            <div class="w-100">
+                                <div class=" text-center">
+                                    <span class="titulos">Porcentaje de Solucionadas VS Ingresadas</span>
+                                    <hr>
+                                </div>
+                                <div class="text-center">
+                                    <input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{ $ordenesP }}">
+                                </div>
+                                <div class="text-center">
+                                    <canvas class="lineChartP" height="100%"></canvas>
+                                    <script>
+                                        $(document).ready(function() {
+                                            var ctx = $('.lineChartP');
+                                            ctx.css('display', 'initial!important');
+                                            var chartOptions = {
+                                                legend: {
+                                                    display: false,
+                                                    position: 'top',
+                                                    labels: {
+                                                        boxWidth: 80,
+                                                        fontColor: 'black'
+                                                    }
+                                                }
+                                            };
+                                            var myChart = new Chart(ctx, {
+                                                type: 'line',
+                                                options: chartOptions,
+                                                data: {
+                                                    labels: ['{{$mes3letra}}', '{{$mes2letra}}', '{{$mes1letra}}', '{{$mes0letra}}'],
+                                                    datasets: [{
+                                                        label: '',
+                                                        data: [{{$ordenesP3}}, {{$ordenesP2}}, {{$ordenesP1}}, {{$ordenesP0}}],
+                                                        backgroundColor: "transparent",
+                                                        borderColor: "#004e92",
+                                                        borderWidth: 2
+                                                    }]
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                </div>
+                            </div>
+                        </li>
+
                     </ul>
+
                 </div>
             </div>
+
         </div>
     </div>
     @endif
@@ -1472,7 +1647,7 @@
 
             <h5 class="titulos-grandes text-center">Encuesta a Comisionista</h5>
             <div class="col py-2 mb-4" style="background: white;">
-                <div class="row col-md-3 offset-md-4 text-center p-0">    
+                <div class="row col-md-3 offset-md-4 text-center p-0">
                         @php
                         $ordenes = (new \App\Orden_Requerimiento())->select('solicitado','enproceso','finalizado','calificacion')
                         ->join('orden_trabajos','orden_requermientos.idorden_requermientos','orden_trabajos.orden_requermiento_id')
@@ -1551,31 +1726,51 @@
                         $mes3inicio = \Carbon\Carbon::now()->subMonths(3)->firstOfMonth()->toDateTimeString();
                         $mes3fin = \Carbon\Carbon::now()->subMonths(3)->lastOfMonth()->toDateTimeString();
 
-                        $ordenes = \Illuminate\Support\Facades\DB::select("SELECT subareas.nombre as subarea, count(*) as problemas FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND solicitado BETWEEN '$datainicio' AND '$datafin' GROUP BY subareas.nombre");
+                        $ordenesS = count(\Illuminate\Support\Facades\DB::select("SELECT * FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND solicitado BETWEEN '$datainicio' AND '$datafin'"));
+                        $ordenesS0 = count(\Illuminate\Support\Facades\DB::select("SELECT * FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND solicitado BETWEEN '$mesactualinicio' AND '$mesactualfin'"));
+                        $ordenesS1 = count(\Illuminate\Support\Facades\DB::select("SELECT * FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND solicitado BETWEEN '$mes1inicio' AND '$mes1fin'"));
+                        $ordenesS2 = count(\Illuminate\Support\Facades\DB::select("SELECT * FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND solicitado BETWEEN '$mes2inicio' AND '$mes2fin'"));
+                        $ordenesS3 = count(\Illuminate\Support\Facades\DB::select("SELECT * FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND solicitado BETWEEN '$mes3inicio' AND '$mes3fin'"));
+
+                        $ordenesF = count(\Illuminate\Support\Facades\DB::select("SELECT * FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND finalizado != null AND solicitado BETWEEN '$datainicio' AND '$datafin'"));
+                        $ordenesF0 = count(\Illuminate\Support\Facades\DB::select("SELECT * FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND finalizado != null AND solicitado BETWEEN '$mesactualinicio' AND '$mesactualfin'"));
+                        $ordenesF1 = count(\Illuminate\Support\Facades\DB::select("SELECT * FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND finalizado != null AND solicitado BETWEEN '$mes1inicio' AND '$mes1fin'"));
+                        $ordenesF2 = count(\Illuminate\Support\Facades\DB::select("SELECT * FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND finalizado != null AND solicitado BETWEEN '$mes2inicio' AND '$mes2fin'"));
+                        $ordenesF3 = count(\Illuminate\Support\Facades\DB::select("SELECT * FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND finalizado != null AND solicitado BETWEEN '$mes3inicio' AND '$mes3fin'"));
+
+                        function porcentaje( $a, $b ){
+                            if( $a > $b ){
+                                return $a / $b * 100;
+                            } else if( $b > $a ){
+                                return $b / $a * 100;
+                            } else {
+                                return 0;
+                            }
+                        }
+
+                        $ordenesP = $ordenesS != 0 && $ordenesF != 0 ? porcentaje( $ordenesS, $ordenesF ) : 0;
+                        $ordenesP0 = $ordenesS0 != 0 && $ordenesF0 != 0 ? porcentaje( $ordenesS0, $ordenesF0 ) : 0;
+                        $ordenesP1 = $ordenesS1 != 0 && $ordenesF1 != 0 ? porcentaje( $ordenesS1, $ordenesF1 ) : 0;
+                        $ordenesP2 = $ordenesS2 != 0 && $ordenesF2 != 0 ? porcentaje( $ordenesS2, $ordenesF2 ) : 0;
+                        $ordenesP3 = $ordenesS3 != 0 && $ordenesF3 != 0 ? porcentaje( $ordenesS3, $ordenesF3 ) : 0;
                     @endphp
 
                     <ul class="indicadoresgraf nav lista-estado">
-                    @forelse($ordenes as $orden)
-                        @php
-                            $ordenes0 = count(\Illuminate\Support\Facades\DB::select("SELECT * FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND subareas.nombre = '$orden->subarea' AND solicitado BETWEEN '$mesactualinicio' AND '$mesactualfin'"));
-                            $ordenes1 = count(\Illuminate\Support\Facades\DB::select("SELECT * FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND subareas.nombre = '$orden->subarea' AND solicitado BETWEEN '$mes1inicio' AND '$mes1fin'"));
-                            $ordenes2 = count(\Illuminate\Support\Facades\DB::select("SELECT * FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND subareas.nombre = '$orden->subarea' AND solicitado BETWEEN '$mes2inicio' AND '$mes2fin'"));
-                            $ordenes3 = count(\Illuminate\Support\Facades\DB::select("SELECT * FROM orden_requermientos INNER JOIN problemas ON orden_requermientos.problema_id = problemas.id INNER JOIN subareas ON problemas.subarea_id = subareas.idsubareas INNER JOIN areas ON subareas.area_id = areas.idareas INNER JOIN entidades ON areas.entidad_id = entidades.identidad WHERE entidades.nombre = '$category' AND subareas.nombre = '$orden->subarea' AND solicitado BETWEEN '$mes3inicio' AND '$mes3fin'"));
-                        @endphp
+
                         <li class="nav-item">
                             <div class="w-100">
                                 <div class=" text-center">
-                                    <span class="titulos">{{$orden->subarea}}</span>
+                                    <span class="titulos">N. de ordenes de requerimiento ingresadas</span>
                                     <hr>
                                 </div>
                                 <div class="text-center">
-                                    <input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{ $orden->problemas }}">
+                                    <input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{ $ordenesS }}">
                                 </div>
                                 <div class="text-center">
-                                    <canvas class="lineChart{{$orden->subarea}}" height="100%"></canvas>
+                                    <canvas class="lineChartS" height="100%"></canvas>
                                     <script>
                                         $(document).ready(function() {
-                                            var ctx = $('.lineChart{{$orden->subarea}}');
+                                            var ctx = $('.lineChartS');
                                             ctx.css('display', 'initial!important');
                                             var chartOptions = {
                                                 legend: {
@@ -1594,7 +1789,7 @@
                                                     labels: ['{{$mes3letra}}', '{{$mes2letra}}', '{{$mes1letra}}', '{{$mes0letra}}'],
                                                     datasets: [{
                                                         label: '',
-                                                        data: [{{$ordenes3}}, {{$ordenes2}}, {{$ordenes1}}, {{$ordenes0}}],
+                                                        data: [{{$ordenesS3}}, {{$ordenesS2}}, {{$ordenesS1}}, {{$ordenesS0}}],
                                                         backgroundColor: "transparent",
                                                         borderColor: "#004e92",
                                                         borderWidth: 2
@@ -1606,11 +1801,102 @@
                                 </div>
                             </div>
                         </li>
-                    @empty
-                    @endforelse
+
+                        <li class="nav-item">
+                            <div class="w-100">
+                                <div class=" text-center">
+                                    <span class="titulos">N. de ordenes de requerimiento solucionadas</span>
+                                    <hr>
+                                </div>
+                                <div class="text-center">
+                                    <input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{ $ordenesF }}">
+                                </div>
+                                <div class="text-center">
+                                    <canvas class="lineChartF" height="100%"></canvas>
+                                    <script>
+                                        $(document).ready(function() {
+                                            var ctx = $('.lineChartF');
+                                            ctx.css('display', 'initial!important');
+                                            var chartOptions = {
+                                                legend: {
+                                                    display: false,
+                                                    position: 'top',
+                                                    labels: {
+                                                        boxWidth: 80,
+                                                        fontColor: 'black'
+                                                    }
+                                                }
+                                            };
+                                            var myChart = new Chart(ctx, {
+                                                type: 'line',
+                                                options: chartOptions,
+                                                data: {
+                                                    labels: ['{{$mes3letra}}', '{{$mes2letra}}', '{{$mes1letra}}', '{{$mes0letra}}'],
+                                                    datasets: [{
+                                                        label: '',
+                                                        data: [{{$ordenesF3}}, {{$ordenesF2}}, {{$ordenesF1}}, {{$ordenesF0}}],
+                                                        backgroundColor: "transparent",
+                                                        borderColor: "#004e92",
+                                                        borderWidth: 2
+                                                    }]
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="nav-item">
+                            <div class="w-100">
+                                <div class=" text-center">
+                                    <span class="titulos">Porcentaje de Solucionadas VS Ingresadas</span>
+                                    <hr>
+                                </div>
+                                <div class="text-center">
+                                    <input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{ $ordenesP }}">
+                                </div>
+                                <div class="text-center">
+                                    <canvas class="lineChartP" height="100%"></canvas>
+                                    <script>
+                                        $(document).ready(function() {
+                                            var ctx = $('.lineChartP');
+                                            ctx.css('display', 'initial!important');
+                                            var chartOptions = {
+                                                legend: {
+                                                    display: false,
+                                                    position: 'top',
+                                                    labels: {
+                                                        boxWidth: 80,
+                                                        fontColor: 'black'
+                                                    }
+                                                }
+                                            };
+                                            var myChart = new Chart(ctx, {
+                                                type: 'line',
+                                                options: chartOptions,
+                                                data: {
+                                                    labels: ['{{$mes3letra}}', '{{$mes2letra}}', '{{$mes1letra}}', '{{$mes0letra}}'],
+                                                    datasets: [{
+                                                        label: '',
+                                                        data: [{{$ordenesP3}}, {{$ordenesP2}}, {{$ordenesP1}}, {{$ordenesP0}}],
+                                                        backgroundColor: "transparent",
+                                                        borderColor: "#004e92",
+                                                        borderWidth: 2
+                                                    }]
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                </div>
+                            </div>
+                        </li>
+
                     </ul>
+
                 </div>
             </div>
+
         </div>
     </div>
     @endif
@@ -1798,15 +2084,15 @@
                             }
                         }
 
-                        $ordenesP = $ordenesS != 0 && $ordenesF != 0 ? porcentaje( $ordenesS, $ordenesF ) : 100;
-                        $ordenesP0 = $ordenesS0 != 0 && $ordenesF0 != 0 ? porcentaje( $ordenesS0, $ordenesF0 ) : 100;
-                        $ordenesP1 = $ordenesS1 != 0 && $ordenesF1 != 0 ? porcentaje( $ordenesS1, $ordenesF1 ) : 100;
-                        $ordenesP2 = $ordenesS2 != 0 && $ordenesF2 != 0 ? porcentaje( $ordenesS2, $ordenesF2 ) : 100;
-                        $ordenesP3 = $ordenesS3 != 0 && $ordenesF3 != 0 ? porcentaje( $ordenesS3, $ordenesF3 ) : 100;
+                        $ordenesP = $ordenesS != 0 && $ordenesF != 0 ? porcentaje( $ordenesS, $ordenesF ) : 0;
+                        $ordenesP0 = $ordenesS0 != 0 && $ordenesF0 != 0 ? porcentaje( $ordenesS0, $ordenesF0 ) : 0;
+                        $ordenesP1 = $ordenesS1 != 0 && $ordenesF1 != 0 ? porcentaje( $ordenesS1, $ordenesF1 ) : 0;
+                        $ordenesP2 = $ordenesS2 != 0 && $ordenesF2 != 0 ? porcentaje( $ordenesS2, $ordenesF2 ) : 0;
+                        $ordenesP3 = $ordenesS3 != 0 && $ordenesF3 != 0 ? porcentaje( $ordenesS3, $ordenesF3 ) : 0;
                     @endphp
 
                     <ul class="indicadoresgraf nav lista-estado">
-                    
+
                         <li class="nav-item">
                             <div class="w-100">
                                 <div class=" text-center">
@@ -1896,7 +2182,7 @@
                                 </div>
                             </div>
                         </li>
-                    
+
                         <li class="nav-item">
                             <div class="w-100">
                                 <div class=" text-center">
@@ -1941,14 +2227,14 @@
                                 </div>
                             </div>
                         </li>
-                    
+
                     </ul>
 
                 </div>
             </div>
 
-            <h5 class="titulos-grandes text-center tauditorias">Auditorias</h5>
-            <div class="row data-estado mb-2">
+            <h5 class="titulos-grandes text-center tauditorias" style="display: none;">Auditorias</h5>
+            <div class="row data-estado mb-2" style="display: none;">
                 <div class="col-12 " {{--style="height: 546px!important;overflow: scroll;overflow-x: hidden;"--}}>
                     @php
                         $mes0letra = \Carbon\Carbon::now()->isoFormat('MMM');
@@ -2026,6 +2312,10 @@
                     @empty
                     @endforelse
                     </ul>
+
+                    @if(count($ordenes) == 0)
+                        <h3 style="text-align: center; padding: 50px;">En los parámetros establecidos no se encuentra información que mostrar</h3>
+                    @endif
                 </div>
             </div>
 
@@ -2077,7 +2367,7 @@
                         break;
                     }
                 }
-                
+
                 $ordenesS = (new \App\Orden_Requerimiento())->select('solicitado','enproceso','finalizado','calificacion')
                 ->join('orden_trabajos','orden_requermientos.idorden_requermientos','orden_trabajos.orden_requermiento_id')
                 ->join('calificaciones','orden_trabajos.idorden_trabajos','calificaciones.id_orden_trabajo')
@@ -2125,7 +2415,7 @@
                 }
                 @endphp
                 <div class="row">
-                    <div class="row col-md-6 text-center px-5">    
+                    <div class="row col-md-6 text-center px-5">
                         <h2 class="text-primary px-3 mt-3 ml-3"><b>Comisionista</b></h2>
                         <div class="calificacionC"></div>
                         <h2 class="text-primary pull-left px-3 mt-3"><b>{{ $porcentajeC }}%</b></h2>
@@ -2139,7 +2429,7 @@
                         }
                         </style>
                     </div>
-                    <div class="row col-md-6 text-center px-5">    
+                    <div class="row col-md-6 text-center px-5">
                         <h2 class="text-primary px-3 mt-3 ml-3"><b>Soporte</b></h2>
                         <div class="calificacionS"></div>
                         <h2 class="text-primary pull-left px-3 mt-3"><b>{{ $porcentajeS }}%</b></h2>
@@ -2173,7 +2463,6 @@
                     <div class="card-body pt-1">
                         <div class="row align-content-center text-center">
                             <span class=" pr-4 pl-4 w-100"><i class="fa text-center fa-sliders pointer"></i> Seleccionar rango de fecha:</span>
-                            </span>
                         </div>
                         <div class="row pt-2 pr-4 pl-4">
                             <label for="sel-dateinicio">Inicio (o único día)</label>
@@ -2343,15 +2632,15 @@
                             }
                         }
 
-                        $ordenesP = $ordenesS != 0 && $ordenesF != 0 ? porcentaje( $ordenesS, $ordenesF ) : 100;
-                        $ordenesP0 = $ordenesS0 != 0 && $ordenesF0 != 0 ? porcentaje( $ordenesS0, $ordenesF0 ) : 100;
-                        $ordenesP1 = $ordenesS1 != 0 && $ordenesF1 != 0 ? porcentaje( $ordenesS1, $ordenesF1 ) : 100;
-                        $ordenesP2 = $ordenesS2 != 0 && $ordenesF2 != 0 ? porcentaje( $ordenesS2, $ordenesF2 ) : 100;
-                        $ordenesP3 = $ordenesS3 != 0 && $ordenesF3 != 0 ? porcentaje( $ordenesS3, $ordenesF3 ) : 100;
+                        $ordenesP = $ordenesS != 0 && $ordenesF != 0 ? porcentaje( $ordenesS, $ordenesF ) : 0;
+                        $ordenesP0 = $ordenesS0 != 0 && $ordenesF0 != 0 ? porcentaje( $ordenesS0, $ordenesF0 ) : 0;
+                        $ordenesP1 = $ordenesS1 != 0 && $ordenesF1 != 0 ? porcentaje( $ordenesS1, $ordenesF1 ) : 0;
+                        $ordenesP2 = $ordenesS2 != 0 && $ordenesF2 != 0 ? porcentaje( $ordenesS2, $ordenesF2 ) : 0;
+                        $ordenesP3 = $ordenesS3 != 0 && $ordenesF3 != 0 ? porcentaje( $ordenesS3, $ordenesF3 ) : 0;
                     @endphp
 
                     <ul class="indicadoresgraf nav lista-estado">
-                    
+
                         <li class="nav-item">
                             <div class="w-100">
                                 <div class=" text-center">
@@ -2441,7 +2730,7 @@
                                 </div>
                             </div>
                         </li>
-                    
+
                         <li class="nav-item">
                             <div class="w-100">
                                 <div class=" text-center">
@@ -2486,14 +2775,14 @@
                                 </div>
                             </div>
                         </li>
-                    
+
                     </ul>
 
                 </div>
             </div>
 
-            <h5 class="titulos-grandes text-center tauditorias">Auditorias</h5>
-            <div class="data-estado mb-2">
+            <h5 class="titulos-grandes text-center tauditorias" style="display: none;">Auditorias</h5>
+            <div class="data-estado mb-2" style="display: none;">
                 <div class="col-12 py-4" style="background:white;">
                     @php
                         $mes0letra = \Carbon\Carbon::now()->isoFormat('MMM');
@@ -2517,7 +2806,7 @@
                     @forelse($subareas as $subarea)
                     <div class="row">
                         <span class="titulos text-center font-weight-bold col t{{str_replace(' ', '_', $subarea->subarea)}}">{{$subarea->subarea}}</span>
-                    </div>                    
+                    </div>
                     <hr>
                     <ul class="indicadoresgraf nav">
                         @php
@@ -2576,9 +2865,13 @@
                         </li>
                         @empty
                         @endforelse
-                    </ul>                        
+                    </ul>
                     @empty
                     @endforelse
+
+                    @if(count($subareas) == 0)
+                        <h3 style="text-align: center; padding: 50px;">En los parámetros establecidos no se encuentra información que mostrar</h3>
+                    @endif
                 </div>
             </div>
 
@@ -2630,7 +2923,7 @@
                         break;
                     }
                 }
-                
+
                 $ordenesS = (new \App\Orden_Requerimiento())->select('solicitado','enproceso','finalizado','calificacion')
                 ->join('orden_trabajos','orden_requermientos.idorden_requermientos','orden_trabajos.orden_requermiento_id')
                 ->join('calificaciones','orden_trabajos.idorden_trabajos','calificaciones.id_orden_trabajo')
@@ -2678,7 +2971,7 @@
                 }
                 @endphp
                 <div class="row">
-                    <div class="row col-md-6 text-center px-5">    
+                    <div class="row col-md-6 text-center px-5">
                         <h2 class="text-primary px-3 mt-3 ml-3"><b>Comisionista</b></h2>
                         <div class="calificacionC"></div>
                         <h2 class="text-primary pull-left px-3 mt-3"><b>{{ $porcentajeC }}%</b></h2>
@@ -2692,7 +2985,7 @@
                         }
                         </style>
                     </div>
-                    <div class="row col-md-6 text-center px-5">    
+                    <div class="row col-md-6 text-center px-5">
                         <h2 class="text-primary px-3 mt-3 ml-3"><b>Soporte</b></h2>
                         <div class="calificacionS"></div>
                         <h2 class="text-primary pull-left px-3 mt-3"><b>{{ $porcentajeS }}%</b></h2>
@@ -2814,7 +3107,7 @@
             <h5 class="titulos-grandes text-center tauditorias">Número de ordenes de requerimiento</h5>
             <div class="row">
                 <h4 class="titulos text-center font-weight-bold col tareas">Areas</h4>
-            </div>                    
+            </div>
             <div class="mb-2">
                 <div class="col-12 py-4" style="background:white;">
                     @php
@@ -2890,13 +3183,16 @@
                         </li>
                         @empty
                         @endforelse
-                    </ul>                        
+                    </ul>
+                    @if(count($areas) == 0)
+                        <h3 style="text-align: center; padding: 50px;">En los parámetros establecidos no se encuentra información que mostrar</h3>
+                    @endif
                 </div>
             </div>
 
             <div class="row">
                 <h4 class="titulos text-center font-weight-bold col tareas">SubAreas</h4>
-            </div>                    
+            </div>
             <div class="mb-2">
                 <div class="col-12" style="background:white;">
                     <div class="row">
@@ -2979,8 +3275,11 @@
                             @endforelse
                         </ul>
                         @empty
-                        @endforelse    
+                        @endforelse
                     </div>
+                    @if(count($areas) == 0)
+                        <h3 style="text-align: center; padding: 50px;">En los parámetros establecidos no se encuentra información que mostrar</h3>
+                    @endif
                 </div>
             </div>
 
@@ -3009,7 +3308,7 @@
                     @forelse($subareas as $subarea)
                     <div class="row">
                         <span class="titulos text-center font-weight-bold col t{{str_replace(' ', '_', $subarea->subarea)}}">{{$subarea->subarea}}</span>
-                    </div>                    
+                    </div>
                     <hr>
                     <ul class="indicadoresgraf nav">
                         @php
@@ -3068,9 +3367,12 @@
                         </li>
                         @empty
                         @endforelse
-                    </ul>                        
+                    </ul>
                     @empty
                     @endforelse
+                    @if(count($subareas) == 0)
+                        <h3 style="text-align: center; padding: 50px;">En los parámetros establecidos no se encuentra información que mostrar</h3>
+                    @endif
                 </div>
             </div>
 
@@ -3089,28 +3391,8 @@
 <script src="{{asset('assets/plugins/Chart.js/Chart.min.js')}}"></script>
 <script>
     $(document).ready(function() {
-        @if(request('cat') == "auditoria")
-            $('.data-procesos').css('display', 'none');
-            $('.navsubitemindicadores li').click(function() {
-                var data = $(this).attr('data-val');
-                if (!$(this).hasClass('active')) {
-                    if (data == "estado") {
-                        $(this).addClass('active');
-                        $(".navsubitemindicadores li[data-val='procesos']").removeClass('active');
-                        $('.data-estado').css('display', 'flex');
-                        $('.data-procesos').css('display', 'none');
-                    } else {
-                        $(this).addClass('active');
-                        $(".navsubitemindicadores li[data-val='estado']").removeClass('active');
-                        $('.data-procesos').css('display', 'flex');
-                        $('.data-estado').css('display', 'none');
-                    }
-                }
-            });
-        @endif
-
         @if(request('cat') == "comisionistas")
-            var Ec_ = '<li class="nav-item"><div class="w-100"><div class=" text-center"><span class="titulos">Estado</span><hr></div><div class="text-center"><input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{$porcentajeE!=0?$porcentajeE/$totaldatosverticalesE:0}}"></div><div class="text-center"><canvas class="lineChartE" height="100%"></canvas></div></div></li>';
+            var Ec_ = '<li class="nav-item"><div class="w-100"><div class=" text-center"><span class="titulos">Estado</span><hr></div><div class="text-center"><input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{$porcentajeE!=0?number_format($porcentajeE/$totaldatosverticalesE, 2):0}}"></div><div class="text-center"><canvas class="lineChartE" height="100%"></canvas></div></div></li>';
             $('.lista-estado').prepend(Ec_);
             var ctx = $('.lineChartE');
             ctx.css('display', 'initial!important');
@@ -3139,7 +3421,7 @@
                 }
             });
 
-            var Pc_ = '<li class="nav-item"><div class="w-100"><div class=" text-center"><span class="titulos">Proceso</span><hr></div><div class="text-center"><input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{$porcentajeP!=0?$porcentajeP/$totaldatosverticalesP:0}}"></div><div class="text-center"><canvas class="lineChartP" height="100%"></canvas></div></div></li>';
+            var Pc_ = '<li class="nav-item"><div class="w-100"><div class=" text-center"><span class="titulos">Proceso</span><hr></div><div class="text-center"><input class="knob" data-width="50%" data-cursor="false" data-angleoffset="0" data-linecap="round" disabled data-fgcolor="#004e92" value="{{$porcentajeP!=0?number_format($porcentajeP/$totaldatosverticalesP, 2):0}}"></div><div class="text-center"><canvas class="lineChartP" height="100%"></canvas></div></div></li>';
             $('.lista-proceso').prepend(Pc_);
             var ctx = $('.lineChartP');
             ctx.css('display', 'initial!important');
@@ -3185,6 +3467,26 @@
                 'rotation': "anticlockwise",
             });
             $('.loadingc').addClass('hidden');
+
+            @if(request('cat') == "auditoria")
+            $('.navsubitemindicadores li').click(function() {
+                var data = $(this).attr('data-val');
+                if (!$(this).hasClass('active')) {
+                    if (data == "estado") {
+                        $(this).addClass('active');
+                        $(".navsubitemindicadores li[data-val='procesos']").removeClass('active');
+                        $('.data-estado').css('display', 'flex');
+                        $('.data-procesos').css('display', 'none');
+                    } else {
+                        $(this).addClass('active');
+                        $(".navsubitemindicadores li[data-val='estado']").removeClass('active');
+                        $('.data-procesos').css('display', 'flex');
+                        $('.data-estado').css('display', 'none');
+                    }
+                }
+            });
+        @endif
+
             $('.selglobal').click(function() {
                 $('#pdssel').val(0).trigger('change');
                 $('#ciudad').val(0).trigger('change');

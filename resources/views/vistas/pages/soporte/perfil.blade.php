@@ -13,14 +13,36 @@
                                 <input type="text" class="form-control" value="{{$user->name}}" readonly>
                             </div>
                         </div>
-                        @if($user->attachment_id!=null)
-                        <div class="form-group">
-                            <label class="col-form-label">Foto</label>
-                            <div class="col-8 offset-2">
-                                <img class="img-thumbnail" src="{{url('/imagen/' . $user->attachment_id)}}">
+                        <form method="POST" enctype="multipart/form-data" id="perfil">
+                            @csrf
+                            <input type="hidden" name="id" value="{{ $user->id }}">
+                            <div class="form-group">
+                                <label class="col-form-label">Foto</label>
+                                <label class="pt" for="profileImg">
+                                    <div class="col-8 offset-2">
+                                        <img id="previewImg" src="@if($user->avatar != "users/default.png"){{ url('perfil') . '/'. $user->avatar }}@else{{'https://devtemporal92.grupolizame.com/person.jpg'}}@endif" class="img-thumbnail" alt=""/>
+                                        <input type="file" id="profileImg" name="profileImg" style="display: none">
+                                    </div>
+                                </label>
+                                <script>
+                                    $("#profileImg").change(function () {
+                                        var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
+                                        if (regex.test($(this).val().toLowerCase())) {
+                                            if (typeof (FileReader) != "undefined") {
+                                                var reader = new FileReader();
+                                                reader.onload = function (e) {
+                                                    $("#previewImg").attr("src", e.target.result);
+                                                }
+                                                reader.readAsDataURL($(this)[0].files[0]);
+                                                $("#perfil").submit();
+                                            }
+                                        } else {
+                                            alert("Solo se permiten archivos de imágenes!");
+                                        }
+                                    });
+                                </script>
                             </div>
-                        </div>
-                        @endif
+                        </form>
                     </div>
                     <div class="col-lg-8">
                         <div class="form-group">
