@@ -20,7 +20,7 @@ class ProveedoresController extends Controller
         $proveedores = DB::table('proveedores')->orderBy('idproveedores', 'asc')->where('nombre', '!=', 'Mantenimiento')->get();
         $tbody = "";
         foreach ($proveedores as $proveedor) {
-            $calificacion = Calificacion::join('orden_trabajos', 'calificaciones.id_orden_trabajo', 'orden_trabajos.idorden_trabajos')->where('proveedor_id', $proveedor->idproveedores)->avg('calificacion');
+            $calificacion = ceil(Calificacion::join('orden_trabajos', 'calificaciones.id_orden_trabajo', 'orden_trabajos.idorden_trabajos')->where('proveedor_id', $proveedor->idproveedores)->avg('calificacion'));
             $porcentaje = 0;
             switch ($calificacion) {
                 case 1:

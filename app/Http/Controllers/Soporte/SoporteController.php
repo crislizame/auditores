@@ -386,7 +386,15 @@ class SoporteController extends Controller
     public function perfil()
     {
         $user = User::where('id', Auth::user()->id)->leftJoin('mantenimiento_users', 'users.id', 'mantenimiento_users.user_id')->first();
-        $calificacion = Calificacion::where('id_user_calificado', $user->id)->avg('calificacion');
+        
+        $calificacion = ceil(Calificacion::select('areas.entidad_id')
+        ->where('areas.entidad_id', Auth::user()->entidad_id)
+        ->join('orden_trabajos', 'calificaciones.id_orden_trabajo', 'orden_trabajos.idorden_trabajos')
+        ->join('orden_requermientos', 'orden_trabajos.orden_requermiento_id', 'orden_requermientos.idorden_requermientos')
+        ->join('problemas', 'orden_requermientos.problema_id', 'problemas.id')
+        ->join('subareas', 'problemas.subarea_id', 'subareas.idsubareas')
+        ->join('areas', 'subareas.area_id', 'areas.idareas')
+        ->avg('calificacion'));
 
         $cumplimiento_datos = Proveedor::select('problemas.tiempo', 'orden_requermientos.enproceso', 'orden_requermientos.finalizado')
             ->join('orden_trabajos', 'proveedores.idproveedores', 'orden_trabajos.proveedor_id')

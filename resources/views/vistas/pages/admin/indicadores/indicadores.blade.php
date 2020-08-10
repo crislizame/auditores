@@ -1276,7 +1276,7 @@
                         }
                         $porcentaje = 0;
                         if(count($ordenes)>0){
-                            switch($calificaciones/count($ordenes)){
+                            switch(ceil($calificaciones/count($ordenes))){
                                 case 1:
                                     $porcentaje = 0;
                                 break;
@@ -1303,7 +1303,7 @@
                             height: 80px;
                             background-repeat: no-repeat;
                             background-position: center;
-                            background-image:url("{{url('/img/cara')}}{{ count($ordenes)>0?$calificaciones/count($ordenes):0 }}.jpg");
+                            background-image:url("{{url('/img/cara')}}{{ count($ordenes)>0?ceil($calificaciones/count($ordenes)):0 }}.jpg");
                         }
                     </style>
                 </div>
@@ -1675,7 +1675,7 @@
                         }
                         $porcentaje = 0;
                         if(count($ordenes)>0){
-                            switch($calificaciones/count($ordenes)){
+                            switch(ceil($calificaciones/count($ordenes))){
                                 case 1:
                                     $porcentaje = 0;
                                 break;
@@ -1702,7 +1702,7 @@
                             height: 80px;
                             background-repeat: no-repeat;
                             background-position: center;
-                            background-image:url("{{url('/img/cara')}}{{ count($ordenes)>0?$calificaciones/count($ordenes):0 }}.jpg");
+                            background-image:url("{{url('/img/cara')}}{{ count($ordenes)>0?ceil($calificaciones/count($ordenes)):0 }}.jpg");
                         }
                     </style>
                 </div>
@@ -2349,7 +2349,7 @@
                 }
                 $porcentajeC = 0;
                 if(count($ordenesC)>0){
-                    switch($calificacionesC/count($ordenesC)){
+                    switch(ceil($calificacionesC/count($ordenesC))){
                         case 1:
                             $porcentajeC = 0;
                         break;
@@ -2395,7 +2395,7 @@
                 }
                 $porcentajeS = 0;
                 if(count($ordenesS)>0){
-                    switch($calificacionesS/count($ordenesS)){
+                    switch(ceil($calificacionesS/count($ordenesS))){
                         case 1:
                             $porcentajeS = 0;
                         break;
@@ -2425,7 +2425,7 @@
                             height: 80px;
                             background-repeat: no-repeat;
                             background-position: center;
-                            background-image:url("{{url('/img/cara')}}{{ count($ordenesC)>0?$calificacionesC/count($ordenesC):0 }}.jpg");
+                            background-image:url("{{url('/img/cara')}}{{ count($ordenesC)>0?ceil($calificacionesC/count($ordenesC)):0 }}.jpg");
                         }
                         </style>
                     </div>
@@ -2439,7 +2439,7 @@
                             height: 80px;
                             background-repeat: no-repeat;
                             background-position: center;
-                            background-image:url("{{url('/img/cara')}}{{ count($ordenesS)>0?$calificacionesS/count($ordenesS):0 }}.jpg");
+                            background-image:url("{{url('/img/cara')}}{{ count($ordenesS)>0?ceil($calificacionesS/count($ordenesS)):0 }}.jpg");
                         }
                         </style>
                     </div>
@@ -2905,7 +2905,7 @@
                 }
                 $porcentajeC = 0;
                 if(count($ordenesC)>0){
-                    switch($calificacionesC/count($ordenesC)){
+                    switch(ceil($calificacionesC/count($ordenesC))){
                         case 1:
                             $porcentajeC = 0;
                         break;
@@ -2951,7 +2951,7 @@
                 }
                 $porcentajeS = 0;
                 if(count($ordenesS)>0){
-                    switch($calificacionesS/count($ordenesS)){
+                    switch(ceil($calificacionesS/count($ordenesS))){
                         case 1:
                             $porcentajeS = 0;
                         break;
@@ -2981,7 +2981,7 @@
                             height: 80px;
                             background-repeat: no-repeat;
                             background-position: center;
-                            background-image:url("{{url('/img/cara')}}{{ count($ordenesC)>0?$calificacionesC/count($ordenesC):0 }}.jpg");
+                            background-image:url("{{url('/img/cara')}}{{ count($ordenesC)>0?ceil($calificacionesC/count($ordenesC)):0 }}.jpg");
                         }
                         </style>
                     </div>
@@ -2995,7 +2995,7 @@
                             height: 80px;
                             background-repeat: no-repeat;
                             background-position: center;
-                            background-image:url("{{url('/img/cara')}}{{ count($ordenesS)>0?$calificacionesS/count($ordenesS):0 }}.jpg");
+                            background-image:url("{{url('/img/cara')}}{{ count($ordenesS)>0?ceil($calificacionesS/count($ordenesS)):0 }}.jpg");
                         }
                         </style>
                     </div>
