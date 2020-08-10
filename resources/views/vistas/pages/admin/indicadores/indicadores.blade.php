@@ -1246,7 +1246,7 @@
                 </div>
             </div>
 
-            <h5 class="titulos-grandes text-center">Encuesta a Comisionista</h5>
+            <h5 class="titulos-grandes text-center">Calificación de Gestión al Comisionista</h5>
             <div class="col py-2 mb-4" style="background: white;">
                 <div class="row col-md-3 offset-md-4 text-center p-0">
                         @php
@@ -1645,7 +1645,7 @@
                 </div>
             </div>
 
-            <h5 class="titulos-grandes text-center">Encuesta a Comisionista</h5>
+            <h5 class="titulos-grandes text-center">Calificación de Gestión al Comisionista</h5>
             <div class="col py-2 mb-4" style="background: white;">
                 <div class="row col-md-3 offset-md-4 text-center p-0">
                         @php
@@ -2319,7 +2319,7 @@
                 </div>
             </div>
 
-            <h5 class="titulos-grandes text-center">Encuestas</h5>
+            <h5 class="titulos-grandes text-center">Calificación de Gestión</h5>
             <div class="col py-2 mb-4" style="background: white;">
                 @php
                 $ordenesC = (new \App\Orden_Requerimiento())->select('solicitado','enproceso','finalizado','calificacion')
@@ -2875,7 +2875,7 @@
                 </div>
             </div>
 
-            <h5 class="titulos-grandes text-center">Encuestas</h5>
+            <h5 class="titulos-grandes text-center">Calificación de Gestión</h5>
             <div class="col py-2 mb-4" style="background: white;">
                 @php
                 $ordenesC = (new \App\Orden_Requerimiento())->select('solicitado','enproceso','finalizado','calificacion')
