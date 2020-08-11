@@ -4,9 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Comisionista;
 use App\Comisionistas_attachment;
+use App\Encaudit;
+use App\Encauditdata;
+use App\Encauditvalue;
 use App\Pdsperfile;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class ComisionistasController extends Controller
 {
@@ -34,6 +38,27 @@ class ComisionistasController extends Controller
         $pdssql = (new Pdsperfile())->where('id',$pds_id)->first();
         return $pdssql->pds_ciudad;
     }
+
+    public function resultado($valor){
+        switch($valor){
+            case 1:
+                return 0;
+            break;
+            case 2:
+                return 25;
+            break;
+            case 3:
+                return 50;
+            break;
+            case 4:
+                return 75;
+            break;
+            case 5:
+                return 100;
+            break;
+        }
+    }
+
     public function cargarcomisionistas(){
         $comisionistas = (new \App\Comisionista())->orderBy('id','desc')->get();
         $td = "";
@@ -47,6 +72,50 @@ class ComisionistasController extends Controller
                 $pdsname = $pds->pds_name;
                 $ciudad = $pds->pds_ciudad;
 
+                $datosverticales = Encaudit::where('categoria',"estado")->get();
+                $promGlobalE = 0;
+                $sumthc = 0;
+
+                foreach($datosverticales as $dv){
+                    $tgsum = 0;
+                    $thc = Encauditvalue::where('encaudit_id',$dv->idencaudit)->get();
+                    $sumthc += count($thc);
+                    foreach($thc as $tc){
+                        $carita = (new \App\Encauditdata())->select(DB::raw('sum(carita) as totalCaritas'), DB::raw('count(carita) as cuentaCaritas'))
+                        ->where(['encauditvalues_id'=>$tc->idencauditvalues])
+                        ->where('pds_id',$comisionista->pds_id)
+                        ->first();
+                    
+                        if($carita->totalCaritas != null && $carita->cuentaCaritas != null){
+                            $tgsum += $this->resultado(ceil($carita->totalCaritas/$carita->cuentaCaritas));
+                        }
+                    }
+                    $promGlobalE += number_format($tgsum/count($thc),2);
+                }
+                $promGlobalE = number_format($promGlobalE/$sumthc,2);
+                
+                $datosverticales = Encaudit::where('categoria',"procesos")->get();
+                $promGlobalP = 0;
+                $sumthc = 0;
+
+                foreach($datosverticales as $dv){
+                    $tgsum = 0;
+                    $thc = Encauditvalue::where('encaudit_id',$dv->idencaudit)->get();
+                    $sumthc += count($thc);
+                    foreach($thc as $tc){
+                        $carita = (new \App\Encauditdata())->select(DB::raw('sum(carita) as totalCaritas'), DB::raw('count(carita) as cuentaCaritas'))
+                        ->where(['encauditvalues_id'=>$tc->idencauditvalues])
+                        ->where('pds_id',$comisionista->pds_id)
+                        ->first();
+                    
+                        if($carita->totalCaritas != null && $carita->cuentaCaritas != null){
+                            $tgsum += $this->resultado(ceil($carita->totalCaritas/$carita->cuentaCaritas));
+                        }
+                    }
+                    $promGlobalP += number_format($tgsum/count($thc),2);
+                }
+                $promGlobalP = number_format($promGlobalP/$sumthc,2);
+                
             }
             $td .= "<tr>
                         <th scope=\"row\">".$comisionista->id."</th>
@@ -54,7 +123,7 @@ class ComisionistasController extends Controller
                         <td>".mb_strimwidth(strtoupper($comisionista->apellidos),'0','15','...')."</td>
                         <td data-toggle='tooltip' title='$pdsname' data-placement='top'>".strtoupper($pdsname)."</td>
                         <td>".strtoupper($ciudad)."</td>                       
-                        <td>$comisionista->calificacion</td>
+                        <td>".number_format($promGlobalE+$promGlobalP, 2)."%</td>
                         <td><button class=\"btn btn-sm btn-warning btnEditarComisionista\" data-id=\"$comisionista->id\"><i class=\"fa fa-lg fa-edit\"></i></button> | <button class=\"btn btn-sm btn-danger btnEliminarComisionista\" data-id=\"$comisionista->id\"><i class=\"fa fa-lg fa-trash\"></i></button></td>
                     </tr>";
         }
