@@ -1248,8 +1248,7 @@
 
             <h5 class="titulos-grandes text-center">Calificación de Gestión al Comisionista</h5>
             <div class="col py-2 mb-4" style="background: white;">
-                <div class="row col-md-3 offset-md-4 text-center p-0">
-                        @php
+                @php
                         $ordenes = (new \App\Orden_Requerimiento())->select('solicitado','enproceso','finalizado','calificacion')
                         ->join('orden_trabajos','orden_requermientos.idorden_requermientos','orden_trabajos.orden_requermiento_id')
                         ->join('calificaciones','orden_trabajos.idorden_trabajos','calificaciones.id_orden_trabajo')
@@ -1271,8 +1270,18 @@
                         }
                         $ordenes = $ordenes->get();
                         $calificaciones = 0;
+                        $diasParaResolver = 0;
                         foreach($ordenes as $orden){
                             $calificaciones += $orden->calificacion;
+
+                            if( $orden->enproceso != null && $orden->finalizado != null ){
+                                $diasParaResolver += \Carbon\Carbon::parse($orden->enproceso)->diffInDays(\Carbon\Carbon::parse($orden->finalizado));
+                            }
+                        }
+                        if(count($ordenes)>0){
+                            $promedioDiasParaResolver = ceil($diasParaResolver/count($ordenes));
+                        }else{
+                            $promedioDiasParaResolver = 0;
                         }
                         $porcentaje = 0;
                         if(count($ordenes)>0){
@@ -1295,9 +1304,11 @@
                             }
                         }
                         @endphp
-                    <div class="col-6 p-0 mx-auto"><div class="calificacion mx-auto"></div></div>
-                    <div class="col-6 p-0 my-auto mx-auto"><h2 class="text-primary"><b>{{ $porcentaje }}%</b></h2></div>
-                    <style>
+                            <div class="row col-md-3 offset-md-4 text-center p-0">
+                                <div class="col-6 p-0 mx-auto"><div class="calificacion mx-auto"></div></div>
+                                <div class="col-6 p-0 my-auto mx-auto"><h2 class="text-primary"><b>{{ $porcentaje }}%</b></h2></div>
+                            </div>
+                            <style>
                         .calificacion {
                             width: 80px;
                             height: 80px;
@@ -1306,7 +1317,23 @@
                             background-image:url("{{url('/img/cara')}}{{ count($ordenes)>0?ceil($calificaciones/count($ordenes)):0 }}.jpg");
                         }
                     </style>
-                </div>
+            </div>
+
+            <h5 class="titulos-grandes text-center">Promedio de tiempo en solucionar</h5>
+            <div class="col py-2 mb-4" style="background: white;">
+                    <div class="row col-md-3 offset-md-4 text-center p-0">
+                        <div class="col-6 p-0 mx-auto"><div class="calificacionDias mx-auto"></div></div>
+                        <div class="col-6 p-0 my-auto mx-auto"><h2 class="text-primary"><b>{{ $promedioDiasParaResolver.' días' }}</b></h2></div>
+                    </div>
+                    <style>
+                        .calificacionDias {
+                            width: 80px;
+                            height: 80px;
+                            background-repeat: no-repeat;
+                            background-position: center;
+                            background-image:url("{{url('/img/cara')}}5.jpg");
+                        }
+                    </style>
             </div>
 
             <h5 class="titulos-grandes text-center">Resultado de reporteria</h5>
@@ -1647,8 +1674,7 @@
 
             <h5 class="titulos-grandes text-center">Calificación de Gestión al Comisionista</h5>
             <div class="col py-2 mb-4" style="background: white;">
-                <div class="row col-md-3 offset-md-4 text-center p-0">
-                        @php
+                @php
                         $ordenes = (new \App\Orden_Requerimiento())->select('solicitado','enproceso','finalizado','calificacion')
                         ->join('orden_trabajos','orden_requermientos.idorden_requermientos','orden_trabajos.orden_requermiento_id')
                         ->join('calificaciones','orden_trabajos.idorden_trabajos','calificaciones.id_orden_trabajo')
@@ -1670,8 +1696,18 @@
                         }
                         $ordenes = $ordenes->get();
                         $calificaciones = 0;
+                        $diasParaResolver = 0;
                         foreach($ordenes as $orden){
                             $calificaciones += $orden->calificacion;
+
+                            if( $orden->enproceso != null && $orden->finalizado != null ){
+                                $diasParaResolver += \Carbon\Carbon::parse($orden->enproceso)->diffInDays(\Carbon\Carbon::parse($orden->finalizado));
+                            }
+                        }
+                        if(count($ordenes)>0){
+                            $promedioDiasParaResolver = ceil($diasParaResolver/count($ordenes));
+                        }else{
+                            $promedioDiasParaResolver = 0;
                         }
                         $porcentaje = 0;
                         if(count($ordenes)>0){
@@ -1694,9 +1730,11 @@
                             }
                         }
                         @endphp
-                    <div class="col-6 p-0 mx-auto"><div class="calificacion mx-auto"></div></div>
-                    <div class="col-6 p-0 my-auto mx-auto"><h2 class="text-primary"><b>{{ $porcentaje }}%</b></h2></div>
-                    <style>
+                            <div class="row col-md-3 offset-md-4 text-center p-0">
+                                <div class="col-6 p-0 mx-auto"><div class="calificacion mx-auto"></div></div>
+                                <div class="col-6 p-0 my-auto mx-auto"><h2 class="text-primary"><b>{{ $porcentaje }}%</b></h2></div>
+                            </div>
+                            <style>
                         .calificacion {
                             width: 80px;
                             height: 80px;
@@ -1705,7 +1743,23 @@
                             background-image:url("{{url('/img/cara')}}{{ count($ordenes)>0?ceil($calificaciones/count($ordenes)):0 }}.jpg");
                         }
                     </style>
-                </div>
+            </div>
+
+            <h5 class="titulos-grandes text-center">Promedio de tiempo en solucionar</h5>
+            <div class="col py-2 mb-4" style="background: white;">
+                    <div class="row col-md-3 offset-md-4 text-center p-0">
+                        <div class="col-6 p-0 mx-auto"><div class="calificacionDias mx-auto"></div></div>
+                        <div class="col-6 p-0 my-auto mx-auto"><h2 class="text-primary"><b>{{ $promedioDiasParaResolver.' días' }}</b></h2></div>
+                    </div>
+                    <style>
+                        .calificacionDias {
+                            width: 80px;
+                            height: 80px;
+                            background-repeat: no-repeat;
+                            background-position: center;
+                            background-image:url("{{url('/img/cara')}}5.jpg");
+                        }
+                    </style>
             </div>
 
             <h5 class="titulos-grandes text-center">Resultado de reporteria</h5>
@@ -2042,6 +2096,80 @@
                         <div class="col-md-6 border py-5"><h2 class="my-5 text-primary">{{$tPF->format('H:i')}}</h2></div>
                     </div>
                 </div>
+            </div>
+
+                @php
+                        $ordenes = (new \App\Orden_Requerimiento())->select('solicitado','enproceso','finalizado','calificacion')
+                        ->join('orden_trabajos','orden_requermientos.idorden_requermientos','orden_trabajos.orden_requermiento_id')
+                        ->join('calificaciones','orden_trabajos.idorden_trabajos','calificaciones.id_orden_trabajo')
+                        ->join('problemas','orden_requermientos.problema_id','problemas.id')
+                        ->join('subareas','problemas.subarea_id','subareas.idsubareas')
+                        ->join('areas','subareas.area_id','areas.idareas')
+                        ->join('entidades','areas.entidad_id','entidades.identidad')
+                        ->where('entidades.nombre',$category)
+                        ->whereBetween('solicitado', [$datainicio, $datafin]);
+                        if($pds_id != "%"){
+                            $ordenes = $ordenes->where("pds_id",$pds_id);
+                        } else {
+                            if($ciudad != "sc"){
+                                $ordenes = $ordenes->join('pdsperfiles','orden_requerimientos.pds_id', 'pdsperfiles.id')->where("pds_ciudad",$ciudad);
+                            }
+                            if($provincia != "sp"){
+                                $ordenes = $ordenes->join('pdsperfiles','orden_requerimientos.pds_id', 'pdsperfiles.id')->where("pds_provincia",$provincia);
+                            }
+                        }
+                        $ordenes = $ordenes->get();
+                        $calificaciones = 0;
+                        $diasParaResolver = 0;
+                        foreach($ordenes as $orden){
+                            $calificaciones += $orden->calificacion;
+
+                            if( $orden->enproceso != null && $orden->finalizado != null ){
+                                $diasParaResolver += \Carbon\Carbon::parse($orden->enproceso)->diffInDays(\Carbon\Carbon::parse($orden->finalizado));
+                            }
+                        }
+                        if(count($ordenes)>0){
+                            $promedioDiasParaResolver = ceil($diasParaResolver/count($ordenes));
+                        }else{
+                            $promedioDiasParaResolver = 0;
+                        }
+                        $porcentaje = 0;
+                        if(count($ordenes)>0){
+                            switch(ceil($calificaciones/count($ordenes))){
+                                case 1:
+                                    $porcentaje = 0;
+                                break;
+                                case 2:
+                                    $porcentaje = 25;
+                                break;
+                                case 3:
+                                    $porcentaje = 50;
+                                break;
+                                case 4:
+                                    $porcentaje = 75;
+                                break;
+                                case 5:
+                                    $porcentaje = 100;
+                                break;
+                            }
+                        }
+                        @endphp
+
+            <h5 class="titulos-grandes text-center">Promedio de tiempo en solucionar</h5>
+            <div class="col py-2 mb-4" style="background: white;">
+                    <div class="row col-md-3 offset-md-4 text-center p-0">
+                        <div class="col-6 p-0 mx-auto"><div class="calificacionDias mx-auto"></div></div>
+                        <div class="col-6 p-0 my-auto mx-auto"><h2 class="text-primary"><b>{{ $promedioDiasParaResolver.' días' }}</b></h2></div>
+                    </div>
+                    <style>
+                        .calificacionDias {
+                            width: 80px;
+                            height: 80px;
+                            background-repeat: no-repeat;
+                            background-position: center;
+                            background-image:url("{{url('/img/cara')}}5.jpg");
+                        }
+                    </style>
             </div>
 
             <h5 class="titulos-grandes text-center">Resultado de reporteria</h5>
@@ -2591,6 +2719,80 @@
                     </div>
                 </div>
             </div>
+
+            @php
+            $ordenes = (new \App\Orden_Requerimiento())->select('solicitado','enproceso','finalizado','calificacion')
+            ->join('orden_trabajos','orden_requermientos.idorden_requermientos','orden_trabajos.orden_requermiento_id')
+            ->join('calificaciones','orden_trabajos.idorden_trabajos','calificaciones.id_orden_trabajo')
+            ->join('problemas','orden_requermientos.problema_id','problemas.id')
+            ->join('subareas','problemas.subarea_id','subareas.idsubareas')
+            ->join('areas','subareas.area_id','areas.idareas')
+            ->join('entidades','areas.entidad_id','entidades.identidad')
+            ->where('entidades.nombre',$category)
+            ->whereBetween('solicitado', [$datainicio, $datafin]);
+            if($pds_id != "%"){
+                $ordenes = $ordenes->where("pds_id",$pds_id);
+            } else {
+                if($ciudad != "sc"){
+                    $ordenes = $ordenes->join('pdsperfiles','orden_requerimientos.pds_id', 'pdsperfiles.id')->where("pds_ciudad",$ciudad);
+                }
+                if($provincia != "sp"){
+                    $ordenes = $ordenes->join('pdsperfiles','orden_requerimientos.pds_id', 'pdsperfiles.id')->where("pds_provincia",$provincia);
+                }
+            }
+            $ordenes = $ordenes->get();
+            $calificaciones = 0;
+            $diasParaResolver = 0;
+            foreach($ordenes as $orden){
+                $calificaciones += $orden->calificacion;
+
+                if( $orden->enproceso != null && $orden->finalizado != null ){
+                    $diasParaResolver += \Carbon\Carbon::parse($orden->enproceso)->diffInDays(\Carbon\Carbon::parse($orden->finalizado));
+                }
+            }
+            if(count($ordenes)>0){
+                $promedioDiasParaResolver = ceil($diasParaResolver/count($ordenes));
+            }else{
+                $promedioDiasParaResolver = 0;
+            }
+            $porcentaje = 0;
+            if(count($ordenes)>0){
+                switch(ceil($calificaciones/count($ordenes))){
+                    case 1:
+                        $porcentaje = 0;
+                    break;
+                    case 2:
+                        $porcentaje = 25;
+                    break;
+                    case 3:
+                        $porcentaje = 50;
+                    break;
+                    case 4:
+                        $porcentaje = 75;
+                    break;
+                    case 5:
+                        $porcentaje = 100;
+                    break;
+                }
+            }
+            @endphp
+
+<h5 class="titulos-grandes text-center">Promedio de tiempo en solucionar</h5>
+<div class="col py-2 mb-4" style="background: white;">
+        <div class="row col-md-3 offset-md-4 text-center p-0">
+            <div class="col-6 p-0 mx-auto"><div class="calificacionDias mx-auto"></div></div>
+            <div class="col-6 p-0 my-auto mx-auto"><h2 class="text-primary"><b>{{ $promedioDiasParaResolver.' días' }}</b></h2></div>
+        </div>
+        <style>
+            .calificacionDias {
+                width: 80px;
+                height: 80px;
+                background-repeat: no-repeat;
+                background-position: center;
+                background-image:url("{{url('/img/cara')}}5.jpg");
+            }
+        </style>
+</div>
 
             <h5 class="titulos-grandes text-center">Resultado de reporteria</h5>
             <div class="row data-estado mb-2">

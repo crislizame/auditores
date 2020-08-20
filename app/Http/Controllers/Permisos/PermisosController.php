@@ -18,7 +18,10 @@ class PermisosController extends Controller
 {
     public function permisos(Request $request)
     {
-        $pds = DB::table('pdsperfiles')->join('pdsperfiles_permisos', 'pdsperfiles_permisos.pds_id', 'pdsperfiles.id')->orderBy('id', 'asc')->get();
+        $pds = DB::table('pdsperfiles')
+            ->join('pdsperfiles_permisos', 'pdsperfiles_permisos.pds_id', 'pdsperfiles.id')
+            ->orderBy('id', 'asc')
+            ->get();
         return view('vistas.pages.permisos.permisos')->with('pds', $pds);
     }
 
@@ -43,7 +46,7 @@ class PermisosController extends Controller
 
             if ($permisopds != null) {
                 if (date('Y-m-d') < $permisopds->caducidad) {
-                    $p_tiempo = Carbon::parse($permisopds->caducidad)->diffInDays(\Carbon\Carbon::now());
+                    $p_tiempo = Carbon::parse($permisopds->caducidad)->diffInDays(\Carbon\Carbon::now(), true);
                 }
                 $p_permisopds = $permisopds->id;
                 $p_expedicion = $permisopds->expedicion;
@@ -108,12 +111,12 @@ class PermisosController extends Controller
                         <h5 class="titulos mt-2">Conteo regresivo</h5>
                     </div>
                     <div class="col-5">
-                        <h4 class="mt-1">' . $p_tiempo . '</h4>
+                        <h4 class="mt-1">' . ($p_expedicion == null && $p_caducidad == null ? 'Permiso no cargado' : ($p_tiempo <= 0 ? 'Permiso Vencido' : $p_tiempo . ' días restantes')) . '</h4>
                     </div>
                 </div>
                 <hr>
             </div>
-            <div class="col-3"> 
+            <div class="col-3">
                 <div class="col-8 mx-auto">
                     <img class="img-thumbnail" src="' . $p_imagen . '" onclick="modalImagen(this.src, \'' . $permiso->nombre . '\')">
                 </div>
@@ -147,7 +150,7 @@ class PermisosController extends Controller
 
             if ($permisopds != null) {
                 if (date('Y-m-d') < $permisopds->caducidad) {
-                    $p_tiempo = Carbon::parse($permisopds->caducidad)->diffInDays(\Carbon\Carbon::now());
+                    $p_tiempo = Carbon::parse($permisopds->caducidad)->diffInDays(\Carbon\Carbon::now(), true);
                 }
                 $p_permisopds = $permisopds->id;
                 $p_expedicion = $permisopds->expedicion;
@@ -212,12 +215,12 @@ class PermisosController extends Controller
                         <h5 class="titulos mt-2">Conteo regresivo</h5>
                     </div>
                     <div class="col-5">
-                        <h4 class="mt-1">' . $p_tiempo . '</h4>
+                        <h4 class="mt-1">' . ($p_expedicion == null && $p_caducidad == null ? 'Permiso no cargado' : ($p_tiempo <= 0 ? 'Permiso Vencido' : $p_tiempo . ' días restantes')) . '</h4>
                     </div>
                 </div>
                 <hr>
             </div>
-            <div class="col-3"> 
+            <div class="col-3">
                 <div class="col-8 mx-auto">
                     <img class="img-thumbnail" src="' . $p_imagen . '" onclick="modalImagen(this.src, \'' . $permiso->nombre . '\')">
                 </div>
@@ -251,7 +254,7 @@ class PermisosController extends Controller
 
             if ($permisopds != null) {
                 if (date('Y-m-d') < $permisopds->caducidad) {
-                    $p_tiempo = Carbon::parse($permisopds->caducidad)->diffInDays(\Carbon\Carbon::now());
+                    $p_tiempo = Carbon::parse($permisopds->caducidad)->diffInDays(\Carbon\Carbon::now(), true);
                 }
                 $p_permisopds = $permisopds->id;
                 $p_expedicion = $permisopds->expedicion;
@@ -316,12 +319,12 @@ class PermisosController extends Controller
                         <h5 class="titulos mt-2">Conteo regresivo</h5>
                     </div>
                     <div class="col-5">
-                        <h4 class="mt-1">' . $p_tiempo . '</h4>
+                        <h4 class="mt-1">' . ($p_expedicion == null && $p_caducidad == null ? 'Permiso no cargado' : ($p_tiempo <= 0 ? 'Permiso Vencido' : $p_tiempo . ' días restantes')) . '</h4>
                     </div>
                 </div>
                 <hr>
             </div>
-            <div class="col-3"> 
+            <div class="col-3">
                 <div class="col-8 mx-auto">
                     <img class="img-thumbnail" src="' . $p_imagen . '" onclick="modalImagen(this.src, \'' . $permiso->nombre . '\')">
                 </div>
@@ -355,7 +358,7 @@ class PermisosController extends Controller
 
             if ($permisopds != null) {
                 if (date('Y-m-d') < $permisopds->caducidad) {
-                    $p_tiempo = Carbon::parse($permisopds->caducidad)->diffInDays(\Carbon\Carbon::now());
+                    $p_tiempo = Carbon::parse($permisopds->caducidad)->diffInDays(\Carbon\Carbon::now(), true);
                 }
                 $p_permisopds = $permisopds->id;
                 $p_expedicion = $permisopds->expedicion;
@@ -420,12 +423,12 @@ class PermisosController extends Controller
                         <h5 class="titulos mt-2">Conteo regresivo</h5>
                     </div>
                     <div class="col-5">
-                        <h4 class="mt-1">' . $p_tiempo . '</h4>
+                        <h4 class="mt-1">' . ($p_expedicion == null && $p_caducidad == null ? 'Permiso no cargado' : ($p_tiempo <= 0 ? 'Permiso Vencido' : $p_tiempo . ' días restantes')) . '</h4>
                     </div>
                 </div>
                 <hr>
             </div>
-            <div class="col-3"> 
+            <div class="col-3">
                 <div class="col-8 mx-auto">
                     <img class="img-thumbnail" src="' . $p_imagen . '" onclick="modalImagen(this.src, \'' . $permiso->nombre . '\')">
                 </div>
@@ -459,7 +462,7 @@ class PermisosController extends Controller
 
             if ($permisopds != null) {
                 if (date('Y-m-d') < $permisopds->caducidad) {
-                    $p_tiempo = Carbon::parse($permisopds->caducidad)->diffInDays(\Carbon\Carbon::now());
+                    $p_tiempo = Carbon::parse($permisopds->caducidad)->diffInDays(\Carbon\Carbon::now(), true);
                 }
                 $p_permisopds = $permisopds->id;
                 $p_expedicion = $permisopds->expedicion;
@@ -524,12 +527,12 @@ class PermisosController extends Controller
                         <h5 class="titulos mt-2">Conteo regresivo</h5>
                     </div>
                     <div class="col-5">
-                        <h4 class="mt-1">' . $p_tiempo . '</h4>
+                        <h4 class="mt-1">' . ($p_expedicion == null && $p_caducidad == null ? 'Permiso no cargado' : ($p_tiempo <= 0 ? 'Permiso Vencido' : $p_tiempo . ' días restantes')) . '</h4>
                     </div>
                 </div>
                 <hr>
             </div>
-            <div class="col-3"> 
+            <div class="col-3">
                 <div class="col-8 mx-auto">
                     <img class="img-thumbnail" src="' . $p_imagen . '" onclick="modalImagen(this.src, \'' . $permiso->nombre . '\')">
                 </div>
@@ -563,7 +566,7 @@ class PermisosController extends Controller
 
             if ($permisopds != null) {
                 if (date('Y-m-d') < $permisopds->caducidad) {
-                    $p_tiempo = Carbon::parse($permisopds->caducidad)->diffInDays(\Carbon\Carbon::now());
+                    $p_tiempo = Carbon::parse($permisopds->caducidad)->diffInDays(\Carbon\Carbon::now(), true);
                 }
                 $p_permisopds = $permisopds->id;
                 $p_expedicion = $permisopds->expedicion;
@@ -628,12 +631,12 @@ class PermisosController extends Controller
                         <h5 class="titulos mt-2">Conteo regresivo</h5>
                     </div>
                     <div class="col-5">
-                        <h4 class="mt-1">' . $p_tiempo . '</h4>
+                        <h4 class="mt-1">' . ($p_expedicion == null && $p_caducidad == null ? 'Permiso no cargado' : ($p_tiempo <= 0 ? 'Permiso Vencido' : $p_tiempo . ' días restantes')) . '</h4>
                     </div>
                 </div>
                 <hr>
             </div>
-            <div class="col-3"> 
+            <div class="col-3">
                 <div class="col-8 mx-auto">
                     <img class="img-thumbnail" src="' . $p_imagen . '" onclick="modalImagen(this.src, \'' . $permiso->nombre . '\')">
                 </div>
@@ -667,7 +670,7 @@ class PermisosController extends Controller
 
             if ($permisopds != null) {
                 if (date('Y-m-d') < $permisopds->caducidad) {
-                    $p_tiempo = Carbon::parse($permisopds->caducidad)->diffInDays(\Carbon\Carbon::now());
+                    $p_tiempo = Carbon::parse($permisopds->caducidad)->diffInDays(\Carbon\Carbon::now(), true);
                 }
                 $p_permisopds = $permisopds->id;
                 $p_expedicion = $permisopds->expedicion;
@@ -732,12 +735,12 @@ class PermisosController extends Controller
                         <h5 class="titulos mt-2">Conteo regresivo</h5>
                     </div>
                     <div class="col-5">
-                        <h4 class="mt-1">' . $p_tiempo . '</h4>
+                        <h4 class="mt-1">' . ($p_expedicion == null && $p_caducidad == null ? 'Permiso no cargado' : ($p_tiempo <= 0 ? 'Permiso Vencido' : $p_tiempo . ' días restantes')) . '</h4>
                     </div>
                 </div>
                 <hr>
             </div>
-            <div class="col-3"> 
+            <div class="col-3">
                 <div class="col-8 mx-auto">
                     <img class="img-thumbnail" src="' . $p_imagen . '" onclick="modalImagen(this.src, \'' . $permiso->nombre . '\')">
                 </div>
@@ -763,15 +766,16 @@ class PermisosController extends Controller
 
     public function guardarPermisos(Request $request)
     {
-        $cimagen = new Attachment();
-        $cimagen->file = file_get_contents($request->file('archivo')->getRealPath());
-        $cimagen->user_id = Auth::user()->id;
-        $cimagen->save();
-
         $permisopds = $request->permisopds != 0 ? Permisospds::find($request->permisopds) : new Permisospds();
         $permisopds->id_pds = $request->pds;
         $permisopds->id_permiso = $request->permiso;
-        $permisopds->id_attachment = $cimagen->idattachments;
+        if(!empty($request->archivo)){
+            $cimagen = new Attachment();
+            $cimagen->file = file_get_contents($request->file('archivo')->getRealPath());
+            $cimagen->user_id = Auth::user()->id;
+            $cimagen->save();
+            $permisopds->id_attachment = $cimagen->idattachments;
+        }
         $permisopds->aplica = $request->aplica;
         $permisopds->expedicion = $request->fexp;
         $permisopds->caducidad = $request->fcad;

@@ -1,7 +1,7 @@
 <div id="sidebar-wrapper" class="gradient-forest-ligth text-white" data-simplebar="" data-simplebar-auto-hide="true">
     <div class="brand-logo   text-center">
         <a href="index.html">
-            <img src="{{ asset('img/logo.png') }}" width="90px" class="" alt="user avatar">
+            <img src="{{ asset('img/logoblanco.png') }}" width="90px" class="" alt="user avatar">
         </a>
     </div>
     <ul class="sidebar-menu do-nicescrol">

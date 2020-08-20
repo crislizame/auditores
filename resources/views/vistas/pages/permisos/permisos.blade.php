@@ -33,7 +33,15 @@
                         <tbody>
                             @foreach($pds as $row)
                             <tr>
-                                <td><a href="#" onclick="buscarPermisos({{ $row->id }})">{{ $row->pds_name }}</a></td>
+                                @php
+                                    // Permiso más próximo a vencerse
+                                    $diferencia=0;
+                                    $fechaMasProxima = \Illuminate\Support\Facades\DB::table('permisospds')->select('caducidad')->where('id_pds', $row->id)->orderBy('caducidad', 'ASC')->first();
+                                    if($fechaMasProxima!=null){
+                                        $diferencia = \Carbon\Carbon::now()->diffInDays(\Carbon\Carbon::parse($fechaMasProxima->caducidad), false);
+                                    }
+                                @endphp
+                                <td><a href="#" onclick="buscarPermisos({{ $row->id }})">{{ $row->pds_name }}</a></td><td width="60"><h3>@if($fechaMasProxima!=null)@if($diferencia <= 30)<i class="fa fa-frown-o" style="color: red"></i>@elseif($diferencia > 30 && $diferencia < 180)<i class="fa fa-meh-o" style="color: orange"></i>@else<i class="fa fa-smile-o" style="color: green"></i>@endif @else<i class="fa fa-frown-o" style="color: red"></i>@endif</h3></td>
                             </tr>
                             @endforeach
                         </tbody>

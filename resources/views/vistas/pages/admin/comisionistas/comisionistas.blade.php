@@ -9,43 +9,31 @@
 
 @section('content')
 
-
     <div class="container-fluid ">
         <div class="row ">
-            <!-- Start Row principal -->
             <div class="col-lg-12 mt-3">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title"><button data-toggle="modal" data-target=".addComisionistaModal" class="btn btn-primary"><i class="fa fa-plus"></i> Agregar Comisionistas</button></h5>
-
                         <table class="table" id="list_comisionistas">
                             <thead>
                             <tr class="bg-primary text-white">
-                                <th scope="col">ID</th>
+                                <th scope="col">Cédula</th>
                                 <th>Nombre</th>
                                 <th>Apellido</th>
                                 <th width="30%">Punto de Suerte</th>
                                 <th>Ciudad</th>
-                                <th width="5%">Score</th>
                                 <th width="15%">Opciones</th>
                             </tr>
                             </thead>
                             <tbody class="comisionistaTabla">
-
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-            <!-- End Submenu -->
-            <!--Start Dashboard Content-->
-
-
-
-            <!--End Dashboard Content-->
-        </div><!-- End Row principal -->
-    </div><!-- End container-fluid-->
-
+        </div>
+    </div>
 
     <div class="modal fade addComisionistaModal" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
@@ -71,7 +59,6 @@
                                     <option value="0">Seleccione un PDS</option>
                                     @php
                                         $pdss = (new \App\Pdsperfile())->orderBy('id','desc')->get()
-
                                     @endphp
                                     @forelse($pdss as $pds)
                                         <option value="{{$pds->id}}">{{$pds->pds_name}}</option>
@@ -87,7 +74,6 @@
                                         $provinciasx = public_path('provincias.json');
                                         $abierto = file_get_contents($provinciasx);
                                         $provincias = json_decode($abierto);
-
                                     @endphp
                                     @forelse($provincias as $provincia)
                                         @forelse($provincia->cantones as $canton)
@@ -114,7 +100,6 @@
                                 <label for="apellidos">Apellidos</label>
                                 <input class="form-control" id="apellidos" name="apellidos" type="text">
                             </div>
-
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
@@ -124,9 +109,7 @@
                             <div class="form-group col-md-6">
                                 <label for="email">Email</label>
                                 <input class="form-control" id="email" name="email" type="text">
-
                             </div>
-
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-3">
@@ -140,37 +123,26 @@
                             <div class="form-group col-md-6">
                                 <label for="direccion">Direccion</label>
                                 <input class="form-control" id="direccion" name="direccion" type="text">
-
                             </div>
-
-
                         </div>
-
                         <div class="form-row">
                             <div class="form-group col-md-3">
                                 <label for="tipo_comisionista">Tipo</label>
-                                {{-- <input class="form-control" id="tipo_comisionista" name="tipo_comisionista" type="text" >--}}
-
-                                <select class="form-control" id="tipo_comisionista" name="tipo_comisionista">
-                                    <option value="AG. MULTIPLE">AG. MULTIPLE</option>
-                                    <option value="AGENCIERO 1PTO">AGENCIERO 1PTO</option>
+                                <select class="form-control" id="tipo_comisionista" name="tipo_comisionista" disabled>
                                     <option value="COMISIONISTA">COMISIONISTA</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="fecha_apertura">Fecha Ingreso</label>
                                 <input class="form-control" value="<?php echo date('Y-m-d'); ?>" id="fecha_apertura" name="fecha_apertura" type="date">
-
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="telef_celular">Telef. Celular</label>
                                 <input class="form-control" id="celular" name="celular" type="text">
-
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="telef_domicilio">Telefono Fijo</label>
                                 <input class="form-control" id="telef_domicilio" name="telef_domicilio" type="text">
-
                             </div>
                         </div>
                         <div class="row">
@@ -183,14 +155,11 @@
                             <div class="form-group col-md-6">
                                 <label for="rs_ventas">Ventas</label>
                                 <input class="form-control" id="rs_ventas" name="rs_ventas" type="text">
-
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="rs_cartera">Cartera</label>
                                 <input class="form-control" id="rs_cartera" name="rs_cartera" type="text">
-
                             </div>
-
                         </div>
                         <div class="row">
                             <div class="col-12">
@@ -202,22 +171,18 @@
                             <div class="form-group col-md-3">
                                 <label for="tipo_comisionista">Hora de Entrada L-V</label>
                                 <input class="form-control" id="h_ingreso" name="h_ingreso" type="time">
-
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="direccion">Hora de Salida L-V</label>
                                 <input class="form-control" id="h_salida" name="h_salida" type="time">
-
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="telef_celular">Hora de Entrada S-D</label>
                                 <input class="form-control" id="hfds_ingreso" name="hfds_ingreso" type="time">
-
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="telef_fijo">Hora de Salida S-D</label>
                                 <input class="form-control" id="hfds_salida" name="hfds_salida" type="time">
-
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -226,10 +191,10 @@
                         </div>
                     </form>
                 </div>
-
             </div>
         </div>
     </div>
+
     <div class="modal fade editComisionistaModal" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -337,28 +302,21 @@
                         <div class="form-row">
                             <div class="form-group col-md-3">
                                 <label for="tipo_comisionista">Tipo</label>
-                                {{-- <input class="form-control" id="tipo_comisionista2" name="tipo_comisionista" type="text" >--}}
-
-                                <select class="form-control" id="tipo_comisionista2" name="tipo_comisionista">
-                                    <option value="AG. MULTIPLE">AG. MULTIPLE</option>
-                                    <option value="AGENCIERO 1PTO">AGENCIERO 1PTO</option>
+                                <select class="form-control" id="tipo_comisionista2" name="tipo_comisionista" disabled>
                                     <option value="COMISIONISTA">COMISIONISTA</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="fecha_apertura">Fecha Ingreso</label>
                                 <input class="form-control" id="fecha_apertura2" value="" name="fecha_apertura" type="text">
-
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="telef_celular">Número Celular</label>
                                 <input class="form-control" id="celular2" value="0" name="celular" type="text">
-
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="telef_domicilio">Teléfono Fijo</label>
                                 <input class="form-control" id="telef_domicilio2" name="telef_domicilio" type="text">
-
                             </div>
                         </div>
                         <div class="row">
@@ -614,7 +572,6 @@
                         $('#rs_ventas2').val(data.rs_ventas);
                         $('#hfds_ingreso2').val(data.hfds_ingreso);
                         $('#hfds_salida2').val(data.hfds_salida);
-                        $('#tipo_comisionista2').val(data.tipo_comisionista);
                         $('#celular2').val(data.celular);
                         $('#fecha_apertura2').val(data.fecha_apertura);
                         $('#rs_cartera2').val(data.rs_cartera);
@@ -691,7 +648,7 @@
                     $('.editComisionistaModal').modal('hide');
                     noti = Lobibox.notify('success', {
                         pauseDelayOnHover: true,
-                        title: "¡Guardardo!",
+                        title: "¡Guardado!",
                         continueDelayOnInactiveTab: false,
                         position: 'top right',
                         icon: 'fa fa-check-circle',
@@ -715,72 +672,48 @@
 
                     }
                 }).done(function(data) {
-                    $('.addComisionistaModal').modal('hide');
-                    noti = Lobibox.notify('success', {
-                        pauseDelayOnHover: true,
-                        title: "¡Guardardo!",
-                        continueDelayOnInactiveTab: false,
-                        position: 'top right',
-                        icon: 'fa fa-check-circle',
-                        msg: 'Edición Guardado'
-                    });
-                    $('#pds_name').val(0)
-                        .trigger('change');
-                    $('#pds_ciudad').val(0)
-                        .trigger('change');
-                    $('#nombres').val('');
-                    $('#apellidos').val('');
-                    $('#estudios').val('');
-                    $('#direccion').val('');
-                    $('#h_ingreso').val('');
-                    $('#h_salida').val('');
-                    $('#edad').val('');
-                    $('#hfds_ingreso').val('');
-                    $('#hfds_salida').val('');
-                    $('#celular').val('');
-                    $('#telef_domicilio').val('');
-                    $('#cedula').val('');
-                    $('#rs_cartera').val('');
-                    $('#rs_ventas').val('');
-                    $('#fecha_apertura').val('');
-                    $('#tipo_comisionista').val('');
-                    cargarComisionistas();
+                    if(JSON.parse(data).exists){
+                        swal({
+                            title: "Los datos ingresados ya existen",
+                            icon: "error",
+                            buttons: false,
+                            timer: 3000
+                        });
+                    } else{
+                        $('.addComisionistaModal').modal('hide');
+                        noti = Lobibox.notify('success', {
+                            pauseDelayOnHover: true,
+                            title: "¡Guardado!",
+                            continueDelayOnInactiveTab: false,
+                            position: 'top right',
+                            icon: 'fa fa-check-circle',
+                            msg: 'Edición Guardado'
+                        });
+                        $('#pds_name').val(0)
+                            .trigger('change');
+                        $('#pds_ciudad').val(0)
+                            .trigger('change');
+                        $('#nombres').val('');
+                        $('#apellidos').val('');
+                        $('#estudios').val('');
+                        $('#direccion').val('');
+                        $('#h_ingreso').val('');
+                        $('#h_salida').val('');
+                        $('#edad').val('');
+                        $('#hfds_ingreso').val('');
+                        $('#hfds_salida').val('');
+                        $('#celular').val('');
+                        $('#telef_domicilio').val('');
+                        $('#cedula').val('');
+                        $('#rs_cartera').val('');
+                        $('#rs_ventas').val('');
+                        $('#fecha_apertura').val('');
+                        $('#tipo_comisionista').val('');
+                        cargarComisionistas();
+                    }
                 });
 
             });
-            // function getFiles(id)
-            // {
-            //     var idFiles=document.getElementById(id);
-            //     // Obtenemos el listado de archivos en un array
-            //     var archivos=idFiles.files;
-            //     // Creamos un objeto FormData, que nos permitira enviar un formulario
-            //     // Este objeto, ya tiene la propiedad multipart/form-data
-            //     var data=new FormData();
-            //     // Recorremos todo el array de archivos y lo vamos añadiendo all
-            //     // objeto data
-            //     for(var i=0;i<archivos.length;i++)
-            //     {
-            //         // Al objeto data, le pasamos clave,valor
-            //         data.append("archivo"+i,archivos[i]);
-            //     }
-            //     return data;
-            // }
-            // function getFormData(id,data)
-            // {
-            //     $("#"+id).find("input,select,textarea").each(function(i,v) {
-            //         if(v.type!=="file") {
-            //             if(v.type==="checkbox" && v.checked===true) {
-            //                 data.append(v.name,"on");
-            //             }else
-            //             if(v.type==="textarea") {
-            //                 data.append(v.name,v.value);
-            //             }else{
-            //                 data.append(v.name,v.value);
-            //             }
-            //         }
-            //     });
-            //     return data;
-            // }
         });
     </script>
 @endsection

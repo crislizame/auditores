@@ -14,7 +14,7 @@
     <title>Lista</title>
 </head>
 <body>
-<img src="{{asset('assets/img/clogo.png')}}" width="100" style="float:right;display:inline;padding: 0" alt="">
+<img src="{{ asset('img/logonegro.png') }}" width="100" style="float:right;display:inline;padding: 0" alt="">
 @php
 $datoss = (new \App\Models\SubAlectivo())->where(['idslectivos'=>$slectivos])->first();
 $subcurson = (new \App\Models\Subcurso())->where('idsubcursos',$datoss->subcursos_id)->value("name");

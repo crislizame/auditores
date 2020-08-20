@@ -72,6 +72,7 @@ class ComisionistasController extends Controller
                 $pdsname = $pds->pds_name;
                 $ciudad = $pds->pds_ciudad;
 
+                /*
                 $datosverticales = Encaudit::where('categoria',"estado")->get();
                 $promGlobalE = 0;
                 $sumthc = 0;
@@ -85,7 +86,7 @@ class ComisionistasController extends Controller
                         ->where(['encauditvalues_id'=>$tc->idencauditvalues])
                         ->where('pds_id',$comisionista->pds_id)
                         ->first();
-                    
+
                         if($carita->totalCaritas != null && $carita->cuentaCaritas != null){
                             $tgsum += $this->resultado(ceil($carita->totalCaritas/$carita->cuentaCaritas));
                         }
@@ -93,7 +94,7 @@ class ComisionistasController extends Controller
                     $promGlobalE += number_format($tgsum/count($thc),2);
                 }
                 $promGlobalE = number_format($promGlobalE/$sumthc,2);
-                
+
                 $datosverticales = Encaudit::where('categoria',"procesos")->get();
                 $promGlobalP = 0;
                 $sumthc = 0;
@@ -107,7 +108,7 @@ class ComisionistasController extends Controller
                         ->where(['encauditvalues_id'=>$tc->idencauditvalues])
                         ->where('pds_id',$comisionista->pds_id)
                         ->first();
-                    
+
                         if($carita->totalCaritas != null && $carita->cuentaCaritas != null){
                             $tgsum += $this->resultado(ceil($carita->totalCaritas/$carita->cuentaCaritas));
                         }
@@ -115,15 +116,16 @@ class ComisionistasController extends Controller
                     $promGlobalP += number_format($tgsum/count($thc),2);
                 }
                 $promGlobalP = number_format($promGlobalP/$sumthc,2);
-                
+
+                <td>".number_format($promGlobalE+$promGlobalP, 2)."%</td>
+                */
             }
             $td .= "<tr>
-                        <th scope=\"row\">".$comisionista->id."</th>
+                        <th scope=\"row\">".$comisionista->cedula."</th>
                         <td>".mb_strimwidth(strtoupper($comisionista->nombres),'0','15','...')."</td>
                         <td>".mb_strimwidth(strtoupper($comisionista->apellidos),'0','15','...')."</td>
                         <td data-toggle='tooltip' title='$pdsname' data-placement='top'>".strtoupper($pdsname)."</td>
-                        <td>".strtoupper($ciudad)."</td>                       
-                        <td>".number_format($promGlobalE+$promGlobalP, 2)."%</td>
+                        <td>".strtoupper($ciudad)."</td>
                         <td><button class=\"btn btn-sm btn-warning btnEditarComisionista\" data-id=\"$comisionista->id\"><i class=\"fa fa-lg fa-edit\"></i></button> | <button class=\"btn btn-sm btn-danger btnEliminarComisionista\" data-id=\"$comisionista->id\"><i class=\"fa fa-lg fa-trash\"></i></button></td>
                     </tr>";
         }
@@ -160,23 +162,21 @@ class ComisionistasController extends Controller
         return md5(1);
 
     }
+
     public function guardarComisionistas(){
         $datos = \request('datos');
-
-        //$comisionista = (new Comisionista())->where('id',$comi_id)->first();
-
-        //$result = $comisionista;
-        //var_dump($datos);
-        $insert = [];
-        for ($i = 0; $i < count($datos);$i++){
-            $insert[$datos[$i]['name']] = $datos[$i]['value'];
-
+        if(Comisionista::where('cedula', $datos[3]['value'])->exists()==false){
+            $insert = [];
+            for ($i = 0; $i < count($datos);$i++){
+                $insert[$datos[$i]['name']] = $datos[$i]['value'];
+            }
+            (new Comisionista())->insert($insert);
+            return md5(1);
+        }else{
+            return response()->json(['exists'=>true]);
         }
-        //var_dump($insert);
-        (new Comisionista())->insert($insert);
-        return md5(1);
-
     }
+
     public function eliminarComisionistas(){
         $comi_id = \request('comi_id');
         (new Comisionista())->where('id',$comi_id)->delete();
