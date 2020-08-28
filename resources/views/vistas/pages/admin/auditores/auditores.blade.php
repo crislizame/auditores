@@ -507,29 +507,51 @@
                         _token: "{{csrf_token()}}"
                     },
                     beforeSend: function() {
-
+                        swal({
+                            title: "Espere, Guardando Auditor",
+                            icon: "info",
+                            buttons: false,
+                            timer: 2000,
+                            closeOnClickOutside: false,
+                            closeOnEsc: false
+                        });
                     }
                 }).done(function(data) {
-                    $('.addComisionistaModal').modal('hide');
-                    noti = Lobibox.notify('success', {
-                        pauseDelayOnHover: true,
-                        title: "¡Guardardo!",
-                        continueDelayOnInactiveTab: false,
-                        position: 'top right',
-                        icon: 'fa fa-check-circle',
-                        msg: 'Edición Guardado'
-                    });
-                    $('#aud_nombre').val('');
-                    $('#aud_apellidos').val('');
-                    $('#aud_cedula').val('');
-                    $('#password').val('1234');
-                    $('#aud_correo').val('');
-                    $('#aud_direccion').val('');
-                    $('#aud_cuentanumero').val('');
-                    $('#aud_cuentatipo').val('');
-                    $('#aud_cuentabanco').val('ahorro');
-                    $('#auditor_tipo').val('N');
-                    cargarAuditores();
+                    if(JSON.parse(data).exists){
+                        swal({
+                            title: "Los datos ingresados ya existen",
+                            icon: "error",
+                            buttons: false,
+                            timer: 3000
+                        });
+                    } else{
+                        $('.addComisionistaModal').modal('hide');
+                        noti = Lobibox.notify('success', {
+                            pauseDelayOnHover: true,
+                            title: "¡Guardado!",
+                            continueDelayOnInactiveTab: false,
+                            position: 'top right',
+                            icon: 'fa fa-check-circle',
+                            msg: 'Auditor Guardado'
+                        });
+                        swal({
+                            title: "Los datos fueron guardados",
+                            icon: "success",
+                            buttons: false,
+                            timer: 3000
+                        });
+                        $('#aud_nombre').val('');
+                        $('#aud_apellidos').val('');
+                        $('#aud_cedula').val('');
+                        $('#password').val('1234');
+                        $('#aud_correo').val('');
+                        $('#aud_direccion').val('');
+                        $('#aud_cuentanumero').val('');
+                        $('#aud_cuentatipo').val('');
+                        $('#aud_cuentabanco').val('ahorro');
+                        $('#auditor_tipo').val('N');
+                        cargarAuditores();
+                    }
                 });
 
             });

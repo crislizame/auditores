@@ -26,9 +26,8 @@
                                 <th>N. de Orden</th>
                                 <th>Sub Area</th>
                                 <th>Problema</th>
-                                <th>Cliente</th>
+                                <th style="width: 350px;">Cliente</th>
                                 <th>Fecha reportado</th>
-                                <th>Fecha finalizado</th>
                                 <th>Tiempo para resolver</th>
                                 <th>Tiempo de solución</th>
                                 <th>Estado</th>
@@ -44,9 +43,8 @@
                                 <th>N. de Orden</th>
                                 <th>Sub Area</th>
                                 <th>Problema</th>
-                                <th>Cliente</th>
+                                <th style="width: 350px;">Cliente</th>
                                 <th>Fecha reportado</th>
-                                <th>Fecha finalizado</th>
                                 <th>Tiempo para resolver</th>
                                 <th>Tiempo de solución</th>
                                 <th>Estado</th>
@@ -222,17 +220,17 @@
                                 <div class="col-6">
                                     <label>Fecha Inicio</label>
                                 </div>
-                                <div class="col-6">
+                                <!--div class="col-6">
                                     <label>Fecha Fin</label>
-                                </div>
+                                </div-->
                             </div>
                             <div class="row">
                                 <div class="col-6">
                                     <h5 id="ot_finicio"></h5>
                                 </div>
-                                <div class="col-6">
+                                <!--div class="col-6">
                                     <h5 id="ot_ffin"></h5>
-                                </div>
+                                </div-->
                             </div>
                             <div class="row">
                                 <div class="col-6">
@@ -288,18 +286,18 @@
                             </div>
                             <div class="row">
                                 <div class="col-6" id="cc">
-                                    <label>Cotización <i class="fa fa-upload"></i> Cargar imagen</label>
+                                    <label>Cotización <i class="fa fa-upload"></i> Cargar PDF</label>
                                     <input type="file" class="form-control-file border" name="ot_ccotizacion">
                                 </div>
                                 <div class="col-6" id="cv" style="display: none;">
-                                    <label>Cotización <i class="fa fa-eye"></i><a href="#" id="cvl"> Ver</a></label>
+                                    <label>Cotización <i class="fa fa-eye"></i><a href="#" id="cvl" download> Ver</a></label>
                                 </div>
                                 <div class="col-6" id="gc">
-                                    <label>Garantía <i class="fa fa-upload"></i> Cargar imagen</label>
+                                    <label>Garantía <i class="fa fa-upload"></i> Cargar PDF</label>
                                     <input type="file" class="form-control-file border" name="ot_cgarantia">
                                 </div>
                                 <div class="col-6" id="gv" style="display: none;">
-                                    <label>Garantía <i class="fa fa-eye"></i><a href="#" id="gvl"> Ver</a></label>
+                                    <label>Garantía <i class="fa fa-eye"></i><a href="#" id="gvl" download> Ver</a></label>
                                 </div>
                                 
                                 <div class="col-6">
@@ -314,12 +312,9 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-12" style="display: none;" id="gb-g">
-                            <a onclick="finalizar()" class="btn btn-primary float-right text-white">Finalizar</a>
-                            <button type="submit" class="btn btn-primary float-right mr-3" id="benviar">Procesar</button>
-                        </div>
-                        <div class="col-12" style="display: none;" id="gb-c">
+                        <div class="col-12">
                             <button type="button" class="btn btn-default float-right" data-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-primary float-right mr-3" id="benviar">Procesar</button>
                         </div>
                     </div>
                 </form>
@@ -400,42 +395,12 @@
                     "lengthMenu": [
                         [25, 50, 100, -1],
                         [25, 50, 100, "Todos"]
-                    ],
-                    "columns": [{
-                            "width": "10%"
-                        },
-                        {
-                            "width": "10%"
-                        },
-                        {
-                            "width": "10%"
-                        },
-                        {
-                            "width": "15%"
-                        },
-                        {
-                            "width": "10%"
-                        },
-                        {
-                            "width": "10%"
-                        },
-                        {
-                            "width": "10%"
-                        },
-                        {
-                            "width": "15%"
-                        },
-                        {
-                            "width": "10%"
-                        }
                     ]
                 });
             });
         }
 
         $('.modal-asignar').on('hidden.bs.modal', function (e) {
-            $('#gb-g').hide();
-            $('#gb-c').hide();
             $('#text-ent').hide();
 
             $('[name="ot_presupuesto"]').removeAttr('disabled');
@@ -444,6 +409,40 @@
             $('[name="ot_extra"]').removeAttr('disabled');
             $('[name="ot_comentario"]').removeAttr('disabled');
         })
+        
+        $('[name="ot_ccotizacion"]').change(function () {
+                var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.pdf)$/;
+                if (regex.test($(this).val().toLowerCase())) {
+                    if (typeof (FileReader) != "undefined") {
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                        }
+                        reader.readAsDataURL($(this)[0].files[0]);
+                    }
+                } else {
+                    Swal.fire({
+                        title: "Solo se permiten archivos en formato PDF!",
+                        icon: 'info'
+                    });
+                }
+            });
+
+        $('[name="ot_cgarantia"]').change(function () {
+                var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.pdf)$/;
+                if (regex.test($(this).val().toLowerCase())) {
+                    if (typeof (FileReader) != "undefined") {
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                        }
+                        reader.readAsDataURL($(this)[0].files[0]);
+                    }
+                } else {
+                    Swal.fire({
+                        title: "Solo se permiten archivos en formato PDF!",
+                        icon: 'info'
+                    });
+                }
+            });
     });
 
     function modalAsignarOrdenDeTrabajo(id, visualId, entidad) {
@@ -550,9 +549,9 @@
                     if (ok.attachment_id > 0) {
                         $('#cc').hide();
                         $('#cv').show();
-                        $('#cvl').attr('onclick', 'modalImagenTrabajo("{{url("/imagen")}}/' + ok.attachment_id + '", "Cotización")');
+                        $('#cvl').attr('href', '{{url("/imagen")}}/' + ok.attachment_id);
 
-                        $("#pvc").attr('src', '{{url("/imagen")}}/'+ok.attachment_id);
+                        $("#pvc").attr('src', '{{ url("img/pdf.png") }}');
                         $("#pvc").show();
                     } else {
                         $('#cc').show();
@@ -573,9 +572,9 @@
                     if (ok.attachment_id > 0) {
                         $('#gc').hide();
                         $('#gv').show();
-                        $('#gvl').attr('onclick', 'modalImagenTrabajo("{{url("/imagen")}}/' + ok.attachment_id + '", "Garantía")');
-                        
-                        $("#pvg").attr('src', '{{url("/imagen")}}/'+ok.attachment_id);
+                        $('#gvl').attr('href', '{{url("/imagen")}}/' + ok.attachment_id);
+
+                        $("#pvg").attr('src', '{{ url("img/pdf.png") }}');
                         $("#pvg").show();
                     } else {
                         $('#gc').show();
@@ -598,12 +597,9 @@
             }
 
             if (entidad == "{{(new App\Entidad())->where('identidad',Auth::user()->entidad_id)->value('nombre')}}") {
-                if(done.finalizado!=null){
-                    $('#gb-c').show();
-                }else{
-                    $('#gb-g').show();
-                }
+                $('#benviar').show();
             } else {
+                $('#benviar').hide();
                 $('[name="ot_presupuesto"]').attr('disabled','true');
                 $('[name="ot_garantia"]').attr('disabled','true');
                 $('[name="ot_encargado"]').attr('disabled','true');
@@ -612,8 +608,6 @@
 
                 $('#cc').hide();
                 $('#gc').hide();
-
-                $('#gb-c').show();
             }
         });
     }

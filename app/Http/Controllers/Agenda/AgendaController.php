@@ -343,10 +343,10 @@ class AgendaController extends Controller
     }
     public function imagen($id)
     {
-        $img = (new Attachment())->where('idattachments', $id)->value('file');
+        $img = (new Attachment())->where('idattachments', $id);
 
-        header('Content-type: ' . "image/jpeg");
-        echo $img;
+        header('Content-type: ' . $img->value('mimetype'));
+        echo $img->value('file');
     }
     public function getimages()
     {

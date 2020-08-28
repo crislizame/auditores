@@ -677,7 +677,7 @@
             <div class="row">
                 <span class="col pr-4 fechasel titulos w-50 text-right font-weight-bold">{{ucfirst($datainicioletra)}} {!! $datafinletra !!}</span>
             </div>
-            <h5 class="titulos-grandes text-center">{{$cambio}}</h5>
+            <h5 class="titulos-grandes text-center" id="GGlobal">{{$cambio}}</h5>
             <div class="row">
                 <div class="col-12">
                     <h5 class="col titulos-grandes text-center" id="GEstado">Estado</h5>
@@ -884,7 +884,7 @@
                     </ul>
                     <script>
                         $(document).ready(function(){
-                            $('#GEstado').html("Estado {{$porcentajeE!=0?number_format($porcentajeE/$totaldatosverticalesE, 2):0}}%")
+                            $('#GEstado').html("Estado {{$porcentajeE!=0?number_format($porcentajeE/$totaldatosverticalesE, 2):0}}%");
                         });
                     </script>
                 </div>
@@ -1094,7 +1094,12 @@
                     </ul>
                     <script>
                         $(document).ready(function(){
-                            $('#GProceso').html("Proceso {{$porcentajeP!=0?number_format($porcentajeP/$totaldatosverticalesP, 2):0}}%")
+                            $('#GProceso').html("Proceso {{$porcentajeP!=0?number_format($porcentajeP/$totaldatosverticalesP, 2):0}}%");
+                            @php
+                                $percentE = $porcentajeE!=0?number_format($porcentajeE/$totaldatosverticalesE, 2):0;
+                                $percentP = $porcentajeP!=0?number_format($porcentajeP/$totaldatosverticalesP, 2):0;
+                            @endphp
+                            $('#GGlobal').html("{{ $cambio . ' ' . number_format( ($percentE + $percentP ) / 2, 2 ) }}%")
                         });
                     </script>
                 </div>
@@ -1322,18 +1327,8 @@
             <h5 class="titulos-grandes text-center">Promedio de tiempo en solucionar</h5>
             <div class="col py-2 mb-4" style="background: white;">
                     <div class="row col-md-3 offset-md-4 text-center p-0">
-                        <div class="col-6 p-0 mx-auto"><div class="calificacionDias mx-auto"></div></div>
                         <div class="col-6 p-0 my-auto mx-auto"><h2 class="text-primary"><b>{{ $promedioDiasParaResolver.' días' }}</b></h2></div>
                     </div>
-                    <style>
-                        .calificacionDias {
-                            width: 80px;
-                            height: 80px;
-                            background-repeat: no-repeat;
-                            background-position: center;
-                            background-image:url("{{url('/img/cara')}}5.jpg");
-                        }
-                    </style>
             </div>
 
             <h5 class="titulos-grandes text-center">Resultado de reporteria</h5>
@@ -1748,18 +1743,8 @@
             <h5 class="titulos-grandes text-center">Promedio de tiempo en solucionar</h5>
             <div class="col py-2 mb-4" style="background: white;">
                     <div class="row col-md-3 offset-md-4 text-center p-0">
-                        <div class="col-6 p-0 mx-auto"><div class="calificacionDias mx-auto"></div></div>
                         <div class="col-6 p-0 my-auto mx-auto"><h2 class="text-primary"><b>{{ $promedioDiasParaResolver.' días' }}</b></h2></div>
                     </div>
-                    <style>
-                        .calificacionDias {
-                            width: 80px;
-                            height: 80px;
-                            background-repeat: no-repeat;
-                            background-position: center;
-                            background-image:url("{{url('/img/cara')}}5.jpg");
-                        }
-                    </style>
             </div>
 
             <h5 class="titulos-grandes text-center">Resultado de reporteria</h5>
@@ -2158,18 +2143,8 @@
             <h5 class="titulos-grandes text-center">Promedio de tiempo en solucionar</h5>
             <div class="col py-2 mb-4" style="background: white;">
                     <div class="row col-md-3 offset-md-4 text-center p-0">
-                        <div class="col-6 p-0 mx-auto"><div class="calificacionDias mx-auto"></div></div>
                         <div class="col-6 p-0 my-auto mx-auto"><h2 class="text-primary"><b>{{ $promedioDiasParaResolver.' días' }}</b></h2></div>
                     </div>
-                    <style>
-                        .calificacionDias {
-                            width: 80px;
-                            height: 80px;
-                            background-repeat: no-repeat;
-                            background-position: center;
-                            background-image:url("{{url('/img/cara')}}5.jpg");
-                        }
-                    </style>
             </div>
 
             <h5 class="titulos-grandes text-center">Resultado de reporteria</h5>
@@ -2780,18 +2755,8 @@
 <h5 class="titulos-grandes text-center">Promedio de tiempo en solucionar</h5>
 <div class="col py-2 mb-4" style="background: white;">
         <div class="row col-md-3 offset-md-4 text-center p-0">
-            <div class="col-6 p-0 mx-auto"><div class="calificacionDias mx-auto"></div></div>
             <div class="col-6 p-0 my-auto mx-auto"><h2 class="text-primary"><b>{{ $promedioDiasParaResolver.' días' }}</b></h2></div>
         </div>
-        <style>
-            .calificacionDias {
-                width: 80px;
-                height: 80px;
-                background-repeat: no-repeat;
-                background-position: center;
-                background-image:url("{{url('/img/cara')}}5.jpg");
-            }
-        </style>
 </div>
 
             <h5 class="titulos-grandes text-center">Resultado de reporteria</h5>

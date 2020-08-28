@@ -24,6 +24,7 @@
                                 <th>Teléfono</th>
                                 <th>Email</th>
                                 <th>Score</th>
+                                <th>Opciones</th>
                             </tr>
                         </thead>
                         <tbody class="TablaProveedores">
@@ -206,18 +207,43 @@
         $.ajax({
             url: "{{ url('proveedores/listas/ajax/guardarProveedores') }}",
             method: "post",
-            data: $('#formCrearProveedor').serialize()
+            data: $('#formCrearProveedor').serialize(),
+                    beforeSend: function() {
+                        swal({
+                            title: "Espere, Guardando Proveedor",
+                            icon: "info",
+                            buttons: false,
+                            timer: 2000,
+                            closeOnClickOutside: false,
+                            closeOnEsc: false
+                        });
+                    }
         }).done(function(data) {
-            $('.agregarProveedor').modal('hide');
-            noti = Lobibox.notify('success', {
-                pauseDelayOnHover: true,
-                title: "¡Guardado!",
-                continueDelayOnInactiveTab: false,
-                position: 'top right',
-                icon: 'fa fa-check-circle',
-                msg: 'Proveedor Guardado'
-            });
-            cargar();
+            if(data.exists){
+                swal({
+                    title: "Los datos ingresados ya existen",
+                    icon: "error",
+                    buttons: false,
+                    timer: 3000
+                });
+            } else {
+                $('.agregarProveedor').modal('hide');
+                noti = Lobibox.notify('success', {
+                            pauseDelayOnHover: true,
+                            title: "¡Guardado!",
+                            continueDelayOnInactiveTab: false,
+                            position: 'top right',
+                            icon: 'fa fa-check-circle',
+                            msg: 'Proveedor Guardado'
+                        });
+                        swal({
+                            title: "Los datos fueron guardados",
+                            icon: "success",
+                            buttons: false,
+                            timer: 3000
+                        });
+                cargar();
+            }
         });
 
     });
@@ -284,6 +310,7 @@
                 'id': id
             }
         }).done(function(data) {
+            $('[name="id_edit"]').val(id);
             $('[name="nombre_edit"]').val(data.nombre);
             $('[name="cedula_edit"]').val(data.ruc_cedula);
             $('[name="telefono_edit"]').val(data.telefono);

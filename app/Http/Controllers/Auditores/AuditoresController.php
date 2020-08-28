@@ -33,31 +33,24 @@ class AuditoresController extends Controller
     }
     public function guardarAuditores(){
         $datos = \request('datos');
-        //$comisionista = (new Comisionista())->where('id',$comi_id)->first();
-
-        //$result = $comisionista;
-        //var_dump($datos);
-        $insert = [];
-        for ($i = 0; $i < count($datos);$i++){
-            if($datos[$i]['name'] == "password"){
-                if($datos[$i]['value'] != ""){
-                    $insert[$datos[$i]['name']] = bcrypt($datos[$i]['value']);
-
+        if(Auditore::where('aud_cedula', $datos[2]['value'])->exists()==false){
+            $insert = [];
+            for ($i = 0; $i < count($datos);$i++){
+                if($datos[$i]['name'] == "password"){
+                    if($datos[$i]['value'] != ""){
+                        $insert[$datos[$i]['name']] = bcrypt($datos[$i]['value']);
+                    }else{
+                        $insert[$datos[$i]['name']] = bcrypt("1234");
+                    }
                 }else{
-                    $insert[$datos[$i]['name']] = bcrypt("1234");
+                    $insert[$datos[$i]['name']] = $datos[$i]['value'];
                 }
-            }else{
-                $insert[$datos[$i]['name']] = $datos[$i]['value'];
-
             }
-
-
-
+            (new Auditore())->insert($insert);
+            return md5(1);
+        }else{
+            return response()->json(['exists'=>true]);
         }
-        //var_dump($insert);
-        (new Auditore())->insert($insert);
-        return md5(1);
-
     }
     public function guardarPDS(){
         $datos = \request('datos');

@@ -308,7 +308,7 @@
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="fecha_apertura">Fecha Ingreso</label>
-                                <input class="form-control" id="fecha_apertura2" value="" name="fecha_apertura" type="text">
+                                <input class="form-control" id="fecha_apertura2" value="" name="fecha_apertura" type="date">
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="telef_celular">Número Celular</label>
@@ -347,23 +347,19 @@
                         <div class="form-row">
                             <div class="form-group col-md-3">
                                 <label for="tipo_comisionista">Hora de Entrada L-V (22:10)</label>
-                                <input class="form-control" id="h_ingreso2" name="h_ingreso">
-
+                                <input class="form-control" id="h_ingreso2" name="h_ingreso" type="time">
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="direccion">Hora de Salida L-V (22:10)</label>
-                                <input class="form-control" id="h_salida2" name="h_salida">
-
+                                <input class="form-control" id="h_salida2" name="h_salida" type="time">
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="telef_celular">Hora de Entrada S-D (22:10)</label>
-                                <input class="form-control" id="hfds_ingreso2" name="hfds_ingreso">
-
+                                <input class="form-control" id="hfds_ingreso2" name="hfds_ingreso" type="time">
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="telef_fijo">Hora de Salida S-D (22:10)</label>
-                                <input class="form-control" id="hfds_salida2" name="hfds_salida">
-
+                                <input class="form-control" id="hfds_salida2" name="hfds_salida" type="time">
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -669,7 +665,14 @@
                         _token: "{{csrf_token()}}"
                     },
                     beforeSend: function() {
-
+                        swal({
+                            title: "Espere, Guardando Comisionista",
+                            icon: "info",
+                            buttons: false,
+                            timer: 2000,
+                            closeOnClickOutside: false,
+                            closeOnEsc: false
+                        });
                     }
                 }).done(function(data) {
                     if(JSON.parse(data).exists){
@@ -687,7 +690,13 @@
                             continueDelayOnInactiveTab: false,
                             position: 'top right',
                             icon: 'fa fa-check-circle',
-                            msg: 'Edición Guardado'
+                            msg: 'Comisionista Guardado'
+                        });
+                        swal({
+                            title: "Los datos fueron guardados",
+                            icon: "success",
+                            buttons: false,
+                            timer: 3000
                         });
                         $('#pds_name').val(0)
                             .trigger('change');

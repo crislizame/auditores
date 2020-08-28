@@ -41,12 +41,13 @@ class ProveedoresController extends Controller
             }
 
             $tbody .= "<tr>
-                        <th scope=\"row\"><a href=\"#\" onclick=\"verProveedor(".$proveedor->idproveedores.")\">" . strtoupper($proveedor->nombre) . "</a></th>
+                        <th scope=\"row\">" . strtoupper($proveedor->nombre) . "</th>
                         <td>" . strtoupper($proveedor->ruc_cedula) . "</td>
                         <td>" . strtoupper($proveedor->direccion) . "</td>
                         <td>" . strtoupper($proveedor->telefono) . "</td>
                         <td>" . strtoupper($proveedor->correo) . "</td>
                         <td><span class=\"col\">" . $porcentaje . "%</span><img style=\"width: 40px;height: 40px;\" src=\"" . url('/img/cara') . "$calificacion.jpg\"></td>
+                        <td><button class=\"btn btn-sm btn-warning\" onclick=\"verProveedor($proveedor->idproveedores)\"><i class=\"fa fa-lg fa-edit\"></i></button></td>
                     </tr>";
         }
         return $tbody;
@@ -54,18 +55,22 @@ class ProveedoresController extends Controller
 
     public function guardar(Request $request)
     {
-        $proveedor = new Proveedor();
-        $proveedor->nombre = $request->nombre;
-        $proveedor->ruc_cedula = $request->cedula;
-        $proveedor->telefono = $request->telefono;
-        $proveedor->correo = $request->correo;
-        $proveedor->direccion = $request->direccion;
-        $proveedor->banco = $request->cuentabanco;
-        $proveedor->cuenta = $request->cuentanumero;
-        $proveedor->tipodecuenta = $request->cuentatipo;
-        $proveedor->save();
+        if(Proveedor::where('ruc_cedula', $request->cedula)->exists()==false){
+            $proveedor = new Proveedor();
+            $proveedor->nombre = $request->nombre;
+            $proveedor->ruc_cedula = $request->cedula;
+            $proveedor->telefono = $request->telefono;
+            $proveedor->correo = $request->correo;
+            $proveedor->direccion = $request->direccion;
+            $proveedor->banco = $request->cuentabanco;
+            $proveedor->cuenta = $request->cuentanumero;
+            $proveedor->tipodecuenta = $request->cuentatipo;
+            $proveedor->save();
 
-        return response()->json(['status' => 'Ok']);
+            return response()->json(['status' => 'Ok']);
+        }else{
+            return response()->json(['exists'=>true]);
+        }
     }
 
     public function ver(Request $request)

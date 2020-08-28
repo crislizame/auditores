@@ -806,18 +806,32 @@
                         _token: "{{csrf_token()}}"
                     },
                     beforeSend: function() {
-
+                        swal({
+                            title: "Espere, Guardando PDS",
+                            icon: "info",
+                            buttons: false,
+                            timer: 2000,
+                            closeOnClickOutside: false,
+                            closeOnEsc: false
+                        });
                     }
                 }).done(function(data) {
                     $('.addComisionistaModal').modal('hide');
+                    $('#formguardarComisionistas').reset();
                     noti = Lobibox.notify('success', {
-                        pauseDelayOnHover: true,
-                        title: "¡Guardardo!",
-                        continueDelayOnInactiveTab: false,
-                        position: 'top right',
-                        icon: 'fa fa-check-circle',
-                        msg: 'Edición Guardado'
-                    });
+                            pauseDelayOnHover: true,
+                            title: "¡Guardado!",
+                            continueDelayOnInactiveTab: false,
+                            position: 'top right',
+                            icon: 'fa fa-check-circle',
+                            msg: 'PDS Guardado'
+                        });
+                        swal({
+                            title: "Los datos fueron guardados",
+                            icon: "success",
+                            buttons: false,
+                            timer: 3000
+                        });
                     cargarPDS();
                 });
 

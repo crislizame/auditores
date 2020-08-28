@@ -50,6 +50,7 @@ class SoporteController extends Controller
                 ->join('entidades', 'entidades.identidad', 'areas.entidad_id')
                 ->join('pdsperfiles', 'orden_requermientos.pds_id', 'pdsperfiles.id')
                 ->leftJoin('orden_trabajos', 'orden_requermientos.idorden_requermientos', 'orden_trabajos.orden_requermiento_id')
+                ->where('entidades.nombre', '!=', 'Mantenimiento')
                 ->where(function ($query) {
                     $query->whereNull('orden_requermientos.enproceso')
                         ->orWhereNotNull('orden_requermientos.enproceso');
@@ -172,6 +173,7 @@ class SoporteController extends Controller
                 ->join('entidades', 'entidades.identidad', 'areas.entidad_id')
                 ->join('pdsperfiles', 'orden_requermientos.pds_id', 'pdsperfiles.id')
                 ->leftJoin('orden_trabajos', 'orden_requermientos.idorden_requermientos', 'orden_trabajos.orden_requermiento_id')
+                ->where('entidades.nombre', '!=', 'Mantenimiento')
                 ->whereNotNull('orden_requermientos.enproceso')
                 ->where(function ($query) {
                     $query->whereNull('orden_requermientos.finalizado')
@@ -193,7 +195,11 @@ class SoporteController extends Controller
                     if ($calificado) {
                         $estado = 'Finalizado <span style="background-color: green;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
                     } else {
-                        $estado = '<a href="#" onclick="modalCalificar(' . $orden->idorden_trabajos . ')">Finalizado</a> <span style="background-color: green;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+                        if($orden->entidad != 'Soporte'){
+                            $estado = '<a href="#" onclick="modalCalificar(' . $orden->idorden_trabajos . ')">Finalizado</a> <span style="background-color: green;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+                        }else{
+                            $estado = 'Finalizado <span style="background-color: green;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+                        }
                     }
                 }
 
@@ -330,6 +336,7 @@ class SoporteController extends Controller
         if ($request->has('ot_ccotizacion')) {
             $cimagen = new Attachment();
             $cimagen->file = file_get_contents($request->file('ot_ccotizacion')->getRealPath());
+            $cimagen->mimetype = 'application/pdf';
             $cimagen->user_id = Auth::user()->id;
             $cimagen->save();
 
@@ -343,6 +350,7 @@ class SoporteController extends Controller
         if ($request->has('ot_cgarantia')) {
             $cimagen = new Attachment();
             $cimagen->file = file_get_contents($request->file('ot_cgarantia')->getRealPath());
+            $cimagen->mimetype = 'application/pdf';
             $cimagen->user_id = Auth::user()->id;
             $cimagen->save();
 

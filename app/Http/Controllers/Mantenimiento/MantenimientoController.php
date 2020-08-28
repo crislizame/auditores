@@ -193,7 +193,11 @@ class MantenimientoController extends Controller
                     if ($calificado) {
                         $estado = 'Finalizado <span style="background-color: green;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
                     } else {
-                        $estado = '<a href="#" onclick="modalCalificar(' . $orden->idorden_trabajos . ')">Finalizado</a> <span style="background-color: green;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+                        if((Orden_trabajo::find($orden->idorden_trabajos)->proveedor_id != Proveedor::where('nombre', 'Mantenimiento')->first()->idproveedores) && $orden->entidad == 'Mantenimiento'){
+                            $estado = '<a href="#" onclick="modalCalificar(' . $orden->idorden_trabajos . ')">Finalizado</a> <span style="background-color: green;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+                        }else{
+                            $estado = 'Finalizado <span style="background-color: green;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+                        }
                     }
                 }
 
@@ -330,6 +334,7 @@ class MantenimientoController extends Controller
         if ($request->has('ot_ccotizacion')) {
             $cimagen = new Attachment();
             $cimagen->file = file_get_contents($request->file('ot_ccotizacion')->getRealPath());
+            $cimagen->mimetype = 'application/pdf';
             $cimagen->user_id = Auth::user()->id;
             $cimagen->save();
 
@@ -343,6 +348,7 @@ class MantenimientoController extends Controller
         if ($request->has('ot_cgarantia')) {
             $cimagen = new Attachment();
             $cimagen->file = file_get_contents($request->file('ot_cgarantia')->getRealPath());
+            $cimagen->mimetype = 'application/pdf';
             $cimagen->user_id = Auth::user()->id;
             $cimagen->save();
 

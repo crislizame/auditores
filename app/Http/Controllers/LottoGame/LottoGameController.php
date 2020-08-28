@@ -87,7 +87,6 @@ class LottoGameController extends Controller
                     <td>" . $orden->problema . "</td>
                     <td>" . $orden->cliente . "</td>
                     <td>" . Carbon::parse($orden->solicitado)->format('d/m/Y') . "</td>
-                    <td>" . Carbon::parse($orden->finalizado)->format('d/m/Y') . "</td>
                     <td>" . date_format($taux, 'H:i') . "</td>
                     <td>" . date_format($tdiff, 'H:i') . "</td>
                     <td>" . $estado . "</td>
@@ -108,7 +107,8 @@ class LottoGameController extends Controller
                     DB::raw('areas.nombre as area'),
                     DB::raw('entidades.nombre as entidad'),
                     'orden_requermientos.enproceso',
-                    DB::raw('entidades.nombre as entidad')
+                    DB::raw('entidades.nombre as entidad'),
+                    'orden_trabajos.estado'
                 )
                 ->join('problemas', 'orden_requermientos.problema_id', 'problemas.id')
                 ->join('subareas', 'problemas.subarea_id', 'subareas.idsubareas')
@@ -152,7 +152,6 @@ class LottoGameController extends Controller
                     <td>" . $orden->problema . "</td>
                     <td>" . $orden->cliente . "</td>
                     <td>" . Carbon::parse($orden->solicitado)->format('d/m/Y') . "</td>
-                    <td>" . Carbon::parse($orden->finalizado)->format('d/m/Y') . "</td>
                     <td>" . date_format($taux, 'H:i') . "</td>
                     <td>" . date_format($tdiff, 'H:i') . "</td>
                     <td>" . $estado . "</td>
@@ -244,7 +243,8 @@ class LottoGameController extends Controller
                     DB::raw('areas.nombre as area'),
                     DB::raw('entidades.nombre as entidad'),
                     'orden_requermientos.enproceso',
-                    DB::raw('entidades.nombre as entidad')
+                    DB::raw('entidades.nombre as entidad'),
+                    'orden_trabajos.estado'
                 )
                 ->join('problemas', 'orden_requermientos.problema_id', 'problemas.id')
                 ->join('subareas', 'problemas.subarea_id', 'subareas.idsubareas')
@@ -356,6 +356,7 @@ class LottoGameController extends Controller
         if ($request->has('ot_ccotizacion')) {
             $cimagen = new Attachment();
             $cimagen->file = file_get_contents($request->file('ot_ccotizacion')->getRealPath());
+            $cimagen->mimetype = 'application/pdf';
             $cimagen->user_id = Auth::user()->id;
             $cimagen->save();
 
@@ -369,6 +370,7 @@ class LottoGameController extends Controller
         if ($request->has('ot_cgarantia')) {
             $cimagen = new Attachment();
             $cimagen->file = file_get_contents($request->file('ot_cgarantia')->getRealPath());
+            $cimagen->mimetype = 'application/pdf';    
             $cimagen->user_id = Auth::user()->id;
             $cimagen->save();
 

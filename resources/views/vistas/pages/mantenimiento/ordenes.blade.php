@@ -199,7 +199,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-6" id="sel-pro" style="display: none;">
-                                    <select name="ot_proveedor">
+                                    <select name="ot_proveedor" disabled>
                                         @foreach ($proveedores as $proveedor)
                                         <option value="{{$proveedor->idproveedores}}">{{$proveedor->nombre}}</option>
                                         @endforeach
@@ -299,18 +299,18 @@
                             </div>
                             <div class="row">
                                 <div class="col-6" id="cc">
-                                    <label>Cotización <i class="fa fa-upload"></i> Cargar imagen</label>
+                                    <label>Cotización <i class="fa fa-upload"></i> Cargar PDF</label>
                                     <input type="file" class="form-control-file border" name="ot_ccotizacion">
                                 </div>
                                 <div class="col-6" id="cv" style="display: none;">
-                                    <label>Cotización <i class="fa fa-eye"></i><a href="#" id="cvl"> Ver</a></label>
+                                    <label>Cotización <i class="fa fa-eye"></i><a href="#" id="cvl" download> Ver</a></label>
                                 </div>
                                 <div class="col-6" id="gc">
-                                    <label>Garantía <i class="fa fa-upload"></i> Cargar imagen</label>
+                                    <label>Garantía <i class="fa fa-upload"></i> Cargar PDF</label>
                                     <input type="file" class="form-control-file border" name="ot_cgarantia">
                                 </div>
                                 <div class="col-6" id="gv" style="display: none;">
-                                    <label>Garantía <i class="fa fa-eye"></i><a href="#" id="gvl"> Ver</a></label>
+                                    <label>Garantía <i class="fa fa-eye"></i><a href="#" id="gvl" download> Ver</a></label>
                                 </div>
 
                                 <div class="col-6">
@@ -325,12 +325,9 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-12" style="display: none;" id="gb-g">
-                            <a onclick="finalizar()" class="btn btn-primary float-right text-white">Finalizar</a>
-                            <button type="submit" class="btn btn-primary float-right mr-3" id="benviar">Procesar</button>
-                        </div>
-                        <div class="col-12" style="display: none;" id="gb-c">
+                        <div class="col-12" id="gb-g">
                             <button type="button" class="btn btn-default float-right" data-dismiss="modal">Cerrar</button>
+                            <a onclick="finalizar()" class="btn btn-primary float-right text-white" id="bfinalizar" style="display: none;">Finalizar</a>
                         </div>
                     </div>
                 </form>
@@ -694,6 +691,40 @@
                 });
             });
         }
+
+        $('[name="ot_ccotizacion"]').change(function () {
+                var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.pdf)$/;
+                if (regex.test($(this).val().toLowerCase())) {
+                    if (typeof (FileReader) != "undefined") {
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                        }
+                        reader.readAsDataURL($(this)[0].files[0]);
+                    }
+                } else {
+                    Swal.fire({
+                        title: "Solo se permiten archivos en formato PDF!",
+                        icon: 'info'
+                    });
+                }
+            });
+
+        $('[name="ot_cgarantia"]').change(function () {
+                var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.pdf)$/;
+                if (regex.test($(this).val().toLowerCase())) {
+                    if (typeof (FileReader) != "undefined") {
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                        }
+                        reader.readAsDataURL($(this)[0].files[0]);
+                    }
+                } else {
+                    Swal.fire({
+                        title: "Solo se permiten archivos en formato PDF!",
+                        icon: 'info'
+                    });
+                }
+            });
     });
 
     function modalAsignarOrdenDeTrabajo(id, visualId, entidad) {
@@ -781,10 +812,6 @@
 
                 $('[name="ot_comentario"]').val(done.comentario);
 
-                $('#benviar').prop('disabled', true);
-                $('#benviar').removeClass('btn-primary');
-                $('#benviar').addClass('btn-default');
-
                 var otrabajo = done.idorden_trabajos;
                 $.ajax({
                     url: "{{url('mantenimiento/problemas/trabajo/ver')}}",
@@ -798,9 +825,9 @@
                     if (ok.attachment_id > 0) {
                         $('#cc').hide();
                         $('#cv').show();
-                        $('#cvl').attr('onclick', 'modalImagenTrabajo("{{url("/imagen")}}/' + ok.attachment_id + '", "Cotización")');
+                        $('#cvl').attr('href', '{{url("/imagen")}}/' + ok.attachment_id);
 
-                        $("#pvc").attr('src', '{{url("/imagen")}}/'+ok.attachment_id);
+                        $("#pvc").attr('src', '{{ url("img/pdf.png") }}');
                         $("#pvc").show();
                     } else {
                         $('#cc').show();
@@ -821,9 +848,9 @@
                     if (ok.attachment_id > 0) {
                         $('#gc').hide();
                         $('#gv').show();
-                        $('#gvl').attr('onclick', 'modalImagenTrabajo("{{url("/imagen")}}/' + ok.attachment_id + '", "Garantía")');
-                        
-                        $("#pvg").attr('src', '{{url("/imagen")}}/'+ok.attachment_id);
+                        $('#gvl').attr('href', '{{url("/imagen")}}/' + ok.attachment_id);
+
+                        $("#pvg").attr('src', '{{ url("img/pdf.png") }}');
                         $("#pvg").show();
                     } else {
                         $('#gc').show();
@@ -833,29 +860,28 @@
                 });
             }
 
-            if (entidad == "{{(new App\Entidad())->where('identidad',Auth::user()->entidad_id)->value('nombre')}}") {
+            if (entidad == 'Mantenimiento' || entidad == 'RP3' || entidad == 'Lotto Game') {
                 $('#sel-pro').show();
+                $('#tex-ent').hide();
 
-                if (done.finalizado != null) {
-                    $('#gb-c').show();
-                } else {
-                    $('#gb-g').show();
+                if (done.finalizado == null) {
+                    $('#bfinalizar').show();
+                }else{
+                    $('#bfinalizar').hide();
                 }
             } else {
+                $('#sel-pro').hide();
                 $('#tex-ent').show();
-                $('#ot_entidad').html(done.entidad);
+                $('#ot_entidad').html("");
 
+                $('#cc').hide();
+                $('#gc').hide();
+            }
                 $('[name="ot_presupuesto"]').attr('readonly', 'true');
                 $('[name="ot_garantia"]').attr('readonly', 'true');
                 $('[name="ot_encargado"]').attr('readonly', 'true');
                 $('[name="ot_extra"]').attr('readonly', 'true');
                 $('[name="ot_comentario"]').attr('readonly', 'true');
-
-                $('#cc').hide();
-                $('#gc').hide();
-
-                $('#gb-c').show();
-            }
         });
     }
 
