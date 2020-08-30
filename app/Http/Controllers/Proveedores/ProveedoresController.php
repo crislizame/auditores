@@ -46,8 +46,9 @@ class ProveedoresController extends Controller
                         <td>" . strtoupper($proveedor->direccion) . "</td>
                         <td>" . strtoupper($proveedor->telefono) . "</td>
                         <td>" . strtoupper($proveedor->correo) . "</td>
-                        <td><span class=\"col\">" . $porcentaje . "%</span><img style=\"width: 40px;height: 40px;\" src=\"" . url('/img/cara') . "$calificacion.jpg\"></td>
-                        <td><button class=\"btn btn-sm btn-warning\" onclick=\"verProveedor($proveedor->idproveedores)\"><i class=\"fa fa-lg fa-edit\"></i></button></td>
+                        <td><span class=\"col\">" . $porcentaje . "%</span></td>
+                        <td><button class=\"btn btn-sm btn-warning\" onclick=\"verProveedor($proveedor->idproveedores)\"><i class=\"fa fa-lg fa-edit\"></i></button>
+                        <button class=\"btn btn-sm btn-danger\" onclick=\"borrarProveedor($proveedor->idproveedores)\"><i class=\"fa fa-lg fa-minus\"></i></button></td>
                     </tr>";
         }
         return $tbody;
@@ -92,5 +93,11 @@ class ProveedoresController extends Controller
         $proveedor->save();
 
         return response()->json(['status' => 'Ok']);
+    }
+
+    public function eliminarComisionistas(){
+        $id = \request('id');
+        (new Proveedor())->where('id',$id)->delete();
+        return md5(1);
     }
 }

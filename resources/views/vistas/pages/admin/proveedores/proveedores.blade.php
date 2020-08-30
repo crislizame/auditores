@@ -322,5 +322,45 @@
             $('.editarProveedor').modal('show');
         });
     }
+
+    function borrarProveedor(id) {
+                    swal({
+                        title: "¿Estas seguro de ELIMINAR el Proveedor?",
+                        icon: "warning",
+                        buttons: {
+                            cancel: {
+                                text: "NO",
+                                className: "btn-danger shadow-danger",
+                                visible: true,
+                                closeModal: true,
+                            },
+                            willsuccess: "Eliminar"
+                        },
+                        dangerMode: false,
+                    }).then((willsuccess) => {
+                        if (willsuccess) {
+                            $.ajax({
+                                url: "{{url('proveedores/listas/ajax/eliminarProveedores')}}",
+                                method: "post",
+                                dataType: 'text',
+                                data: {
+                                    id: id,
+                                    _token: "{{csrf_token()}}"
+                                }
+                            }).done(function(data) {
+                                swal({
+                                    title: "Proveedor Eliminado con éxito",
+                                    icon: "success",
+                                    buttons: false,
+                                    timer: 1000,
+                                    closeOnClickOutside: false,
+                                    closeOnEsc: false
+                                });
+
+                                cargar();
+                            });
+                        }
+                    });
+    }
 </script>
 @endsection

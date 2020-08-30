@@ -362,6 +362,14 @@
                                 <input class="form-control" id="hfds_salida2" name="hfds_salida" type="time">
                             </div>
                         </div>
+                        <div class="form-row">
+                            <div class="form-group offset-md-4 col-md-2 text-md-right">
+                                <h4>Score</h4>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <h4 id="score"></h4>
+                            </div>
+                        </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                             <button type="submit" disabled class="btn btn-primary btnComisionistasEditar">Guardar</button>
@@ -542,38 +550,40 @@
                     }).done(function(data) {
                         //asdasdasd
                         $('#formeditComisionistas').attr('data-id', id);
-                        $('#pds_name2').val(data.pds_id)
-                            .trigger('change');
-                        var date = $('#pds_name2').select2('data');
-                        $('#pds_name2').trigger({
-                            type: 'select2:select',
-                            params: {
-                                data: date[0]
+                        $('#pds_name2').val(data.comisionista.pds_id)
+.trigger('change');
+var date = $('#pds_name2').select2('data');
+$('#pds_name2').trigger({
+type: 'select2:select',
+params: {
+    data: date[0]
 
-                            }
-                        });
-                        if(data.attach == null || data.attach == "null" ){
-                            $('#img_editar').attr('src',"{{asset('person.jpg')}}");
-                        }else{
-                            $('#img_editar').attr('src',"{{url('imagen')}}/"+data.attach);
-                        }
-                        $('#nombres2').val(data.nombres);
-                        $('#apellidos2').val(data.apellidos);
-                        $('#estudios2').val(data.estudios);
-                        $('#direccion2').val(data.direccion);
-                        $('#h_ingreso2').val(data.h_ingreso);
-                        $('#email2').val(data.email);
+}
+});
+if(data.comisionista.attach == null || data.comisionista.attach == "null" ){
+$('#img_editar').attr('src',"{{asset('person.jpg')}}");
+}else{
+$('#img_editar').attr('src',"{{url('imagen')}}/"+data.comisionista.attach);
+}
+$('#nombres2').val(data.comisionista.nombres);
+$('#apellidos2').val(data.comisionista.apellidos);
+$('#estudios2').val(data.comisionista.estudios);
+$('#direccion2').val(data.comisionista.direccion);
+$('#h_ingreso2').val(data.comisionista.h_ingreso);
+$('#email2').val(data.comisionista.email);
 
-                        $('#h_salida2').val(data.h_salida);
-                        $('#rs_ventas2').val(data.rs_ventas);
-                        $('#hfds_ingreso2').val(data.hfds_ingreso);
-                        $('#hfds_salida2').val(data.hfds_salida);
-                        $('#celular2').val(data.celular);
-                        $('#fecha_apertura2').val(data.fecha_apertura);
-                        $('#rs_cartera2').val(data.rs_cartera);
-                        $('#telef_domicilio2').val(data.telef_domicilio);
-                        $('#cedula2').val(data.cedula);
-                        $('#edad2').val(data.edad);
+$('#h_salida2').val(data.comisionista.h_salida);
+$('#rs_ventas2').val(data.comisionista.rs_ventas);
+$('#hfds_ingreso2').val(data.comisionista.hfds_ingreso);
+$('#hfds_salida2').val(data.comisionista.hfds_salida);
+$('#celular2').val(data.comisionista.celular);
+$('#fecha_apertura2').val(data.comisionista.fecha_apertura);
+$('#rs_cartera2').val(data.comisionista.rs_cartera);
+$('#telef_domicilio2').val(data.comisionista.telef_domicilio);
+$('#cedula2').val(data.comisionista.cedula);
+$('#edad2').val(data.comisionista.edad);
+
+$('#score').html(data.score+"%");
 
                     });
                 });

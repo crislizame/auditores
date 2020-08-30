@@ -141,7 +141,51 @@ class ComisionistasController extends Controller
 
         $result = $comisionista;
 
-        return json_encode($result);
+        $datosverticales = Encaudit::where('categoria',"estado")->get();
+        $promGlobalE = 0;
+        $sumthc = 0;
+
+        foreach($datosverticales as $dv){
+            $tgsum = 0;
+            $thc = Encauditvalue::where('encaudit_id',$dv->idencaudit)->get();
+            $sumthc += count($thc);
+            foreach($thc as $tc){
+                $carita = (new \App\Encauditdata())->select(DB::raw('sum(carita) as totalCaritas'), DB::raw('count(carita) as cuentaCaritas'))
+                ->where(['encauditvalues_id'=>$tc->idencauditvalues])
+                ->where('pds_id',$comisionista->pds_id)
+                ->first();
+
+                if($carita->totalCaritas != null && $carita->cuentaCaritas != null){
+                    $tgsum += $this->resultado(ceil($carita->totalCaritas/$carita->cuentaCaritas));
+                }
+            }
+            $promGlobalE += number_format($tgsum/count($thc),2);
+        }
+        $promGlobalE = number_format($promGlobalE/$sumthc,2);
+
+        $datosverticales = Encaudit::where('categoria',"procesos")->get();
+        $promGlobalP = 0;
+        $sumthc = 0;
+
+        foreach($datosverticales as $dv){
+            $tgsum = 0;
+            $thc = Encauditvalue::where('encaudit_id',$dv->idencaudit)->get();
+            $sumthc += count($thc);
+            foreach($thc as $tc){
+                $carita = (new \App\Encauditdata())->select(DB::raw('sum(carita) as totalCaritas'), DB::raw('count(carita) as cuentaCaritas'))
+                ->where(['encauditvalues_id'=>$tc->idencauditvalues])
+                ->where('pds_id',$comisionista->pds_id)
+                ->first();
+
+                if($carita->totalCaritas != null && $carita->cuentaCaritas != null){
+                    $tgsum += $this->resultado(ceil($carita->totalCaritas/$carita->cuentaCaritas));
+                }
+            }
+            $promGlobalP += number_format($tgsum/count($thc),2);
+        }
+        $promGlobalP = number_format($promGlobalP/$sumthc,2);
+
+        return json_encode(['comisionista' => $result, 'score' => number_format($promGlobalE+$promGlobalP, 2)]);
 
     }
     public function editarComisionistas(){

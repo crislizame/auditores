@@ -99,6 +99,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('proveedores/listas/ajax/verProveedores', 'Proveedores\ProveedoresController@ver');
     Route::post('proveedores/listas/ajax/guardarProveedores', 'Proveedores\ProveedoresController@guardar');
     Route::post('proveedores/listas/ajax/editarProveedores', 'Proveedores\ProveedoresController@modificar');
+    Route::post('proveedores/listas/ajax/eliminarProveedores', 'Proveedores\ProveedoresController@eliminar');
     // Proveedores
 
     // Perfil admin
