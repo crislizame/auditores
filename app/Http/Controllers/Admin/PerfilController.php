@@ -21,7 +21,8 @@ class PerfilController extends Controller
         return view('vistas.pages.admin.perfil.perfil')->with('user', $user);
     }
 
-    public function modificar(Request $request){
+    public function modificar(Request $request)
+    {
         $user = Auth::user();
         $user->name = $request->nombre;
         $user->email = $request->correo;

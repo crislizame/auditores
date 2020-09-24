@@ -1229,10 +1229,10 @@
                                 $ordenes = $ordenes->where("pds_id",$pds_id);
                             } else {
                                 if($ciudad != "sc"){
-                                    $ordenes = $ordenes->join('pdsperfiles','orden_requerimientos.pds_id', 'pdsperfiles.id')->where("pds_ciudad",$ciudad);
+                                    $ordenes = $ordenes->join('pdsperfiles','orden_requermientos.pds_id', 'pdsperfiles.id')->where("pds_ciudad",$ciudad);
                                 }
                                 if($provincia != "sp"){
-                                    $ordenes = $ordenes->join('pdsperfiles','orden_requerimientos.pds_id', 'pdsperfiles.id')->where("pds_provincia",$provincia);
+                                    $ordenes = $ordenes->join('pdsperfiles','orden_requermientos.pds_id', 'pdsperfiles.id')->where("pds_provincia",$provincia);
                                 }
                             }
                             $ordenes = $ordenes->get();
@@ -1267,10 +1267,10 @@
                             $ordenes = $ordenes->where("pds_id",$pds_id);
                         } else {
                             if($ciudad != "sc"){
-                                $ordenes = $ordenes->join('pdsperfiles','orden_requerimientos.pds_id', 'pdsperfiles.id')->where("pds_ciudad",$ciudad);
+                                $ordenes = $ordenes->join('pdsperfiles','orden_requermientos.pds_id', 'pdsperfiles.id')->where("pds_ciudad",$ciudad);
                             }
                             if($provincia != "sp"){
-                                $ordenes = $ordenes->join('pdsperfiles','orden_requerimientos.pds_id', 'pdsperfiles.id')->where("pds_provincia",$provincia);
+                                $ordenes = $ordenes->join('pdsperfiles','orden_requermientos.pds_id', 'pdsperfiles.id')->where("pds_provincia",$provincia);
                             }
                         }
                         $ordenes = $ordenes->get();
@@ -1645,10 +1645,10 @@
                                 $ordenes = $ordenes->where("pds_id",$pds_id);
                             } else {
                                 if($ciudad != "sc"){
-                                    $ordenes = $ordenes->join('pdsperfiles','orden_requerimientos.pds_id', 'pdsperfiles.id')->where("pds_ciudad",$ciudad);
+                                    $ordenes = $ordenes->join('pdsperfiles','orden_requermientos.pds_id', 'pdsperfiles.id')->where("pds_ciudad",$ciudad);
                                 }
                                 if($provincia != "sp"){
-                                    $ordenes = $ordenes->join('pdsperfiles','orden_requerimientos.pds_id', 'pdsperfiles.id')->where("pds_provincia",$provincia);
+                                    $ordenes = $ordenes->join('pdsperfiles','orden_requermientos.pds_id', 'pdsperfiles.id')->where("pds_provincia",$provincia);
                                 }
                             }
                             $ordenes = $ordenes->get();
@@ -1683,10 +1683,10 @@
                             $ordenes = $ordenes->where("pds_id",$pds_id);
                         } else {
                             if($ciudad != "sc"){
-                                $ordenes = $ordenes->join('pdsperfiles','orden_requerimientos.pds_id', 'pdsperfiles.id')->where("pds_ciudad",$ciudad);
+                                $ordenes = $ordenes->join('pdsperfiles','orden_requermientos.pds_id', 'pdsperfiles.id')->where("pds_ciudad",$ciudad);
                             }
                             if($provincia != "sp"){
-                                $ordenes = $ordenes->join('pdsperfiles','orden_requerimientos.pds_id', 'pdsperfiles.id')->where("pds_provincia",$provincia);
+                                $ordenes = $ordenes->join('pdsperfiles','orden_requermientos.pds_id', 'pdsperfiles.id')->where("pds_provincia",$provincia);
                             }
                         }
                         $ordenes = $ordenes->get();
@@ -2061,10 +2061,10 @@
                                 $ordenes = $ordenes->where("pds_id",$pds_id);
                             } else {
                                 if($ciudad != "sc"){
-                                    $ordenes = $ordenes->join('pdsperfiles','orden_requerimientos.pds_id', 'pdsperfiles.id')->where("pds_ciudad",$ciudad);
+                                    $ordenes = $ordenes->join('pdsperfiles','orden_requermientos.pds_id', 'pdsperfiles.id')->where("pds_ciudad",$ciudad);
                                 }
                                 if($provincia != "sp"){
-                                    $ordenes = $ordenes->join('pdsperfiles','orden_requerimientos.pds_id', 'pdsperfiles.id')->where("pds_provincia",$provincia);
+                                    $ordenes = $ordenes->join('pdsperfiles','orden_requermientos.pds_id', 'pdsperfiles.id')->where("pds_provincia",$provincia);
                                 }
                             }
                             $ordenes = $ordenes->get();
@@ -2097,10 +2097,10 @@
                             $ordenes = $ordenes->where("pds_id",$pds_id);
                         } else {
                             if($ciudad != "sc"){
-                                $ordenes = $ordenes->join('pdsperfiles','orden_requerimientos.pds_id', 'pdsperfiles.id')->where("pds_ciudad",$ciudad);
+                                $ordenes = $ordenes->join('pdsperfiles','orden_requermientos.pds_id', 'pdsperfiles.id')->where("pds_ciudad",$ciudad);
                             }
                             if($provincia != "sp"){
-                                $ordenes = $ordenes->join('pdsperfiles','orden_requerimientos.pds_id', 'pdsperfiles.id')->where("pds_provincia",$provincia);
+                                $ordenes = $ordenes->join('pdsperfiles','orden_requermientos.pds_id', 'pdsperfiles.id')->where("pds_provincia",$provincia);
                             }
                         }
                         $ordenes = $ordenes->get();
@@ -2439,10 +2439,10 @@
                     $ordenesC = $ordenesC->where("pds_id",$pds_id);
                 } else {
                     if($ciudad != "sc"){
-                        $ordenesC = $ordenesC->join('pdsperfiles','orden_requerimientos.pds_id', 'pdsperfiles.id')->where("pds_ciudad",$ciudad);
+                        $ordenesC = $ordenesC->join('pdsperfiles','orden_requermientos.pds_id', 'pdsperfiles.id')->where("pds_ciudad",$ciudad);
                     }
                     if($provincia != "sp"){
-                        $ordenesC = $ordenesC->join('pdsperfiles','orden_requerimientos.pds_id', 'pdsperfiles.id')->where("pds_provincia",$provincia);
+                        $ordenesC = $ordenesC->join('pdsperfiles','orden_requermientos.pds_id', 'pdsperfiles.id')->where("pds_provincia",$provincia);
                     }
                 }
                 $ordenesC = $ordenesC->get();
@@ -2485,10 +2485,10 @@
                     $ordenesS = $ordenesS->where("pds_id",$pds_id);
                 } else {
                     if($ciudad != "sc"){
-                        $ordenesS = $ordenesS->join('pdsperfiles','orden_requerimientos.pds_id', 'pdsperfiles.id')->where("pds_ciudad",$ciudad);
+                        $ordenesS = $ordenesS->join('pdsperfiles','orden_requermientos.pds_id', 'pdsperfiles.id')->where("pds_ciudad",$ciudad);
                     }
                     if($provincia != "sp"){
-                        $ordenesS = $ordenesS->join('pdsperfiles','orden_requerimientos.pds_id', 'pdsperfiles.id')->where("pds_provincia",$provincia);
+                        $ordenesS = $ordenesS->join('pdsperfiles','orden_requermientos.pds_id', 'pdsperfiles.id')->where("pds_provincia",$provincia);
                     }
                 }
                 $ordenesS = $ordenesS->get();
@@ -2673,10 +2673,10 @@
                                 $ordenes = $ordenes->where("pds_id",$pds_id);
                             } else {
                                 if($ciudad != "sc"){
-                                    $ordenes = $ordenes->join('pdsperfiles','orden_requerimientos.pds_id', 'pdsperfiles.id')->where("pds_ciudad",$ciudad);
+                                    $ordenes = $ordenes->join('pdsperfiles','orden_requermientos.pds_id', 'pdsperfiles.id')->where("pds_ciudad",$ciudad);
                                 }
                                 if($provincia != "sp"){
-                                    $ordenes = $ordenes->join('pdsperfiles','orden_requerimientos.pds_id', 'pdsperfiles.id')->where("pds_provincia",$provincia);
+                                    $ordenes = $ordenes->join('pdsperfiles','orden_requermientos.pds_id', 'pdsperfiles.id')->where("pds_provincia",$provincia);
                                 }
                             }
                             $ordenes = $ordenes->get();
@@ -2709,10 +2709,10 @@
                 $ordenes = $ordenes->where("pds_id",$pds_id);
             } else {
                 if($ciudad != "sc"){
-                    $ordenes = $ordenes->join('pdsperfiles','orden_requerimientos.pds_id', 'pdsperfiles.id')->where("pds_ciudad",$ciudad);
+                    $ordenes = $ordenes->join('pdsperfiles','orden_requermientos.pds_id', 'pdsperfiles.id')->where("pds_ciudad",$ciudad);
                 }
                 if($provincia != "sp"){
-                    $ordenes = $ordenes->join('pdsperfiles','orden_requerimientos.pds_id', 'pdsperfiles.id')->where("pds_provincia",$provincia);
+                    $ordenes = $ordenes->join('pdsperfiles','orden_requermientos.pds_id', 'pdsperfiles.id')->where("pds_provincia",$provincia);
                 }
             }
             $ordenes = $ordenes->get();
@@ -3059,10 +3059,10 @@
                     $ordenesC = $ordenesC->where("pds_id",$pds_id);
                 } else {
                     if($ciudad != "sc"){
-                        $ordenesC = $ordenesC->join('pdsperfiles','orden_requerimientos.pds_id', 'pdsperfiles.id')->where("pds_ciudad",$ciudad);
+                        $ordenesC = $ordenesC->join('pdsperfiles','orden_requermientos.pds_id', 'pdsperfiles.id')->where("pds_ciudad",$ciudad);
                     }
                     if($provincia != "sp"){
-                        $ordenesC = $ordenesC->join('pdsperfiles','orden_requerimientos.pds_id', 'pdsperfiles.id')->where("pds_provincia",$provincia);
+                        $ordenesC = $ordenesC->join('pdsperfiles','orden_requermientos.pds_id', 'pdsperfiles.id')->where("pds_provincia",$provincia);
                     }
                 }
                 $ordenesC = $ordenesC->get();
@@ -3105,10 +3105,10 @@
                     $ordenesS = $ordenesS->where("pds_id",$pds_id);
                 } else {
                     if($ciudad != "sc"){
-                        $ordenesS = $ordenesS->join('pdsperfiles','orden_requerimientos.pds_id', 'pdsperfiles.id')->where("pds_ciudad",$ciudad);
+                        $ordenesS = $ordenesS->join('pdsperfiles','orden_requermientos.pds_id', 'pdsperfiles.id')->where("pds_ciudad",$ciudad);
                     }
                     if($provincia != "sp"){
-                        $ordenesS = $ordenesS->join('pdsperfiles','orden_requerimientos.pds_id', 'pdsperfiles.id')->where("pds_provincia",$provincia);
+                        $ordenesS = $ordenesS->join('pdsperfiles','orden_requermientos.pds_id', 'pdsperfiles.id')->where("pds_provincia",$provincia);
                     }
                 }
                 $ordenesS = $ordenesS->get();

@@ -81,10 +81,10 @@ class LoginController extends Controller
                         return redirect('crear-agenda');
                     }
                 }
-            }else{
+            } else {
                 return back()
-                ->withErrors(['email' => '¡Contraseña incorrecta!'])
-                ->withInput(request(['email']));
+                    ->withErrors(['email' => '¡Contraseña incorrecta!'])
+                    ->withInput(request(['email']));
             }
         }
     }

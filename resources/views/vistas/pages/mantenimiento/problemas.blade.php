@@ -14,7 +14,8 @@
                                     <li class="nav-item @if($cat == 'loteria') active @endif">Loteria</li>
                                 </a>
                                 <a href="{{url('mantenimiento/problemas')}}?cat=proveedores">
-                                    <li href="#" class="nav-item @if($cat == 'proveedores') active @endif">Proveedores</li>
+                                    <li href="#" class="nav-item @if($cat == 'proveedores') active @endif">Proveedores
+                                    </li>
                                 </a>
                             </ul>
                         </div>
@@ -75,7 +76,8 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="form-asignarOrden" method="POST" autocomplate="off" action="{{url('mantenimiento/problemas/orden/asignar')}}" enctype="multipart/form-data">
+                <form id="form-asignarOrden" method="POST" autocomplate="off"
+                    action="{{url('mantenimiento/problemas/orden/asignar')}}" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col-6">
@@ -162,12 +164,16 @@
                                                     </ol>
                                                     <div class="carousel-inner">
                                                     </div>
-                                                    <a class="carousel-control-prev" href="#req_imagenes" role="button" data-slide="prev">
-                                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                    <a class="carousel-control-prev" href="#req_imagenes" role="button"
+                                                        data-slide="prev">
+                                                        <span class="carousel-control-prev-icon"
+                                                            aria-hidden="true"></span>
                                                         <span class="sr-only">Previous</span>
                                                     </a>
-                                                    <a class="carousel-control-next" href="#req_imagenes" role="button" data-slide="next">
-                                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                    <a class="carousel-control-next" href="#req_imagenes" role="button"
+                                                        data-slide="next">
+                                                        <span class="carousel-control-next-icon"
+                                                            aria-hidden="true"></span>
                                                         <span class="sr-only">Next</span>
                                                     </a>
                                                 </div>
@@ -212,7 +218,8 @@
                                     <div class="row">
                                         <div class="col-6">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="ot_estado" id="r1" value="U" checked="" disabled>
+                                                <input class="form-check-input" type="radio" name="ot_estado" id="r1"
+                                                    value="U" checked="" disabled>
                                                 <label class="form-check-label" for="r1">
                                                     Urgente
                                                 </label>
@@ -220,7 +227,8 @@
                                         </div>
                                         <div class="col-6">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="ot_estado" id="r2" value="S" disabled>
+                                                <input class="form-check-input" type="radio" name="ot_estado" id="r2"
+                                                    value="S" disabled>
                                                 <label class="form-check-label" for="r2">
                                                     Seguimiento
                                                 </label>
@@ -294,7 +302,8 @@
                             </div>
                             <div class="row">
                                 <div class="col-12">
-                                    <textarea class="form-control" name="ot_comentario" rows="4" placeholder="Incluir # de orden de compra"></textarea>
+                                    <textarea class="form-control" name="ot_comentario" rows="4"
+                                        placeholder="Incluir # de orden de compra"></textarea>
                                 </div>
                             </div>
                             <div class="row">
@@ -303,16 +312,18 @@
                                     <input type="file" class="form-control-file border" name="ot_ccotizacion">
                                 </div>
                                 <div class="col-6" id="cv" style="display: none;">
-                                    <label>Cotización <i class="fa fa-eye"></i><a href="#" id="cvl" download> Ver</a></label>
+                                    <label>Cotización <i class="fa fa-eye"></i><a href="#" id="cvl" download>
+                                            Ver</a></label>
                                 </div>
                                 <div class="col-6" id="gc">
                                     <label>Garantía <i class="fa fa-upload"></i> Cargar PDF</label>
                                     <input type="file" class="form-control-file border" name="ot_cgarantia">
                                 </div>
                                 <div class="col-6" id="gv" style="display: none;">
-                                    <label>Garantía <i class="fa fa-eye"></i><a href="#" id="gvl" download> Ver</a></label>
+                                    <label>Garantía <i class="fa fa-eye"></i><a href="#" id="gvl" download>
+                                            Ver</a></label>
                                 </div>
-                                
+
                                 <div class="col-6">
                                     <img class="img-thumbnail" id="pvc" style="display: none;">
                                 </div>
@@ -326,8 +337,10 @@
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <button type="button" class="btn btn-default float-right" data-dismiss="modal">Cerrar</button>
-                            <button type="submit" class="btn btn-primary float-right mr-3" id="bprocesar">Procesar</button>
+                            <button type="button" class="btn btn-default float-right"
+                                data-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-primary float-right mr-3"
+                                id="bprocesar">Procesar</button>
                         </div>
                     </div>
                 </form>
@@ -640,7 +653,7 @@
                 $('[name="ot_comentario"]').removeAttr('disabled');
             }
 
-            if (entidad == 'Mantenimiento' || entidad == 'RP3' || entidad == 'Lotto Game') {
+            if (entidad == 'Mantenimiento') {
                 $('#sel-pro').show();
 
                 if (done.finalizado == null) {
@@ -661,6 +674,8 @@
 
                 $('#cc').hide();
                 $('#gc').hide();
+
+                $('#sel-pro').hide();
             }
         });
     }
