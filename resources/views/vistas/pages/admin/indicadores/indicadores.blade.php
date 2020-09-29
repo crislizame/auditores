@@ -153,21 +153,23 @@
             </div>
         </div>
         @php
-        $datainicio = request()->has('sel-dateinicio')? \Carbon\Carbon::parse(request()->post('sel-dateinicio'))->toDateTimeString() : \Carbon\Carbon::now()->toDateTimeString() ;
-        $datainicioletra = request()->has('sel-dateinicio')? \Carbon\Carbon::parse(request()->post('sel-dateinicio'))->isoFormat('dddd, D \d\e\ MMMM \d\e\l YYYY') : \Carbon\Carbon::now()->isoFormat('dddd, D \d\e\ MMMM \d\e\l YYYY') ;
-        $datafin = request()->has('sel-datefin')? \Carbon\Carbon::parse(request()->post('sel-datefin'))->toDateTimeString() : \Carbon\Carbon::now()->addDays(1)->toDateTimeString() ;
-        $datafinletra = request()->post('sel-datefin') != null ? "<br>".ucfirst(\Carbon\Carbon::parse(request()->post('sel-datefin'))->isoFormat('dddd, D \d\e\ MMMM \d\e\l YYYY')): "" ;
+        $datainicio = request()->has('sel-dateinicio') ? \Carbon\Carbon::parse(request()->post('sel-dateinicio'))->toDateTimeString() : \Carbon\Carbon::now()->toDateTimeString() ;
+        $datainicioletra = request()->has('sel-dateinicio') ? \Carbon\Carbon::parse(request()->post('sel-dateinicio'))->isoFormat('dddd, D \d\e\ MMMM \d\e\l YYYY') : \Carbon\Carbon::now()->isoFormat('dddd, D \d\e\ MMMM \d\e\l YYYY') ;
+        $datafin = request()->has('sel-datefin') ? \Carbon\Carbon::parse(request()->post('sel-datefin'))->toDateTimeString() : \Carbon\Carbon::now()->addDays(1)->toDateTimeString() ;
+        $datafinletra = request()->has('sel-datefin') ? "<br>".ucfirst(\Carbon\Carbon::parse(request()->post('sel-datefin'))->isoFormat('dddd, D \d\e\ MMMM \d\e\l YYYY')) : "" ;
         $pds_id = ((request()->post('pdssel') != "0") and (request()->post('pdssel') != null)) || (request()->has('pdssel') and request()->post('pdssel') != "0") ? request()->post('pdssel') : "%" ;
-        $global = request()->post('global') == "on"? request()->post('global') : "off" ;
-        $ciudad = ((request()->post('ciudad') != "0") and (request()->post('ciudad') != null)) || (request()->has('ciudad') and request()->post('ciudad') != "0")? request()->post('ciudad') : "sc" ;
-        $provincia = ((request()->post('provincia') != "0") and (request()->post('provincia') != null)) || (request()->has('provincia') and request()->post('provincia') != "0")? request()->post('provincia') : "sp" ;
+        $ciudad = ((request()->post('ciudad') != "0") and (request()->post('ciudad') != null)) || (request()->has('ciudad') and request()->post('ciudad') != "0") ? request()->post('ciudad') : "sc" ;
+        $provincia = ((request()->post('provincia') != "0") and (request()->post('provincia') != null)) || (request()->has('provincia') and request()->post('provincia') != "0") ? request()->post('provincia') : "sp" ;
         $cambio = "Global";
         if($ciudad != "sc"){
             $cambio = ucfirst($ciudad);
-        }else if($pds_id != "%"){
-            $cambio = (new \App\Pdsperfile())->where('id',$pds_id)->value('pds_name');
+        } else if($provincia != "sp"){
+            $cambio = ucfirst($provincia);
+        } else if($pds_id != "%"){
+            $cambio = \App\Pdsperfile::where('id', $pds_id)->value('pds_name');
         }
         @endphp
+        
         <div class="col-lg-9 mt-0">
 
             <div class="row pt-4">
@@ -227,26 +229,26 @@
                             $mes3fin = \Carbon\Carbon::now()->subMonths(3)->lastOfMonth()->toDateTimeString();
                             if($pds_id != "%"){
                                 $carita = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('created_at', [$datainicio, $datafin])->where('pds_id','like',"$pds_id");
-                                $caritac = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('created_at', [$datainicio, $datafin])->where('pds_id','like',"$pds_id");
+                                $caritac = (new \App\Encauditdata())->select(DB::raw('carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('created_at', [$datainicio, $datafin])->where('pds_id','like',"$pds_id");
                                 $carita0 = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('created_at', [$mesactualinicio, $mesactualfin])->where('pds_id','like',"$pds_id");
-                                $carita0c = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('created_at', [$mesactualinicio, $mesactualfin])->where('pds_id','like',"$pds_id");
+                                $carita0c = (new \App\Encauditdata())->select(DB::raw('carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('created_at', [$mesactualinicio, $mesactualfin])->where('pds_id','like',"$pds_id");
                                 $carita1 = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('created_at', [$mes1inicio, $mes1fin])->where('pds_id','like',"$pds_id");
-                                $carita1c = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('created_at', [$mes1inicio, $mes1fin])->where('pds_id','like',"$pds_id");
+                                $carita1c = (new \App\Encauditdata())->select(DB::raw('carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('created_at', [$mes1inicio, $mes1fin])->where('pds_id','like',"$pds_id");
                                 $carita2 = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('created_at', [$mes2inicio, $mes2fin])->where('pds_id','like',"$pds_id");
-                                $carita2c = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('created_at', [$mes2inicio, $mes2fin])->where('pds_id','like',"$pds_id");
+                                $carita2c = (new \App\Encauditdata())->select(DB::raw('carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('created_at', [$mes2inicio, $mes2fin])->where('pds_id','like',"$pds_id");
                                 $carita3 = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('created_at', [$mes3inicio, $mes3fin])->where('pds_id','like',"$pds_id");
-                                $carita3c = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('created_at', [$mes3inicio, $mes3fin])->where('pds_id','like',"$pds_id");
+                                $carita3c = (new \App\Encauditdata())->select(DB::raw('carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('created_at', [$mes3inicio, $mes3fin])->where('pds_id','like',"$pds_id");
                             } else {
                                 $carita = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('encauditdatas.created_at', [$datainicio, $datafin])->join('pdsperfiles', 'pdsperfiles.id', '=', 'encauditdatas.pds_id');
-                                $caritac = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('encauditdatas.created_at', [$datainicio, $datafin])->join('pdsperfiles', 'pdsperfiles.id', '=', 'encauditdatas.pds_id');
+                                $caritac = (new \App\Encauditdata())->select(DB::raw('carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('encauditdatas.created_at', [$datainicio, $datafin])->join('pdsperfiles', 'pdsperfiles.id', '=', 'encauditdatas.pds_id');
                                 $carita0 = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('encauditdatas.created_at', [$mesactualinicio, $mesactualfin])->join('pdsperfiles', 'pdsperfiles.id', '=', 'encauditdatas.pds_id');
-                                $carita0c = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('encauditdatas.created_at', [$mesactualinicio, $mesactualfin])->join('pdsperfiles', 'pdsperfiles.id', '=', 'encauditdatas.pds_id');
+                                $carita0c = (new \App\Encauditdata())->select(DB::raw('carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('encauditdatas.created_at', [$mesactualinicio, $mesactualfin])->join('pdsperfiles', 'pdsperfiles.id', '=', 'encauditdatas.pds_id');
                                 $carita1 = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('encauditdatas.created_at', [$mes1inicio, $mes1fin])->join('pdsperfiles', 'pdsperfiles.id', '=', 'encauditdatas.pds_id');
-                                $carita1c = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('encauditdatas.created_at', [$mes1inicio, $mes1fin])->join('pdsperfiles', 'pdsperfiles.id', '=', 'encauditdatas.pds_id');
+                                $carita1c = (new \App\Encauditdata())->select(DB::raw('carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('encauditdatas.created_at', [$mes1inicio, $mes1fin])->join('pdsperfiles', 'pdsperfiles.id', '=', 'encauditdatas.pds_id');
                                 $carita2 = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('encauditdatas.created_at', [$mes2inicio, $mes2fin])->join('pdsperfiles', 'pdsperfiles.id', '=', 'encauditdatas.pds_id');
-                                $carita2c = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('encauditdatas.created_at', [$mes2inicio, $mes2fin])->join('pdsperfiles', 'pdsperfiles.id', '=', 'encauditdatas.pds_id');
+                                $carita2c = (new \App\Encauditdata())->select(DB::raw('carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('encauditdatas.created_at', [$mes2inicio, $mes2fin])->join('pdsperfiles', 'pdsperfiles.id', '=', 'encauditdatas.pds_id');
                                 $carita3 = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('encauditdatas.created_at', [$mes3inicio, $mes3fin])->join('pdsperfiles', 'pdsperfiles.id', '=', 'encauditdatas.pds_id');
-                                $carita3c = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('encauditdatas.created_at', [$mes3inicio, $mes3fin])->join('pdsperfiles', 'pdsperfiles.id', '=', 'encauditdatas.pds_id');
+                                $carita3c = (new \App\Encauditdata())->select(DB::raw('carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('encauditdatas.created_at', [$mes3inicio, $mes3fin])->join('pdsperfiles', 'pdsperfiles.id', '=', 'encauditdatas.pds_id');
                                 if($ciudad != "sc"){
                                     $carita = $carita->where('pdsperfiles.pds_ciudad',$ciudad);
                                     $caritac = $carita->where('pdsperfiles.pds_ciudad',$ciudad);
@@ -272,16 +274,16 @@
                                     $carita3c = $carita->where('pdsperfiles.pds_provincia',$provincia);
                                 }
                             }
-                            $carita = $carita->value('carita');
-                            $caritac = $caritac->count();
-                            $carita0 = $carita0->value('carita');
-                            $carita0c = $carita0c->count();
-                            $carita1 = $carita1->value('carita');
-                            $carita1c = $carita1c->count();
-                            $carita2 = $carita2->value('carita');
-                            $carita2c = $carita2c->count();
-                            $carita3 = $carita3->value('carita');
-                            $carita3c = $carita3c->count();
+                            $carita = $carita->first()->value('carita');
+                            $caritac = $caritac->get()->count();
+                            $carita0 = $carita0->first()->value('carita');
+                            $carita0c = $carita0c->get()->count();
+                            $carita1 = $carita1->first()->value('carita');
+                            $carita1c = $carita1c->get()->count();
+                            $carita2 = $carita2->first()->value('carita');
+                            $carita2c = $carita2c->get()->count();
+                            $carita3 = $carita3->first()->value('carita');
+                            $carita3c = $carita3c->get()->count();
                             $c += $carita == null?"0":$carita;
                             $c0 += $carita0 == null?"0":$carita0;
                             $c1 += $carita1 == null?"0":$carita1;
@@ -428,26 +430,26 @@
                             $mes3fin = \Carbon\Carbon::now()->subMonths(3)->lastOfMonth()->toDateTimeString();
                             if($pds_id != "%"){
                                 $carita = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('created_at', [$datainicio, $datafin])->where('pds_id','like',"$pds_id");
-                                $caritac = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('created_at', [$datainicio, $datafin])->where('pds_id','like',"$pds_id");
+                                $caritac = (new \App\Encauditdata())->select('carita')->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('created_at', [$datainicio, $datafin])->where('pds_id','like',"$pds_id");
                                 $carita0 = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('created_at', [$mesactualinicio, $mesactualfin])->where('pds_id','like',"$pds_id");
-                                $carita0c = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('created_at', [$mesactualinicio, $mesactualfin])->where('pds_id','like',"$pds_id");
+                                $carita0c = (new \App\Encauditdata())->select('carita')->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('created_at', [$mesactualinicio, $mesactualfin])->where('pds_id','like',"$pds_id");
                                 $carita1 = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('created_at', [$mes1inicio, $mes1fin])->where('pds_id','like',"$pds_id");
-                                $carita1c = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('created_at', [$mes1inicio, $mes1fin])->where('pds_id','like',"$pds_id");
+                                $carita1c = (new \App\Encauditdata())->select('carita')->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('created_at', [$mes1inicio, $mes1fin])->where('pds_id','like',"$pds_id");
                                 $carita2 = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('created_at', [$mes2inicio, $mes2fin])->where('pds_id','like',"$pds_id");
-                                $carita2c = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('created_at', [$mes2inicio, $mes2fin])->where('pds_id','like',"$pds_id");
+                                $carita2c = (new \App\Encauditdata())->select('carita')->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('created_at', [$mes2inicio, $mes2fin])->where('pds_id','like',"$pds_id");
                                 $carita3 = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('created_at', [$mes3inicio, $mes3fin])->where('pds_id','like',"$pds_id");
-                                $carita3c = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('created_at', [$mes3inicio, $mes3fin])->where('pds_id','like',"$pds_id");
+                                $carita3c = (new \App\Encauditdata())->select('carita')->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('created_at', [$mes3inicio, $mes3fin])->where('pds_id','like',"$pds_id");
                             } else {
                                 $carita = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('encauditdatas.created_at', [$datainicio, $datafin])->join('pdsperfiles', 'pdsperfiles.id', '=', 'encauditdatas.pds_id');
-                                $caritac = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('encauditdatas.created_at', [$datainicio, $datafin])->join('pdsperfiles', 'pdsperfiles.id', '=', 'encauditdatas.pds_id');
+                                $caritac = (new \App\Encauditdata())->select('carita')->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('encauditdatas.created_at', [$datainicio, $datafin])->join('pdsperfiles', 'pdsperfiles.id', '=', 'encauditdatas.pds_id');
                                 $carita0 = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('encauditdatas.created_at', [$mesactualinicio, $mesactualfin])->join('pdsperfiles', 'pdsperfiles.id', '=', 'encauditdatas.pds_id');
-                                $carita0c = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('encauditdatas.created_at', [$mesactualinicio, $mesactualfin])->join('pdsperfiles', 'pdsperfiles.id', '=', 'encauditdatas.pds_id');
+                                $carita0c = (new \App\Encauditdata())->select('carita')->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('encauditdatas.created_at', [$mesactualinicio, $mesactualfin])->join('pdsperfiles', 'pdsperfiles.id', '=', 'encauditdatas.pds_id');
                                 $carita1 = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('encauditdatas.created_at', [$mes1inicio, $mes1fin])->join('pdsperfiles', 'pdsperfiles.id', '=', 'encauditdatas.pds_id');
-                                $carita1c = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('encauditdatas.created_at', [$mes1inicio, $mes1fin])->join('pdsperfiles', 'pdsperfiles.id', '=', 'encauditdatas.pds_id');
+                                $carita1c = (new \App\Encauditdata())->select('carita')->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('encauditdatas.created_at', [$mes1inicio, $mes1fin])->join('pdsperfiles', 'pdsperfiles.id', '=', 'encauditdatas.pds_id');
                                 $carita2 = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('encauditdatas.created_at', [$mes2inicio, $mes2fin])->join('pdsperfiles', 'pdsperfiles.id', '=', 'encauditdatas.pds_id');
-                                $carita2c = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('encauditdatas.created_at', [$mes2inicio, $mes2fin])->join('pdsperfiles', 'pdsperfiles.id', '=', 'encauditdatas.pds_id');
+                                $carita2c = (new \App\Encauditdata())->select('carita')->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('encauditdatas.created_at', [$mes2inicio, $mes2fin])->join('pdsperfiles', 'pdsperfiles.id', '=', 'encauditdatas.pds_id');
                                 $carita3 = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('encauditdatas.created_at', [$mes3inicio, $mes3fin])->join('pdsperfiles', 'pdsperfiles.id', '=', 'encauditdatas.pds_id');
-                                $carita3c = (new \App\Encauditdata())->select(DB::raw('sum(carita) as carita'))->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('encauditdatas.created_at', [$mes3inicio, $mes3fin])->join('pdsperfiles', 'pdsperfiles.id', '=', 'encauditdatas.pds_id');
+                                $carita3c = (new \App\Encauditdata())->select('carita')->where(['encauditvalues_id'=>$tc->idencauditvalues])->whereBetween('encauditdatas.created_at', [$mes3inicio, $mes3fin])->join('pdsperfiles', 'pdsperfiles.id', '=', 'encauditdatas.pds_id');
                                 if($ciudad != "sc"){
                                     $carita = $carita->where('pdsperfiles.pds_ciudad',$ciudad);
                                     $caritac = $carita->where('pdsperfiles.pds_ciudad',$ciudad);
@@ -473,16 +475,16 @@
                                     $carita3c = $carita->where('pdsperfiles.pds_provincia',$provincia);
                                 }
                             }
-                            $carita = $carita->value('carita');
-                            $caritac = $caritac->count();
-                            $carita0 = $carita0->value('carita');
-                            $carita0c = $carita0c->count();
-                            $carita1 = $carita1->value('carita');
-                            $carita1c = $carita1c->count();
-                            $carita2 = $carita2->value('carita');
-                            $carita2c = $carita2c->count();
-                            $carita3 = $carita3->value('carita');
-                            $carita3c = $carita3c->count();
+                            $carita = $carita->first()->value('carita');
+                            $caritac = $caritac->get()->count();
+                            $carita0 = $carita0->first()->value('carita');
+                            $carita0c = $carita0c->get()->count();
+                            $carita1 = $carita1->first()->value('carita');
+                            $carita1c = $carita1c->get()->count();
+                            $carita2 = $carita2->first()->value('carita');
+                            $carita2c = $carita2c->get()->count();
+                            $carita3 = $carita3->first()->value('carita');
+                            $carita3c = $carita3c->get()->count();
                             $c += $carita == null?"0":$carita;
                             $c0 += $carita0 == null?"0":$carita0;
                             $c1 += $carita1 == null?"0":$carita1;
@@ -783,16 +785,16 @@
                                     $carita3c = $carita->where('pdsperfiles.pds_provincia',$provincia);
                                 }
                             }
-                            $carita = $carita->value('carita');
-                            $caritac = $caritac->count();
-                            $carita0 = $carita0->value('carita');
-                            $carita0c = $carita0c->count();
-                            $carita1 = $carita1->value('carita');
-                            $carita1c = $carita1c->count();
-                            $carita2 = $carita2->value('carita');
-                            $carita2c = $carita2c->count();
-                            $carita3 = $carita3->value('carita');
-                            $carita3c = $carita3c->count();
+                            $carita = $carita->first()->value('carita');
+                            $caritac = $caritac->get()->count();
+                            $carita0 = $carita0->first()->value('carita');
+                            $carita0c = $carita0c->get()->count();
+                            $carita1 = $carita1->first()->value('carita');
+                            $carita1c = $carita1c->get()->count();
+                            $carita2 = $carita2->first()->value('carita');
+                            $carita2c = $carita2c->get()->count();
+                            $carita3 = $carita3->first()->value('carita');
+                            $carita3c = $carita3c->get()->count();
                             $c += $carita == null?"0":$carita;
                             $c0 += $carita0 == null?"0":$carita0;
                             $c1 += $carita1 == null?"0":$carita1;
@@ -993,16 +995,16 @@
                                     $carita3c = $carita->where('pdsperfiles.pds_provincia',$provincia);
                                 }
                             }
-                            $carita = $carita->value('carita');
-                            $caritac = $caritac->count();
-                            $carita0 = $carita0->value('carita');
-                            $carita0c = $carita0c->count();
-                            $carita1 = $carita1->value('carita');
-                            $carita1c = $carita1c->count();
-                            $carita2 = $carita2->value('carita');
-                            $carita2c = $carita2c->count();
-                            $carita3 = $carita3->value('carita');
-                            $carita3c = $carita3c->count();
+                            $carita = $carita->first()->value('carita');
+                            $caritac = $caritac->get()->count();
+                            $carita0 = $carita0->first()->value('carita');
+                            $carita0c = $carita0c->get()->count();
+                            $carita1 = $carita1->first()->value('carita');
+                            $carita1c = $carita1c->get()->count();
+                            $carita2 = $carita2->first()->value('carita');
+                            $carita2c = $carita2c->get()->count();
+                            $carita3 = $carita3->first()->value('carita');
+                            $carita3c = $carita3c->get()->count();
                             $c += $carita == null?"0":$carita;
                             $c0 += $carita0 == null?"0":$carita0;
                             $c1 += $carita1 == null?"0":$carita1;
@@ -3655,8 +3657,13 @@
         @endif
 
             $('.selglobal').click(function() {
-                $('#pdssel').val(0).trigger('change');
-                $('#ciudad').val(0).trigger('change');
+                $('[name="provincia"]').val(0).trigger('change');
+                $('[name="ciudad"]').val(0).trigger('change');
+                $('[name="pdssel"]').val(0).trigger('change');
+
+                $('[name="provincia"]').removeAttr('disabled');
+                $('[name="ciudad"]').removeAttr('disabled');
+                $('[name="pdssel"]').removeAttr('disabled');
             });
             $('#pdssel').on('select2:select', function(e) {
                 $('#ciudad').val(0).trigger('change');
@@ -3680,6 +3687,23 @@
                 placeholder: "Seleccione una Provincia",
                 allowClear: false
             });
+
+            $('[name="provincia"]').on('select2:select', function(e) {
+                $('[name="ciudad"]').attr('disabled',true);
+                $('[name="pdssel"]').attr('disabled',true);
+            });
+            
+            $('[name="ciudad"]').on('select2:select', function(e) {
+                $('[name="provincia"]').attr('disabled',true);
+                $('[name="pdssel"]').attr('disabled',true);
+            });
+            
+            $('[name="pdssel"]').on('select2:select', function(e) {
+                $('[name="provincia"]').attr('disabled',true);
+                $('[name="ciudad"]').attr('disabled',true);
+            });
+            
+
     });
 </script>
 @endsection
