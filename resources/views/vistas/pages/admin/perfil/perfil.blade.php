@@ -43,18 +43,20 @@
                                     <label>Nombre completo</label>
                                     <input class="form-control" name="nombre" type="text" value="{{$user->name}}">
                                 </div>
-                                <div class="form-group">
+                                <input name="cedula" type="hidden" value="@if($user->cedula!=null){{$user->cedula}}@endif">
+                                {{--<div class="form-group">
                                     <label>Cédula</label>
                                     <input class="form-control" name="cedula" type="text" value="@if($user->cedula!=null){{$user->cedula}}@endif">
-                                </div>
+                                </div>--}}
                                 <div class="form-group">
                                     <label>Contraseña</label>
                                     <input class="form-control" name="clave" type="password">
                                 </div>
-                                <div class="form-group">
+                                <input name="direccion" type="hidden" value="@if($user->direccion!=null){{$user->direccion}}@endif">
+                                {{--<div class="form-group">
                                     <label>Dirección</label>
                                     <input class="form-control" name="direccion" type="text" value="@if($user->direccion!=null){{$user->direccion}}@endif">
-                                </div>
+                                </div>--}}
                                 <div class="form-group">
                                     <label>Correo</label>
                                     <input class="form-control" name="correo" type="text" value="{{ $user->email }}">
