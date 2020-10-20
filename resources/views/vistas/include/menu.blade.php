@@ -8,6 +8,7 @@
             {{--            <h5 class="logo-text text-white">AD<span class="text-info">MIN</span></h5>--}}
         </a>
     </div>
+@if(Auth::user()->role == 'A')
     <ul class="sidebar-menu do-nicescrol">
         <li @if(strpos (url()->current(), 'agenda')!==false) class="active" @endif>
             <a href="{{route('agenda/crear-agenda')}}" class="waves-effect">
@@ -55,6 +56,7 @@
             </a>
         </li>
     </ul>
+@endif
 </div>
 <!--End sidebar-wrapper-->
 

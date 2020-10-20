@@ -79,6 +79,8 @@ class LoginController extends Controller
                         return redirect('permisos/permisos');
                     } else if ($user_type == "A") {
                         return redirect('crear-agenda');
+                    } else if ($user_type == "G") {
+                        return redirect('superadmin/usuarios');
                     }
                 }
             } else {

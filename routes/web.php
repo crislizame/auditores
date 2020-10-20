@@ -189,4 +189,15 @@ Route::middleware(['auth'])->group(function () {
     //----Indicadores
     Route::any('indicadores', 'Admin\IndicadoresController@index')->name('indicadores');
     //--Rutas Ajax
+
+    // SuperAdministrador
+    Route::prefix('superadmin')->group(function () {
+        Route::get('usuarios', 'Superadmin\SuperAdminController@index');
+        Route::post('usuarios/ajax/store', 'Superadmin\SuperAdminController@store');
+        Route::post('usuarios/ajax/list', 'Superadmin\SuperAdminController@list');
+        Route::post('usuarios/ajax/show/{id}', 'Superadmin\SuperAdminController@show');
+        Route::post('usuarios/ajax/update', 'Superadmin\SuperAdminController@update');
+        Route::post('usuarios/ajax/destroy/{id}', 'Superadmin\SuperAdminController@destroy');
+    });
+    // SuperAdministrador
 });

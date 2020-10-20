@@ -32,6 +32,8 @@ class RedirectIfAuthenticated
                 return Redirect::to('permisos/permisos');
             } else if ($user_type == "A") {
                 return Redirect::to('agenda/crear-agenda');
+            } else if ($user_type == "G") {
+                return Redirect::to('superadmin/usuarios');
             }
         }
         return $next($request);
